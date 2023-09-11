@@ -1,0 +1,7 @@
+Windows
+conda create -n .wvenv_db python=3.9
+conda activate .wvenv_db
+C:\ProgramData\Anaconda3\Scripts\activate .wvenv_db
+pip install -r /Users/awotoroe/Desktop/mpvis/requirements.txt
+
+streamlit run src\app.py
