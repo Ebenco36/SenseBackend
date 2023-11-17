@@ -3,7 +3,7 @@ import requests
 from retry import retry
 from App.Services.Service import Service
 from App.Request.ApiRequest import ApiRequest
-from App.Utils.Helpers import save_json_to_csv, append_json_response_to_file, \
+from App.Utils.Helpers import create_directory_if_not_exists, save_json_to_csv, append_json_response_to_file, \
     json_to_dataframe_and_save, get_remainder_and_quotient, convert_json_to_List_of_dict
 
 class EMBASE(Service):
@@ -133,6 +133,7 @@ class EMBASE(Service):
         We are following the structure as described on EMBASE Server.
     """
     def executeRetrieveData(self):
+        create_directory_if_not_exists("EMBASE/")
         # get record page by page for example 200 per page
         if (self.execute_search2_details_data):
             details = self.execute_search2_details_data
@@ -162,7 +163,7 @@ class EMBASE(Service):
                     for offset in range(0, list_item_number, size):
                         rec = self.retrieveRecord(offset=offset, size=size)
                         # pageList.append(rec.get("bibrecords")[0])
-                        append_json_response_to_file(rec, "EMBASEexportPage_" + str(page) + "__" + str(offset) + ".json")
+                        append_json_response_to_file(rec, "EMBASE/EMBASEexportPage_" + str(page) + "__" + str(offset) + ".json")
                 convert_json_to_List_of_dict()
 
     # @retry(exceptions=requests.exceptions.ProxyError, tries=3, delay=2, backoff=2)                

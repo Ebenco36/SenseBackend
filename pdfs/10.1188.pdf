@@ -1,0 +1,2491 @@
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'html' -->
+<!-- FILE NAME SUGGESTIONS:
+   * html--node--240221.html.twig
+   * html--node--%.html.twig
+   * html--node.html.twig
+   x html.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/html.html.twig' -->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+            
+    
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- Responsive Magic -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Google Analytics set user id cookie -->
+    <script>
+      function setGoogleAnalyticsUserId() {
+        ga('set','userId', );
+      }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PFFS3MJ');
+    </script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0557NQCJVW"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "G-0557NQCJVW", {"groups":"default","page_placeholder":"PLACEHOLDER_page_location","allow_ad_personalization_signals":false});gtag("event", "custom", {"Content Type":"Journal Article","Node Id":"240221","Journal Type":"Clinical Journal of Oncology Nursing","Institution Node Id":"158916"});</script>
+<meta name="description" content="    Cancer-related infections cause significant complications in cancer care, affecting patient morbidity and mortality (Brand et al., 2016; Chindaprasirt et al., 2013; Kuderer, Dale, Crawford, Cosler, &amp; Lyman, 2006; Lyman et al., 2010). Patients with cancer are at risk for viral, bacterial, and fungal infections (National Comprehensive Cancer Network [NCCN], 2017b). Immunosuppression related to nature of the malignancy, chemotherapy, or targeted therapies increases infection risk (Gudiol, Aguado, &amp; Carratalà, 2016; Ibrahim et al., 2013)." />
+<meta property="og:site_name" content="Oncology Nursing Society | ONS | ons.org" />
+<meta property="og:image" content="https://www.ons.org/sites/default/files/ons.org (og_image).png" />
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="citation_pdf_url" content="http://cjon.ons.org/system/files/journal-article-pdfs/Wilson2018AprilCJON.pdf" />
+<meta name="citation_author" content="Barbara J. Wilson" />
+<meta name="citation_title" content="Prevention of Infection: A Systematic Review of Evidence-Based Practice Interventions for Management in Patients With Cancer" />
+<meta name="citation_doi" content="10.1188/18.CJON.157-168" />
+<meta name="citation_publication_date" content="2018/04/01" />
+<meta name="citation_publisher" content="Oncology Nursing Society" />
+<meta name="citation_firstpage" content="157" />
+<meta name="citation_lastpage" content="168" />
+<meta name="citation_language" content="en" />
+<meta name="citation_abstract_html_url" content="http://cjon.ons.org/cjon/22/2/prevention-infection-systematic-review-evidence-based-practice-interventions-management" />
+<meta name="citation_volume" content="22" />
+<meta name="citation_issue" content="2" />
+<meta name="citation_journal_title" content="Number 2 / April 2018" />
+<link rel="icon" href="/sites/default/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="canonical" href="http://cjon.ons.org/cjon/22/2/prevention-infection-systematic-review-evidence-based-practice-interventions-management" />
+<link rel="shortlink" href="http://cjon.ons.org/node/240221" />
+
+    <title>Prevention of Infection: A Systematic Review of Evidence-Based Practice Interventions for Management in Patients With Cancer | ONS</title>
+    <link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/ajax-progress.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/align.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/autocomplete-loading.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/fieldgroup.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/container-inline.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/clearfix.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/details.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/hidden.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/item-list.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/js.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/nowrap.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/position-container.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/progress.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/reset-appearance.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/resize.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/sticky-header.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/system-status-counter.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/system-status-report-counters.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/system-status-report-general-info.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/tabledrag.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/tablesort.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/system/components/tree-child.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/core/themes/stable9/css/views/views.module.css?s117dx" />
+<link rel="stylesheet" media="all" href="/assets/stylesheets/style.css?s117dx" />
+
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/aptify-custom.css">
+    
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/jazz-hr-widget.css">
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/notification-bar.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+   <!--[if lt IE 9]>
+        <script src="/assets/scripts/vendor/html5shiv.min.js"></script>
+        <script src="/assets/scripts/vendor/respond.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- AD CODE HEADER SCRIPT - TWIG EXTENSION -->
+  <script type="application/javascript" src="https://ced.sascdn.com/tag/1541/smart.js" async></script>
+  <script type="application/javascript">
+    if (document.cookie.indexOf('session_first_page_visited=') === -1) {
+      document.cookie = 'session_first_page_visited=1';
+    }
+    else if (document.cookie.indexOf('session_first_page_visited=1') !== -1) {
+      document.cookie = 'session_first_page_visited=2';
+    }
+    var sas = sas || {};
+    sas.cmd = sas.cmd || [];
+    sas.cmd.push(function() {
+      sas.setup({ networkid: 1541, domain: "https://www5.smartadserver.com", async: true });
+    });
+  </script>
+
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+  <script type='text/javascript'>
+     window.googletag = window.googletag || {cmd: []};
+     googletag.cmd.push(function() {
+         googletag.defineSlot('/30017927/ons.org/ONS_ORG/ONSorgROS_728x90', [728, 90], 'ONSorgROS-728').addService(googletag.pubads());
+         googletag.defineSlot('/30017927/ons.org/ONS_ORG/ONSorgROS_300x250', [300, 250], 'ONSorgROS-300').addService(googletag.pubads());
+         googletag.defineSlot('/30017927/ons.org/ONS_Interstitials/ONS_Inter_1x1', [1, 1], 'Interstitial').addService(googletag.pubads());
+
+         googletag.pubads().setTargeting('ONSZone', 'ONSorgROS');
+         googletag.pubads().collapseEmptyDivs();
+         googletag.enableServices();
+     });
+  </script>
+
+    <!-- HEAD SCRIPTS -->
+    
+
+    <!-- END HEAD SCRIPTS -->
+    <!-- PIWIK TRACKING CODE -->
+    <script type="text/javascript">
+      (function(window, document, dataLayerName, id) {
+      function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+      var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+      var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+      document.write('<script src="//ons.containers.piwik.pro/'+id+'.sync.js' + qPString + '"></' + 'script>');
+      })(window, document, 'dataLayer', 'b7a75c5e-a65e-4ee8-a8dd-6ff269e593da');
+    </script>
+    <!-- END OF PIWIK TRACKING CODE -->
+  </head>
+  <body class="path-node page-node-type-journal-article">
+    <!-- PIWIK TRACKING CODE -->
+    <script type="text/javascript"> (function(window, document, dataLayerName, id) { window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script'); function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"} var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1); var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):""; tags.async=!0,tags.src="//ons.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts); !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]); })(window, document, 'dataLayer', 'b7a75c5e-a65e-4ee8-a8dd-6ff269e593da'); </script><noscript><iframe src="//ons.containers.piwik.pro/b7a75c5e-a65e-4ee8-a8dd-6ff269e593da/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- END OF PIWIK TRACKING CODE -->
+    <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFFS3MJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+    <a class="screen-reader-text" href="#maincontent">Skip to main content</a>
+    <div class="member-bar-top loggedin hidden">
+	<div class="member-info">
+		<div class="member-greeting">
+			<span class="member-greeting--name">Hello <span class="data-element-name">[ Name ]</span>!</span>
+		</div>
+	</div>
+	<div class="member-stat-container">
+		<div class="contained">
+			<div class="member-stat dashboard-member-only">Renew Membership: <strong><a href="/membership-application" title="Renew Membership"><span class="data-element-membership-days-left">[##]</span> days left.</a></strong></div>
+			<div class="member-stat dashboard-non-member-only"><a href="/membership-application" title="Become a Member">Become a member and save!</a></div>
+			<div class="member-stat"><a href="/account-dashboard" title="View My Dashboard">View My Dashboard</a></div>
+			<div class="member-stat"><a href="https://loginlr.ons.org/auth.aspx?action=logout&return_url=https://login.ons.org/user/logout?return_url=https://www.ons.org/" class="logout">Log Out</a></div>
+		</div>
+	</div>
+</div>
+<div class="member-bar-top loggedin hidden" id="welcome-bar-active">
+	<div class="member-info">
+		<div class="member-greeting">
+			<span class="member-greeting--name">Hello <span class="data-element-name">[ Name ]</span>!</span>
+		</div>
+	</div>
+	<div class="member-stat-container">
+		<div class="contained">
+			<div class="member-stat dashboard-member-only">Renew Membership: <strong><a href="/membership-application" title="Renew Membership"><span class="data-element-membership-days-left">[##]</span> days left.</a></strong></div>
+			<div class="member-stat dashboard-non-member-only"><a href="/membership-application" title="Become a Member">Become a member and save!</a></div>
+			<div class="member-stat"><a href="/account-dashboard" title="View My Dashboard">View My Dashboard</a></div>
+			<div class="member-stat"><a href="https://loginlr.ons.org/auth.aspx?action=logout&return_url=https://login.ons.org/user/logout?return_url=https://www.ons.org/" class="logout">Log Out</a></div>
+		</div>
+	</div>
+</div>
+
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=3.2.1"></script>
+<script type="text/javascript">
+	if (localStorage.getItem('welcome-bar') !== null) {
+		$('#welcome-bar-active').html(localStorage.getItem('welcome-bar'));
+		$('#welcome-bar-active').removeClass('hidden');
+	}
+</script>
+    
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'off_canvas_page_wrapper' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/content/off-canvas-page-wrapper.html.twig' -->
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'page' -->
+<!-- FILE NAME SUGGESTIONS:
+   * page--node--240221.html.twig
+   * page--node--%.html.twig
+   * page--node.html.twig
+   x page.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/page.html.twig' -->
+
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--quick-links.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   x block--quicklinks.html.twig
+   * block--system-menu-block--quick-links.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--quicklinks.html.twig' -->
+<div id="quicklinks">
+  <div class="contained">
+    <ul>
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__quick_links' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--quick-links.html.twig
+   x menu--quick-links.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--quick-links.html.twig' -->
+
+                <ul>
+        <div class="list-section quick-links">  
+                <li class="menu-item menu-item--expanded">
+                <span target="">Membership</span>
+                                  <ul>
+        <div class="list-section quick-links">  
+                <li class="menu-item">
+                <a href="https://www.ons.org/member-benefits" target="_blank">Member Benefits</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/network/ons-chapters" target="" data-drupal-link-system-path="node/61">Chapters</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/network/ons-communities" target="" data-drupal-link-system-path="node/66">Communities</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/develop-your-career/find-grants-and-scholarships" target="" data-drupal-link-system-path="node/36">Grants and Scholarships</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/student-nurse-resources" target="" data-drupal-link-system-path="node/716">Student Nurse Resources</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/network/member-directory" target="" data-drupal-link-system-path="node/76">Member Directory</a>
+              </li>
+              </div>
+    </ul>
+  
+              </li>
+              </div>
+        <div class="list-section quick-links">
+                      <li class="menu-item menu-item--expanded">
+                <span target="">Education</span>
+                                  <ul>
+        <div class="list-section quick-links">  
+                <li class="menu-item">
+                <a href="/explore-resources?source=1491&amp;display=source&amp;narrowby=" target="" data-drupal-link-query="{&quot;display&quot;:&quot;source&quot;,&quot;narrowby&quot;:&quot;&quot;,&quot;source&quot;:&quot;1491&quot;}" data-drupal-link-system-path="node/46">Articles</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/store?source=books" target="" data-drupal-link-query="{&quot;source&quot;:&quot;books&quot;}" data-drupal-link-system-path="node/73091">Books</a>
+              </li>
+                      <li class="menu-item">
+                <a href="http://courses.ons.org" target="_blank">Course Login</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/publications" target="" data-drupal-link-system-path="node/736">Journals</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/develop-your-career/professional-development" target="" data-drupal-link-system-path="node/21">Professional Development</a>
+              </li>
+              </div>
+    </ul>
+  
+              </li>
+              </div>
+        <div class="list-section quick-links">
+                      <li class="menu-item menu-item--expanded">
+                <span target="">Institutions</span>
+                                  <ul>
+        <div class="list-section quick-links">  
+                <li class="menu-item">
+                <a href="https://www.ons.org/ons-guidelines" target="_blank">ONS Guidelines™</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/licensing-opportunities/on-call" target="" data-drupal-link-system-path="node/153036">ONS On-Call™</a>
+              </li>
+                      <li class="menu-item">
+                <a href="https://www.ons.org/courses/oncology-nurse-orientation-program-perceptor-bundle" target="_blank">Oncology Nurse Orientation Program</a>
+              </li>
+              </div>
+    </ul>
+  
+              </li>
+              </div>
+        <div class="list-section quick-links">
+                      <li class="menu-item menu-item--expanded">
+                <span target="">Self-Service</span>
+                                  <ul>
+        <div class="list-section quick-links">  
+                <li class="menu-item">
+                <a href="https://www.ons.org/account-dashboard" target="_blank">Account Settings</a>
+              </li>
+                      <li class="menu-item">
+                <a href="https://help.ons.org/hc/en-us" target="_blank">Help Center</a>
+              </li>
+                      <li class="menu-item">
+                <a href="https://www.ons.org/membership-card/" target="_blank">Print Membership Card</a>
+              </li>
+                      <li class="menu-item">
+                <a href="https://courses.ons.org" target="_blank">Print NCPD Certificate</a>
+              </li>
+                      <li class="menu-item">
+                <a href="/certificate-verification" target="" data-drupal-link-system-path="node/153101">Verify Cardholder or Certificate Status</a>
+              </li>
+              </div>
+    </ul>
+  
+              </li>
+              </div>
+    </ul>
+  
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--quick-links.html.twig' -->
+
+
+        </div>
+    </ul>
+  </div>
+</div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--quicklinks.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+  
+    <div id="page-interior">
+              <div class="header-fixed">
+<header id="header">
+	<div class="header-main">
+		<div class="contained">
+			
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--header.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   x block--secondarynavigation.html.twig
+   * block--system-menu-block--secondary-navigation.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--secondarynavigation.html.twig' -->
+<nav class="global-navigation">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__secondary_navigation' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--secondary-navigation.html.twig
+   x menu--secondary-navigation.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--secondary-navigation.html.twig' -->
+
+  	  	    		    			      			<li>
+      				<a href="/about-ons" target="" data-drupal-link-system-path="node/146">About ONS</a>
+			</li>
+    		    			      			<li>
+      				<a href="/membership" target="" data-drupal-link-system-path="node/251601">Join / Renew</a>
+			</li>
+    		    			      			<li>
+      				<a href="/licensing-opportunities" target="" data-drupal-link-system-path="node/152756">Institutions</a>
+			</li>
+    		    			      			<li>
+      				<a href="https://www.ons.org/search-help" target="_blank" class="borderless">Search Help</a>
+			</li>
+    		    		    		<li class="quicklinks-trigger"><a class="trigger" rel="quicklinks" alt="/" title="/">Quicklinks</a></li>
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--secondary-navigation.html.twig' -->
+
+
+  </nav>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--secondarynavigation.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+
+			<div class="header-main-inner">
+				<div class="header-main-left">
+					<div class="header-logo">
+					<a href="/" title="ONS Homepage"><img title="ONS Logo" alt="ONS Logo" src="/assets/images/ONS-Logo.png" /></a>
+					</div>
+				</div><!--header-main-left-->
+				<div class="header-main-right">
+					<div class="header-search">
+					<form method="get" action="/acq-search">
+						<input type="search" id="search" name="search" class="search-input js-search-input" autocomplete="off" placeholder="Search ONS.ORG">
+						<div id="overlay-search"></div>
+						<ul class="autocomplete js-autocomplete-width">
+							<li><a href="/acq-search">abl <em>book</em></a></li>
+						</ul>
+						<ul class="global-navigation">
+							<li>
+								<a href="/search-help" target="_blank">Trouble finding what you need?</a>
+							</li>
+							<li>
+								<a href="/search-help" target="_blank">Check our search tips.</a>
+							</li>
+						</ul>
+					</form>
+					</div>
+				</div><!--header-middle-->
+			</div><!--header-inner-->
+		</div><!--contained-->
+	</div><!--main-header-->
+
+	<div id="header-mobile">
+		<div class="header-left">
+			<div class="trigger block-scroll" rel="left-offcanvas">
+				<div class="icon menu">
+					<span class="screen-reader-text">Menu</span>
+				</div>
+			</div>
+		</div><!--header-left-->
+		<div class="header-middle">
+			<div class="header-logo-mobile">
+				<a href="/"><img src="/assets/images/ons-logo-mobile.png" /></a>
+			</div>
+		</div><!--header-middle-->
+		<div class="header-right">
+			<div class="trigger site-search-offcanvas" rel="search-offcanvas">
+				<span class="icon search">
+					<span class="screen-reader-text">Search</span>
+				</span>
+			</div>
+				<a href="https://cart.ons.org/">
+			<div class="trigger">
+				<div class="icon cart">
+					<span class="screen-reader-text">Shopping Cart</span>
+					<!--
+					<div class="item-count">
+						<span class="item-count--count">28</span>
+					</div>
+					-->
+				</div>
+			</div>
+				</a>
+															<div class="trigger block-scroll" rel="right-offcanvas">
+				<!-- <a class="trigger block-scroll nav-link-profile " rel="right-offcanvas"> -->
+					<div class="icon account">
+					</div>
+					<!-- <span class="aux-count">(23)</span> -->
+				<!-- </a> -->
+				<a class="nav-link-login " href="https://login.ons.org/User/Login?branding=ons&vendor=ons">
+					<div class="icon account">
+					</div>
+				</a>
+			</div>
+		</div><!--header-right-->
+	</div>
+</header>
+
+<div class="navigation-main">
+	<div class="navigation-inner">
+		<div class="navigation horizontal-nav">
+			<div class="contained">
+				<div class="main-nav">
+					
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--navigation.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   x block--utilitynavigation.html.twig
+   * block--system-menu-block--utility-navigation.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--utilitynavigation.html.twig' -->
+<nav class="auxilary-navigation">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__utility_navigation' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--utility-navigation.html.twig
+   x menu--utility-navigation.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--utility-navigation.html.twig' -->
+
+  	  	  		    		<li>
+				<a href="/ons-store">
+					<span class="aux-link-standard">ONS Store</span>
+					<div class="aux-icon aux-store">
+						<img src="/assets/images/icons/icon-store.png" alt="" />
+					</div>
+				</a>
+			</li>
+    		<li>
+				<a href="https://cart.ons.org/" alt="/" title="/">
+					<span class="aux-link-text">My Cart</span>
+					<div class="aux-icon aux-cart">
+						<img src="/assets/images/icons/icon-cart.png" alt="" />
+					</div>
+					<span class="aux-count"></span>
+				</a>
+			</li>
+			<li id="nav-link-profile-login">
+																<a class="trigger block-scroll nav-link-profile hidden" rel="right-offcanvas">
+					<span class="aux-link-text loggedin">My Account</span>
+					<div class="aux-icon aux-account">
+						<img src="/assets/images/icons/icon-profile.png" alt="" />
+					</div>
+					<!-- <span class="aux-count">(23)</span> -->
+				</a>
+				<a class="nav-link-login " href="https://login.ons.org/User/Login?branding=ons&vendor=ons">
+					<span class="aux-link-text loggedin">Login</span>
+					<div class="aux-icon aux-account">
+						<img src="/assets/images/icons/icon-profile.png" alt="" />
+					</div>
+				</a>
+			</li>
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--utility-navigation.html.twig' -->
+
+
+  </nav>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--utilitynavigation.html.twig' -->
+
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--primarynavigation-2.html.twig
+   x block--system-menu-block--primary-navigation.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--primary-navigation.html.twig' -->
+<nav role="navigation" class="primary-nav">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__primary_navigation' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--primary-navigation.html.twig
+   x menu--primary-navigation.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--primary-navigation.html.twig' -->
+
+              <ul>
+                        <li class="menu-item top-level-li">
+        <a href="/explore-resources" class="top-level-a" data-drupal-link-system-path="node/46">Explore Resources</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/develop-your-career" class="top-level-a" data-drupal-link-system-path="node/16">Develop Your Career</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/network" class="top-level-a" data-drupal-link-system-path="node/56">Network</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/make-difference" class="top-level-a" data-drupal-link-system-path="node/81">Make a Difference</a>
+              </li>
+                    <li class="menu-item top-level-li menu-item--expanded">
+        <a href="/develop-your-career/professional-development/conferences" title="Oncology Nursing Conferences" class="top-level-a" data-drupal-link-system-path="node/71">Events</a>
+                                <ul>
+                        <li class="menu-item top-level-li">
+        <a href="/congress/2024/homepage" class="top-level-a" data-drupal-link-system-path="node/251876">ONS Congress®</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/bridge/2023" class="top-level-a" title="ONS Bridge™" data-drupal-link-system-path="node/158241">ONS Bridge™</a>
+              </li>
+        </ul>
+  
+              </li>
+                    <li class="menu-item top-level-li menu-item--expanded">
+        <a href="/publications" class="top-level-a" target="_self" data-drupal-link-system-path="node/736">Publications</a>
+                                <ul>
+                        <li class="menu-item top-level-li">
+        <a href="/cjon" class="top-level-a" data-drupal-link-system-path="cjon">Clinical Journal of Oncology Nursing</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/onf" class="top-level-a" data-drupal-link-system-path="onf">Oncology Nursing Forum</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="https://www.ons.org/voice" target="_self" class="top-level-a">ONS Voice</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="https://www.ons.org/books" target="_self" class="top-level-a">Books</a>
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="https://www.ons.org/journal-article-search" target="_self" class="top-level-a">Search Our Journals</a>
+              </li>
+        </ul>
+  
+              </li>
+                    <li class="menu-item top-level-li">
+        <a href="/e-book/purchases" class="top-level-a" data-drupal-link-system-path="e-book/purchases">Purchased eBooks</a>
+              </li>
+        </ul>
+  
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--primary-navigation.html.twig' -->
+
+
+  </nav>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--primary-navigation.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+				</div>
+			</div><!-- contained -->
+		</div><!--navigation-->
+	</div><!--navigation-inner-->
+</div><!-- nav-container -->
+      
+    </div>
+    <div id="maincontent">
+            	<div class="page-body">
+			
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   x region--content-header.html.twig
+   * region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region--content-header.html.twig' -->
+			<div class="contained">
+			<div class="row">
+		  		<div class="page-title-wrapper">
+		    		
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--ons-breadcrumbs.html.twig
+   * block--system-breadcrumb-block.html.twig
+   * block--system.html.twig
+   x block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'breadcrumb' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/breadcrumb.html.twig' -->
+
+	<ul class="breadcrumbs" role="navigation">
+		<li class="home-crumb">
+			<a href="/" title="Homepage">
+				<div class="icon-breadcrumb-home"><svg alt="Home icon" fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z"/></svg></div>
+				<span class="screen-reader-text">Home</span>
+			</a>
+		</li>
+    		    			   		     			    				<li class="parent-crumb">
+    					<a href="/cjon">Clinical Journal of Oncology Nursing</a>
+    				</li>
+    			   		     			    				<li class="parent-crumb">
+    					<a href="/cjon/22/2">Number 2 / April 2018</a>
+    				</li>
+    			   		 	</ul>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/breadcrumb.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+
+
+		  		</div><!-- .end page-title-wrapper -->
+			</div><!--row-->
+		</div><!--contained-->
+	
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region--content-header.html.twig' -->
+
+
+			
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   x region--content.html.twig
+   * region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region--content.html.twig' -->
+<div class="contained">
+  <div class="row">
+		<div data-drupal-messages-fallback class="hidden"></div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--ons-content.html.twig
+   * block--system-main-block.html.twig
+   * block--system.html.twig
+   x block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'node' -->
+<!-- FILE NAME SUGGESTIONS:
+   * node--240221--full.html.twig
+   * node--240221.html.twig
+   * node--journal-article--full.html.twig
+   x node--journal-article.html.twig
+   * node--full.html.twig
+   * node.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/content/node--journal-article.html.twig' -->
+
+
+
+<div class="main-body" role="main">
+  <div class="ja-wrapper">
+    <div class="ja-header">
+      <div class="ja-header-tag">
+        
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--field-jour-article-type--journal-article.html.twig
+   * field--node--field-jour-article-type.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-jour-article-type.html.twig
+   * field--entity-reference.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+                <div>Article</div>
+        
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+      </div>
+      <div class="ja-header-title">
+        <h1 class="page-title">Prevention of Infection: A Systematic Review of Evidence-Based Practice Interventions for Management in Patients With Cancer</h1>
+      </div>
+              <div class="ja-header-authors">
+          
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--field-jour-author--journal-article.html.twig
+   x field--node--field-jour-author.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-jour-author.html.twig
+   * field--entity-reference.html.twig
+   * field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field--node--field-jour-author.html.twig' -->
+
+      <p>
+      Barbara
+      J.
+      Wilson
+    </p>
+        <p>
+      Laura
+      J.
+      Zitella
+    </p>
+        <p>
+      Colleen
+      H.
+      Erb
+    </p>
+        <p>
+      Jacqueline
+      D.
+      Foster
+    </p>
+        <p>
+      Mary
+      E.
+      Peterson
+    </p>
+        <p>
+      Sylvia
+      K.
+      Wood
+    </p>
+  
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field--node--field-jour-author.html.twig' -->
+
+
+        </div>
+            <div class="ja-header-meta">
+                  <div class="ja-header-meta-tags">
+            
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   x field--node--field-keywords--journal-article.html.twig
+   * field--node--field-keywords.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-keywords.html.twig
+   * field--string.html.twig
+   * field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field--node--field-keywords--journal-article.html.twig' -->
+<div>
+        cancer-related infection, evidence-based practice, prevention of infection, PEP
+    </div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field--node--field-keywords--journal-article.html.twig' -->
+
+
+          </div>
+                          <div class="ja-header-meta-journal-name">
+            CJON 2018, 22(2), 157-168. DOI: 
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--field-jour-doi--journal-article.html.twig
+   * field--node--field-jour-doi.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-jour-doi.html.twig
+   * field--string.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            10.1188/18.CJON.157-168
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+          </div>
+              </div>
+    </div>
+    <div class="ja-body">
+      <div class="ja-body-abstract">
+          <div class="ja-download" id="ja-download">
+                          <a href="/pubs/article/240221/download" class="button button-primary download-full" id="download-full">Download PDF</a>
+                      </div>
+        
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--field-jour-abstract--journal-article.html.twig
+   * field--node--field-jour-abstract.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-jour-abstract.html.twig
+   * field--text-long.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            <p><strong>Background:</strong> Cancer-related infections lead to increases in mortality, antibiotic use, and hospital stays. Other adverse outcomes include dose delays and reductions, which can result in suboptimal treatment outcomes.</p>
+<p><strong>Objectives:</strong> Effective implementation of risk assessment and evidence-based interventions for the prevention and treatment of infection are essential to improve care and reduce costs related to infections in patients with cancer receiving immunosuppressive therapy.</p>
+<p><strong>Methods:</strong> The Oncology Nursing Society (ONS) Putting Evidence Into Practice (PEP) prevention of infection resource have been developed and updated to identify and disseminate the best available scientific evidence.</p>
+<p><strong>Findings:</strong> Pharmacologic and nonpharmacologic interventions were evaluated, resulting in recommended for practice rating for catheter care bundles, antimicrobial prophylaxis, vaccination for specific populations, and implementation of contact precautions for resistant organisms.</p>
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+      </div>
+
+              <div class="ja-body-accordion">
+          <div class="accordion-container">
+            <section>
+              <h3 id="accordion1" class="accordion" aria-controls="panel1" tabindex="0">Jump to a section</h3>
+              <div id="panel1" class="panel accordion-content" aria-labeledby="accordion1">
+                <div class="panel-inner">
+                  <ul id="toc"></ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="ja-body-body">
+          
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--body--journal-article.html.twig
+   * field--node--body.html.twig
+   * field--node--journal-article.html.twig
+   * field--body.html.twig
+   * field--text-with-summary.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            <div>
+	<em> </em></div>
+<div>
+	 </div>
+<p>Cancer-related infections cause significant complications in cancer care, affecting patient morbidity and mortality (Brand et al., 2016; Chindaprasirt et al., 2013; Kuderer, Dale, Crawford, Cosler, &amp; Lyman, 2006; Lyman et al., 2010). Patients with cancer are at risk for viral, bacterial, and fungal infections (National Comprehensive Cancer Network [NCCN], 2017b). Immunosuppression related to nature of the malignancy, chemotherapy, or targeted therapies increases infection risk (Gudiol, Aguado, &amp; Carratalà, 2016; Ibrahim et al., 2013). Infections can cause dose delays and dose reductions that prevent optimal treatment outcomes (Bilir et al., 2016; Gafter-Gvili &amp; Polliack, 2016; Lyman et al., 2010; Weycker et al., 2015).</p>
+<p>A high infection risk is predictive of higher mortality rates, longer hospitalization, and higher cost of care (Wang, Lopez, &amp; Chan, 2015; Weycker et al., 2015). Age older than 65 years is associated with a higher incidence of infections during treatment (American Cancer Society [ACS], 2016; Cooksley, Avritscher, Rolston, &amp; Elting, 2009; Grosso et al., 2012; Zanussi, Serraino, Dolcetti, Berretta, &amp; De Paoli, 2013), and 87% of people diagnosed with cancer in the United States are aged 50 years or older (ACS, 2017).</p>
+<p>Patients with cancer have the potential for recurring infections requiring various antimicrobial treatment and prophylaxis. A systemic review evaluating trends in epidemiology and antibiotic resistance for bacteremia in these patients revealed that gram-negative bacteria was the most frequent isolate, with substantial emergence of antimicrobial-resistant strains in both gram-negative and gram-positive bacteria (Montassier, Batard, Gastinne, Potel, &amp; de La Cochetière, 2013). Management of cancer-related infections related to multi-drug resistant organisms present challenges, including limited effective antibiotic choices, and are associated with higher risks for morbidity and mortality (Gudiol &amp; Carratalà, 2014). Epidemiologic trends for emerging resistant strains of pathogens in patients with cancer can threaten antimicrobial resistance in the larger populations (Gudiol &amp; Carratalà, 2014; Gudiol et al., 2016; Kalantar et al., 2015; Liu et al., 2016; Satlin et al., 2016). The economic burden from resistant pathogens is related to duration of illness, expensive antimicrobials, and additional diagnostics (Magauran &amp; Salgado, 2011).</p>
+<p>Sepsis has a high fatality rate in patients with cancer (Gudiol et al., 2016; Marin et al., 2014; Marin, Gudiol, Garcia-Vidal, Ardanuy, &amp; Carratalà, 2014; Satlin et al., 2016). One study reports mortality from Staphylococcus aureus central line–associated bloodstream infections of 25%–30% in patients with cancer (El Zakhem et al., 2014). A retrospective cohort study of patients with metastatic solid tumors (N = 15,318) investigated rates of febrile neutropenia (FN), its associated risks, and consequences (Weycker et al., 2015). The study used data repositories from geographically diverse private healthcare claims from 2006–2011. Depending on cancer type, the rate of FN ranged from 13%–21%, with costs per inpatient episode ranging from $16,000–$19,000.</p>
+<h2>
+	Prevention of Infection</h2>
+<p>The Oncology Nursing Society (ONS) Putting Evidence Into Practice (PEP) resources have been developed to identify and disseminate the best available scientific evidence supporting best practices to improve nurse-sensitive patient outcomes (Johnson, 2014). The PEP prevention of infection resource is a comprehensive synthesis of currently published nursing and medical research literature summarizing and classifying evidence by weight for effectiveness in specific patient outcomes (Johnson, 2014). This article provides an update on the PEP prevention of infection team’s evidence review, offering a summary of recommendations for best infection prevention practices for nurses caring for adult patients with cancer.</p>
+<h3>
+	Risk Assessment</h3>
+<p>Three risk assessments—risk for infection, risk for cancer-related FN, and risk for FN complications—have been developed to support early identification and intervention of cancer-related infections. Additional assessments specific to autologous and allogeneic hematopoietic cell transplantation (HCT) are also available (NCCN, 2017b; Tomblyn et al., 2009).</p>
+<p><strong>Infection:</strong> Patients undergoing systemic cancer treatment should be evaluated using patient and treatment factors for infection risk prior to each treatment, including the first cycle. Patients are categorized as high risk for infection if their treatment includes allogeneic HCT, induction or consolidation for acute leukemia, or an alemtuzumab-containing regimen. Therapy that requires high-dose steroids to treat graft-versus-host disease (GVHD) or neutropenia expected to last more than 10 days also places patients at high risk for infection. Intermediate risk for infection includes diagnosis of multiple myeloma, lymphoma or chronic lymphocytic leukemia, treatment with autologous HCT, a purine analog–containing regimen, or one that results in neutropenia with expected duration of 7–10 days. The risk for infection is low if the patient is receiving standard chemotherapy doses and neutropenia is expected to last less than seven days (NCCN, 2017b).</p>
+<p><strong>Febrile neutropenia:</strong> Guidelines from the NCCN, the EORTC, the American Society of Clinical Oncology (ASCO), and the Infectious Diseases Society of America (IDSA) identify fever in the presence of neutropenia as an increased risk for infection. FN is defined as fever with an oral temperature of 38.3ºC or greater or a single temperature of 38ºC or greater and lasting more than one hour; neutropenia is defined as 500 neutrophils or less per mcl or less than 1,000 neutrophils per mcl trending down and predicted to fall below 500 per mcl within 48 hours. Figure 1 categorizes risk factors for developing FN. <img src="/sites/default/files/journal-images/Wilson2018Figure1.png" /></p>
+<p><strong>Febrile neutropenia complications:</strong> Using a comprehensive patient, disease, and treatment risk assessment results in patients being stratified as high risk for developing complications of FN if they present with any of the following:</p>
+<p>•  A Multinational Association for Supportive Care in Cancer score lower than 21 (Baskaran, Gan, &amp; Adeeba, 2008)</p>
+<p>•  Inpatient status when fever starts</p>
+<p>•  Clinically unstable</p>
+<p>•  Major comorbidity or comorbidities</p>
+<p>•  Allogeneic HCT</p>
+<p>•  Treated with alemtuzumab</p>
+<p>•  A neutropenia count of 100 cells per mcl or less that is expected to last seven days or longer</p>
+<p>•  Liver dysfunction with aminotransferases of five times the upper limit of normal</p>
+<p>•  Renal disease with creatinine clearance of less than 30 ml per minute</p>
+<p>•  Cancer that is progressing or uncontrolled</p>
+<p>•  Complex infections, including pneumonia</p>
+<p>•  Grade 3–4 mucositis</p>
+<p>Patients are categorized as low risk if they do not have any of the high-risk factors (NCCN, 2017b). NCCN stratifies the risk as high when the associated risk is greater than 20%, moderate when the risk is 10%–20%, or low if the risk is less than 10% for FN. The assessment should be completed before the initial treatment and each subsequent treatment (Aapro et al., 2011; NCCN, 2017a, 2017b).</p>
+<p>The Multinational Association for Supportive Care in Cancer scoring system includes the patient’s burden of illness, comorbidities, characteristics of malignancy, age, and level of hydration. A calculator for scoring is available at <a href="http://bit.ly/2EnYm3G">http://bit.ly/2EnYm3G</a>.</p>
+<h3>
+	Assessing Infection Risk in Hematopoietic Stem Cell Transplantation</h3>
+<p>Patients undergoing HCT have additional risks for opportunistic infections. Differences in risk for infectious complications are noted between recipients of autologous versus allogeneic transplantation (NCCN, 2017b; Tomblyn et al., 2009). The loss of mucosal integrity from myeloablative therapy prior to autologous HCT is a risk factor for developing bacteremia (Sonis et al., 2001). An inverse relationship between response to granulocyte–colony-stimulating factor (G-CSF) and incidence of infection (p &lt; 0.01) was also a reliable predictor for autologous HCT-related infection risk (Straka et al., 2011).</p>
+<p>For patients undergoing allogeneic HCT, the risk for infection is specific to phase of engraftment (Sonis et al., 2001; Tomblyn et al., 2009). During the pre-engraftment phase (about 0–30 days after allogeneic HCT), the risk for fungal and bacterial infections is related to neutropenia and interruption of mucosal integrity. Patients are at risk and should be assessed for reactivation of herpes simplex virus (HSV). The post-engraftment phase (30–100 days after HCT) places the patient at risk for herpes viruses, cytomegalovirus (CMV), Pneumocystis jiroveci pneumonia (PCP), and Aspergillus. Beyond 100 days, patients continue to be at risk for CMV, varicella zoster virus (VZV), and Streptococcus pneumoniae or other encapsulated bacteria (NCCN, 2017b; Ullmann et al., 2016).</p>
+<h2>
+	Methods</h2>
+<p>An extensive literature search was performed of PubMed and CINAHL® for research articles, systematic reviews, guidelines, and meta-analyses published in English. This update includes studies retrieved from January 2009 to January 2017, in addition to 31 articles published prior to 2009 that were included in previous reviews. The PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) diagram is shown in Figure 2. Abstracts, proceedings, letters to the editor, grey literature, descriptive studies, and case reports were excluded. Research that did not report on interventions to prevent infection of FN or did not include patients with cancer were excluded. The search strategy, search terms, databases, and inclusion criteria are found at <a href="http://www.ons.org/content/prevention-infection-search-strategy">www.ons.org/content/prevention-infection-search-strategy</a>. Inclusion criteria have evolved in response to the quality and amount of evidence. As of January 2016, additional inclusion criteria were added, including (a) sample size must have been at least 40, or 20 per study group, and (b) complex interventions must have been described with sufficient detail to identify the components of the intervention. <img src="/sites/default/files/journal-images/Wilson2018Figure2.png" /></p>
+<p>The 273 articles meeting inclusion criteria were divided into two categories: (a) prevention of infection: general and (b) prevention of infection: transplant. Each article was reviewed by a member of the ONS PEP prevention of infection team. This review and article were then reviewed by a second team member. Following that, the entire PEP prevention of infection team discussed the reviews to confirm that articles were appropriate for inclusion and that review summaries accurately represented the content (Mitchell &amp; Friese, 2009; Ropka &amp; Spencer-Cisek, 2001) (see Table 1). <img src="/sites/default/files/journal-images/Wilson2018Table1.png" /></p>
+<h2>
+	Evidence Review</h2>
+<p>This section describes evidence-based interventions for prevention of infection. Efficacy and recommended timing for interventions are included for pharmacologic and nonpharmacologic interventions (see Table 2). Separate considerations are noted for patients undergoing hematopoietic stem cell transplantation. <img src="/sites/default/files/journal-images/Wilson2018Table2.png" /></p>
+<h3>
+	Interventions to Prevent Infection</h3>
+<p><strong>Colony-stimulating factors:</strong> CSFs are a class of biologic agents that regulate the growth and development of neutrophils and are indicated to decrease the neutropenic complications of myelosuppressive chemotherapy and to maintain chemotherapy dose intensity. CSFs decrease the severity and duration of neutropenia and incidence of FN, infection, infection-related mortality, and all-cause mortality in adults and children receiving cancer chemotherapy (Kuderer, 2011; Lyman et al., 2010).</p>
+<p>NCCN, ASCO, EORTC, the European Society for Medical Oncology, and the National Institute for Health and Care Excellence are uniform in their recommendation of primary prophylaxis of a CSF for patients undergoing chemotherapy that has a 20% or higher risk of FN (Aapro et al., 2011; Crawford, Caserta, &amp; Roila, 2010; NCCN, 2017a; Phillips et al., 2012; Smith et al., 2015).</p>
+<p>CSFs should also be considered for individuals undergoing chemotherapy who have less than a 20% risk for FN if they have other risk factors for neutropenia. The most important risk factor is age older than 65 years. Other risk factors include prior extensive chemotherapy or radiation, comorbid conditions, renal or hepatic dysfunction, HIV infection, performance status, bone marrow involvement, and pretreatment blood counts (NCCN, 2017a; Smith et al., 2015).</p>
+<p>Filgrastim, filgrastim-sndz, tbo-filgrastim, and pegfilgrastim are FDA-approved CSFs indicated to prevent chemotherapy-induced neutropenia. Filgrastim, filgrastim-sncz, and tbo-filgrastim are biologically similar G-CSFs that have equivalent clinical activity (NCCN, 2017a; Smith et al., 2015). Filgrastim, filgrastim-sndz, and tbo-filgrastim are subcutaneous injections administered daily after each cycle of chemotherapy until neutrophil recovery. Pegfilgrastim, a pegylated formulation of filgrasitim, is a subcutaneous injection administered once after each cycle of chemotherapy. The major adverse effect of CSF use is bone pain (NCCN, 2017a).</p>
+<p>Recommended timing for administration of CSFs is between 1 and 3–4 days after chemotherapy (NCCN, 2017a; Smith et al., 2015). A meta-analysis of patients with non-Hodgkin lymphoma and breast cancer undergoing chemotherapy who were treated with same-day versus next-day pegfilgrastim showed a trend toward increased grade 4 neutropenia in the group of patients who received pegfilgrastim on the same day as chemotherapy (Burris et al., 2010). Other studies showed an increased risk of neutropenia (Li et al., 2016) and FN (Weycker et al., 2015) when CSFs were administered on the same day of chemotherapy instead of day 2 or beyond. The biologic basis for this observation may be that stimulating myeloid progenitor cell growth may render them more vulnerable to destruction by cytotoxic chemotherapy.</p>
+<p><strong>Antibiotic prophylaxis:</strong> For purposes of this PEP update, antibiotic prophylaxis in clinical oncology care is defined as antibiotics prescribed for patients undergoing chemotherapy to decrease the risk of infection during chemotherapy-induced neutropenia. A meta-analysis of 109 trials with 13,579 participants showed that the use of fluoroquinolones for prophylaxis during chemotherapy-induced neutropenia resulted in significant reduction in the risk for all-cause mortality (RR = 0.66, 95% CI [0.55, 0.79], p &lt; 0.00001) and infection-related mortality (RR = 0.61, 95% CI [0.48, 0.77], p = 0.04), as well as decreased incidence of fever, documented infection, and bacteremia (Gafter-Gvili et al., 2012). No significant differences in outcomes were noted between various antibiotic regimens, although the greatest effect was seen with quinolones. A majority of patients in this review had hematologic malignancies, which rendered them at high risk for infection.</p>
+<p>Because prophylactic antibiotics may promote antibiotic resistance, their use should be limited to high-risk patients. Guidelines for NCCN, ASCO, and IDSA advise against antibiotic prophylaxis unless profound neutropenia (absolute neutrophil count less than 100) is expected to exceed 7–10 days, such as after high-dose chemotherapy, acute leukemia regimens, or HCT regimens (Freifeld et al., 2011; NCCN, 2017b).</p>
+<p><strong>Antifungal prophylaxis:</strong> Routine antifungal prophylaxis is not recommended for patients with an anticipated duration of neutropenia of less than 7–10 days (Freifeld et al., 2011; NCCN, 2017b). Antifungal prophylaxis should be reserved for a targeted group of high-risk patients, such as those with acute lymphoblastic leukemia and those with acute myeloid leukemia or myelodysplastic syndrome during neutropenia (NCCN, 2017b).</p>
+<p>Meta-analyses have demonstrated that antifungal prophylaxis decreases the risk of invasive fungal infections (IFI) and mortality in high-risk patients with hematologic malignancies (Zhao et al., 2015; Ziakas, Kourbeti, Voulgarelis, &amp; Mylonakis, 2010). Posaconazole is the preferred agent to prevent IFI in patients with acute myelogenous leukemia or myelodysplastic syndrome undergoing induction chemotherapy (Cornely et al., 2009; NCCN, 2017b; Tacke et al., 2014). In three Cochrane reviews of antifungal prophylaxias (that did not include posaconazole), amphotericin B, ketaconozole, fluconazole, and voriconazole were all effective prophylaxis (Gøtzsche &amp; Johansen, 2014; Johansen &amp; Gøtzsche, 2014; Jørgensen, Gøtzsche, Dalbøge, &amp; Johansen, 2014).</p>
+<p><strong>Pneumocystis jirovecIi pneumonia prophylaxis:</strong> Patients at risk for Pneumocystis pneumonia (from PCP) are those undergoing treatment for acute lymphocytic leukemia, receiving alemtuzumab or idelalisib, receiving temozolomide with radiation therapy, or being treated with the prednisone equivalent of 20 mg or more for four or more weeks (NCCN, 2017b). Trimethoprim-sulfamethoxazole (TMP/SMX) is the preferred agent for prophylaxis.</p>
+<p><strong>Antiviral prophylaxis for at-risk patients:</strong> Prophylactic treatment with antiviral agents is not recommended routinely for all patients receiving cancer treatment. Antiviral prophylaxis is recommended for patients with solid tumors who have had a prior episode of HSV; patients with acute leukemia, lymphoma, multiple myeloma, or chronic lymphocytic leukemia; and patients receiving purine analog therapy or alemtuzumab (NCCN, 2017b). Patients receiving proteasome inhibitors (e.g., bortezomib) are at high risk of VZV reactivation, and VZV prophylaxis is recommended. Patients receiving alemtuzumab are at risk for CMV reactivation, and CMV surveillance is recommended. Patients should be screened for hepatitis B, and prophylaxis is recommended for chronic hepatitis B carriers.</p>
+<h3>
+	Vaccinations</h3>
+<p>Annual influenza vaccination is recommended by the Centers for Disease Control and Prevention’s Advisory Committee on Immunization Practices (ACIP), the NCCN, and the IDSA for patients, their close contacts, and healthcare workers in close contact with these patients (Kroger, Duchin, &amp; Vázques, 2017; NCCN, 2017b; Rubin et al., 2014). Annual influenza vaccination is not recommended for patients who have been treated with anti-B cell antibodies within the previous six months or those receiving intensive chemotherapy as induction or consolidation for acute leukemia (Kroger, Duchin, &amp; Vázques, 2017; NCCN, 2017b, Rubin et al., 2014). No clear consensus has been reached on the most appropriate timing of vaccination; optimally, vaccination should be given more than two weeks from the time of immunosuppression (Rubin et al., 2014).</p>
+<p>The conjugate pneumococcal vaccine PCV13 should be administered to patients who have not previously been vaccinated (Kroger et al., 2017; NCCN, 2017b, Rubin et al., 2014). The polysaccharide pneumococcal vaccine PPSV23 should be administered eight weeks later and repeated every five years. Patients previously vaccinated with PPSV23 only should be vaccinated with PCV13 at least one year after their last PPSV23 dose. The meningococcal vaccine is recommended for patients with complement deficiencies or who receive eculizumab. Patients who require splenectomy or who have functional asplenia should receive pneumococcal, meningococcal, and Haemophilus influenzae b conjugate (NCCN, 2017b).</p>
+<p>Live vaccinations should not be administered to patients undergoing chemotherapy or immunosuppressive therapy (Kroger et al., 2017; NCCN, 2017b; Rubin et al., 2014). Most patients can return to usual vaccination schedule and receive live vaccinations starting three months following chemotherapy or six months following treatment with anti–B cell antibodies (Rubin et al., 2014).</p>
+<h3>
+	Pharmacologic Interventions for Patients Undergoing Hematopoietic Stem Cell Transplantation</h3>
+<p><strong>Colony-stimulating factors:</strong> No consensus exists on the use of CSFs following autologous or allogeneic transplantation (NCCN, 2017a). CSF use may accelerate neutrophil recovery, but it has not been established that CSFs decrease the risk of infection or mortality (NCCN, 2017a). If CSFs are used, pegfilgrastim and filgrastim appear to be equally effective (Ziakas &amp; Kourbeti, 2012).</p>
+<p><strong>Antibiotic prophylaxis:</strong> Fluoroquinolone prophylaxis is recommended by several professional guidelines for all patients undergoing HCT throughout the period from conditioning to engraftment (Freifeld et al., 2011; NCCN, 2017b; Tomblyn et al., 2009). The NCCN and IDSA both recommend levofloxacin in situations with increased risk for oral mucositis–related viridans streptococci infections (Freifeld et al., 2011; NCCN, 2017b). Patients undergoing allogeneic HCT are at increased risk of pneumococcal infection. Penicillin prophylaxis is recommended starting three months following allogeneic HCT until one year after transplantation or until immunosuppression for chronic GVHD is discontinued (NCCN, 2017b).</p>
+<p><strong>Antifungal prophylaxis:</strong> Antifungal prophylaxis is recommended for high-risk patients undergoing HCT, including patients with allogeneic HCT with neutropenia, autologous HCT with mucositis, and patients with GVHD (Freifeld et al., 2011; Majhail et al., 2012; NCCN, 2017b; Tomblyn et al., 2009; Weissinger et al., 2012).</p>
+<p>Fluconazole is recommended to prevent IFI in patients undergoing allogeneic HCT with severe GVHD (NCCN, 2017b; Ullmann et al., 2007). Fluconazole is recommended to prevent IFI in patients undergoing allogenic HCT until the development of GVHD (Cornely et al., 2009). Posaconazole is recommended to prevent IFI in allogeneic HCT recipients with severe GVHD (NCCN, 2017b; Ullmann et al., 2007).</p>
+<p><strong>Antiviral prophylaxis:</strong> HSV and VZV prophylaxis are recommended for patients undergoing autologous and allogeneic HCT and patients with GVHD (Freifeld et al., 2011; Tomblyn et al., 2009). VZV prophylaxis should continue for at least one year following allogeneic HCT and for 6–12 months following autologous HCT (NCCN, 2017b). Options for antiviral prophylaxis include acyclovir, famciclovir, and valaciclovir. The doses for VZV prophylaxis are higher than for HSV prophylaxis (NCCN, 2017b).</p>
+<p>For patients who are CMV seropositive, surveillance should continue for 1–6 months following allogeneic HCT or longer if patients are on immunosuppression for GVHD (NCCN, 2017b).</p>
+<p><strong>Pneumocystis jirovecii pneumonia prophylaxis:</strong> Prophylaxis against PCP with TMP/SMX is recommended for at least six months after allogeneic HCT and longer if the patient continues to be immunosuppressed (NCCN, 2017b; Tomblyn et al., 2009). NCCN (2017b) also recommends consideration of TMP-SMX prophylaxis for 3–6 months in patients who have had autologous HCT (NCCN, 2017b). Pentamadine, atovaquone, and dapsone can be used for PCP prophylaxis in patients intolerant to TMP-SMX (NCCN, 2017b).</p>
+<h3>
+	Vaccination for Patients Undergoing Hematopoietic Stem Cell Transplantation and Their Close Contacts</h3>
+<p>Annual vaccination against influenza is recommended for transplantation recipients, their close contacts, and healthcare providers caring for patients undergoing HCT (Freifeld et al., 2011; Majhail et al., 2012; NCCN, 2017b; Tomblyn et al., 2009). Vaccination should occur at least two weeks prior to immunosuppressive therapy (NCCN, 2017b). The NCCN and American Society for Blood and Marrow Transplantation issued a schedule of recommended vaccines for post-transplantation patients. The inactivated vaccines diphtheria/tetanus/acellular pertussis, haemophilus influenza type b, pneumococcal, hepatitis A, hepatitis B, meningococcal, and inactivated polio vaccine are recommended 6–12 months following autologous or allogeneic transplantation. The live vaccines measles/mumps/rubella and VZV are not recommended unless the patient is seronegative and is more than two years following transplantation and not on immunosuppression (NCCN, 2017b; Tomblyn et al., 2009).</p>
+<h3>
+	Nonpharmacologic Interventions for Prevention of Infection in the General and Transplantation Populations</h3>
+<p><strong>Central venous catheter care and bundles:</strong> Central venous catheter care and care bundles were developed to reduce the number of central line infections and standardize central line care practices (Bundy et al., 2014). Guidelines provide recommendations for education and training of staff, hand hygiene, sterile techniques, dressing regimens, antimicrobial-impregnated catheters for long-term catheter use, and site cleaning (O’Grady et al., 2011). Every person who enters the room during the insertion or access of the line should perform hand hygiene according to standard recommendations (Schiffer et al., 2013). The skin at the insertion site should be scrubbed with 2% chlorhexidine for 30 seconds and should be allowed to dry for at least 30 seconds when inserting or accessing the central line (Schiffer et al., 2013). There is no evidence that particular dressing types or more frequent IV set and/or dressing changes decrease the risk of infection, and, in fact, frequent IV or dressing changes may actually increase risk of infection. The use of topical antibiotic ointment or cream at the insertion site is not recommended because of the potential for increased fungal infections and antibiotic resistance (Schiffer et al., 2013). Transparent dressings on long-term central lines should be changed at least every seven days or when the patient is diaphoretic, the catheter site is oozing, or the catheter dressing looks damp loosened or visibly soiled (O’Grady et al., 2011). Insertion sites should be monitored visually when changing the dressing or by palpation through an intact dressing on a regular basis, depending on the clinical situation of the patient. If there is any tenderness at the site, fever without obvious source, or other symptoms suggesting bloodstream or localized infection the dressing should be removed and the site thoroughly examined (O’Grady et al., 2011). The use of antimicrobial-impregnated CLs remains somewhat controversial because of cost (Schiffer et al., 2013). These guidelines and use of catheter care bundles have decreased central line-associated bloodstream infections in pediatric, general oncology, and transplantation populations (Bundy et al., 2014; O’Grady et al., 2011; Schiffer et al., 2013).</p>
+<p><strong>Chlorhexidine skin preparation:</strong> According to the ASCO guidelines for catheter care, chlorhexidine-based preparations used at the time of insertion result in a decrease in the incidence of CVC-related infections by 40%–50% compared with povidone-iodine solutions (Schiffer et al., 2013). A chlorhexidine-impregnated dressing at the insertion site also substantially reduces the risk of CVC or exit-site bacterial colonization (14.8% versus 26.9%; odds ratio [OR] = 0.47; p &lt; 0.001) (Schiffer et al., 2013). In studies of effectiveness of chlorhexidine, an antiseptic solution used to clean the skin prior to invasive procedures was found to be equally or more effective than 70% alcohol solution, 10% povidone-iodine solution, 0.025% benzalkonium chloride, and 4% benzyl alcohol (O’Grady et al., 2011).</p>
+<h3>
+	Contact Precautions for Resistant Organisms</h3>
+<p>Contact precautions, including donning gowns and gloves to enter the room, have been recommended in patients with resistant organisms. Studies have shown a decrease in the incidence of drug-resistant organisms, including methicillin-resistant Staphylococcus aureus and vancomycin-resistant Enterococcus when full-contact precautions are taken, including patient isolation, wearing of gowns and gloves with proper disposal, and use of disposal equipment when available (Kawamura, Ohmagari, Noda, Sugiyama, &amp; Kurai, 2013; Montecalvo et al., 1999; Shaikh et al., 2002).</p>
+<h3>
+	Environmental Interventions</h3>
+<p>Environmental interventions include disinfection and sterilization of surfaces and equipment, air filtration, positive air pressure rooms, hand hygiene, and barrier protection from body fluids. The IDSA states that environmental factors are effective in preventing infections in the general oncology and HCT population (Freifeld et al., 2011). Hand hygiene is the most effective means of preventing infection in the hospital (Freifeld et al., 2011; Stoll, Silla, Cola, Splitt, &amp; Moreira, 2013). Patients undergoing HCT should have private rooms; allogeneic HCT recipients should have rooms with more than 12 air exchanges, high efficiency particulate absorption filtration, and positive pressure (Freifeld et al., 2011; Stoll et al., 2013). Plants and dried or fresh flowers are not allowed in rooms of hospitalized neutropenic patients (Freifeld et al., 2011). There is no evidence that protective gear (gowns, gloves, and masks) are effective in preventing infection when caring for neutropenic patients (Freifeld et al., 2011).</p>
+<h3>
+	Diet</h3>
+<p>Studies have not shown a decrease in the incidence of infection with use of the low-microbial diet, which prohibits fresh fruits and vegetables and unprocessed food (Sonbol, Firwana, Diab, Zarzour, &amp; Witzig, 2015; van Dalen et al., 2012, 2016). Standard food safety practices that emphasize safe handling and washing or thoroughly cooking food were found to be just as safe and produced no increase in infection rates or incidence of neutropenic fever (Gardner et al., 2008; Moody, Finlay, Mancuso, &amp; Charlson, 2006). <img src="/sites/default/files/journal-images/Wilson2018Figure3.png" /></p>
+<h2>
+	Implications for Practice</h2>
+<p>Nurses caring for patients with cancer-related neutropenic sepsis must be aware that the mortality rate ranges from 2%-21% (Phillips et al., 2012). Evidence-based practice for prevention and management of infection, FN leading to infection, and FN complications are available and should be implemented in all settings where systemic therapy is administered (see Figures 3 and 4). Organizational support to develop documentation and tracking in the patient’s record will encourage timely, accurate, and consistent identification of risks, interventions, and related outcomes. Policies and practices that do not demonstrate benefit need to formally be discontinued so that time and resources can be allocated to activities and interventions proven to be beneficial in prevention of infection in the cancer treatment setting. Additional information for practice, which includes evidence summaries for the articles included in this review and other clinical tools and references, is available at <a href="http://www.ons.org/practice-resources/pep/prevention-infection">www.ons.org/practice-resources/pep/prevention-infection</a>. <img src="/sites/default/files/journal-images/Wilson2018Figure4.png" /></p>
+<h2>
+	Implications for Research</h2>
+<p>Hospitalized patients with cancer who have neutropenic complications experience higher all-cause mortality rates and higher inpatient hospitalization costs. The current evidence, although robust in volume, lacks the ability to replicate findings, and many of these studies are nonrandomized, single-institution studies with small sample sizes. Specific examples include studies for fungal prophylaxis that are limited by design, sample size, and low level of evidence, with the strongest level of evidence in HCT. In conjunction with the ONS (2015) strategic plan, oncology nurses at all levels continue to advance the quality of cancer care and patient/staff safety. These findings should inspire new questions leading to additional research, which may have a broader impact in the prevention of infection. <img src="/sites/default/files/journal-images/Wilson2018Implications.png" /></p>
+<h2>
+	Conclusion</h2>
+<p>Prevention of infection is essential for successful cancer treatment and reduction of morbidity, mortality, and cost of oncology care. Current practice guidelines for prevention of infection in patients with cancer recommend risk assessments for early identification of infection, cancer-related FN, and FN complications for timely implementation of targeted, evidence-based interventions. ONS PEP for infection is a comprehensive synthesis of currently published nursing and medical research literature providing up to date best evidence resources to guide best oncology nursing practices for preventing infection in patients with cancer.</p>
+<h2>
+	About the Author(s)</h2>
+<p>Barbara J. Wilson, MS, RN, AOCN®, ACNS-BC, is the director of oncology professional practice for the WellStar Cancer Network in Marietta, GA; Laura J. Zitella, MS, RN, ACNP-BC, AOCN®, is a nurse practitioner and lead advance practice provider of inpatient hematology–oncology at Stanford Health Care in CA; Colleen H. Erb, MSN, CRNP, ACNP-BC, AOCNP®, is a hematology–oncology nurse practitioner at the PENN Medicine Abramson Cancer Center in Philadelphia, PA; Jackie Foster, MPH, RN, OCN®, is a senior patient education specialist at the National Marrow Donor Program/Be The Match® in Minneapolis, MN; Mary Peterson, MS, APRN, ANP-BC, AOCNP®, is a nurse practitioner in the Texas Transplant Institute at St. David’s South Austin Medical Center in Austin; and Sylvia K. Wood, DNP, APRN, ANP-BC, AOCNP®, is an assistant professor in the Department of Nursing Professional and Graduate Studies at St. Joseph’s College in Brooklyn, NY. The authors take full responsibility for this content. Wilson serves on speakers bureaus for Amgen, Genentech, TEVA, and Apobiologix. Zitella consults for AstraZeneca and Caregive. Peterson has previously served on speakers bureaus for Takeda Oncology and has received support from the American Society for Blood and Marrow Transplantation. The article has been reviewed by independent peer reviewers to ensure that it is objective and free from bias. Wilson can be reached at <a href="mailto:bwlsn56@aol.com">bwlsn56@aol.com</a>, with copy to <a href="mailto:CJONEditor@ons.org">CJONEditor@ons.org</a>. (Submitted May 2017. Accepted June 27, 2017.)</p>
+<p> </p>
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+        </div>
+
+        <div class="ja-body-references">
+          <h2>References</h2>
+          
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--node--field-jour-references--journal-article.html.twig
+   * field--node--field-jour-references.html.twig
+   * field--node--journal-article.html.twig
+   * field--field-jour-references.html.twig
+   * field--text-long.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+                <div><p>Aapro, M.S., Bohlius, J., Cameron, D.A., Dal Lago, L., Donnelly, J.P., Kearney, N., . . . Zielinski, C. (2011). 2010 update of EORTC guidelines for the use of granulocyte-colony stimulating factor to reduce the incidence of chemotherapy-induced febrile neutropenia in adult patients with lymphoproliferative disorders and solid tumours. European Journal of Cancer, 47, 8–32. <a href="https://doi.org/10.1016/j.ejca.2010.10.013">https://doi.org/10.1016/j.ejca.2010.10.013</a></p></div>
+              <div><p>American Cancer Society. (2016). Cancer treatment and survivorship facts and figures, 2016–2017. Retrieved from <a href="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/cancer-treatment-and-survivorship-facts-and-figures/cancer-treatment-and-survivorship-facts-and-figures-2016-2017.pdf">https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and…</a></p></div>
+              <div><p>American Cancer Society. (2017). Cancer facts and figures, 2017. Retrieved from <a href="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/cancer-facts-and-figures-2017.pdf">https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and…</a></p></div>
+              <div><p>Baskaran, N.D., Gan, G.G., &amp; Adeeba, K. (2008). Applying the Multinational Association for Supportive Care in Cancer risk scoring in predicting outcome of fegrile neutropenia patients in a cohort of patients. Annals of Hematology, 87, 563–569. <a href="https://doi.org/10.1007/s00277-008-0487-7">https://doi.org/10.1007/s00277-008-0487-7</a></p></div>
+              <div><p>Bilir, S.P., Ma, Q., Zhao, Z., Wehler, E., Munakata, J., &amp; Barber, B. (2016). Economic burden of toxicities associated with treating metastatic melanoma in the United States. American Health and Drug Benefits, 9, 203–213.</p></div>
+              <div><p>Brand, J.S., Colzani, E., Johansson, A.L.V., Giesecke, J., Clements, M., Bergh, J., . . . Czene, K. (2016). Infection-related hospitalizations in breast cancer patients: Risk and impact on prognosis. Journal of Infection, 72, 650–658. <a href="https://doi.org/10.1016/j.jinf.2016.04.003">https://doi.org/10.1016/j.jinf.2016.04.003</a></p></div>
+              <div><p>Bundy, D.G., Gaur, A.H., Billett, A.L., He, B., Colantuoni, E.A., &amp; Miller, M.R. (2014). Preventing CLABSis among pediatric hematology/oncology inpatients: National collaborative results. Pediatrics, 134, e1678–e1685. <a href="https://doi.org/10.1542/peds.2014-0582">https://doi.org/10.1542/peds.2014-0582</a></p></div>
+              <div><p>Burris, H.A., Belani, C.P., Kaufman, P.A., Gordon, A.N., Schwartzberg, L.S., Paroly, W.S., . . . Saven, A. (2010). Pegfilgrastim on the same day versus next day of chemotherapy in patients with breast cancer, non-small-cell lung cancer, ovarian cancer, and non-Hodgkin’s lymphoma: Results of four multicenter, double-blind, randomized phase II studies. Journal of Oncology Practice, 6, 133–140. <a href="https://doi.org/10.1200/JOP.091094">https://doi.org/10.1200/JOP.091094</a></p></div>
+              <div><p>Chindaprasirt, J., Wanitpongpun, C., Limpawattana, P., Thepsuthammarat, K., Sripakdee, W., Sookprasert, A., &amp; Wirasorn, K. (2013). Mortality, length of stay, and cost associated with hospitalized adult cancer patients with febrile neutropenia. Asian Pacific Journal of Cancer Prevention, 14, 1115–1119.</p></div>
+              <div><p>Cooksley, C.D., Avritscher, E.B., Rolston, K.V., &amp; Elting, L.S. (2009). Hospitalizations for infection in cancer patients: Impact of an aging population. Supportive Care in Cancer, 17, 547–554. <a href="https://doi.org/10.1007/s00520-008-0520-3">https://doi.org/10.1007/s00520-008-0520-3</a></p></div>
+              <div><p>Cornely, O.A., Böhme, A., Buchheidt, D., Einsele, H., Heinz, W.J., Karthaus, M., . . . Ullmann, A.J. (2009). Primary prophylaxis of invasive fungal infections in patients with hematologic malignancies. Recommendations of the Infectious Diseases Working Party of the German Society for Haematology and Oncology. Haematologica, 94, 113–122. <a href="https://doi.org/10.3324/haematol.11665">https://doi.org/10.3324/haematol.11665</a></p></div>
+              <div><p>Crawford, J., Caserta, C., &amp; Roila, F. (2010). Hematopoietic growth factors: ESMO Clinical Practice Guidelines for the applications. Annals of Oncology, 21(Suppl. 5), v248-v251. <a href="https://doi.org/10.1093/annonc/mdq195">https://doi.org/10.1093/annonc/mdq195</a></p></div>
+              <div><p>El Zakhem, A., Chaftari, A.M., Bahu, R., El Helou, G., Shelburne, S., Jiang, Y., . . . Raad, I. (2014). Central line-associated bloodstream infections caused by Staphylococcus aureus in cancer patients: Clinical outcome and management. Annals of Medicine, 46, 163–168. <a href="https://doi.org/10.3109/07853890.2013.878513">https://doi.org/10.3109/07853890.2013.878513</a></p></div>
+              <div><p>Freifeld, A.G., Bow, E.J., Sepkowitz, K.A., Boeckh, M.J., Ito, J.I., Mullen, C.A., . . . Wingard, J.R. (2011). Clinical practice guideline for the use of antimicrobial agents in neutropenic patients with cancer: 2010 update by the Infectious Diseases Society of America. Clinical Infectious Diseases, 52, 427–431. <a href="https://doi.org/10.1093/cid/ciq147">https://doi.org/10.1093/cid/ciq147</a></p></div>
+              <div><p>Gafter-Gvili, A., Fraser, A., Paul, M., Vidal, L., Lawrie, T.A., van de Wetering, M.D., . . . Leibovici, L. (2012). Antibiotic prophylaxis for bacterial infections in afebrile neutropenic patients following chemotherapy. Cochrane Database of Systematic Reviews, 1, CD004386. <a href="https://doi.org/10.1002/14651858.CD004386.pub3">https://doi.org/10.1002/14651858.CD004386.pub3</a></p></div>
+              <div><p>Gafter-Gvili, A., &amp; Polliack, A. (2016). Bendamustine associated immune suppression and infections during therapy of hematological malignancies. Leukemia and Lymphoma, 57, 512–519. <a href="https://doi.org/10.3109/10428194.2015.1110748">https://doi.org/10.3109/10428194.2015.1110748</a></p></div>
+              <div><p>Gardner, A., Mattiuzzi, G., Faderl, S., Borthakur, G., Garcia-Manero, G., Pierce, S., . . . Estey, E. (2008). Randomized comparison of cooked and noncooked diets in patients undergoing remission induction therapy for acute myeloid leukemia. Journal of Clincal Oncology, 26, 5684–5688. <a href="https://doi.org/10.1200/JCO.2008.16.4681">https://doi.org/10.1200/JCO.2008.16.4681</a></p></div>
+              <div><p>Gøtzsche, P.C., &amp; Johansen, H.K. (2014). Routine versus selective antifungal administration for control of fungal infections in patients with cancer. Cochrane Database of Systematic Reviews, 9, CD000026. <a href="https://doi.org/10.1002/14651858.CD000026.pub2">https://doi.org/10.1002/14651858.CD000026.pub2</a></p></div>
+              <div><p>Grosso, G., Biondi, A., Marventano, S., Mistretta, A., Calabrese, G., &amp; Basile, F. (2012). Major postoperative complications and survival for colon cancer elderly patients. BMC Surgery, 12(Suppl. 1), S20. <a href="https://doi.org/10.1186/1471-2482-12-S1-S20">https://doi.org/10.1186/1471-2482-12-S1-S20</a></p></div>
+              <div><p>Gudiol, C., Aguado, J.M., &amp; Carratalà, J. (2016). Bloodstream infections in patients with solid tumors. Virulence, 7, 298–308. <a href="https://doi.org/10.1080/21505594.2016.1141161">https://doi.org/10.1080/21505594.2016.1141161</a></p></div>
+              <div><p>Gudiol, C., &amp; Carratalà, J. (2014). Antibiotic resistance in cancer patients. Expert Review of Anti-Infective Therapy, 12, 1003–1016. <a href="https://doi.org/10.1586/14787210.2014.920253">https://doi.org/10.1586/14787210.2014.920253</a></p></div>
+              <div><p>Ibrahim, K.Y., Pierrotti, L.C., Freire, M.P., Gutierrez, P.P., Duarte Ldo, P., Bellesso, M., . . . Abdala, E. (2013). Health care-associated infections in hematology-oncology patients with neutropenia: A method of surveillance. American Journal of Infection Control, 41, 1131–1133. <a href="https://doi.org/10.1016/j.ajic.2013.03.299">https://doi.org/10.1016/j.ajic.2013.03.299</a></p></div>
+              <div><p>Johansen, H.K., &amp; Gøtzsche, P.C. (2014). Amphotericin B versus fluconazole for controlling fungal infections in neutropenic cancer patients. Cochrane Database of Systematic Reviews, 9, CD000239. <a href="http://doi.org/10.1002/14651858.CD000239.pub2">http://doi.org/10.1002/14651858.CD000239.pub2</a></p></div>
+              <div><p>Johnson, L.A. (2014). Putting Evidence Into Practice. Clinical Journal of Oncology Nursing, 18(Suppl. 3), S2–S4. <a href="https://doi.org/10.1188/14.CJON.S3.2-4">https://doi.org/10.1188/14.CJON.S3.2-4</a></p></div>
+              <div><p>Jørgensen, K.J., Gøtzsche, P.C., Dalbøge, C.S., &amp; Johansen, H.K. (2014). Voriconazole versus amphotericin B or fluconazole in cancer patients with neutropenia. Cochrane Database of Systematic Reviews, 2, CD004707. <a href="https://doi.org/10.1002/14651858.CD004707.pub3">https://doi.org/10.1002/14651858.CD004707.pub3</a></p></div>
+              <div><p>Kalantar, E., Marashi, S.M., Pormazaheri, H., Mahmoudi, E., Hatami, S., Barari, M.A., . . . Asadi, M. (2015). First experience of Candida non-albicans isolates with high antibiotic resistance pattern caused oropharyngeal candidiasis among cancer patients. Journal of Cancer Research and Therapeutics, 11, 388–390. <a href="https://doi.org/10.4103/0973-1482.157307">https://doi.org/10.4103/0973-1482.157307</a></p></div>
+              <div><p>Kawamura, I., Ohmagari, M., Noda, S., Sugiyama, T., &amp; Kurai, H. (2013). Preventing the transmission of methicillin-resistant Staphylococcus aureus at a tertiary care cancer center in Japan: Quality improvement report. American Journal of Infection Control, 41, 1105–1106. <a href="https://doi.org/10.1016/j.ajic.2013.06.005">https://doi.org/10.1016/j.ajic.2013.06.005</a></p></div>
+              <div><p>Kroger, A.T., Duchin, J., &amp; Vázques, M. (2017). General best practice guidelines for immunization. Retrieved from <a href="https://www.cdc.gov/vaccines/hcp/acip-recs/general-recs/index.html">https://www.cdc.gov/vaccines/hcp/acip-recs/general-recs/index.html</a></p></div>
+              <div><p>Kuderer, N.M. (2011). Meta-analysis of randomized controlled trials of granulocyte colony-stimulating factor prophylaxis in adult cancer patients receiving chemotherapy. Cancer Treatment and Research, 157, 127–143. <a href="https://doi.org/10.1007/978-1-4419-7073-2_8">https://doi.org/10.1007/978-1-4419-7073-2_8</a></p></div>
+              <div><p>Kuderer, N.M., Dale, D.C., Crawford, J., Cosler, L.E., &amp; Lyman, G.H. (2006). Mortality, morbidity, and cost associated with febrile neutropenia in adult cancer patients. Cancer, 106, 2258–2266.</p></div>
+              <div><p>Li, Y., Klippel, Z., Shih, X., Wang, H., Reiner, M., &amp; Page, J.H. (2016). Trajectory of absolute neutrophil counts in patients treated with pegfilgrastim on the day of chemotherapy versus the day after chemotherapy. Cancer Chemotherapy and Pharmacology, 77, 703–712.</p></div>
+              <div><p>Liu, Y.Y., Wang, Y., Walsh, T.R., Yi, L.X., Zhang, R., Spencer, J., . . . Shen, J. (2016). Emergence of plasmid-mediated colistin resistance mechanism MCR-1 in animals and human beings in China: A microbiological and molecular biological study. Lancet Infectious Diseases, 16, 161–168. <a href="https://doi.org/10.1016/S1473-3099(15)00424-7">https://doi.org/10.1016/S1473-3099(15)00424-7</a></p></div>
+              <div><p>Lyman, G.H., Michels, S.L., Reynolds, M.W., Barron, R., Tomic, K.S., &amp; Yu, J. (2010). Risk of mortality in patients with cancer who experience febrile neutropenia. Cancer, 116, 5555–5563. <a href="https://doi.org/10.1002/cncr.25332">https://doi.org/10.1002/cncr.25332</a></p></div>
+              <div><p>Magauran, C.E., &amp; Salgado, C.D. (2011). Challenges and advances in infection control of hematopoietic stem cell transplant recipients. Infectious Disorders Drug Targets, 11, 18–26.</p></div>
+              <div><p>Majhail, N.S., Rizzo, J.D., Lee, S.J., Aljurf, M., Atsuta, Y., Bonfim, C., . . . Tichelli, A. (2012). Recommended screening and preventive practices for long-term survivors after hematopoietic cell transplantation. Biology of Blood and Marrow Transplantation, 18, 348–371. <a href="https://doi.org/10.1016/j.bbmt.2011.12.519">https://doi.org/10.1016/j.bbmt.2011.12.519</a></p></div>
+              <div><p>Marin, M., Gudiol, C., Ardanuy, C., Garcia-Vidal, C., Calvo, M., Arnan, M., &amp; Carratalà, J. (2014). Bloodstream infections in neutropenic patients with cancer: Differences between patients with haematological malignancies and solid tumours. Journal of Infection, 69, 417–423. <a href="https://doi.org/10.1016/j.jinf.2014.05.018">https://doi.org/10.1016/j.jinf.2014.05.018</a></p></div>
+              <div><p>Marín, M., Gudiol, C., Garcia-Vidal, C., Ardanuy, C., &amp; Carratalà, J. (2014). Bloodstream infections in patients with solid tumors: Epidemiology, antibiotic therapy, and outcomes in 528 episodes in a single cancer center. Medicine, 93, 143–149. <a href="https://doi.org/10.1097/MD.0000000000000026">https://doi.org/10.1097/MD.0000000000000026</a></p></div>
+              <div><p>Mitchell, S.A., &amp; Friese, C.R. (2009). Decision rules for summative evaluation of a body of evidence. Retrieved from <a href="https://www.ons.org/practice-resources/pep/evaluation-process">https://www.ons.org/practice-resources/pep/evaluation-process</a></p></div>
+              <div><p>Montassier, E., Batard, E., Gastinne, T., Potel, G., &amp; de La Cochetière, M.F. (2013). Recent changes in bacteremia in patients with cancer: A systematic review of epidemiology and antibiotic resistance. European Journal of Clinical Microbiology and Infectious Diseases, 32, 841–850. <a href="https://doi.org/10.1007/s10096-013-1819-7">https://doi.org/10.1007/s10096-013-1819-7</a></p></div>
+              <div><p>Montecalvo, M.A., Jarvis, W.R., Uman, J., Shay, D.K., Petrullo, C., Rodney, K., . . . Wormser, G.P. (1999). Infection-control measures reduce transmission of vancomycin-resistant Enterococci in an endemic setting. Annals of Internal Medicine, 131, 269–272.</p></div>
+              <div><p>Moody, K., Finlay, J., Mancuso, C., &amp; Charlson, M. (2006). Feasibility and safety of a pilot randomized trial of infection rate: Neutropenic diet versus standard food safety guidelines. Journal of Pediatric Hematology/Oncology, 28, 126–133. <a href="https://doi.org/10.1097/01.mph.0000210412.33630.fb">https://doi.org/10.1097/01.mph.0000210412.33630.fb</a></p></div>
+              <div><p>National Comprehensive Cancer Network. (2017a). NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®): Myeloid growth factors [v.2.2017]. Retrieved from <a href="https://www.nccn.org/professionals/physician_gls/pdf/myeloid_growth.pdf">https://www.nccn.org/professionals/physician_gls/pdf/myeloid_growth.pdf</a></p></div>
+              <div><p>National Comprehensive Cancer Network. (2017b). NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®): Prevention and treatment of cancer-related infections [v.2.2017]. Retrieved from <a href="https://www.nccn.org/professionals/physician_gls/PDF/infections.pdf">https://www.nccn.org/professionals/physician_gls/PDF/infections.pdf</a></p></div>
+              <div><p>O’Grady, N.P., Alexander, M., Burns, L.A., Dellinger, E.P., Garland, J., Heard, S.O., . . . Saint, S. (2011). Guidelines for the prevention of intravascular catheter-related infections. Clinical Infectious Diseases, 52, e162–e193. <a href="https://doi.org/10.1093/cid/cir257">https://doi.org/10.1093/cid/cir257</a></p></div>
+              <div><p>Oncology Nursing Society. (2015). New ONS core values define society’s strategic objective. Retrieved from <a href="https://www.ons.org/search?search_api_views_fulltext=strategic+plan">https://www.ons.org/search?search_api_views_fulltext=strategic+plan</a></p></div>
+              <div><p>Oncology Nursing Society. (2017a). Prevention of infection: General. Retrieved from <a href="https://www.ons.org/practice-resources/pep/prevention-infection/prevention-infection-general">https://www.ons.org/practice-resources/pep/prevention-infection/prevent…</a></p></div>
+              <div><p>Oncology Nursing Society. (2017b). Prevention of infection: Transplant. Retrieved from <a href="https://www.ons.org/practice-resources/pep/prevention-infection/prevention-infection-transplant">https://www.ons.org/practice-resources/pep/prevention-infection/prevent…</a></p></div>
+              <div><p>Phillips, R., Hancock, B., Graham, J., Bromham, N., Jin, H., &amp; Berendse, S. (2012). Prevention and management of neutropenic sepsis in patients with cancer: Summary of NICE guidance. BMJ, 345, e5368. <a href="http://doi.org/10.1136/bmj.e5368">http://doi.org/10.1136/bmj.e5368</a></p></div>
+              <div><p>Ropka, M.E., &amp; Spencer-Cisek, P. (2001). PRISM: Priority symptom management project phase I: Assessment. Oncology Nursing Forum, 28, 1585–1594.</p></div>
+              <div><p>Rubin, L.G., Levin, M.J., Ljungman, P., Davies, E.G., Avery, R., Tomblyn, M., . . . Kang, I. (2014). 2013 IDSA clinical practice guideline for vaccination of the immunocompromised host. Clinical Infectious Diseases, 58, e44–e100. <a href="https://doi.org/10.1093/cid/cit684">https://doi.org/10.1093/cid/cit684</a></p></div>
+              <div><p>Satlin, M.J., Cohen, N., Ma, K.C., Gedrimaite, Z., Soave, R., Askin, G., . . . Seo, S.K. (2016). Bacteremia due to carbapenem-resistant enterobacteriaceae in neutropenic patients with hematologic malignancies. Journal of Infection, 73, 336–345. <a href="https://doi.org/10.1016/j.jinf.2016.07.002">https://doi.org/10.1016/j.jinf.2016.07.002</a></p></div>
+              <div><p>Schiffer, C.A., Mangu, P.B., Wade, J.C., Camp-Sorrell, D., Cope, D.G., El-Rayes, B.F., . . . Levine, M. (2013). Central venous catheter care for the patient with cancer: American Society of Clinical Oncology clinical practice guideline. Journal of Clinical Oncology, 31, 1357–1370. <a href="https://doi.org/10.1200/JCO.2012.45.5733">https://doi.org/10.1200/JCO.2012.45.5733</a></p></div>
+              <div><p>Shaikh, Z.H., Osting, C.A., Hanna, H.A., Arbuckle, R.B., Tarr, J.J., &amp; Raad, I.I. (2002). Effectiveness of a multifaceted infection control policy in reducing vancomycin usage and vancomycin-resistant Enterococci at a tertiary care cancer centre. Journal of Hospital Infection, 51, 52–58. <a href="https://doi.org/10.1053/jhin.2002.1161">https://doi.org/10.1053/jhin.2002.1161</a></p></div>
+              <div><p>Smith, T.J., Bohlke, K., Lyman, G.H., Carson, K.R., Crawford, J., Cross, S.J., . . . Armitage, J.O. (2015). Recommendations for the use of WBC growth factors: American Society of Clinical Oncology clinical practice guideline update. Journal of Clinical Oncology, 33, 3199–3212. <a href="https://doi.org/10.1200/JCO.2015.62.3488">https://doi.org/10.1200/JCO.2015.62.3488</a></p></div>
+              <div><p>Sonbol, M.G., Firwana, B., Diab, M., Zarzour, A., &amp; Witzig, T.E., (2015). The effect of a neutropenic diet on infection and mortality rates in cancer patients: A meta-analysis. Nutrition and Cancer, 67, 1230–1238. <a href="https://doi.org/10.1080/01635581.2015.1082109">https://doi.org/10.1080/01635581.2015.1082109</a></p></div>
+              <div><p>Sonis, S.T., Oster, G., Fuchs, H., Belllm, L., Bradford, W.Z., Edelsberg, J., . . . Horowitz, M. (2001). Oral mucositis and the clinical and economic outcomes of hematopoietic stem-cell transplantation. Journal of Clinical Oncology, 19, 2201–2205.</p></div>
+              <div><p>Stoll, P., Silla, L.M., Cola, C.M., Splitt, J.I., &amp; Moreira, L.B. (2013). Effectiveness of a protective environment implementation for cancer patients with chemotherapy-induced neutropenia on fever and mortality incidence. American Journal of Infection Control, 41, 357–359. <a href="https://doi.org/10.1016/j.ajic.2012.05.018">https://doi.org/10.1016/j.ajic.2012.05.018</a></p></div>
+              <div><p>Straka, C., Sandherr, M., Salwender, H., Wandt, H., Metzner, B., Hübel, K., . . . Emmerich, B. (2011). Testing G-CSF responsiveness predicts the individual susceptibility to infection and consecutive treatment in recipients of high-dose chemotherapy. Blood, 117, 2121–2128. <a href="https://doi.org/10.1182/blood-2010-06-290080">https://doi.org/10.1182/blood-2010-06-290080</a></p></div>
+              <div><p>Tacke, D., Buchheidt, D., Karthaus, M., Krause, S.W., Maschmeyer, G., Neumann, S., . . . Cornely, O.A. (2014). Primary prophylaxis of invasive fungal infections in patients with haematologic malignancies. 2014 update of the recommendations of the Infectious Diseases Working Party of the German Society for Haematology and Oncology. Annals of Hematology, 93, 1449–1456. <a href="https://doi.org/10.1007/s00277-014-2108-y">https://doi.org/10.1007/s00277-014-2108-y</a></p></div>
+              <div><p>Tomblyn, M., Chiller, T., Einsele, H., Gress, R., Sepkowitz, K., Storek, J., . . . Boeckh, M.J. (2009). Guidelines for preventing infectious complications among hematopoietic cell transplant recipients: A global perspective. Biology of Blood Marrow Transplantation, 15, 1143–1145. <a href="https://doi.org/10.1038/bmt.2009.254">https://doi.org/10.1038/bmt.2009.254</a></p></div>
+              <div><p>Ullmannn, A.J., Lipton, J.H., Vesole, D.H., Chandrasekar, P., Langston, A., Tarantolo, S.R., . . . Durrant, S. (2007). Posaconazole or fluconazole for prophylaxis in severe graft-versus-host disease. New England Journal of Medicine, 356, 335–347. <a href="https://doi.org/10.1056/NEJMoa061098">https://doi.org/10.1056/NEJMoa061098</a></p></div>
+              <div><p>Ullmann, A.J., Schmidt-Hieber, M., Bertz, H., Heinz, W.J., Kiehl, M., Krüger, W., … on behalf of the Infectious Diseases Working Party of the German Society for Hematology and Medical Oncology (AGIHO/DGHO) and the DAG-KBT (German Working Group for Blood and Marrow Transplantation). (2016). Infectious diseases in allogeneic haematopoietic stem cell transplantation: Prevention and prophylaxis strategy guidelines 2016. Annals of Hematology, 95, 1435–1455. <a href="http://doi.org/10.1007/s00277-016-2711-1">http://doi.org/10.1007/s00277-016-2711-1</a></p></div>
+              <div><p>van Dalen, E.C., Mank, A., Leclercq, E., Mulder, R.L., Davies, M., Kersten, M.J., &amp; van de Wetering, M.D. (2012). Low bacterial diet versus control diet to prevent infection in cancer patients treated with chemotherapy causing episodes of neutropenia. Cochrane Database of Systemic Reviews, 9, CD006247. <a href="https://doi.org/10.1002/14651858.CD006247.pub2">https://doi.org/10.1002/14651858.CD006247.pub2</a></p></div>
+              <div><p>van Dalen, E.C., Mank, A., Leclercq, E., Mulder, R.L., Davies, M., Kersten, M.J., &amp; van de Wetering, M.D. (2016). Low bacterial diet versus control diet to prevent infection in cancer patients treated with chemotherapy causing episodes of neutropenia. Cochrane Database of Systemic Reviews, 4, CD006247. <a href="https://doi.org/10.1002/14651858.CD006247.pub3">https://doi.org/10.1002/14651858.CD006247.pub3</a></p></div>
+              <div><p>Wang, X.J., Lopez, S.E., &amp; Chan, A. (2015). Economic burden of chemotherapy-induced febrile neutropenia in patients with lymphoma: A systematic review. Critical Reviews in Oncology/Hematology, 94, 201–212. <a href="https://doi.org/10.1016/j.critrevonc.2014.12.011">https://doi.org/10.1016/j.critrevonc.2014.12.011</a></p></div>
+              <div><p>Weissinger, F., Auner, H.W., Bertz, H., Buchheidt, D., Cornely, O.A., Egerer, G., . . . Wolf, H.H. (2012). Antimicrobial therapy of febrile complications after high-dose chemotherapy and autologous hematopoietic stem cell transplantation—Guidelines of the Infectious Diseases Working Party (AGIHO) of the German Society of Hematology and Oncology (DGHO). Annals of Hematology, 91, 1161–1174. <a href="https://doi.org/10.1007/s00277-012-1456-8">https://doi.org/10.1007/s00277-012-1456-8</a></p></div>
+              <div><p>Weycker, D., Li, X., Edelsberg, J., Barron, R., Kartashov, A., Xu, H., &amp; Lyman, G.H. (2015). Risk and consequences of chemotherapy-induced febrile neutropenia in patients with metastatic solid tumors. Journal of Oncology Practice, 11, 47–54. <a href="https://doi.org/10.1200/JOP.2014.001492">https://doi.org/10.1200/JOP.2014.001492</a></p></div>
+              <div><p>Zanussi, S., Serraino, D., Dolcetti, R., Berretta, M., &amp; De Paoli, P. (2013). Cancer, aging and immune reconstitution. Anti-Cancer Agents in Medicinal Chemistry, 13, 1310–1324.</p></div>
+              <div><p>Zhao, Y.J., Khoo, A.L., Tan, G., Teng, M., Tee, C., Tan, B.H., . . . Chai, L.Y. (2015). Network meta-analysis and pharmacoeconomic evaluation of fluconazole, itraconazole, posaconazole, and voriconazole in invasive fungal infection prophylaxis. Antimicrobial Agents and Chemotherapy, 60, 376–386. <a href="https://doi.org/10.1128/AAC.01985-15">https://doi.org/10.1128/AAC.01985-15</a></p></div>
+              <div><p>Ziakas, P.D., &amp; Kourbeti, I.S. (2012). Pegfilgrastim vs. filgrastim for supportive care after autologous stem cell transplantation: can we decide? Clinical Transplantation, 26, 16–22. <a href="http://doi.org/10.111/j.1399-00122011.01532.x">http://doi.org/10.111/j.1399-00122011.01532.x</a></p></div>
+              <div><p>Ziakas, P.D., Kourbeti, I.S., Voulgarelis, M., &amp; Mylonakis, E. (2010). Effectiveness of systemic antifungal prophylaxis in patients with neutropenia after chemotherapy: A meta-analysis of randomized controlled trials. Clinical Therapeutics, 32, 2316–2336.</p></div>
+        
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+  
+
+
+  <div class="side-column">
+			
+	
+<div class="top-side-ad">
+
+                <div id="sas_35013"></div>
+<script type="application/javascript">
+    sas.cmd.push(function() {
+        sas.call("std", {
+            siteId: 332172, // 
+            pageId: 1167578, // Page : ONS.org/ons_ros
+            formatId: 35013, // Format :  IAB Medium Rectangle 1 (300x250) 300x250
+            target: "" // Targeting
+        });
+    });
+</script>
+<noscript>
+    <a href="https://www5.smartadserver.com/ac?jump=1&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=35013&visit=m&tmstp=[timestamp]&out=nonrich" target="_blank">
+        <img src="https://www5.smartadserver.com/ac?out=nonrich&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=35013&visit=m&tmstp=[timestamp]" border="0" alt="" />
+    </a>
+</noscript>
+              <div id="sas_35283"></div>
+<script type="application/javascript">
+    sas.cmd.push(function() {
+        sas.call("std", {
+            siteId: 332172, // 
+            pageId: 1167591, // Page : ONS.org/cjon
+            formatId: 35283, // Format :  IAB Medium Rectangle 2 (300x250) 300x250
+            target: "" // Targeting
+        });
+    });
+</script>
+<noscript>
+    <a href="https://www5.smartadserver.com/ac?jump=1&nwid=1541&siteid=332172&pgname=cjon&fmtid=35283&visit=m&tmstp=[timestamp]&out=nonrich" target="_blank">
+        <img src="https://www5.smartadserver.com/ac?out=nonrich&nwid=1541&siteid=332172&pgname=cjon&fmtid=35283&visit=m&tmstp=[timestamp]" border="0" alt="" />
+    </a>
+</noscript>
+                  <div id="sas_86356"></div>
+<script type="application/javascript">
+  // Verify that at least 2 pages have been visited, including this page view.
+  if (document.cookie.indexOf("session_first_page_visited=2") !== -1) {
+  if (document.cookie.indexOf("interstitial_was_displayed="") === -1) {
+    sas.cmd.push(function() {
+      sas.call("std", {
+        siteId: 332172, //
+        pageId: 1167578, // Page : ONS.org/ons_ros
+        formatId: 86356, // Format : IAB Medium Rectangle Interstitial (300x250) 300x250
+        target: "" // Targeting
+      });
+    });
+    document.cookie = "interstitial_was_displayed=1";
+  }
+  window.withAds = true;
+  }
+</script>
+<noscript>
+    <a href="https://www5.smartadserver.com/ac?jump=1&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=86356&visit=m&tmstp=[timestamp]&out=nonrich" target="_blank">
+        <img src="https://www5.smartadserver.com/ac?out=nonrich&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=86356&visit=m&tmstp=[timestamp]" border="0" alt="" />
+    </a>
+</noscript>
+        </div>	
+			
+<nav class="expanding-menu active expanding-nav nav-side">
+    <ul class="level-1">
+		    </ul>
+</nav>
+
+	    
+              						
+    
+		      <div class="related-journal-articles link-list">
+  <div class="callout-inner">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'container' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/container.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view.html.twig' -->
+<div class="related-articles js-view-dom-id-ce5cd2216b81fd071ddba6e52c7a47937a473275b2c4280953b1ea140ea221d1 results-list">
+  
+  
+  
+
+      <header>
+      <h2>Related Articles</h2>
+    </header>
+  
+  
+  
+
+  
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_unformatted' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-unformatted.html.twig' -->
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div><div class="related-article-type">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+Article
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div></div><div><h3 class="related-article-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/cjon/27/5/practical-guidance-177lulu-psma-617-treatment-including-radiation-safety-adverse-event" hreflang="en">Practical Guidance on [177Lu]Lu-PSMA-617 Treatment, Including Radiation Safety, Adverse Event Monitoring, and Patient Counseling </a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div><div class="related-article-type">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+Article
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div></div><div><h3 class="related-article-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/onf/50/5/advances-treatment-and-health-related-quality-life-cohort-study-older-adult-survivors" hreflang="en">Advances in Treatment and Health-Related Quality of Life: A Cohort Study of Older Adult Survivors of Breast Cancer </a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div><div class="related-article-type">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+Article
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div></div><div><h3 class="related-article-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/onf/50/5/formation-stigma-and-its-social-consequences-chinese-people-living-lung-cancer-qualitative" hreflang="en">The Formation of Stigma and Its Social Consequences on Chinese People Living With Lung Cancer: A Qualitative Study </a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-unformatted.html.twig' -->
+
+
+  
+  
+
+  
+  
+
+  
+  
+</div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/container.html.twig' -->
+
+
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'container' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/container.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view.html.twig' -->
+<div class="related-books js-view-dom-id-1954ea8d1d6c09a259b6326cec97d1fee8913d98ae7056826bc29e731cfd0e82 results-list">
+  
+  
+  
+
+      <header>
+      <h2>Related Books</h2>
+    </header>
+  
+  
+  
+
+  
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_unformatted' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-unformatted.html.twig' -->
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div class="related-book-image">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_formatter' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+  
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_style' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+<img loading="lazy" src="/sites/default/files/styles/thumbnail/public/BMTCN2e%20Final%20Cover.jpg?itok=CDnEGhsG" alt="BMTCN® Certification Review Manual (second edition) " typeof="foaf:Image" />
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><h3 class="related-book-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/books/bmtcnr-certification-review-manual-second-edition" hreflang="en">BMTCN® Certification Review Manual (Second Edition)</a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price related-book-price-1">Member Price: <b>$70.00</b></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price">Nonmember Price: $120.00</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div class="related-book-image">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_formatter' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+  
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_style' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+<img loading="lazy" src="/sites/default/files/styles/thumbnail/public/C-IO-2e%20Cover%20Final_0.jpg?itok=rFaFiov4" alt="Chemotherapy and Immunotherapy Guidelines and Recommendations for Practice (Second Edition) " typeof="foaf:Image" />
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><h3 class="related-book-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/books/chemotherapy-and-immunotherapy-guidelines-and-recommendations-practice-second-edition" hreflang="en">Chemotherapy and Immunotherapy Guidelines and Recommendations for Practice (Second Edition)</a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price related-book-price-1">Member Price: <b>$99.00</b></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price">Nonmember Price: $160.00</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+    <div class="views-row">
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_fields' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+<div class="related-book-image">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_formatter' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+  
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image_style' -->
+<!-- BEGIN OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'image' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+<img loading="lazy" src="/sites/default/files/styles/thumbnail/public/CB3e%20Front%20Cover.jpg?itok=ZOJwo2NL" alt="Cancer Basics Third Edition" typeof="foaf:Image" />
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/image.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-style.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/field/image-formatter.html.twig' -->
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><h3 class="related-book-title">
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<a href="/books/cancer-basics-third-edition" hreflang="en">Cancer Basics (Third Edition)</a>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</h3><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price related-book-price-1">Member Price: <b>$99.00</b></div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div><div>
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'views_view_field' -->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+<div class="related-book-price">Nonmember Price: $154.00</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-field.html.twig' -->
+
+</div>
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-fields.html.twig' -->
+
+
+  </div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view-unformatted.html.twig' -->
+
+
+  
+  
+
+  
+  
+
+  
+  
+</div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/views/views-view.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/container.html.twig' -->
+
+
+  </div>
+</div>
+    </div>
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/content/node--journal-article.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+
+
+	</div>
+</div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region--content.html.twig' -->
+
+
+			
+		</div><!--page-body-->
+
+    </div><!--#maincontent for accessibility skip to main content link-->
+
+    <!-- Footer -->
+
+<div class="back-to-top">
+    <div class="contained">
+        <div class="row">
+            <div class="top-trigger"><a>Back to Top &#9650;</a></div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="track-section-links" data-title="Footer">
+    <div class="footer-main">
+    	<div class="contained">
+            <div class="footer-main-inner">
+                <div class="footer-main-left">
+                    <a class="footer-logo" href="/" alt="" title="">
+                        <img alt="ONS Logo" title="ONS Logo" src="/assets/images/ons-logo.jpg" />
+                    </a>
+                    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--footer-left.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--ons-address-footer.html.twig
+   * block--block-content--5c6c63e0-a166-4585-bb77-9052ef8f5a7c.html.twig
+   * block--block-content.html.twig
+   * block--block-content.html.twig
+   x block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--block-content--body--basic.html.twig
+   * field--block-content--body.html.twig
+   * field--block-content--basic.html.twig
+   * field--body.html.twig
+   * field--text-with-summary.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            <div class="vcard address"><a href="/">Oncology Nursing Society</a>
+<p class="adr">125 Enterprise Drive<br />
+Pittsburgh, PA 15275<br />
+866-257-4ONS (866-257-4667)</p>
+
+<p class="adr"><a href="/contact">Contact Us</a></p>
+</div>
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+
+                </div><!--footer-main-left-->
+                <div class="footer-main-middle">
+                    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--footer-middle.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--onsbrandline.html.twig
+   * block--block-content--20c8728e-85cd-49ee-8097-67512839b18f.html.twig
+   * block--block-content.html.twig
+   * block--block-content.html.twig
+   x block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--block-content--body--basic.html.twig
+   * field--block-content--body.html.twig
+   * field--block-content--basic.html.twig
+   * field--body.html.twig
+   * field--text-with-summary.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            <p>The <strong>Oncology Nursing Society (ONS)</strong> is a professional association that represents 100,000 nurses and is the professional home to more than 35,000 members. ONS is committed to promoting excellence in oncology nursing and the transformation of cancer care. Since 1975, ONS has provided a professional community for oncology nurses, developed evidence-based education programs and treatment information, and advocated for patient care, all in an effort to improve the quality of life and outcomes for patients with cancer and their families.</p>
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--footer.html.twig
+   x block--system-menu-block--footer.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--footer.html.twig' -->
+<div class="footer-main-nav">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__footer' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--footer.html.twig
+   x menu--footer.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--footer.html.twig' -->
+
+  	  	  		<nav>
+    		      			<li>
+      				<a href="/marketing-opportunities" title="Advertising/Sponsorship options and rates/Media/Public Relations" target="" data-drupal-link-system-path="node/426">Business Development</a>
+				</li>
+    			    		      			<li>
+      				<a href="/careers-ons" target="" data-drupal-link-system-path="node/201">Careers at ONS</a>
+				</li>
+    			    		      			<li>
+      				<a href="/educational-integrity-statement" target="" data-drupal-link-system-path="node/196">Educational Integrity Statement</a>
+				</li>
+    			    		      			<li>
+      				<a href="/employee-access" target="" data-drupal-link-system-path="node/211">Employee Access</a>
+				</li>
+    			    		      			<li>
+      				<a href="http://help.ons.org" target="_blank">Help Center</a>
+				</li>
+    			    		      			<li>
+      				<a href="https://www.ons.org/licensing-opportunities" title="Licensing Opportunities" target="_blank">Institutions</a>
+				</li>
+    			    				</nav>
+    				<nav>
+    			    		      			<li>
+      				<a href="/publications" target="" data-drupal-link-system-path="node/736"> Journals</a>
+				</li>
+    			    		      			<li>
+      				<a href="/legal-notices" target="" data-drupal-link-system-path="node/206">Legal Notices</a>
+				</li>
+    			    		      			<li>
+      				<a href="https://www.ons.org/media-center" target="_blank">Media Center</a>
+				</li>
+    			    		      			<li>
+      				<a href="/ons-store" target="" data-drupal-link-system-path="node/29546">ONS Store</a>
+				</li>
+    			    		      			<li>
+      				<a href="https://help.ons.org/hc/en-us/articles/206867283-What-is-the-ONS-store-return-policy-" target="_blank">ONS Return Policy</a>
+				</li>
+    			    		      			<li>
+      				<a href="/sitemap" target="" data-drupal-link-system-path="sitemap">Sitemap</a>
+				</li>
+    			    				</nav>
+    				<nav>
+    			    		    	</nav> 
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--footer.html.twig' -->
+
+
+  </div>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--footer.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+                </div>
+                <div class="footer-main-right">
+                	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--footer-right.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--footerctas.html.twig
+   x block--system-menu-block--footer-ctas.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--footer-ctas.html.twig' -->
+<ul class="callout-button-list">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__footer_ctas' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--footer-ctas.html.twig
+   x menu--footer-ctas.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--footer-ctas.html.twig' -->
+
+  	  	  		<nav>
+    		    			      			<li>
+      				<a href="/membership" target="_self" class="btn rounded-corners btn-alternative" data-drupal-link-system-path="node/251601">Join/Renew</a>
+				</li>
+    		    			      			<li>
+      				<a href="https://courses.ons.org" class="btn rounded-corners btn-primary">Print NCPD Certificate</a>
+				</li>
+    		    			      			<li>
+      				<a href="/develop-your-career/professional-development" class="btn rounded-corners btn-primary" data-drupal-link-system-path="node/21">Earn Contact Hours</a>
+				</li>
+    		    			      			<li>
+      				<a href="/certificate-verification" title="Help Center" class="btn rounded-corners btn-primary" data-drupal-link-system-path="node/153101">Verify Cardholder or Certificate Status</a>
+				</li>
+    		    	</nav> 
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--footer-ctas.html.twig' -->
+
+
+  </ul>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--system-menu-block--footer-ctas.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+                </div><!--footer-main-right-->
+
+            </div><!--footer-inner-->
+    	</div><!--contained-->
+    </div><!--footer-main-->
+    <div class="social-footer">
+      <div class="contained">
+        <div class="social-footer-inner">
+          <div class="social-footer-left">
+          	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--footer-bottom-left.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   x block--sociallinks.html.twig
+   * block--system-menu-block--social-links.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--sociallinks.html.twig' -->
+<nav class="nav-social">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__social_links' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--social-links.html.twig
+   x menu--social-links.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--social-links.html.twig' -->
+
+  	  	  		<nav>
+    		    			      			<li>
+      				<a href="https://www.facebook.com/OncologyNursing" title="facebook" target="_blank">
+      				<span class="zmdi icon zmdi-facebook" >
+      					        				<span class="screen-reader-text">facebook</span>
+      				</span>
+      				</a>
+				</li>
+    		    			      			<li>
+      				<a href="http://twitter.com/#!/oncologynursing" title="twitter" target="_blank">
+      				<span class="zmdi icon zmdi-twitter" >
+      					        				<span class="screen-reader-text">twitter</span>
+      				</span>
+      				</a>
+				</li>
+    		    			      			<li>
+      				<a href="https://www.linkedin.com/company/oncology-nursing-society" title="linkedin" target="_blank">
+      				<span class="zmdi icon zmdi-linkedin" >
+      					        				<span class="screen-reader-text">linkedin</span>
+      				</span>
+      				</a>
+				</li>
+    		    			      			<li>
+      				<a href="http://www.youtube.com/user/OncologyNurses" title="youtube-play" target="_blank">
+      				<span class="zmdi icon zmdi-youtube-play" >
+      					        				<span class="screen-reader-text">youtube-play</span>
+      				</span>
+      				</a>
+				</li>
+    		    			      			<li>
+      				<a href="/rss.xml" title="rss" target="_blank">
+      				<span class="zmdi icon zmdi-rss" >
+      					        				<span class="screen-reader-text">rss</span>
+      				</span>
+      				</a>
+				</li>
+    		    			      			<li>
+      				<a href="https://www.instagram.com/oncologynursing" title="instagram" target="_blank">
+      				<span class="zmdi icon zmdi-instagram" >
+      					        				<span class="screen-reader-text">instagram</span>
+      				</span>
+      				</a>
+				</li>
+    		    	</nav> 
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--social-links.html.twig' -->
+
+
+  </nav>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--sociallinks.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+          </div>
+          <div class="social-footer-right">
+          	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'region' -->
+<!-- FILE NAME SUGGESTIONS:
+   * region--content--journal-article.html.twig
+   * region--footer-bottom-right.html.twig
+   x region.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   x block--onslinks.html.twig
+   * block--system-menu-block--ons-l.html.twig
+   * block--system-menu-block.html.twig
+   * block--system.html.twig
+   * block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block--onslinks.html.twig' -->
+<nav class="nav-ons">
+      
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'menu__ons_l' -->
+<!-- FILE NAME SUGGESTIONS:
+   x menu--ons-l.html.twig
+   x menu--ons-l.html.twig
+   * menu.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/navigation/menu--ons-l.html.twig' -->
+
+  	  	  		<nav>
+    		    							<li>
+					<a href="/" title="ONS">
+						<div class="block-logo orange"></div>
+						<strong>ONS</strong>
+					</a>
+				</li>
+    		    							<li>
+					<a href="https://onfgivesback.org/" title="Oncology Nursing Foundation">
+						<div class="block-logo "></div>
+						Oncology Nursing Foundation
+					</a>
+				</li>
+    		    							<li>
+					<a href="http://www.oncc.org" title="ONCC">
+						<div class="block-logo red"></div>
+						<strong>ONCC</strong>
+					</a>
+				</li>
+    		    	</nav> 
+ 	 
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/navigation/menu--ons-l.html.twig' -->
+
+
+  </nav>
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block--onslinks.html.twig' -->
+
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'block' -->
+<!-- FILE NAME SUGGESTIONS:
+   * block--hubspotcode.html.twig
+   * block--block-content--814e8f56-077f-4fb3-b85f-00a4087d885b.html.twig
+   * block--block-content.html.twig
+   * block--block-content.html.twig
+   x block.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+	
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'field' -->
+<!-- FILE NAME SUGGESTIONS:
+   * field--block-content--body--basic.html.twig
+   * field--block-content--body.html.twig
+   * field--block-content--basic.html.twig
+   * field--body.html.twig
+   * field--text-with-summary.html.twig
+   x field.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+            <script type="text/javascript" src="//js.hs-scripts.com/23539862.js"></script>
+      
+<!-- END OUTPUT from 'themes/custom/ons/templates/field/field.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/block/block.html.twig' -->
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/region.html.twig' -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-footer">
+        <div class="contained">
+            <div class="post-footer-inner">
+                <span class="post-footer-text">
+                    &copy; Copyright 2023 Oncology Nursing Society. All rights reserved. <br>Content on this site is protected by U.S. and international copyright laws. Except as expressly stated on this site or as otherwise permitted by applicable law, no content on this site may be used or reproduced without the permission of the copyright holder. <br>For permissions, please contact <a href="mailto:help@ons.org">help@ons.org</a>. <br> ONS Congress is a registered trademark of Oncology Nursing Society.
+                </span><!--post-footer-left-->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<div class="ad-timed-bottom">
+	<div class="contained">
+		<div class="row">
+			<div class="ad-inner">
+				
+            <div id="sas_86355"></div>
+<script type="application/javascript">
+    sas.cmd.push(function() {
+        sas.call("std", {
+            siteId: 332172, // 
+            pageId: 1167578, // Page : ONS.org/ons_ros
+            formatId: 86355, // Format : responsive_728x90_floor 728x90
+            target: "" // Targeting
+        });
+    });
+</script>
+<noscript>
+    <a href="https://www5.smartadserver.com/ac?jump=1&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=86355&visit=m&tmstp=[timestamp]&out=nonrich" target="_blank">
+        <img src="https://www5.smartadserver.com/ac?out=nonrich&nwid=1541&siteid=332172&pgname=ons_ros&fmtid=86355&visit=m&tmstp=[timestamp]" border="0" alt="" />
+    </a>
+</noscript>
+            				<button class="ad-close-button">
+					<span class="zmdi zmdi-close-circle-o "><span class="screen-reader-text"></span></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- / Footer -->
+
+    </div><!--#page-interior-->
+
+    
+
+<div class="nav-offcanvas vertical-nav triggered-area " id="left-offcanvas">
+	<div class="nav-menu">
+		<div class="expanding-menu offcanvas-expanding-nav active">
+			<nav class="nav-offcanvas-main level-1">
+									<li><a href="/explore-resources" data-drupal-link-system-path="node/46">Explore Resources</a>
+											</li>
+									<li><a href="/develop-your-career" data-drupal-link-system-path="node/16">Develop Your Career</a>
+											</li>
+									<li><a href="/network" data-drupal-link-system-path="node/56">Network</a>
+											</li>
+									<li><a href="/make-difference" data-drupal-link-system-path="node/81">Make a Difference</a>
+											</li>
+									<li><a href="/develop-your-career/professional-development/conferences" title="Oncology Nursing Conferences" data-drupal-link-system-path="node/71">Events</a>
+																				<ul>
+							<li>
+				<a href="/congress/2024/homepage" data-drupal-link-system-path="node/251876">ONS Congress®</a>
+							</li>
+					<li>
+				<a href="/bridge/2023" title="ONS Bridge™" data-drupal-link-system-path="node/158241">ONS Bridge™</a>
+							</li>
+				</ul>
+	
+											</li>
+									<li><a href="/publications" target="_self" data-drupal-link-system-path="node/736">Publications</a>
+																				<ul>
+							<li>
+				<a href="/cjon" data-drupal-link-system-path="cjon">Clinical Journal of Oncology Nursing</a>
+							</li>
+					<li>
+				<a href="/onf" data-drupal-link-system-path="onf">Oncology Nursing Forum</a>
+							</li>
+					<li>
+				<a href="https://www.ons.org/voice" target="_self">ONS Voice</a>
+							</li>
+					<li>
+				<a href="https://www.ons.org/books" target="_self">Books</a>
+							</li>
+					<li>
+				<a href="https://www.ons.org/journal-article-search" target="_self">Search Our Journals</a>
+							</li>
+				</ul>
+	
+											</li>
+									<li><a href="/e-book/purchases" data-drupal-link-system-path="e-book/purchases">Purchased eBooks</a>
+											</li>
+							</nav>
+			<nav class="nav-offcanvas-global">
+									<li><a href="/about-ons" data-drupal-link-system-path="node/146">About ONS</a></li>
+									<li><a href="/membership" data-drupal-link-system-path="node/251601">Join / Renew</a></li>
+									<li><a href="/licensing-opportunities" data-drupal-link-system-path="node/152756">Institutions</a></li>
+									<li><a href="https://www.ons.org/search-help" target="_self">Search Help</a></li>
+							</nav>
+			<nav class="nav-offcanvas-aux">
+									<li><a href="/marketing-opportunities" title="Advertising/Sponsorship options and rates/Media/Public Relations" data-drupal-link-system-path="node/426">Business Development</a></li>
+									<li><a href="/careers-ons" data-drupal-link-system-path="node/201">Careers at ONS</a></li>
+									<li><a href="/educational-integrity-statement" data-drupal-link-system-path="node/196">Educational Integrity Statement</a></li>
+									<li><a href="/employee-access" data-drupal-link-system-path="node/211">Employee Access</a></li>
+									<li><a href="http://help.ons.org">Help Center</a></li>
+									<li><a href="https://www.ons.org/licensing-opportunities" title="Licensing Opportunities">Institutions</a></li>
+									<li><a href="/publications" data-drupal-link-system-path="node/736"> Journals</a></li>
+									<li><a href="/legal-notices" data-drupal-link-system-path="node/206">Legal Notices</a></li>
+									<li><a href="https://www.ons.org/media-center">Media Center</a></li>
+									<li><a href="/ons-store" data-drupal-link-system-path="node/29546">ONS Store</a></li>
+									<li><a href="https://help.ons.org/hc/en-us/articles/206867283-What-is-the-ONS-store-return-policy-">ONS Return Policy</a></li>
+									<li><a href="/sitemap" data-drupal-link-system-path="sitemap">Sitemap</a></li>
+							</nav>
+			<!-- <nav class="callout-button-list">
+		    <li><a class="btn" href="#" alt="" title="">Join/Renew</a></li>
+		    <li><a class="btn" href="#" alt="" title="">Print Chemo/Bio Card</a></li>
+		    <li><a class="btn" href="#" alt="" title="">Certication Certral</a></li>
+		    <li><a class="btn" href="#" alt="" title="">Find a Local Chapter</a></li>
+	    </nav> -->
+		</div>
+	</div>
+</div><!--left-offcanvas-->
+
+<div class="nav-offcanvas vertical-nav triggered-area " id="event-offcanvas">
+	<div class="nav-menu">
+		<div class="expanding-menu offcanvas-expanding-nav active">
+			<nav class="nav-offcanvas-main level-1">
+							</nav>
+			<div class="d-go-to-ons-link">
+				<a href="#">Go to ons.org</a>
+			</div>
+		</div>
+	</div>
+</div><!--event-offcanvas-->
+
+<div class="nav-offcanvas vertical-nav triggered-area" id="right-offcanvas">
+	<div class="nav-menu">
+		<div class="account-header">
+			<span class="member-greeting account-title loggedin">Hello <span class="data-element-name">[Name]</span>!</span>
+			<span class="offcanvas-close-button">
+				<span class="screen-reader-text">Close Menu</span>
+				<span class="zmdi zmdi-close"></span>
+			</span>
+		</div>
+		<nav class="account-mobile">
+					          <ul class="page-body menu">
+          			        <li>
+                      <a href="/account-dashboard" data-drupal-link-system-path="node/91311">Account Dashboard</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/my-orders" data-drupal-link-system-path="node/92291">View orders</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/membership-card">Print membership card</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/membership-application" data-drupal-link-system-path="node/75336">Join/Renew</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/view-chapters" data-drupal-link-system-path="node/144906">View chapter(s)</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+           
+            <a href="https://courses.ons.org/?ref=QL">Login to courses</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="https://courses.ons.org">Print provider card</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/professional-information" data-drupal-link-system-path="node/92311">Update professional information</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+      			        <li>
+                      <a href="/account-settings" data-drupal-link-system-path="node/145001">My Account Settings</a>
+          					<!-- Note: "Show as expanded" must be checked on parent for children to show -->
+					<!-- Note 2: Do not show children in flyout nav -->
+                                        </li>
+          </ul>
+  
+		</nav>
+		<nav class="loggedin">
+			<li class="">
+				<a href="https://loginlr.ons.org/auth.aspx?action=logout&return_url=https://login.ons.org/user/logout?return_url=https://www.ons.org/" alt="/" title="/" class="logout-link">
+					<span class="zmdi zmdi-account"></span>
+					Logout
+				</a>
+			</li>
+		</nav>
+	</div>
+</div><!--right-offcanvas-->
+
+
+
+<div class="nav-offcanvas vertical-nav triggered-area" id="quicklinks-offcanvas">
+	<div class="nav-menu">
+		<div class="quicklinks-header">
+			<span>Quicklinks</span>
+		</div>
+		<nav>
+      <li><a href="#">Advocacy &amp; Policy</a></li>
+			<li><a href="#">Books</a></li>
+			<li><a href="#">Clinical Guides</a></li>
+			<li><a href="#">Courses</a></li>
+			<li><a href="#">CNE</a></li>
+			<li><a href="#">Education Resource Center</a></li>
+			<li><a href="#">Get Up Get Moving</a></li>
+			<li><a href="#">Grants &amp; Scholarships</a></li>
+			<li><a href="#">Jobs Board</a></li>
+			<li><a href="#">Journals &amp; Publications</a></li>
+			<li><a href="#">Local Chapters</a></li>
+			<li><a href="#">Membership Directory</a></li>
+			<li><a href="#">ONS Foundation</a></li>
+			<li><a href="#">Print Chemo/Bio Card</a></li>
+			<li><a href="#">Quality Data Registry</a></li>
+		</nav>
+	</div>
+</div><!--right-offcanvas-->
+
+
+<div class="nav-offcanvas triggered-area" id="search-offcanvas">
+	<div class="input-with-button">
+	<form method="get" action="/acq-search">
+      <input type="search" id="search-offconvas-input" name="search" class="search-input" autocomplete="off" placeholder="Search ONS.ORG">
+      <a href="">
+				<button class="btn">
+					<span class="zmdi zmdi-search"></span>
+					<span class="screen-reader-text">Search</span>
+				</button>
+			</a>
+		<ul class="autocomplete">
+			<li>
+				<a href="/search.html">abl <em>book</em></a>
+			</li>
+		</ul>
+		</form>
+    </div>
+</div><!--search-offcanvas-->
+
+<div id="overlay-mobile" class="overlay"></div>
+
+
+
+<!-- END OUTPUT from 'themes/custom/ons/templates/page.html.twig' -->
+
+
+  </div>
+
+<!-- END OUTPUT from 'core/themes/stable9/templates/content/off-canvas-page-wrapper.html.twig' -->
+
+
+    
+
+        <script type="text/javascript">
+      var aptify_js_domain = "//secureresources.ons.org/1-0-50/";
+      var aptify_ws_domain = "https://apollo.ons.org";
+      var aptify_cart_path = "https://cart.ons.org/";
+      var account_cookie_name = "ava-ons";
+      var account_logout_url = "https://loginlr.ons.org/auth.aspx?action=logout&return_url=https://login.ons.org/user/logout?return_url=https://www.ons.org/";
+      var account_login_url = "https://login.ons.org/User/Login?branding=ons&vendor=ons";
+      var account_checed = null;
+    </script>
+
+        
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/240221","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"fitvids":{"selectors":".is-event .paragraph","custom_vendors":"","ignore_selectors":""},"google_analytics":{"account":"G-0557NQCJVW","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"ajax":[],"user":{"uid":0,"permissionsHash":"9a5e9e6663ef9a6e82af79f526e7846c584aba42f81ea741f9af0663d8cc874b"}}</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=3.6.3"></script>
+<script src="/core/misc/drupalSettingsLoader.js?v=9.5.8"></script>
+<script src="/core/misc/drupal.js?v=9.5.8"></script>
+<script src="/core/misc/drupal.init.js?v=9.5.8"></script>
+<script src="/libraries/fitvids/jquery.fitvids.js?v=9.5.8"></script>
+<script src="/modules/contrib/fitvids/js/init-fitvids.js?v=9.5.8"></script>
+<script src="/modules/contrib/google_analytics/js/google_analytics.js?v=9.5.8"></script>
+<script src="/assets/scripts/vendor/bootstrap-3.3.7.min.js?s117dx"></script>
+<script src="/assets/scripts/vendor/sticky-kit.js?s117dx"></script>
+<script src="/assets/scripts/vendor/modernizr-2.6.1.min.js?s117dx"></script>
+<script src="/assets/scripts/vendor/fastClick.js?s117dx"></script>
+<script src="/assets/scripts/vendor/headroom.js?s117dx"></script>
+<script src="/assets/scripts/vendor/flickity.js?s117dx"></script>
+<script src="/assets/scripts/vendor/flickity-imageLoaded.js?s117dx"></script>
+<script src="/assets/scripts/vendor/aos.js?s117dx"></script>
+<script src="/assets/scripts/search.js?s117dx"></script>
+<script src="/themes/custom/ons/node_modules/core-js/client/shim.min.js?s117dx"></script>
+<script src="/themes/custom/ons/node_modules/zone.js/dist/zone.js?s117dx"></script>
+<script src="/themes/custom/ons/node_modules/systemjs/dist/system.src.js?s117dx"></script>
+<script src="/themes/custom/ons/src/systemjs.config.js?s117dx"></script>
+<script src="/themes/custom/ons/src/angular-setup.js?s117dx"></script>
+<script src="/assets/scripts/aptify.js?s117dx"></script>
+<script src="/assets/scripts/login_profile.js?s117dx"></script>
+<script src="/assets/scripts/index.js?s117dx"></script>
+<script src="/themes/custom/ons/js/iframeResizer.min.js?s117dx"></script>
+<script src="/themes/custom/ons/js/notification-bar.js?s117dx"></script>
+<script src="/themes/custom/ons/js/cookies.js?s117dx"></script>
+<script src="/themes/custom/ons/js/jazz-hr.js?s117dx"></script>
+<script src="/themes/custom/ons/js/search-bar.js?s117dx"></script>
+<script src="/themes/custom/ons/js/aptify-product-details.js?s117dx"></script>
+<script src="/modules/ons_pubs_articles/js/pubs_articles_purchase.js?s117dx"></script>
+<script src="/modules/ons_pubs_articles/js/pubs_articles_gaevents.js?s117dx"></script>
+<script src="/themes/custom/ons/js/jquery.toc.js?s117dx"></script>
+<script src="/themes/custom/ons/js/init-toc.js?s117dx"></script>
+
+
+    <!-- Note: Conditional JS for price control, etc., only on product detail pages -->
+        
+
+                <link type="text/css" rel="stylesheet" href="//secureresources.ons.org/1-0-50/aptify/styles/aptify-control.css">
+            <link type="text/css" rel="stylesheet" href="/assets/stylesheets/style-bottom.css">
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/framework/Aptify.Framework.Bootloader.js" type="text/javascript"></script>
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/eBusiness/Aptify.eBusiness.setup.js" type="text/javascript"></script>
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/eBusiness/Aptify.eBusiness.setup.noSpa.js" type="text/javascript"></script>
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/apex/core/Aptify.apex.core.startup.js" type="text/javascript"></script>
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/apex/Aptify.apex.error.UI.js" type="text/javascript"></script>
+      <script src="//secureresources.ons.org/1-0-50/aptify/script/Aptify/Apex/Consulting/Aptify.Apex.Consulting.Router.js" type="text/javascript"></script>
+    
+
+      <style>
+        #Interstitial iframe {
+            width: 1px;
+            min-width: 100%;
+            min-height: 100%;
+            position: fixed;
+            z-index:9999;
+            top: 0;
+            right: 0;
+        }
+    </style>
+    <div id="Interstitial" style="width:1px;height:1px;">
+      <script type="text/javascript">
+        if (document.referrer.match(document.location.hostname) != null && !getCookie('interstitial_ad_shown')) {
+          setCookie('interstitial_ad_shown', 1);
+          googletag.cmd.push(function () {
+            googletag.display('Interstitial');
+          });
+        }
+      </script>
+    </div>
+    </body>
+</html>
+<!-- END OUTPUT from 'themes/custom/ons/templates/layout/html.html.twig' -->
+

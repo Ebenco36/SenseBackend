@@ -5,3 +5,13 @@ C:\ProgramData\Anaconda3\Scripts\activate .wvenv_db
 pip install -r /Users/awotoroe/Desktop/mpvis/requirements.txt
 
 streamlit run src\app.py
+
+pip install PyPDF2
+
+net use Y: \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME%
+
+net use /PERSISTENT:YES Z: \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME%
+
+\\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME%
+
+net use Y: \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME% /user:awotoroe mypassword_was_here /p:yes

@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-538LJG07BP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-538LJG07BP');
+</script>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta property="og:title" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta property="og:url" content="https://scialert.net/fulltext/?doi=pjbs.2017.59.69">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Science Alert">
+<meta property="og:description" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://scialert.net/images/logo_icon.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@scialert">
+<meta name="twitter:title" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta name="twitter:description" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta name="twitter:image" content="https://scialert.net/images/logo_icon.jpg">
+<link rel="amphtml" href="https://scialert.net/fulltext/amp.php?doi=pjbs.2017.59.69">
+<TITLE>
+Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review</TITLE>
+<meta http-equiv="content-language" content="en-gb">
+<meta name="description" itemprop="description" content="Fulltext - Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta name="keywords" itemprop="keywords" content="genotypes,Rotavirus,molecular epidemiology,children,AGE,">
+<meta name="dc.identifier" content="doi:10.3923/pjbs.2017.59.69">
+<script src="../includes/common/js/base.js" type="text/javascript" language="javascript"></script>
+<script src="../includes/common/js/utility.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<meta name="dc.identifier" content="doi:10.3923/pjbs.2017.59.69">
+
+<link href="../assets/img/favicon.png" rel="icon">
+<link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CRaleway:300,300i,400,400i,500,500i,600,600i,700,700i%7CPoppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
+<link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+
+<link href="../assets/css/style.css" rel="stylesheet">
+<meta name="citation_title" content="Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review">
+<meta name="citation_author" content="Ouermi, D.">
+<meta name="citation_author" content="Soubeiga, D.">
+<meta name="citation_author" content="Nadembega, W.M.C.">
+<meta name="citation_author" content="Sawadogo, P.M.">
+<meta name="citation_author" content="Zohoncon, T.M.">
+<meta name="citation_author" content="Obiri-Yeboah, D.">
+<meta name="citation_author" content="Djigma, F.W.">
+<meta name="citation_author" content="Nordgren, J.">
+<meta name="citation_author" content="Simpore, J.">
+<meta name="citation_publication_date" content="2017/01/15">
+<meta name="citation_journal_title" content="Pakistan Journal of Biological Sciences">
+<meta name="citation_volume" content="20">
+<meta name="citation_issue" content="2">
+<meta name="citation_firstpage" content="59">
+<meta name="citation_lastpage" content="69">
+<meta name="citation_pdf_url" content="https://scialert.net/qredirect.php?doi=pjbs.2017.59.69&linkid=pdf">
+<style>
+:target {
+    background-color: #ecf6fe;
+	padding:13px;
+	scroll-margin-top: 100px;
+}
+                          
+#t1:target, #t2:target, #t3:target, #t4:target, #t5:target, #t6:target, #t7:target, #t8:target, #t9:target, #t10:target, #t11:target, #t12:target, #t13:target, #t14:target, #t15:target, #t16:target, #t17:target, #t18:target, #t19:target, #t20:target, #t21:target, #t22:target, #t23:target, #t24:target, #t25:target, #f1:target, #f2:target, #f3:target, #f4:target, #f5:target, #f6:target, #f7:target, #f8:target, #f9:target, #f10:target, #f11:target, #f12:target, #f13:target, #f14:target, #f15:target, #f16:target, #f17:target, #f18:target, #f19:target, #f20:target, #f21:target, #f22:target, #f23:target, #f24:target, #f25:target {
+    background-color: rgba(0,0,0,0);
+	padding:13px;
+	scroll-margin-top: 100px;
+}
+
+#t1a:target, #t2a:target, #t3s:target, #t1b:target, #t2b:target, #t2c:target, #t3a:target, #t3b:target, #t3c:target, #f1a:target, #f1b:target, #f1c:target, #f2a:target, #f2b:target, #f2c:target, #f3a:target, #f3b:target, #f3c:target {
+    background-color: rgba(0,0,0,0);
+	padding:13px;
+	scroll-margin-top: 100px;
+}
+
+@media (max-width:768px) {
+.imgz {
+  width: 100%;
+}
+}
+</style>
+<script async src="https://fundingchoicesmessages.google.com/i/pub-5222637924397992?ers=1" nonce="RUCMf70Tkudv5gciBxV6ow"></script><script nonce="RUCMf70Tkudv5gciBxV6ow">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+<script>(function(){/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+	'use strict';var aa=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}},ba="function"==typeof Object.create?Object.create:function(a){var b=function(){};b.prototype=a;return new b},k;if("function"==typeof Object.setPrototypeOf)k=Object.setPrototypeOf;else{var m;a:{var ca={a:!0},n={};try{n.__proto__=ca;m=n.a;break a}catch(a){}m=!1}k=m?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}
+var p=k,q=function(a,b){a.prototype=ba(b.prototype);a.prototype.constructor=a;if(p)p(a,b);else for(var c in b)if("prototype"!=c)if(Object.defineProperties){var d=Object.getOwnPropertyDescriptor(b,c);d&&Object.defineProperty(a,c,d)}else a[c]=b[c];a.v=b.prototype},r=this||self,da=function(){},t=function(a){return a};var u;var w=function(a,b){this.g=b===v?a:""};w.prototype.toString=function(){return this.g+""};var v={},x=function(a){if(void 0===u){var b=null;var c=r.trustedTypes;if(c&&c.createPolicy){try{b=c.createPolicy("goog#html",{createHTML:t,createScript:t,createScriptURL:t})}catch(d){r.console&&r.console.error(d.message)}u=b}else u=b}a=(b=u)?b.createScriptURL(a):a;return new w(a,v)};var A=function(){return Math.floor(2147483648*Math.random()).toString(36)+Math.abs(Math.floor(2147483648*Math.random())^Date.now()).toString(36)};var B={},C=null;var D="function"===typeof Uint8Array;function E(a,b,c){return"object"===typeof a?D&&!Array.isArray(a)&&a instanceof Uint8Array?c(a):F(a,b,c):b(a)}function F(a,b,c){if(Array.isArray(a)){for(var d=Array(a.length),e=0;e<a.length;e++){var f=a[e];null!=f&&(d[e]=E(f,b,c))}Array.isArray(a)&&a.s&&G(d);return d}d={};for(e in a)Object.prototype.hasOwnProperty.call(a,e)&&(f=a[e],null!=f&&(d[e]=E(f,b,c)));return d}
+function ea(a){return F(a,function(b){return"number"===typeof b?isFinite(b)?b:String(b):b},function(b){var c;void 0===c&&(c=0);if(!C){C={};for(var d="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split(""),e=["+/=","+/","-_=","-_.","-_"],f=0;5>f;f++){var h=d.concat(e[f].split(""));B[f]=h;for(var g=0;g<h.length;g++){var l=h[g];void 0===C[l]&&(C[l]=g)}}}c=B[c];d=Array(Math.floor(b.length/3));e=c[64]||"";for(f=h=0;h<b.length-2;h+=3){var y=b[h],z=b[h+1];l=b[h+2];g=c[y>>2];y=c[(y&3)<<
+4|z>>4];z=c[(z&15)<<2|l>>6];l=c[l&63];d[f++]=""+g+y+z+l}g=0;l=e;switch(b.length-h){case 2:g=b[h+1],l=c[(g&15)<<2]||e;case 1:b=b[h],d[f]=""+c[b>>2]+c[(b&3)<<4|g>>4]+l+e}return d.join("")})}var fa={s:{value:!0,configurable:!0}},G=function(a){Array.isArray(a)&&!Object.isFrozen(a)&&Object.defineProperties(a,fa);return a};var H;var J=function(a,b,c){var d=H;H=null;a||(a=d);d=this.constructor.u;a||(a=d?[d]:[]);this.j=d?0:-1;this.h=null;this.g=a;a:{d=this.g.length;a=d-1;if(d&&(d=this.g[a],!(null===d||"object"!=typeof d||Array.isArray(d)||D&&d instanceof Uint8Array))){this.l=a-this.j;this.i=d;break a}void 0!==b&&-1<b?(this.l=Math.max(b,a+1-this.j),this.i=null):this.l=Number.MAX_VALUE}if(c)for(b=0;b<c.length;b++)a=c[b],a<this.l?(a+=this.j,(d=this.g[a])?G(d):this.g[a]=I):(d=this.l+this.j,this.g[d]||(this.i=this.g[d]={}),(d=this.i[a])?
+G(d):this.i[a]=I)},I=Object.freeze(G([])),K=function(a,b){if(-1===b)return null;if(b<a.l){b+=a.j;var c=a.g[b];return c!==I?c:a.g[b]=G([])}if(a.i)return c=a.i[b],c!==I?c:a.i[b]=G([])},M=function(a,b){var c=L;if(-1===b)return null;a.h||(a.h={});if(!a.h[b]){var d=K(a,b);d&&(a.h[b]=new c(d))}return a.h[b]};J.prototype.toJSON=function(){var a=N(this,!1);return ea(a)};
+var N=function(a,b){if(a.h)for(var c in a.h)if(Object.prototype.hasOwnProperty.call(a.h,c)){var d=a.h[c];if(Array.isArray(d))for(var e=0;e<d.length;e++)d[e]&&N(d[e],b);else d&&N(d,b)}return a.g},O=function(a,b){H=b=b?JSON.parse(b):null;a=new a(b);H=null;return a};J.prototype.toString=function(){return N(this,!1).toString()};var P=function(a){J.call(this,a)};q(P,J);function ha(a){var b,c=(a.ownerDocument&&a.ownerDocument.defaultView||window).document,d=null===(b=c.querySelector)||void 0===b?void 0:b.call(c,"script[nonce]");(b=d?d.nonce||d.getAttribute("nonce")||"":"")&&a.setAttribute("nonce",b)};var Q=function(a,b){b=String(b);"application/xhtml+xml"===a.contentType&&(b=b.toLowerCase());return a.createElement(b)},R=function(a){this.g=a||r.document||document};R.prototype.appendChild=function(a,b){a.appendChild(b)};var S=function(a,b,c,d,e,f){try{var h=a.g,g=Q(a.g,"SCRIPT");g.async=!0;g.src=b instanceof w&&b.constructor===w?b.g:"type_error:TrustedResourceUrl";ha(g);h.head.appendChild(g);g.addEventListener("load",function(){e();d&&h.head.removeChild(g)});g.addEventListener("error",function(){0<c?S(a,b,c-1,d,e,f):(d&&h.head.removeChild(g),f())})}catch(l){f()}};var ia=r.atob("aHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20vaW1hZ2VzL2ljb25zL21hdGVyaWFsL3N5c3RlbS8xeC93YXJuaW5nX2FtYmVyXzI0ZHAucG5n"),ja=r.atob("WW91IGFyZSBzZWVpbmcgdGhpcyBtZXNzYWdlIGJlY2F1c2UgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlIGlzIGludGVyZmVyaW5nIHdpdGggdGhpcyBwYWdlLg=="),ka=r.atob("RGlzYWJsZSBhbnkgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlLCB0aGVuIHJlbG9hZCB0aGlzIHBhZ2Uu"),la=function(a,b,c){this.h=a;this.j=new R(this.h);this.g=null;this.i=[];this.l=!1;this.o=b;this.m=c},V=function(a){if(a.h.body&&!a.l){var b=
+function(){T(a);r.setTimeout(function(){return U(a,3)},50)};S(a.j,a.o,2,!0,function(){r[a.m]||b()},b);a.l=!0}},T=function(a){for(var b=W(1,5),c=0;c<b;c++){var d=X(a);a.h.body.appendChild(d);a.i.push(d)}b=X(a);b.style.bottom="0";b.style.left="0";b.style.position="fixed";b.style.width=W(100,110).toString()+"%";b.style.zIndex=W(2147483544,2147483644).toString();b.style["background-color"]=ma(249,259,242,252,219,229);b.style["box-shadow"]="0 0 12px #888";b.style.color=ma(0,10,0,10,0,10);b.style.display=
+"flex";b.style["justify-content"]="center";b.style["font-family"]="Roboto, Arial";c=X(a);c.style.width=W(80,85).toString()+"%";c.style.maxWidth=W(750,775).toString()+"px";c.style.margin="24px";c.style.display="flex";c.style["align-items"]="flex-start";c.style["justify-content"]="center";d=Q(a.j.g,"IMG");d.className=A();d.src=ia;d.style.height="24px";d.style.width="24px";d.style["padding-right"]="16px";var e=X(a),f=X(a);f.style["font-weight"]="bold";f.textContent=ja;var h=X(a);h.textContent=ka;Y(a,
+e,f);Y(a,e,h);Y(a,c,d);Y(a,c,e);Y(a,b,c);a.g=b;a.h.body.appendChild(a.g);b=W(1,5);for(c=0;c<b;c++)d=X(a),a.h.body.appendChild(d),a.i.push(d)},Y=function(a,b,c){for(var d=W(1,5),e=0;e<d;e++){var f=X(a);b.appendChild(f)}b.appendChild(c);c=W(1,5);for(d=0;d<c;d++)e=X(a),b.appendChild(e)},W=function(a,b){return Math.floor(a+Math.random()*(b-a))},ma=function(a,b,c,d,e,f){return"rgb("+W(Math.max(a,0),Math.min(b,255)).toString()+","+W(Math.max(c,0),Math.min(d,255)).toString()+","+W(Math.max(e,0),Math.min(f,
+255)).toString()+")"},X=function(a){a=Q(a.j.g,"DIV");a.className=A();return a},U=function(a,b){0>=b||null!=a.g&&0!=a.g.offsetHeight&&0!=a.g.offsetWidth||(na(a),T(a),r.setTimeout(function(){return U(a,b-1)},50))},na=function(a){var b=a.i;var c="undefined"!=typeof Symbol&&Symbol.iterator&&b[Symbol.iterator];b=c?c.call(b):{next:aa(b)};for(c=b.next();!c.done;c=b.next())(c=c.value)&&c.parentNode&&c.parentNode.removeChild(c);a.i=[];(b=a.g)&&b.parentNode&&b.parentNode.removeChild(b);a.g=null};var pa=function(a,b,c,d,e){var f=oa(c),h=function(l){l.appendChild(f);r.setTimeout(function(){f?(0!==f.offsetHeight&&0!==f.offsetWidth?b():a(),f.parentNode&&f.parentNode.removeChild(f)):a()},d)},g=function(l){document.body?h(document.body):0<l?r.setTimeout(function(){g(l-1)},e):b()};g(3)},oa=function(a){var b=document.createElement("div");b.className=a;b.style.width="1px";b.style.height="1px";b.style.position="absolute";b.style.left="-10000px";b.style.top="-10000px";b.style.zIndex="-10000";return b};var L=function(a){J.call(this,a)};q(L,J);var qa=function(a){J.call(this,a)};q(qa,J);var ra=function(a,b){this.l=a;this.m=new R(a.document);this.g=b;this.i=K(this.g,1);b=M(this.g,2);this.o=x(K(b,4)||"");this.h=!1;b=M(this.g,13);b=x(K(b,4)||"");this.j=new la(a.document,b,K(this.g,12))};ra.prototype.start=function(){sa(this)};
+var sa=function(a){ta(a);S(a.m,a.o,3,!1,function(){a:{var b=a.i;var c=r.btoa(b);if(c=r[c]){try{var d=O(P,r.atob(c))}catch(e){b=!1;break a}b=b===K(d,1)}else b=!1}b?Z(a,K(a.g,14)):(Z(a,K(a.g,8)),V(a.j))},function(){pa(function(){Z(a,K(a.g,7));V(a.j)},function(){return Z(a,K(a.g,6))},K(a.g,9),K(a.g,10),K(a.g,11))})},Z=function(a,b){a.h||(a.h=!0,a=new a.l.XMLHttpRequest,a.open("GET",b,!0),a.send())},ta=function(a){var b=r.btoa(a.i);a.l[b]&&Z(a,K(a.g,5))};(function(a,b){r[a]=function(c){for(var d=[],e=0;e<arguments.length;++e)d[e-0]=arguments[e];r[a]=da;b.apply(null,d)}})("__h82AlnkH6D91__",function(a){"function"===typeof window.atob&&(new ra(window,O(qa,window.atob(a)))).start()});}).call(this);
+
+window.__h82AlnkH6D91__("WyJwdWItNTIyMjYzNzkyNDM5Nzk5MiIsW251bGwsbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9iL3B1Yi01MjIyNjM3OTI0Mzk3OTkyIl0sbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9lbC9BR1NLV3hWRmtlUG9RY2pMNTAzWXFsbl9yLU9CbWhCeVEtSEJjTC02M2dVSlJjVVkxUkdpOVFkSHVFb0ZCYXJFMGdmNllzby15UnNqTGJkcURjZ2tSOG5JYmRfeUhBXHUwMDNkXHUwMDNkP3RlXHUwMDNkVE9LRU5fRVhQT1NFRCIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFhJLVhtWm9FVGdXcDJlbUZVdnA1WnBOUjZKemItSjA1ZEQxVjhGcEtYbTJnUlZLUkZCNjVLY0JxQUVabUlxUTRTa0gxNjFlVHZ1NkcxVjZvOFIwb1hQOHdcdTAwM2RcdTAwM2Q/YWJcdTAwM2QxXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFdlQ1ZNeHhENlRHZ2Q5T1AwQzJJWFY3dU5VNmduM21STlh5azV2NENjVEVUT3hjRnIxdVF3d2ZaQ01TRDdIdmVZa3N4ZEFGcnVneVh0N29JelNRZzJmeHdcdTAwM2RcdTAwM2Q/YWJcdTAwM2QyXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFVlS2pzcnpnTm1BeTQxaUlmMmw2SFIzdVVYZmFFSWVkZW9TS1ZsM3NHeXZHNjNRRFpYZm8zdzRkTXk4cWk4RlpTT19IQkk4UzhWU1RWQnhUWDltZTVCV1FcdTAwM2RcdTAwM2Q/c2JmXHUwMDNkMiIsImRpdi1ncHQtYWQiLDIwLDEwMCwiY0hWaUxUVXlNakkyTXpjNU1qUXpPVGM1T1RJXHUwMDNkIixbbnVsbCxudWxsLG51bGwsImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tLzBlbW4vZi9wL3B1Yi01MjIyNjM3OTI0Mzk3OTkyLmpzP3VzcXBcdTAwM2RDQVkiXSwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vZWwvQUdTS1d4VlpyRWR0MGNyVXYxa1lJRkpUYkZma1Y2VFI3bWQwekF3cjQ5VnBTRU1FVXdaUkRYbUNQMWJZcGpkOG9iQ09zTy1DaGtja1lHbGN2cE96VmVROUhURUxDZ1x1MDAzZFx1MDAzZCJd");</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5222637924397992" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-inner-pages">
+<div class="container d-flex align-items-center">
+<div class="contact-info mr-auto">
+<ul>
+<li><i class="icofont-envelope"></i><a href="/cdn-cgi/l/email-protection#1f6c6a6f6f706d6b5f6c7c767e737a6d6b317c7072"><span class="__cf_email__" data-cfemail="1a696f6a6a75686e5a6979737b767f686e34797577">[email&#160;protected]</span></a></li>
+<li><i class="icofont-phone"></i> +971 507 888 742</li>
+</ul>
+</div>
+<div class="cta">
+<a href="https://scialert.com" target="_blank" class="scrollto">Submit Manuscript</a>
+</div>
+</div>
+</div>
+
+<header id="header" class="fixed-top header-inner-pages">
+<div class="container d-flex align-items-center">
+
+<a href="../index.php" class="logo mr-auto scrollto"><img src="../cdn-cgi/image/fit=scale-down,width=450,format=auto/https://scialert.net/assets/img/logo_scialert.png" alt="SciAlert" class="img-fluid"></a>
+<nav class="nav-menu d-none d-lg-block">
+<ul>
+<li><a href="../index.php">Home</a></li>
+<li class="active"><a href="../journals.php">Journals</a></li>
+<li class="drop-down"><a href>Information</a>
+<ul>
+<li><a href="../forauthors.php">For Authors</a></li>
+<li><a href="../forreferees.php">For Referees</a></li>
+<li><a href="../librarian.php">For Librarian</a></li>
+<li><a href="../societies.php">For Societies</a></li>
+</ul>
+</li>
+<li><a href="../index.php#contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<section id="breadcrumbs" class="breadcrumbs">
+<div class="container">
+<ol style="margin-top:10px;">
+<li><a href="../jhome.php?issn=1028-8880">Pakistan Journal of Biological Sciences</a></li>
+<li><a href="../archivedetails.php?issn=1028-8880&issueno=315">Vol 20 (2), 2017</a></li>
+<li>59-69</li>
+</ol>
+</div>
+</section>
+<main id="main">
+<section id="blog" class="blog">
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm rounded">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+<li class="nav-item">
+<a class="nav-link"><i class="icofont-navigation-menu" style="padding-right:5px;"></i></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../onlinefirst.php?issn=1028-8880" style="color:#0880e8;">Online First</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../current.php?issn=1028-8880" style="color:#0880e8;">Current Issue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../previous.php?issn=1028-8880" style="color:#0880e8;">Previous Issues</a>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#0880e8;">
+More Information
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="../jhome.php?issn=1028-8880">Aims and Scope</a>
+<a class="dropdown-item" href="../eboard.php?issn=1028-8880">Editorial Board</a>
+<a class="dropdown-item" href="../guide.php?issn=1028-8880">Guide to Authors</a>
+<a class="dropdown-item" href="../jhome.php?issn=1028-8880">Article Processing Charges</a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="https://scialert.com" target="_blank">Submit a Manuscript <i class="icofont-external-link" style="padding-left:7px;"></i></a>
+</div>
+</li> </ul>
+<form name="formsrch" class="form-inline my-2 my-lg-0" action="../result.php" method="get">
+<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyword" id="keyword">
+<input name="issn" type="hidden" id="issn" value="1028-8880">
+<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+</div>
+</nav>
+<div class="container sidebar" style="height:auto;">
+<div class="row justify-content-between">
+<div class="col-xs-12 col-lg-8">
+<h3 style="color:#09F"><a href="../jhome.php?issn=1028-8880">Pakistan Journal of Biological Sciences</a></h3>
+<div style="font-size:13px;padding-bottom:11px;">
+Year: 2017 | Volume: 20 | Issue: 2 | Page No.: 59-69<br>
+</div>
+<div style="font-size:13px;padding-bottom:11px;">
+DOI: <a href="https://doi.org/10.3923/pjbs.2017.59.69" target="_blank">10.3923/pjbs.2017.59.69</a>
+</div>
+</div>
+<div class="col-xs-12 col-lg-4">
+<div align="center">
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://crossmark.crossref.org/javascripts/v1.5/crossmark.min.js"></script>
+<a id="open-crossmark" href="#" style="padding: 0px 0 0px 0;"><img style="border: 0; display: none;text-align:center;" id="crossmark-icon" alt="crossmark" class="img-fluid" src="https://crossmark.crossref.org/images/logos/cm_sbs_072_click.png"></a>
+<div id="crossmark-dialog" style="display: none;text-align:center;">
+
+<iframe id="crossmark-dialog-frame" frameborder="0"></iframe>
+</div>
+
+<hr width="90%">
+<style>
+.socialz
+{
+	padding:2px;
+}
+</style>
+<div align="center">
+<a href="https://www.facebook.com/sharer.php?u=https://scialert.net/fulltext/?doi=pjbs.2017.59.69&org=11" target="_blank"><img src="scialertsocial/facebook.webp" alt="Facebook" width="33px" class="socialz" border="0" /></a>
+<a href="https://twitter.com/share?url=https://scialert.net/fulltext/?doi=pjbs.2017.59.69&org=11&text=Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review @scialert&hashtags=#ScienceAlert" target="_blank"><img src="scialertsocial/twitter.webp" alt="Twitter" width="33px" class="socialz" border="0" /></a>
+<a href="http://www.digg.com/submit?url=https://scialert.net/fulltext/?doi=pjbs.2017.59.69&org=11" target="_blank"><img src="scialertsocial/digg.webp" alt="Digg" width="33px" class="socialz" border="0" /></a>
+<a href="http://reddit.com/submit?url=https://scialert.net/fulltext/?doi=pjbs.2017.59.69&org=11&title=Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review" target="_blank"><img src="scialertsocial/reddit.webp" alt="Reddit" width="33px" class="socialz" border="0" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fscialert.net%2Ffulltext%2F%3Fdoi%3Dpjbs.2017.59.69%26org%3D11" target="_blank"><img src="scialertsocial/linkedin.webp" alt="Linkedin" width="33px" class="socialz" border="0" /></a>
+<a href="http://www.stumbleupon.com/submit?url=https://scialert.net/fulltext/?doi=pjbs.2017.59.69&org=11&title=Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review" target="_blank"><img src="scialertsocial/stumble.webp" alt="StumbleUpon" width="33px" class="socialz" border="0" /></a>
+<a href="/cdn-cgi/l/email-protection#0e315d7b6c646b6d7a335d6d676b606d6b2e4f626b7c7a284c616a7733472b3c3e7d6f792b3c3e7a66677d2b3c3e6f606a2b3c3e7a66617b69667a2b3c3e61682b3c3e77617b2f2b3c3e2e667a7a7e7d3421217d6d676f626b7c7a20606b7a21687b62627a6b767a21316a6167337e646c7d203c3e3f39203b3720383728617c69333f3f"><img src="scialertsocial/email.webp" alt="E-mail" width="33px" class="socialz" border="0" /></a>
+</div></div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12" style="margin:0px;">
+<article class="sidebar">
+<h6 style="text-transform: uppercase;">Review Article</h6>
+<h3 class="entry-title" style="padding-bottom:15px;">
+<strong>Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review</strong>
+</h3>
+<div class="entry-content">
+<style>
+table, th, td {
+  border: 0px solid #ececec;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 17px;
+}
+h6 {
+line-height:29px;
+}
+</style>
+<a href="https://ascidatabase.com/author.php?author=D.&mid=&last=Ouermi" target="_blank" class="authors" title="Click to find out more papers by D.  Ouermi">D. Ouermi</a>,
+<a href="https://ascidatabase.com/author.php?author=D.&mid=&last=Soubeiga" target="_blank" class="authors" title="Click to find out more papers by D.  Soubeiga">D. Soubeiga</a>,
+<a href="https://ascidatabase.com/author.php?author=W.M.C.&mid=&last=Nadembega" target="_blank" class="authors" title="Click to find out more papers by W.M.C.  Nadembega">W.M.C. Nadembega</a>,
+<a href="https://ascidatabase.com/author.php?author=P.M.&mid=&last=Sawadogo" target="_blank" class="authors" title="Click to find out more papers by P.M.  Sawadogo">P.M. Sawadogo</a>,
+<a href="https://ascidatabase.com/author.php?author=T.M.&mid=&last=Zohoncon" target="_blank" class="authors" title="Click to find out more papers by T.M.  Zohoncon">T.M. Zohoncon</a>,
+<a href="https://ascidatabase.com/author.php?author=D.&mid=&last=Obiri-Yeboah" target="_blank" class="authors" title="Click to find out more papers by D.  Obiri-Yeboah">D. Obiri-Yeboah</a>,
+<a href="https://ascidatabase.com/author.php?author=F.W.&mid=&last=Djigma" target="_blank" class="authors" title="Click to find out more papers by F.W.  Djigma">F.W. Djigma</a>,
+<a href="https://ascidatabase.com/author.php?author=J.&mid=&last=Nordgren" target="_blank" class="authors" title="Click to find out more papers by J.  Nordgren">J. Nordgren</a> and <a href="https://ascidatabase.com/author.php?author=J.&mid=&last=Simpore" target="_blank" class="authors" title="Click to find out more papers by J.  Simpore">J. Simpore</a>
+</div>
+</article>
+<article class="sidebar text-justify">
+<h4 class="entry-title"><strong>ABSTRACT</strong></h4><hr>
+Group A human rotaviruses (RVA) are the most common causes of severe viral gastroenteritis in infants and young children worldwide. The available vaccines, while effective in Europe and North America have shown a reduced efficacy in Africa. One issue raised is the <a href="https://ascidatabase.com/result.php?searchin=Keywords&cat=&ascicat=ALL&Submit=Search&keyword=genetic+variability" target="_blank" title="Find more articles containting genetic variability">genetic variability</a> of RVA. The objective of this study was to perform a literature review of molecular epidemiology to determine the prevalence of RVA genotypes circulating in Africa so as to establish a mapping of reliable data on these various genotypes. The search for articles was done from the National Institutes of Health (PUBMED) using three set of keywords. Articles were selected with inclusion criteria such as the date of publication, the age of the children, the sample size and the diagnostic techniques (standardized laboratory techniques). The data were imported into STATA SE version 11 software. Specific prevalence was estimated with Confidence Intervals (CI) of 95%. A total of 326 published studies were initially retrieved, out of which 27 studies were finally selected for the systematic review. The selected studies cover 20 African countries. The most encountered genotypes in Africa during this period were G1 (32.72%), followed by G2 (17.17%), G3 (9.88%), G9 (8.61%) and G12 (7.56%) among the G-types. The most common P-types were P[8] (48.71%) followed by P[6] (22.60%) and P[4] (11.58%) and the G1P[8] combination (22.64%) was the most encountered followed by G2P[4] (8.29%), G9P[8] (6.95%) and G2P[6] (5.00%). North Africa presented the highest prevalence of the P[8] genotype (65.70%). This review provides a comprehensive view of the current circulating rotavirus strains in Africa, which can be important in light of the new rotavirus vaccinations. Indeed, in Africa, the pursuit of national and continental studies for epidemiological surveillance of circulating rotavirus strains is vital for the promotion of future successful vaccines. <hr>
+<A href="../qredirect.php?doi=pjbs.2017.59.69&linkid=pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-1 mb-3">PDF</A>
+<A class="btn btn-sm btn-outline-primary mr-1 mb-3" href="../abstract/?doi=pjbs.2017.59.69">Abstract</A>
+<A class="btn btn-sm btn-outline-primary mr-1 mb-3" href="../fulltext/xml.php?doi=pjbs.2017.59.69"><i class="fa fa-code"></i>XML</A>
+<A href="#ref" class="btn btn-sm btn-outline-primary mr-1 mb-3">References</A>
+<a class="btn btn-sm btn-outline-primary mr-1 mb-3" href="../fulltext/citedby.php?doi=pjbs.2017.59.69&linkid=cite">Citation</a>
+</article>
+<article class="sidebar">
+<div class="entry-content">
+<strong>Received:</strong> October 21, 2016;  
+<strong>Accepted: </strong>December 01, 2016;  
+<strong>Published: </strong>January 15, 2017
+</div>
+</article>
+<article class="sidebar">
+<div class="entry-content">
+<b>Copyright:</b> © 2017. This is an open access article distributed under the terms of the <i><b>creative commons attribution License</b></i>, which permits unrestricted use, distribution and reproduction in any medium, provided the original author and source are credited.
+</div>
+</article>
+<article class="sidebar" style="background-color: #ecf6fe;">
+<h4 class="entry-title">
+<strong>How to cite this article</strong><hr>
+</h4>
+<div class="entry-content">
+D. Ouermi, D. Soubeiga, W.M.C. Nadembega, P.M. Sawadogo, T.M. Zohoncon, D. Obiri-Yeboah, F.W. Djigma, J. Nordgren and J. Simpore, 2017. Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review. <i>Pakistan Journal of Biological Sciences, 20: 59-69.</i>
+<br> <br> <strong>DOI:</strong> <a href="https://doi.org/10.3923/pjbs.2017.59.69" target="_blank">10.3923/pjbs.2017.59.69</a>
+<br> <br> <strong>URL:</strong> <a href="https://scialert.net/abstract/?doi=pjbs.2017.59.69" target="_blank">https://scialert.net/abstract/?doi=pjbs.2017.59.69
+</a>
+</div>
+</article>
+<div class="sidebar" style="padding-bottom:1px;">
+<h4 class="entry-title"><strong>Search</strong></h4><hr>
+<div class="sidebar-item categories text-center">
+<div class="wrapper">
+<style>
+.gsc-control-cse{padding:0px;margin:0px;}
+</style>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://cse.google.com/cse.js?cx=06084a0943e804d18"></script>
+<gcse:search enablehistory="false"></gcse:search>
+</div>
+</div>
+</div>
+<article class="sidebar">
+<div>
+<p align="justify"> <h4 class="entry-title"><strong>INTRODUCTION</strong></h4><hr></P><p align="justify">Acute gastroenteritis (AGE) is one of the leading causes of morbidity and mortality among children<SUP><a href="#153081_ja">1</a></SUP>. Each year, AGE causes two million deaths among children under 5 in the world<SUP><a href="#105913_ja">2</a>,<a href="#105933_ja">3</a></SUP>. Rotavirus (RV) is the pathogen responsible for most of these severe pediatric diarrhea diseases<SUP><a href="#23380_ja">4</a>,<a href="#1651122_ja">5</a></SUP>. Each year: 114 million episodic diarrhea, 24 million day hospital consultations, 2.4 million hospitalizations and more than 453,000 deaths are reported<SUP><a href="#105913_ja">2</a>,<a href="#42549_ja">6</a>-<a href="#38475_op">12</a></SUP>. This high rotavirus-dependent mortality occurs mainly in South Asia and sub-Saharan Africa<SUP><a href="#153081_ja">1</a>,<a href="#23380_ja">4</a>,<a href="#1651145_ja">13</a>,<a href="#1651097_ja">14</a></SUP>. In Burkina Faso, a study conducted from 2009-2010 revealed a prevalence of 32.4% of rotavirus infections with 63.8% of cases occurring during the cold dry season<SUP><a href="#855085_ja">15</a></SUP>. In countries with limited resources, where there is a lack of healthy lifestyle, the median age of first infection with RV is between 6 and 9 months while in the high-income countries where hygiene rules are strictly observed, the first episode frequently occurs between 2-5 years<SUP><a href="#1387253_ja">16</a>-<a href="#1651311_ja">18</a></SUP>. Therefore, rotaviruses are a real public health issue, not only for <a href="https://ascidatabase.com/result.php?searchin=Keywords&cat=&ascicat=ALL&Submit=Search&keyword=developing+countries" target="_blank" title="Find more articles at https://ascidatabase.com/result.php?searchin=Keywords&cat=&ascicat=ALL&Submit=Search&keyword=developing+countries (developing countries)"><strong>developing countries</strong></a> with inadequate sanitation where the majority of children under 5 are infected but also for developed countries where hygiene conditions are quite satisfactory.</P><p align="justify">Structurally, RVs are non-enveloped viruses of the <I>Rotavirus</I> genus within the Reoviridae family. The mature infectious particle of rotavirus is icosahedral with 100 nm in diameter (including spikes) of which the capsid is composed of three layers<SUP><a href="#1651083_ja">19</a></SUP>. The genome is a double stranded RNA composed of eleven segments. These sequences formed of RNA encode six structural proteins (VP1-VP4, VP6 and VP7) and six non-structural proteins (NSP1-NSP6). The inner and intermediate layers of the capsid are formed respectively of VP2 and VP6 viral protein, while the outer layer is formed of VP4 and VP7 proteins that contain neutralizing antigens which are classified into G and P serotypes, respectively through neutralization tests. Apart from these serotypes, genotypes G and P, based on the <a href="https://ascidatabase.com/result.php?searchin=Keywords&cat=&ascicat=ALL&Submit=Search&keyword=genetic+diversity" target="_blank" title="Find more articles at https://ascidatabase.com/result.php?searchin=Keywords&cat=&ascicat=ALL&Submit=Search&keyword=genetic+diversity (genetic diversity)"><strong>genetic diversity</strong></a> of VP7 and VP4 genes have been classified to at least 27 G-types and 37 P-types, respectively. Currently, in many parts of the world, five combinations G1P[8], G2P[4], G3P[8], G4P[8] and G9P[8]) are the source of approximately 90% of all human rotavirus infections, where the G1P[8] genotype has the highest prevalence<SUP><a href="#1651082_ja">10</a>,<a href="#1651311_ja">18</a>,<a href="#1651152_ja">20</a>-<a href="#1651078_ja">23</a></SUP>.</P><p align="justify">Despite the observed global genotype distribution, there is a heterogeneous global distribution of the genotypes of group A human rotavirus (RVA). The G-P combinations encountered in Africa often differ markedly from those circulating in other parts of the world<SUP><a href="#1651152_ja">20</a></SUP>. Today, there are two types of rotavirus vaccine that are used worldwide: Rotarix<sup>&reg;</sup> and RotaTeq<sup>&reg;</sup>, which have shown a reduced efficacy in African countries of which one factor is speculated to be related to differences of RV genotypes present in the sub-continent<SUP><a href="#1651099_ja">24</a></SUP>.</P><p align="justify">The objective of this study was two fold: Conduct a literature review on molecular epidemiology to determine the prevalence of group A human RV genotypes circulating in Africa and establish a mapping of reliable data on these different genotypes that could be used to make a new vaccines covering all the different RV genotypes.</P><p align="justify"></P><p align="justify"></div></article><article class="sidebar"><div class="entry-content"><h4 class="entry-title"><strong>MATERIALS AND METHODS</strong></h4><hr></P><p align="justify"><b>Research strategy: </b>The study review was conducted from the National Institutes of Health (PUBMED) using the following three set of keywords. The first set consisted of the following words &quot;Rotavirus, genotypes, Africa&quot;. The second set consisted of: &quot;Rotavirus, molecular epidemilogy, Africa&quot;. And finally the third set included the words &quot;Diarrhea, rotavirus, p&eacute;diatric children, Africa&quot;. After examining each study, the studies were selected if meeting the following inclusion criteria: The date of publication (from 1 January, 2006 to 30 June, 2016), the age of children (X&lt;5 years), the sample size (30&lt;X), diagnostic techniques (using standardized laboratory techniques such as ELISA for RV positive detection, multiplex RT-PCR, qRT-PCR and sequencing for genotyping and/or RV sequencing), the language of study (English or French), the quality of the journal (Journal indexed in PUBMED), the health facilities where samples of pediatric patients were selected: University hospitals (CHU), regional hospitals (CHR), Medical Centers (CM) and Health and Social Promotion Centers (CSPS). The selected studies have conducted prevalence calculations based on confidence intervals.</P><p align="justify">Excluded from the study were: Data from article analysis, articles written in languages other than English or French and studies related to RV infecting animals.</P><p align="justify"><b>Data extraction:</b> For each selected study where available, we extracted the following data: Name of the first author, time and duration of the study, the country, the study population, the age group, the genotyping methods used, the number of samples tested, absolute numbers and percentages of positive subjects for the relevant genotypes.</P><p align="justify">Data were extracted by two investigators (SD and MS) and verified by a third investigator (OD). All disagreements were resolved by consensus.</P><p align="justify"><b>Estimates of specific prevalence of rotavirus genotypes: </b>Data on the different genotypes found in the studies were extracted. Then, the specific prevalence of rotavirus genotypes was calculated by dividing the number of positive cases for a particular genotype by the number of samples tested.</P><p align="justify"><b>Data analysis:</b> The data were imported into the STATA SE version 11 software. Specific prevalences are estimated at 95% Confidence Intervals (CI).</P><p align="justify"></div></article><article class="sidebar"><div class="entry-content"><h4 class="entry-title"><strong>RESULTS</strong></h4><hr></P><p align="justify">From 1 January, 2006 to 30 June, 2016 we obtained a total of 326 published studies of which 27 studies were finally selected for the systematic review according to the inclusion criteria (<a href="#f1" valign="baseline" nowrap>Fig. 1</a>). The selected studies cover 20 countries in four regions of Africa: West (6 studies), Center (7 studies), East (8 studies), North (3 studies) and South (3 studies) (<a href="#f2" valign="baseline" nowrap>Fig. 2</a>).</P><p align="justify">The samples analyzed were collected from different categories of health facilities (University or regional hospitals, medical centers or health centers). However, many articles do not specify the type of facilities or the type of patients (inpatients or outpatients).</P><p align="justify">The genotyping methods used were multiplex RT-PCR (n = 17 studies), multiplex RT-real time-PCR (n = 1), multiplex semi-nested RT-PCR (n = 5), multiplex semi-nested RT-PCR combined with sequencing (n = 1) and multiplex RT-PCR combined with sequencing (n = 3). Most studies have tested the most common P and G-types only. <a href="#t1" valign="baseline" nowrap>Table 1</a> shows the complete list of uncombined and combined genotypes identified by the 27 articles.</P><p align="justify">The most encountered genotypes in Africa during this period (<a href="#t2" valign="baseline" nowrap>Table 2</a>-<a href="#t4">4</a>) are P[8] (48.71% IC: 47.54-49.89), G1 (32.72% IC: 31.62-33.83) and the G1P[8] combination (22.64% IC : 21.67-23.64). It is also worth noting that there were non-typed cases in some studies. Depending on the different parts of Africa whose studies had been taken into account, the most encountered G-types are distributed as follows (<a href="#t5" valign="baseline" nowrap>Table 5</a>): G1 is the most encountered in all parts of Africa with the highest prevalence in North Africa (39.71% IC: 36.71-42.77) and the lowest in Southern Africa (20.44% IC: 18.09-22.94).</P><p align="justify">In West Africa, G1 is followed by G2 (22.75% IC: 20.91-24.67) and G12 (13.64%, IC: 12.15-15.24) while in East Africa it is followed by G9 (14.77% IC: 12.79-16.94) and G8 (10.59% IC: 8.88-12.49). In Central Africa, G1 is followed by G2 (23.47% IC: 21.55-25.47) as in West Africa.</P><a name="f1" id="f1"></a><table width="435" border="0" align="center"><tr><td colspan="2"><div align="center"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/fig1-2k17-59-69.gif" width="429" height="411"></div></td></tr><tr><td width="49" valign="baseline" valign="baseline" nowrap>Fig. 1:</td><td width="376">Flowchart for study selection</td></tr></table><br><a name="f2" id="f2"></a><table width="651" border="0" align="center"><tr><td colspan="2"><div align="center"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/fig2-2k17-59-69.jpg" width="645" height="560"></div></td></tr><tr><td width="51" valign="baseline" valign="baseline" nowrap>Fig. 2:</td><td width="590">Spatial distribution of the studies included in the study</td></tr></table><br><p align="justify">In North Africa, G9 comes second after G1 with 18.07% (IC: 15.77-20.55) as in East Africa and G2 is third with 17.58% (IC: 15.31-20.04). Unlike Central Africa, in Southern Africa, G3 is the most prevalent after G1 with 20.07% (IC: 18.09-22.94) and it is followed by G2 (9.99% IC: 8.28-11.92).</P><p align="justify">Regarding the P-types, P[8] (38.72%, IC: 36.51-40.97) followed by P[6] (26.88%, IC: 24.88-28.95) and P[4] (14.29% IC 12.74-15.96) were the most prevalent in West Africa. In East Africa, these 3 P-types are also the most found, respectively in 52.35% (IC: 49.44-55.24), 20.41% (IC: 18.14-22.83) and 11.10% (IC: 9.36-13.04) of cases. Similar results from Central Africa where their prevalences were 46.33% (IC: 44.04-48.64), 35.85% (IC: 33.66-38.09) and 9.72% (IC: 8.41-11.17). In South Africa they were found with the following prevalences: 49.86% (IC: 46.87-52.86), 13.08% (IC: 11.14-15.21) and 10.17% (IC: 8.45-12.11). However, in North Africa, these 3 P-types are found but with a much higher prevalence of P[8] (65.70% IC: 62.72-68.59) compared to its prevalence in other African regions. In North Africa, the second most prevalent is P[4], 11.98% (IC: 10.06-14.12) and P[6] 3.86% (IC: 2.78-5.23) which is much lower compared to other regions.</P><p align="justify">The G1P[8] combination is the most common in all regions but with a higher prevalence in North Africa (37.10% IC: 34.15-40.13). In West Africa, with a prevalence of 14.35% (12.79-16.02), it is followed by G12P[8] 12.32% (IC: 10.87-13.89) and G2P[4] 11.41% (IC: 10.01-12.94). However, in East Africa, G1P[8] 29.46% is followed by G9P[8] which is second prevalent (14.52% IC: 12.55-16.67). In Central Africa, G1P[8] is first with 22.32% (IC: 20.44-24.30) followed by G2P[6] 10.54% (IC: 9.17-12.03). </P><a name="t1" id="t1"></a><table width="651" border="0" align="center"><tr><td width="69" valign="baseline" valign="baseline" nowrap>Table 1:</td><td width="572">Genotypes identified by each study and method used</td></tr><tr><td colspan="2"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab1-2k17-59-69.gif" width="645" height="714"></td></tr></table><br><p align="justify">In North Africa, G1P[8] is followed by G9P[8] and G2P[4] with 17.78%, (IC: 15.49-20.25) and 11.40% (IC: 9.53-13.50), respectively. With 13.26% (IC: 11.31-15.41), G3P[8] is the most common in Southern Africa after G1P[8] which has a prevalence of 16.44% (IC: 14.30-18.76).</P><p align="justify"></div></article><article class="sidebar"><div class="entry-content"><h4 class="entry-title"><strong>DISCUSSION</strong></h4><hr></P><p align="justify">This systematic review of RVA genotypes in children under 5 in Africa focused on studies over a period of 11 years. The results showed a high prevalence of G1 (32.72%) followed by G2 (17.17%), G3 (9.88%), G9 (8.61%) and G12 (7.56%) among the G-types.</P><a name="t2" id="t2"></a><table width="651" border="0" align="center"><tr><td width="62" valign="baseline" valign="baseline" nowrap>Table 2:</td><td width="579">Specific prevalence of G genotypes circulating in Africa from 2006-2016</td></tr><tr><td colspan="2"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab2-2k17-59-69.gif" width="645" height="167"></td></tr></table><br><a name="t3" id="t3"></a><table width="651" border="0" align="center"><tr><td width="62" valign="baseline" valign="baseline" nowrap>Table 3:</td><td width="579">Specific prevalence of the P genotype circulating in Africa from 2006-2016</td></tr><tr><td colspan="2"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab3-2k17-59-69.gif" width="645" height="140"></td></tr></table><br><a name="t4" id="t4"></a> <table width="651" border="0" align="center"><tr><td width="62" valign="baseline" valign="baseline" nowrap>Table 4:</td><td width="579">Specific prevalence of combined G-P genotypes circulating in Africa from 2006-2016</td></tr><tr><td colspan="2"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab4a-2k17-59-69.gif" width="645" height="443"><br> <img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab4b-2k17-59-69.gif" width="645" height="117"></td></tr></table> <br> <a name="t5" id="t5"></a> <table width="651" border="0" align="center"><tr><td width="62" valign="baseline" valign="baseline" nowrap>Table 5:</td><td width="579">Most encountered genotypes in the various regions of Africa from 2006-2016</td> </tr><tr><td colspan="2"><img class="imgz" alt="Image for - Molecular Epidemiology of Rotavirus in Children under Five inAfrica (2006-2016): A Systematic Review" src="https://docsdrive.com/images/ansinet/pjbs/2017/tab5-2k17-59-69.gif" width="645" height="624"></td></tr></table><br><p align="justify"> The most common P-types were P[8] (48.71%) followed by P[6] (22.60%) and P[4] (11.58%) and the most encountered combinations were G1P[8] (22.64%) followed by G2P[4] (8.29%), G9P[8] (6.95%) and G2P[6] (5.00%). Todd <I>et al</I>.<SUP><a href="#1651094_ja">25</a></SUP> in their 1997-2006 review in Africa had also found that G1P[8] was the most frequent (17.4%), followed by G2P[6], G8P[6] and G3P[8]. On the other hand, they found that G2 was the most common (15.8%) in that period among the G-types. Other systematic reviews in other regions of the world showed data that are similar to the findings in this review. Liu <I> et al</I>.<SUP><a href="#1651126_ja">26</a></SUP> review found that P[8] (50.2%), P[4] (18.2%) and P[6] (7.2%) are the most common in China, but among G-types, the most common was G3 (39.3%), followed by G1 (30.3%), G2 (7.2%) and G9 (3.3%). They also showed that the most prevalent G-P combinations were G3P[8] (32.1%), G1P[8] (23.0%) and G2P[4] (7.9%)<SUP><a href="#1651126_ja">26</a></SUP>. In Colombia, Ospino <I>et al</I>.<SUP><a href="#1651045_ja">27</a></SUP> that G1 was also the most common but with a higher prevalence (57.9%), followed by G3, G9 and G2 among the G-types. However, among the P-types, the most frequent were P[4] (49.1) followed by P[6] and P[8]. But the most common combinations they found were G3P[8] (32.7%) followed by G1P[8] and G2P[4]<SUP><a href="#1651045_ja">27</a></SUP>. Ogilvie <I>et al</I>.<SUP><a href="#1651156_ja">28</a></SUP> review in the Eastern and Central European regions showed that combinations such as G1P[8], G4P[8] and G2P[4] were the most common in these parts of Europe. In Latin America in 2004, Castello <I>et al</I>.<SUP><a href="#1651062_ja">29</a></SUP> found that G1P[8] was also the most common with 40%, followed by G2P[4] (30%), G3P[8] (6%) and G4P[8] (7%). Note that in large parts of the world, the following five combinations (G1P[8], G2P[4], G3P[8] G4P[8] and G9P[8]) are currently the source of about 90% of all human rotavirus infections, with G1P[8] having the highest prevalence<SUP><a href="#1651152_ja">20</a></SUP>. This review has shown that all those combinations are actually common in Africa</P><p align="justify">Almost all the African regions where the studies were conducted showed the same predominant genotypes with some variations in prevalence. Genotypes G1, G2, G9, G12 and G3 accounted for 75.94% of all G-types circulating in Africa, whereas genotypes P[8], P[6] and P[4] were predominant during the period and accounted for 82.89% of the P-types encountered. It is worth noting that fluctuation mostly relates to G2, G3, G4, G6, G8, G9 and G12, P [6] and P[4]. Indeed, after G1, the following are predominant: G2 and G12 in West Africa, G9 and G8 in East Africa, G2 and G3 in Central Africa and G9 and G2 in North Africa. The P[6] is the most prevalent after P[8] in central, West, East and South of Africa. However, P[4] is the second after P[8] in North Arica. This difference in circulating strains is not surprising given that genotypes vary much from one year to another, from one region to another, from one country to another and from one season to another. There are currently two second generation vaccines, RotaTeq<sup>&reg;</sup> and Rotarix<sup>&reg;</sup>, that have been authorized in more than 100 countries<SUP><a href="#1651097_ja">14</a>,<a href="#38470_op">30</a>,<a href="#1651133_ja">31</a></SUP>. Rotarix<sup>&reg;</sup> is a human rotavirus strain with a live attenuated P1A [8] G1 and RotaTeq<sup>&reg;</sup> is a pentavalent human-bovine reassortment containing G-types 1-4 and P[8]. Both vaccines show good efficacy in preventing rotavirus diarrhea (85-98%)<SUP><a href="#1651091_ja">32</a></SUP> in Europe and North America. However, the efficacy is lower in developing countries<SUP><a href="#1651145_ja">13</a></SUP> and one factor could be related to the present of unusual strains. Therefore, with the unusual strains such as G12, G9, G8 and P[6] which predominate in Africa, it is essential to develop vaccines covering a wide range of genotypes.</P><p align="justify">This systematic review has some limitations. First, all studies are not designed to identify the full range of the G and P-types. Most studies use techniques that only detect common G and P-types since sequencing was not used in all the studies, this is a probable reason why some strains were not characterized. Furthermore, although the studies included in this review provide an indication of genotypes circulating across the African continent, they are not representative of all countries.</P><p align="justify"></div></article><article class="sidebar"><div class="entry-content"><h4 class="entry-title"><strong>CONCLUSION</strong></h4><hr></P><p align="justify">This review has provided a view of the current rotavirus strains circulating in Africa. The common rotavirus genotypes should remain the primary targets for vaccine development. However, due to the emergence of unusual strains and the reassortment between animal and human rotavirus especially in most African countries where animals are very close to humans, pursuing national and continental studies for epidemiological surveillance of circulating rotavirus strains will be vital for the promotion of future successful vaccines and the interpretation of any vaccine failure. Efforts to establish rotavirus surveillance are needed in Africa as to continuously update the information of circulating RV strains in each country and region.</P><p align="justify"></div></article><article class="sidebar"><div class="entry-content"><h4 class="entry-title"><strong>ACKNOWLEDGMENTS</strong></h4><hr></P><p align="justify">The authors are thankful to the Pietro ANNIGONI Association and the WAEMU Commission through the PACER-II program for their financial support.</P> </div>
+</article>
+<div class="sidebar">
+<div class="sidebar-item categories text-center" style="padding-top:19px;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-5222637924397992" data-ad-slot="1054784925"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+<article class="sidebar">
+<h4 class="entry-title" style="padding-bottom:15px;">
+<a name="ref"><strong>REFERENCES</strong></a>
+</h4>
+<ol>
+<li class="m-3 pb-2 pl-3"><hr><div id="153081_ja">Simpore, J., D. Ouermi, D. Ilboudo, A. Kabre and B. Zeba <I>et al</I>., 2009. <a name="153081_ja"></a>Aetiology of acute gastro-enteritis in children at saint Camille Medical Centre, Ouagadougou, Burkina Faso. Pak. J. Biol. Sci., 12: 258-263.<br><a href="https://doi.org/10.3923/pjbs.2009.258.263" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/19579955" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.scialert.net/abstract/?doi=pjbs.2009.258.263" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="105913_ja">Da Luz, C.R.N.E., J.D.P. Mascarenhas, Y.B. Gabbay, A.R.B. Motta and T.V.R. Lima <I>et al</I>., 2005. <a name="105913_ja"></a>Rotavirus serotypes and electropherotypes identified among hospitalised children in Sao Luis, Maranhao, Brazil. Revista Instituto Medicina Tropical Sao Paulo, 47: 287-293.<br><a href="https://doi.org/10.1590/S0036-46652005000500009" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/16302113" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.scielo.br/scielo.php?pid=S0036-46652005000500009&script=sci_arttext" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="105933_ja">Orlandi, P.P., G.F. Magalhaes, N.B. Matos, T. Silva, M. Penatti, P.A. Nogueira and L.H.P. da Silva, 2006. <a name="105933_ja"></a>Etiology of diarrheal infections in children of Porto Velho (Rondonia, Western Amazon region, Brazil). Braz. J. Med. Biol. Res., 39: 507-517.<br><a href="https://doi.org/10.1590/S0100-879X2006000400011" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/16612474" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.scielo.br/scielo.php?pid=S0100-879X2006000400011&script=sci_arttext" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="23380_ja">Ouermi, D., D. Karou, D. Ilboudo, W.M.C. Nadembega and V. Pietra <i>et al</i>., 2007. <a name="23380_ja"></a>Prevalence of rotavirus, adenovirus and enteric parasites among pediatric patients attending Saint Camille Medical Centre in Ouagadougou. Pak. J. Biol. Sci., 10: 4266-4270.<br><a href="https://doi.org/10.3923/pjbs.2007.4266.4270" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/19086583" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="https://scialert.net/abstract/?doi=pjbs.2007.4266.4270" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651122_ja">Waggie, Z., A. Hawkridge and G.D. Hussey, 2010. <a name="1651122_ja"></a>Review of rotavirus studies in Africa: 1976-2006. J. Infect. Dis., 202: S23-S33.<br><a href="https://doi.org/10.1086/653554" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://jid.oxfordjournals.org/content/202/Supplement_1/S23.short" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="42549_ja">Parashar, U.D., C.J. Gibson, J.S. Bresee and R.I. Glass, 2006. <a name="42549_ja"></a>Rotavirus and severe childhood diarrhea. Emerg. Infect. Dis., 12: 304-306.<br><a href="https://doi.org/10.3201/eid1202.050006" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/16494759" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="https://wwwnc.cdc.gov/eid/article/12/2/pdfs/05-0006.pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651095_ja">Glass, R.I. and U.D. Parashar, 2006. <a name="1651095_ja"></a>The promise of new rotavirus vaccines. N. Engl. J. Med., 354: 75-77.<br><a href="https://doi.org/10.1056/NEJMe058285" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.nejm.org/doi/full/10.1056/NEJMe058285#t=article" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="85935_an">WHO., 2009. <a name="85935_an"></a>Detailed review paper on rotavirus vaccines. WHO Strategic Advisory Group of Experts (SAGE) on Immunization, March 17, 2009. http://www.who.int/immunization/sage/3_Detailed_Review_Paper_on_Rota_Vaccines_17_3_2009.pdf.</div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651050_ja">Benhafid, M., N. Elomari, M. Elqazoui, A.I. Meryem, A. Rguig, A. Filali-Maltouf and R. Elaouad, 2013. <a name="1651050_ja"></a>Diversity of rotavirus strains circulating in children under 5 years of age admitted to hospital for acute gastroenteritis in Morocco, June 2006 to May 2009. J. Med. Virol., 85: 354-362.<br><a href="https://doi.org/10.1002/jmv.23445" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.23445/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651082_ja">Ghosh, S. and N. Kobayashi, 2014. <a name="1651082_ja"></a>Genetic diversity and evolution of human rotaviruses based on whole genome. Br. J. Virol., 1: 1-9.<br><a href="http://smithandfranklin.com/uploads/currentIssues/pdf/1399762039BJV_1_1_1-9.pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="38472_op">Cunliffe, N., K. Zaman, C. Rodrigo, S. Debrus, B. Benninghoff, S.P. Venkata and H.H. Han, 2014. <a name="38472_op"></a>Early exposure of infants to natural rotavirus infection: A review of studies with human rotavirus vaccine RIX4414. BMC Pediatr., Vol. 14.<br><a href="https://doi.org/10.1186/s12887-014-0295-2" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="https://bmcpediatr.biomedcentral.com/articles/10.1186/s12887-014-0295-2" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="38475_op">Jere, K.C., H.G. O'Neill, A.C. Potgieter and A.A. van Dijk, 2014. <a name="38475_op"></a>Chimaeric virus-like particles derived from consensus genome sequences of human rotavirus strains co-circulating in Africa. PLoS ONE, Vol. 9.<br><a href="https://doi.org/10.1371/journal.pone.0105167" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0105167" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651145_ja">Magagula, N.B., M.D. Esona, M.M. Nyaga, K.M. Stucker and R.A. Halpin <i>et al</i>., 2015. <a name="1651145_ja"></a>Whole genome analyses of G1P[8] rotavirus strains from vaccinated and non-vaccinated South African children presenting with diarrhea. J. Med. Virol., 87: 79-101.<br><a href="https://doi.org/10.1002/jmv.23971" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.23971/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651097_ja">Wang, C.M., S.C. Chen and K.T. Chen, 2015. <a name="1651097_ja"></a>Current status of rotavirus vaccines. World J. Pediatr., 11: 300-308.<br><a href="https://doi.org/10.1007/s12519-015-0038-y" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://link.springer.com/article/10.1007/s12519-015-0038-y" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="855085_ja">Nitiema, L.W., J. Nordgren, D. Ouermi, D. Dianou, A.S. Traore, L. Svensson and J. Simpore, 2011. <a name="855085_ja"></a>Burden of rotavirus and other enteropathogens among children with diarrhea in Burkina Faso. Int. J. Infect. Dis., 15: e646-e652.<br><a href="https://doi.org/10.1016/j.ijid.2011.05.009" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/21763172 " target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.ijidonline.com/article/S1201-9712(11)00122-6/abstract" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1387253_ja">Kilic, I.H., M. Ozaslan, T. Karsligil, I.D. Karagoz and Y. Zer, 2007. <a name="1387253_ja"></a>Investigation of diarrhea agents less than 5 years of age in summer in Gaziantep/Turkey. Pak. J. Biol. Sci., 10: 2915-2919.<br><a href="https://doi.org/10.3923/pjbs.2007.2915.2919" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/19090199" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.scialert.net/abstract/?doi=pjbs.2007.2915.2919" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="85937_an">WHO., 2012. <a name="85937_an"></a>Estimated rotavirus deaths for children under 5 years of age: 2008, 453&#8200;000. World Health Organization, Geneva, January 2012. http://apps.who.int/immunization_monitoring/burden/rotavirus_estimates/en/index.html.</div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651311_ja">WHO., 2013. <a name="1651311_ja"></a>Rotavirus vaccines. Weekly Epidemiol. Rec., 88: 49-64.<br><a href="http://www.who.int/wer/2013/wer8805.pdf?ua=1" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651083_ja">Ruiz, M.C., T. Leon, Y. Diaz and F. Michelangeli, 2009. <a name="1651083_ja"></a>Molecular biology of rotavirus entry and replication. Scient. World J., 9: 1476-1497.<br><a href="https://doi.org/10.1100/tsw.2009.158" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="https://www.hindawi.com/journals/tswj/2009/879851/abs/" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651152_ja">Nordgren, J., L.W. Nitiema, S. Sharma, D. Ouermi, A.S. Traore, J. Simpore and L. Svensson, 2012. <a name="1651152_ja"></a>Emergence of unusual G6P[6] rotaviruses in children, Burkina Faso, 2009-2010. Emerg. Infect. Dis., 18: 589-597.<br><a href="https://doi.org/10.3201/eid1804.110973" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="https://wwwnc.cdc.gov/eid/article/18/4/pdfs/11-0973.pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651150_ja">Nordgren, J., S. Sharma, F. Bucardo, W. Nasir and G. Gunayd&#305;n <i>et al</i>., 2014. <a name="1651150_ja"></a>Both lewis and secretor status mediate susceptibility to rotavirus infections in a rotavirus genotype-dependent manner. Clin. Infect. Dis., 59: 1567-1573.<br><a href="https://doi.org/10.1093/cid/ciu633" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://cid.oxfordjournals.org/content/early/2014/10/15/cid.ciu633.short" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651061_ja">Pratiwi, E., V. Setiawaty and R.H. Putranto, 2014. <a name="1651061_ja"></a>Molecular characteristics of rotavirus isolated from a diarrhea outbreak in October 2008 in Bintuni Bay, Papua, Indonesia. Virol.: Res. Treat., 5: 11-14.<br><a href="https://doi.org/10.4137/VRT.S13555" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.la-press.com/molecular-characteristics-of-rotavirus-isolated-from-a-diarrhea-outbre-article-a4102" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651078_ja">Esteves, A., J. Nordgren, J. Pereira, F. Fortes and R. Dimbu <i>et al</i>., 2016. <a name="1651078_ja"></a>Molecular epidemiology of rotavirus in four provinces of Angola before vaccine introduction. J. Med. Virol., 88: 1511-1520.<br><a href="https://doi.org/10.1002/jmv.24510" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.24510/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651099_ja">Gomez, M.M., M.C.L. de Mendonca, E.D.M. Volotao, L.F.L. Tort, M.F.M. da Silva, J. Cristina and J.P.G. Leite, 2011. <a name="1651099_ja"></a>Rotavirus A genotype P[4]G2: Genetic diversity and reassortment events among strains circulating in Brazil between 2005 and 2009. J. Med. Virol., 83: 1093-1106.<br><a href="https://doi.org/10.1002/jmv.22071" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.22071/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651094_ja">Todd, S., N.A. Page, A.D. Steele, I. Peenze and N.A. Cunliffe, 2010. <a name="1651094_ja"></a>Rotavirus strain types circulating in Africa: Review of studies published during 1997-2006. J. Infect. Dis., 202: S34-S42.<br><a href="https://doi.org/10.1086/653555" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://jid.oxfordjournals.org/content/202/Supplement_1/S34.short" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651126_ja">Liu, N., Z. Xu, D. Li, Q. Zhang, H. Wang and Z.J. Duan, 2014. <a name="1651126_ja"></a>Update on the disease burden and circulating strains of rotavirus in China: A systematic review and meta-analysis. Vaccine, 32: 4369-4375.<br><a href="https://doi.org/10.1016/j.vaccine.2014.06.018" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.sciencedirect.com/science/article/pii/S0264410X1400807X" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651045_ja">Ospino, D.U., G. Young and O.A. Navarro, 2008. <a name="1651045_ja"></a>Viral gastroenteritis and diversity of rotavirus strains in Colombian children: A systematic review. J. Infect. Dev. Countries, 2: 99-105.<br><a href="https://doi.org/10.3855/jidc.278" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.jidc.org/index.php/journal/article/download/19738332/175" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651156_ja">Ogilvie, I., H. Khoury, A.C. El Khoury and M.M. Goetghebeur, 2011. <a name="1651156_ja"></a>Burden of rotavirus gastroenteritis in the pediatric population in Central and Eastern Europe: Serotype distribution and burden of illness. Hum. Vaccines, 7: 523-533.<br><a href="https://doi.org/10.4161/hv.7.5.14819" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.tandfonline.com/doi/abs/10.4161/hv.7.5.14819" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651062_ja">Castello, A.A., M.L. Arvay, R.I. Glass and J. Gentsch, 2004. <a name="1651062_ja"></a>Rotavirus strain surveillance in Latin America: A review of the last nine years. Pediatr. Infect. Dis. J., 23: S168-S172.<br><a href="http://journals.lww.com/pidj/Abstract/2004/10001/Rotavirus_Strain_Surveillance_in_Latin_America__A.5.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="38470_op">Postma, M.J., M. Jit, M.H. Rozenbaum, B. Standaert, H.A. Tu and R.C. Hutubessy, 2011. <a name="38470_op"></a>Comparative review of three cost-effectiveness models for rotavirus vaccines in national immunization programs: A generic approach applied to various regions in the world. BMC Med., Vol. 9.<br><a href="https://doi.org/10.1186/1741-7015-9-84" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651133_ja">Mukherjee, A. and M. Chawla-Sarkar, 2011. <a name="1651133_ja"></a>Rotavirus infection: A perspective on epidemiology, genomic diversity and vaccine strategies. Indian J. Virol., 22: 11-23.<br><a href="https://doi.org/10.1007/s13337-011-0039-y" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://link.springer.com/article/10.1007/s13337-011-0039-y" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651091_ja">Aggani, S.L., 2013. <a name="1651091_ja"></a>Rotavirus: Approaches to vaccination. Scholars J. Applied Med. Sci., 1: 314-321.<br><a href="http://saspublisher.com/wp-content/uploads/2013/08/SJAMS14314-321.pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651044_ja">Banga-Mingo, V., D. Waku-Kouomou, J.C. Gody, M.D. Esona and J.F. Yetimbi <i>et al</i>., 2014. <a name="1651044_ja"></a>Molecular surveillance of rotavirus infection in Bangui, Central African Republic, October 2011-September 2013. Infect. Genet. Evol., 28: 476-479.<br><a href="https://doi.org/10.1016/j.meegid.2014.08.023" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.sciencedirect.com/science/article/pii/S1567134814003116" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651057_ja">Boula, A., D. Waku-Kouomou, M.N. Kinkela, M.D. Esona and G. Kemajou <i>et al</i>., 2014. <a name="1651057_ja"></a>Molecular surveillance of rotavirus strains circulating in Yaounde, Cameroon, September 2007-December 2012. Infect. Genet. Evol., 28: 470-475.<br><a href="https://doi.org/10.1016/j.meegid.2014.08.019" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.sciencedirect.com/science/article/pii/S1567134814003074" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651125_ja">Lekana-Douki, S.E., C. Kombila-Koumavor, D. Nkoghe, C. Drosten, J.F. Drexler and E.M. Leroy, 2015. <a name="1651125_ja"></a>Molecular epidemiology of enteric viruses and genotyping of rotavirus a, adenovirus and astrovirus among children under 5 years old in Gabon. Int. J. Infect. Dis., 34: 90-95.<br><a href="https://doi.org/10.1016/j.ijid.2015.03.009" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ijidonline.com/article/S1201-9712(15)00070-3/abstract" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651127_ja">Mayindou, G., B. Ngokana, A. Sidibe, V. Moundele and F. Koukouikila-Koussounda <i>et al</i>., 2016. <a name="1651127_ja"></a>Molecular epidemiology and surveillance of circulating rotavirus and adenovirus in congolese children with gastroenteritis. J. Med. Virol., 88: 596-605.<br><a href="https://doi.org/10.1002/jmv.24382" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.24382/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651141_ja">Ndze, V.N., M.D. Esona, E.A. Achidi, K.H. Gonsu and R. Doro <i>et al</i>., 2014. <a name="1651141_ja"></a>Full genome characterization of human <i>Rotavirus A</i> strains isolated in Cameroon, 2010-2011: Diverse combinations of the G and P genes and lack of reassortment of the backbone genes. Infect. Genet. Evol., 28: 537-560.<br><a href="https://doi.org/10.1016/j.meegid.2014.10.009" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.sciencedirect.com/science/article/pii/S1567134814003803" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651068_ja">Pukuta, E.S., M.D. Esona, A. Nkongolo, M. Seheri and M. Makasi <i>et al</i>., 2014. <a name="1651068_ja"></a>Molecular surveillance of rotavirus infection in the Democratic Republic of the Congo August 2009 to June 2012. Pediatr. Infect. Dis. J., 33: 355-359.<br><a href="https://doi.org/10.1097/INF.0000000000000212" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/04000/Molecular_Surveillance_of_Rotavirus_Infection_in.6.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651119_ja">Hokororo, A., B.R. Kidenya, J. Seni, S. Mapaseka, J. Mphahlele and S.E. Mshana, 2014. <a name="1651119_ja"></a>Predominance of rotavirus G1[P8] genotype among under-five children with gastroenteritis in Mwanza, Tanzania. J. Trop. Pediatr., 60: 393-396.<br><a href="https://doi.org/10.1093/tropej/fmu028" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://tropej.oxfordjournals.org/content/60/5/393.short" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651120_ja">Kiulia, N.M., M.M. Nyaga, M.L. Seheri, M. Wolfaardt and W.B. van Zyl <i>et al</i>., 2014. <a name="1651120_ja"></a>Rotavirus G and P types circulating in the eastern region of Kenya: Predominance of G9 and emergence of G12 genotypes. Pediatr. Infect. Dis. J., 33: S85-S88.<br><a href="https://doi.org/10.1097/INF.0000000000000059" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/01001/Rotavirus_G_and_P_Types_Circulating_in_the_Eastern.16.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="38477_op">Moyo, S.J., B. Blomberg, K. Hanevik, O. Kommedal, K. Vainio, S.Y. Maselle and N. Langeland, 2014. <a name="38477_op"></a>Genetic diversity of circulating rotavirus strains in Tanzania prior to the introduction of vaccination. PLoS ONE, Vol. 9.<br><a href="https://doi.org/10.1371/journal.pone.0097562" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0097562" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651131_ja">Mukaratirwa, A., C. Berejena, P. Nziramasanga, A. Shonhai and T.S. Mamvura <i>et al</i>., 2014. <a name="1651131_ja"></a>Epidemiologic and genotypic characteristics of rotavirus strains detected in children less than 5 years of age with gastroenteritis treated at 3 pediatric hospitals in Zimbabwe during 2008-2011. Pediatr. Infect. Dis. J., 33: S45-S48.<br><a href="https://doi.org/10.1097/INF.0000000000000050" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/01001/Epidemiologic_and_Genotypic_Characteristics_of.10.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651041_ja">Odiit, A., A. Mulindwa, E. Nalumansi, M.J. Mphahlele, L.M. Seheri, J.M. Mwenda and A. Kisakye, 2014. <a name="1651041_ja"></a>Rotavirus prevalence and genotypes among children younger than 5 years with acute diarrhea at Mulago National Referral Hospital, Kampala, Uganda. Pediatr. Infect. Dis. J., 33: S41-S44.<br><a href="https://doi.org/10.1097/INF.0000000000000070" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/01001/Rotavirus_Prevalence_and_Genotypes_Among_Children.9.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651076_ja">Raini, S.K., J. Nyangao, J. Kombich, C. Sang, J. Gikonyo, J.R. Ongus and E.O. Odari, 2015. <a name="1651076_ja"></a>Human rotavirus group a serotypes causing gastroenteritis in children less than 5 years and HIV-infected adults in Viwandani Slum, Nairobi. Ethiopian J. Health Sci., 25: 39-46.<br><a href="https://doi.org/10.4314/ejhs.v25i1.6" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ajol.info/index.php/ejhs/article/viewFile/112799/102538" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651121_ja">Yassin, M.A., A. Kirby, A.A. Mengistu, I. Arbide and W. Dove <i>et al</i>., 2012. <a name="1651121_ja"></a>Unusual norovirus and rotavirus genotypes in Ethiopia. Paediatr. Int. Child Health, 32: 51-55.<br><a href="https://doi.org/10.1179/1465328111Y.0000000047" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.tandfonline.com/doi/abs/10.1179/1465328111Y.0000000047?journalCode=ypch20" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651071_ja">Pursem, V.N., B.M.C. Peeroo, T.I. Mangar, F.M.A.L. Sohawon and L.M. Seheri <i>et al</i>., 2014. <a name="1651071_ja"></a>Epidemiology of rotavirus diarrhea and diversity of rotavirus strains among children less than 5 years of age with acute gastroenteritis in Mauritius: June 2008 to December 2010. Pediatr. Infect. Dis. J., 33: S49-S53.<br><a href="https://doi.org/10.1097/INF.0000000000000051" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/01001/Epidemiology_of_Rotavirus_Diarrhea_and_Diversity.11.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651040_ja">Abugalia, M., L. Cuevas, A. Kirby, W. Dove and O. Nakagomi <i>et al</i>., 2011. <a name="1651040_ja"></a>Clinical features and molecular epidemiology of rotavirus and norovirus infections in Libyan children. J. Med. Virol., 83: 1849-1856.<br><a href="https://doi.org/10.1002/jmv.22141" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.22141/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651067_ja">Chouikha, A., M.B.H. Fredj, I. Fodha, I. Mathlouthi and M. Ardhaoui <i>et al</i>., 2011. <a name="1651067_ja"></a>[Evolution of group a rotavirus strains circulating in Tunisia over a 3-year period (2005-2007)]. Pathologie Biologie, 59: e79-e83, (In French).<br><a href="https://doi.org/10.1016/j.patbio.2009.05.007" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/19896286" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.sciencedirect.com/science/article/pii/S0369811409001102" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651054_ja">Bonkoungou, I.J.O., S. Damanka, I. Sanou, F. Tiendrebeogo and S.O. Coulibaly <i>et al</i>., 2011. <a name="1651054_ja"></a>Genotype diversity of group a rotavirus strains in children with acute diarrhea in urban Burkina Faso, 2008-2010. J. Med. Virol., 83: 1485-1490.<br><a href="https://doi.org/10.1002/jmv.22137" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.22137/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="38473_op">Enweronu-Laryea, C.C., K.W. Sagoe, S. Damanka, B. Lartey and G.E. Armah, 2013. <a name="38473_op"></a>Rotavirus genotypes associated with childhood severe acute diarrhoea in Southern Ghana: A cross-sectional study. Virol. J., Vol. 10.<br><a href="https://doi.org/10.1186/1743-422X-10-287" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://virologyj.biomedcentral.com/articles/10.1186/1743-422X-10-287" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651123_ja">Kwambana, B.A., U.N. Ikumapayi, N. Sallah, M. Dione and S. Jarju <i>et al</i>., 2014. <a name="1651123_ja"></a>High genotypic diversity among rotavirus strains infecting Gambian children. Pediatr. Infect. Dis. J., 33: S69-S75.<br><a href="https://doi.org/10.1097/INF.0000000000000087" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://journals.lww.com/pidj/Abstract/2014/01001/High_Genotypic_Diversity_among_Rotavirus_Strains.14.aspx" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651137_ja">Ndze, V.N., H. Papp, E.A. Achidi, K.H. Gonsu and B. Laszlo <i>et al</i>., 2013. <a name="1651137_ja"></a>One year survey of human rotavirus strains suggests the emergence of genotype G12 in Cameroon. J. Med. Virol., 85: 1485-1490.<br><a href="https://doi.org/10.1002/jmv.23603" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.23603/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651052_ja">Page, A.L., V. Jusot, A.A. Mamaty, L. Adamou and J. Kaplon <i>et al</i>., 2014. <a name="1651052_ja"></a>Rotavirus surveillance in urban and rural areas of Niger, April 2010-March 2012. Emerg. Infect. Dis., 20: 573-580.<br><a href="https://doi.org/10.3201/eid2004.131328" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://www.ncbi.nlm.nih.gov/pubmed/24655441" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">PubMed</a><a href="http://www.epicentre.msf.org/sites/preprod.epicentre.actency.fr/files/625_rotavirus%20surveillance.pdf" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651087_ja">Seheri, L.M., N. Page, J.B. Dewar, A. Geyer and A.L. Nemarude <i>et al</i>., 2010. <a name="1651087_ja"></a>Characterization and molecular epidemiology of rotavirus strains recovered in Northern Pretoria, South Africa during 2003-2006. J. Infect. Dis., 202: S139-S147.<br><a href="https://doi.org/10.1086/653559" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://jid.oxfordjournals.org/content/202/Supplement_1/S139.short" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li><li class="m-3 pb-2 pl-3"><hr><div id="22052_an">Ramudingana, P., 2009. <a name="22052_tr"></a>Detection of rotavirus and norovirus in children under 5 years of age in Pretoria, South Africa and molecular characterization of rotavirus strains. Ph.D. Thesis, University of Limpopo, South Africa.</div></li><li class="m-3 pb-2 pl-3"><hr><div id="1651124_ja">Langa, J.S., R. Thompson, P. Arnaldo, H.R. Resque and T. Rose <i>et al</i>., 2016. <a name="1651124_ja"></a>Epidemiology of rotavirus a diarrhea in Chokwe, Southern Mozambique, from February to September, 2011. J. Med. Virol., 88: 1751-1758.<br><a href="https://doi.org/10.1002/jmv.24531" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">CrossRef</a><a href="http://onlinelibrary.wiley.com/doi/10.1002/jmv.24531/full" target="_blank" class="btn btn-sm btn-outline-primary mr-3 mt-3">Direct Link</a></div></li></ol>
+</article>
+<div class="sidebar" style="padding-bottom:1px;">
+<h4 class="entry-title"><strong>Search</strong></h4><hr>
+<div class="sidebar-item categories text-center">
+<div class="wrapper">
+<style>
+.gsc-control-cse{padding:0px;margin:0px;}
+</style>
+<script async src="https://cse.google.com/cse.js?cx=06084a0943e804d18"></script>
+<gcse:search enablehistory="false"></gcse:search>
+</div>
+</div>
+</div>
+<div class="sidebar">
+<div class="sidebar-item categories text-center" style="padding-top:19px;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-5222637924397992" data-ad-slot="1054784925"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+<article class="sidebar">
+<h4 class="entry-title" style="padding-bottom:15px;">
+<strong>Related Articles</strong>
+</h4>
+<table class="table table-hover">
+<div class="entry-content">
+<tr><td>
+<a href="index.php?doi=pjbs.2007.2915.2919" class="relatedlink" title="Investigation of Diarrhea Agents Less Than 5 Years of Age in Summer in Gaziantep/Turkey">Investigation of Diarrhea Agents Less Than 5 Years of Age in Summer in Gaziantep/Turkey</a>
+</td></tr>
+<tr><td>
+<a href="index.php?doi=pjbs.2007.4266.4270" class="relatedlink" title="Prevalence of Rotavirus, Adenovirus and Enteric Parasites Among Pediatric Patients Attending Saint Camille Medical Centre in Ouagadougou">Prevalence of Rotavirus, Adenovirus and Enteric Parasites Among Pediatric Patients Attending Saint Camille Medical Centre in Ouagadougou</a>
+</td></tr>
+<tr><td>
+<a href="index.php?doi=pjbs.2009.258.263" class="relatedlink" title="Aetiology of Acute Gastro-Enteritis in Children at Saint Camille Medical Centre, Ouagadougou, Burkina Faso">Aetiology of Acute Gastro-Enteritis in Children at Saint Camille Medical Centre, Ouagadougou, Burkina Faso</a>
+</td></tr>
+</div>
+</table>
+</article>
+<article class="sidebar">
+<div class="reply-form">
+<h4><strong>Leave a Comment</strong></h4><hr>
+<p>Your email address will not be published. Required fields are marked * </p>
+<form method="post" name="form1" action="?doi=pjbs.2017.59.69&comments=sent#thanks">
+<div class="row">
+<div class="col-md-6 form-group">
+<input name="fullname" id="fullname" type="text" class="form-control" placeholder="Your Name*" required>
+</div>
+<div class="col-md-6 form-group">
+<input name="email" id="email" type="email" class="form-control" placeholder="Your Email*" required>
+</div>
+</div>
+<div class="row">
+<div class="col form-group">
+<textarea name="comments" id="comments" minlength="10" maxlength="400" class="form-control" rows="5" placeholder="Your Comment*" required></textarea>
+</div>
+</div>
+<button type="submit" name="KT_Insert1" id="KT_Insert1" class="btn btn-primary">Post Comment</button>
+<input type="hidden" name="articleid" id="articleid" value="6577">
+<input type="hidden" name="issn" id="issn" value="1028-8880">
+<input type="hidden" name="commdate" id="commdate" value="2023-09-17">
+<input type="hidden" name="approval" id="approval" value="0">
+<input name="doi" type="hidden" id="doi" value="pjbs.2017.59.69">
+</form>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer id="footer">
+<div class="footer-top">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-md-6 footer-links">
+<h4>Useful Links</h4>
+<ul>
+<li><i class="bx bx-chevron-right"></i> <a href="/journals.php">Journals</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/forauthors.php">For Authors</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/forreferees.php">For Referees</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/librarian.php">For Librarian</a></li>
+<li><i class="bx bx-chevron-right"></i> <a href="/societies.php">For Socities</a></li>
+</ul>
+</div>
+<div class="col-lg-4 col-md-6 footer-contact">
+<h4>Contact Us</h4>
+<p>
+Office Number 1128,<br>
+Tamani Arts Building,<br>
+Business Bay,<br>
+Deira, Dubai, UAE <br><br>
+<strong>Phone:</strong> +971 507 888 742<br>
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96e5e3e6e6f9e4e2d6e5f5fff7faf3e4e2b8f5f9fb">[email&#160;protected]</a><br>
+</p>
+</div>
+<div class="col-lg-5 col-md-6 footer-info">
+<h3>About Science Alert</h3>
+<p style="letter-spacing:.5px;">Science Alert is a technology platform and service provider for scholarly publishers, helping them to publish and distribute their content online. We provide a range of services, including hosting, design, and digital marketing, as well as analytics and other tools to help publishers understand their audience and optimize their content. Science Alert works with a wide variety of publishers, including academic societies, universities, and commercial publishers.</p>
+<div class="social-links mt-3"><span style="margin-right:17px;"><strong>Follow Us</strong></span>
+<a href="https://twitter.com/scialert" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
+<a href="https://facebook.com/scialert.net" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+<a href="https://youtube.com/@scialert" class="youtube" target="_blank"><i class="bx bxl-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="copyright">
+&copy; Copyright <strong><span>Science Alert</span></strong>. All Rights Reserved
+</div>
+</div>
+</footer>
+<a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="../assets/vendor/php-email-form/validate.js"></script>
+<script src="../assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="../assets/vendor/venobox/venobox.min.js"></script>
+<script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../assets/vendor/aos/aos.js"></script>
+
+<script src="../assets/js/main.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Molecular Epidemiology of Rotavirus in Children under Five in
+Africa (2006-2016): A Systematic Review",
+  "author": {
+    "@type": "Person",
+    "name": "D.  Ouermi, D.  Soubeiga, W.M.C.  Nadembega, P.M.  Sawadogo, T.M.  Zohoncon, D.  Obiri-Yeboah, F.W.  Djigma, J.  Nordgrenand J.  Simpore"
+  },
+  "articleBody": "Group A human rotaviruses (RVA) are the most common causes of severe viral gastroenteritis in infants and young children worldwide. The available vaccines, while effective in Europe and North America have shown a reduced efficacy in Africa. One issue raised is the genetic variability of RVA. The objective of this study was to perform a literature review of molecular epidemiology to determine the prevalence of RVA genotypes circulating in Africa so as to establish a mapping of reliable data on these various genotypes. The search for articles was done from the National Institutes of Health (PUBMED) using three set of keywords. Articles were selected with inclusion criteria such as the date of publication, the age of the children, the sample size and the diagnostic techniques (standardized laboratory techniques). The data were imported into STATA SE version 11 software. Specific prevalence was estimated with Confidence Intervals (CI) of 95%. A total of 326 published studies were initially retrieved, out of which 27 studies were finally selected for the systematic review. The selected studies cover 20 African countries. The most encountered genotypes in Africa during this period were G1 (32.72%), followed by G2 (17.17%), G3 (9.88%), G9 (8.61%) and G12 (7.56%) among the G-types. The most common P-types were P[8] (48.71%) followed by P[6] (22.60%) and P[4] (11.58%) and the G1P[8] combination (22.64%) was the most encountered followed by G2P[4] (8.29%), G9P[8] (6.95%) and G2P[6] (5.00%). North Africa presented the highest prevalence of the P[8] genotype (65.70%). This review provides a comprehensive view of the current circulating rotavirus strains in Africa, which can be important in light of the new rotavirus vaccinations. Indeed, in Africa, the pursuit of national and continental studies for epidemiological surveillance of circulating rotavirus strains is vital for the promotion of future successful vaccines.",
+  "url": "https://scialert.net/fulltext/?doi=pjbs.2017.59.69"
+}
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"8084fd2ecc212bc7","version":"2023.8.0","b":1,"token":"b858781b7e2c4e049797b07748bdfc04","si":100}' crossorigin="anonymous"></script>
+</body>
+</html>

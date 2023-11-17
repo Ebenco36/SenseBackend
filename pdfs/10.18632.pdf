@@ -1,0 +1,608 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	
+
+    
+    <script>
+     // <!-- Google Tag Manager -->
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KXPN39');
+    //<!-- End Google Tag Manager -->
+    </script>
+    
+
+    <title>Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis | Oncotarget</title>
+
+    
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="https://doi.org/10.18632/oncotarget.24169 Hui-hui Xu, Kai Wang, Xing-Jun Feng, Shan-shan Dong, Aifen Lin, Ling-Zhi Zheng, Wei-hua Yan" />
+
+    
+	
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":{"@type":"Article","license":"https:\/\/creativecommons.org\/licenses\/by\/3.0\/","publisher":{"@type":"Organization","name":"Oncotarget","logo":{"@type":"ImageObject","url":"https:\/\/www.oncotarget.com\/images\/oncotarget-logo-square.png","width":1200,"height":1200}},"dateModified":"2018-03-20","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/www.oncotarget.com\/article\/24169\/text\/"},"headline":"Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic re","articleSection":"Meta-Analysis","sameAs":"https:\/\/doi.org\/10.18632\/oncotarget.24169","image":"https:\/\/www.oncotarget.com\/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338727","datePublished":"2018-03-16","author":[{"@type":"Person","name":"Xu, Hui-hui"},{"@type":"Person","name":"Wang, Kai"},{"@type":"Person","name":"Feng, Xing-Jun"},{"@type":"Person","name":"Dong, Shan-shan"},{"@type":"Person","name":"Lin, Aifen"},{"@type":"Person","name":"Zheng, Ling-Zhi"},{"@type":"Person","name":"Yan, Wei-hua"}],"description":"High-risk HPV (hrHPV) is related to cervical carcinogenesis, although clinical data comparing the natural history and carcinogenic potential of type-specific HPV remain limited. Furthermore, the nationwide prevalence rates of overall and type-specific HPV among women with cervical precancerous lesions and cancer have not been reported. Here, a meta-analysis was performed for type-specific HPV distribution among 30,165 HPV-positive women, including 12,094 invasive cervical cancers (ICCs), 10,026 cervical intraepithelial neoplasia grade 2\/3 (CIN2\/3), 3246 CIN1, and 4799 normal cervices from 45 PCR-based studies. We found that HPV16 was the most common hrHPV type involved in cervical disease. The HPV16 positivity rate varied little across normal (22.7%) and CIN1 individuals (23.6%) but increased through the CIN2 (37.6%) and CIN3 patients (51.9%) to 65.6% in ICC cases. HPV16, 18, 35, 39, 45, and 59 were more frequent in ICC than CIN3, with ICC:CIN3 ratios ranging from 2.3 for HPV18 to 1.1 for HPV35\/45. HPV31, 33, 52, and 58 were more frequent in CIN3 compared with normal cervices but less common in ICC compared with CIN3 (ICC:CIN3 ratios ranging from 0.6 for HPV58 and 0.4 for HPV52). The ICC:normal ratios were particularly high for HPV18, 52 and 58 in West China (4.1, 3.9 and 2.9, respectively) and for HPV45 and 59 in North China (1.6 and 1.1, respectively). In summary, this study is the most comprehensive analysis of type-specific HPV distribution in cervical carcinogenesis and could be valuable for HPV-based cervical cancer screening strategies and vaccination policies in China."}}</script>
+
+
+	<link rel="icon" href="https://www.oncotarget.com/favicon.ico" />
+
+	
+	<meta name="dc.creator" content="Hui-hui Xu"/>
+	<meta name="dc.creator" content="Kai Wang"/>
+	<meta name="dc.creator" content="Xing-Jun Feng"/>
+	<meta name="dc.creator" content="Shan-shan Dong"/>
+	<meta name="dc.creator" content="Aifen Lin"/>
+	<meta name="dc.creator" content="Ling-Zhi Zheng"/>
+	<meta name="dc.creator" content="Wei-hua Yan"/>
+	<meta name="dc.date" scheme="ISO8601" content="2018-03-16"/>
+	<meta name="dc.date.created" scheme="ISO8601" content="2018-03-16"/>
+    <meta name="dc.date.datesubmitted" scheme="ISO8601" content="2018-01-11"/>
+		<meta name="dc.date.issued" scheme="ISO8601" content="2018-03-16"/>
+	<meta name="dc.date.modified" scheme="ISO8601" content="2018-03-16"/>
+	<meta name="dc.description" xml:lang="en" content="  //      Hui-Hui Xu 1 , Kai Wang 2 , Xing-Jun Feng 2 , Shan-Shan Dong 3 , Aifen Lin 3 , Ling-Zhi Zheng 2  and Wei-Hua Yan 1     1 Laboratory of Gynecologic Oncology, Medical Research Center, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China    2 Department of Gynecology and Obstetrics, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China    3 Human Tissue Bank, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China   Correspondence to:   Ling-Zhi Zheng, email:  zhenglz@enzemed.com    Wei-Hua Yan, email:  yanwhcom@yahoo.com     Keywords:  human papillomavirus; cervical cancer; cervical precancerous lesion; genotype; meta-analysis    Received:  May 09, 2017&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Accepted:  December 06, 2017&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Epub:  January 11, 2018&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Published:  March 16, 2018     ABSTRACT   High-risk HPV (hrHPV) is related to cervical carcinogenesis, although clinical data comparing the natural history and carcinogenic potential of type-specific HPV remain limited. Furthermore, the nationwide prevalence rates of overall and type-specific HPV among women with cervical precancerous lesions and cancer have not been reported. Here, a meta-analysis was performed for type-specific HPV distribution among 30,165 HPV-positive women, including 12,094 invasive cervical cancers (ICCs), 10,026 cervical intraepithelial neoplasia grade 2/3 (CIN2/3), 3246 CIN1, and 4799 normal cervices from 45 PCR-based studies. We found that HPV16 was the most common hrHPV type involved in cervical disease. The HPV16 positivity rate varied little across normal (22.7%) and CIN1 individuals (23.6%) but increased through the CIN2 (37.6%) and CIN3 patients (51.9%) to 65.6% in ICC cases. HPV16, 18, 35, 39, 45, and 59 were more frequent in ICC than CIN3, with ICC:CIN3 ratios ranging from 2.3 for HPV18 to 1.1 for HPV35/45. HPV31, 33, 52, and 58 were more frequent in CIN3 compared with normal cervices but less common in ICC compared with CIN3 (ICC:CIN3 ratios ranging from 0.6 for HPV58 and 0.4 for HPV52). The ICC:normal ratios were particularly high for HPV18, 52 and 58 in West China (4.1, 3.9 and 2.9, respectively) and for HPV45 and 59 in North China (1.6 and 1.1, respectively). In summary, this study is the most comprehensive analysis of type-specific HPV distribution in cervical carcinogenesis and could be valuable for HPV-based cervical cancer screening strategies and vaccination policies in China. "/>
+	<meta name="dc.format" scheme="IMT" content="application/pdf"/>
+	<meta name="dc.format" scheme="IMT" content="text/html"/>
+	<meta name="dc.identifier" content="https://doi.org/10.18632/oncotarget.24169"/>
+	<meta name="dc.identifier.pagenumber" content="15386-15397"/>
+	<meta name="citation_doi" content="10.18632/oncotarget.24169"/>
+	<meta name="dc.identifier.uri" content="https://www.oncotarget.com/article/24169/"/>
+	<meta name="dc.language" scheme="ISO639-1" content=""/>
+	<meta name="dc.source" content="Oncotarget"/>
+	<meta name="dc.source.issn" content="1949-2553"/>
+<meta name="dc.source.uri" content="https://www.oncotarget.com/"/>
+	<meta name="dc.source.issue" content="20"/>
+<meta name="dc.source.volume" content="9"/>
+					<meta name="dc.title" content="Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis"/>
+	
+<meta name="dc.type" content="Text.Serial.Journal"/>
+<meta name="dc.type.articletype" content="Meta-Analysis"/>
+
+
+<!-- OGP -->
+	<meta property="og:type"  content="article" />
+	<meta property="og:title" content="Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis | Oncotarget" />
+				<meta property="og:description" content="https://doi.org/10.18632/oncotarget.24169 Hui-hui Xu, Kai Wang, Xing-Jun Feng, Shan-shan Dong, Aifen Lin, Ling-Zhi Zheng, Wei-hua Yan"/>
+		<meta property="og:url"   content="https://www.oncotarget.com/article/24169/text/" />
+	<meta property="og:image" content="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338727"  />
+<!-- /OGP --><!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@Oncotarget" />
+<meta name="twitter:title" content="Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis | Oncotarget" />
+  <meta name="twitter:description" content="https://doi.org/10.18632/oncotarget.24169 Hui-hui Xu, Kai Wang, Xing-Jun Feng, Shan-shan Dong, Aifen Lin, Ling-Zhi Zheng, Wei-hua Yan"/>
+<meta name="twitter:image" content="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338727"  />
+<!-- /Twitter Card -->		<meta name="gs_meta_revision" content="1.1" />
+	<meta name="citation_journal_title" content="Oncotarget"/>
+	<meta name="citation_issn" content="1949-2553"/>
+	<meta name="citation_author" content="Hui-hui Xu"/>
+		
+	<meta name="citation_author" content="Kai Wang"/>
+		
+	<meta name="citation_author" content="Xing-Jun Feng"/>
+		
+	<meta name="citation_author" content="Shan-shan Dong"/>
+		
+	<meta name="citation_author" content="Aifen Lin"/>
+		
+	<meta name="citation_author" content="Ling-Zhi Zheng"/>
+		
+	<meta name="citation_author" content="Wei-hua Yan"/>
+		
+	<meta name="citation_authors" content="Xu, Hui-hui; Wang, Kai; Feng, Xing-Jun; Dong, Shan-shan; Lin, Aifen; Zheng, Ling-Zhi; Yan, Wei-hua"/>
+	<meta name="citation_title" content="Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis"/>
+	<meta name="citation_publication_date" content="2018-03-16"/>
+	<meta name="citation_volume" content="9"/>
+			<meta name="citation_issue" content="20"/>
+		<meta name="citation_firstpage" content="15386"/>
+	<meta name="citation_lastpage" content="15397"/>
+	<meta name="citation_abstract_html_url" content="https://www.oncotarget.com/article/24169/"/>
+				
+        	<meta name="citation_pdf_url" content="https://www.oncotarget.com/article/24169/pdf/" />
+                    	<meta name="citation_fulltext_html_url" content="https://www.oncotarget.com/article/24169/text/"/>
+    	<meta name="citation_publisher" content="Impact Journals"/>
+	
+
+	<link rel="stylesheet" href="https://www.oncotarget.com/styles/paper.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.oncotarget.com/jquery.bubblepopup.v2.3.1.css"type="text/css" />
+
+	<link rel="stylesheet" href="https://www.oncotarget.com/lib/pkp/styles/pkp.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.oncotarget.com/lib/pkp/styles/common.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.oncotarget.com/styles/common.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.oncotarget.com/styles/articleView.css" type="text/css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" type="text/css"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
+
+	<link rel="stylesheet" href="https://www.oncotarget.com/style/agingTemp.min.css" type="text/css" />
+
+	
+	
+	
+
+	<link rel="stylesheet" href="https://www.oncotarget.com/styles/sidebar.css" type="text/css" />	<link rel="stylesheet" href="https://www.oncotarget.com/styles/leftSidebar.css" type="text/css" />	<link rel="stylesheet" href="https://www.oncotarget.com/styles/rightSidebar.css?v=1.0.1" type="text/css" />	<link rel="stylesheet" href="https://www.oncotarget.com/styles/bothSidebars.css" type="text/css" />
+			<link rel="stylesheet" href="https://www.oncotarget.com/public/site/sitestyle.css" type="text/css" />
+	
+	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-74807910-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+	
+
+    <!-- altmetric embed -->
+    <script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+	<!-- Base Jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="https://www.oncotarget.com/lib/pkp/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="https://www.oncotarget.com/lib/pkp/js/fontController.min.js" ></script>
+	<script type="text/javascript" src="https://www.oncotarget.com/lib/pkp/js/general.min.js"></script>
+
+	
+	<script language="javascript" type="text/javascript" src="https://www.oncotarget.com/js/articleView.min.js"></script>
+	<script language="javascript" type="text/javascript" src="https://www.oncotarget.com/js/pdfobject.js"></script>
+
+
+	
+	<script>
+	function SelectText(element) {
+		var text = document.getElementById(element);
+		if ($.browser.msie) {
+			var range = document.body.createTextRange();
+			range.moveToElementText(text);
+			range.select();
+		} else if ($.browser.mozilla || $.browser.opera) {
+			var selection = window.getSelection();
+			var range = document.createRange();
+			range.selectNodeContents(text);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		} else if ($.browser.safari) {
+			var selection = window.getSelection();
+			selection.setBaseAndExtent(text, 0, text, 1);
+		}
+		document.getElementById(element).scrollIntoView();
+	}
+	</script>
+	<script type="text/javascript" src="/js/email.min.js"></script>
+	<script type="text/javascript" src="/js/pops.min.js"></script>
+	<script type="text/javascript" src="/jquery.bubblepopup.v2.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/menu.min.js"></script>
+	
+	
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXPN39"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div id="container">
+<div id="fade" class="black_overlay"></div>
+<div id="header">
+	<a href="/"><div id="home-clickable-area"></div></a>
+	<div class="nav-content">
+		<ul class="socialList segregateSubmit">
+			<li class="social-links"><a href="https://www.facebook.com/Oncotarget/" target="_blank"><i class="fa-brands fa-facebook-square"></i></a></li>
+			<li class="social-links"><a href="https://twitter.com/Oncotarget" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+			<li class="social-links"><a href="https://www.instagram.com/oncotargetjrnl/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+			<li class="social-links"><a href="https://www.linkedin.com/company/oncotarget" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+			<li class="social-links"><a href="https://www.youtube.com/@OncotargetJournal" target="_blank"><i class="fa-brands fa-youtube-square"></i></a></li>
+			<li class="social-links"><a href="https://www.reddit.com/user/Oncotarget" target="_blank"><i class="fa-brands fa-reddit-square"></i></a></li>
+		</ul>
+	
+		<span class="sidebar-toggle-mobile icon icon-menu"></span>
+		<span id="mobile-search" class="icon icon-search hide-on-large-only"></span>
+	</div>
+	
+	<small class="issnLabel">Online ISSN: 1949-2553</small>
+	<div class="nav-search">
+		<form method="get" action="/index.php">
+			<input type="hidden" name="journal" value="oncotarget" />
+			<input type="hidden" name="page" value="pages" />
+			<input type="hidden" name="op" value="view" />
+			<input type="hidden" name="path[]" value="elasticsearch" />
+			<input type="hidden" name="searchPage" value="1" />
+	
+			<label>Search:</label><br/>
+			<input type="text" name="general">
+			<input type="submit" style="display:none">
+		</form>
+	</div>
+</div>
+
+
+<div id="clear">
+<p>Oncotarget</p>
+</div>
+
+
+<div id="leftSidebar">
+	
+ 
+ <style>
+ .anchor-no-underline,
+ .anchor-no-underline:link,
+ .anchor-no-underline:visited,
+ .anchor-no-underline:hover,
+ .anchor-no-underline:active {
+     text-decoration: none;
+ }
+ 
+  a.subscribe-button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    border: 0 none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    font-size:1em;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 22px;
+    margin-top:5px;
+    margin-bottom:20px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: auto;
+    background-color:#761118;
+  }
+ </style>
+ 
+
+	<div class="block" id="sidebarNavigation">
+	<span class="blockTitle" style="display:none;">Journal Content</span>
+	<!--Custom -->
+	<ul class="menu" id="navmenu">
+		<li id="home"><a href="/">Home</a></li>
+		<li id="board"><a href="/editorial-board/">Editorial Board</a></li>
+		<li><a href="http://oncotarget.msubmit.net">Submission</a></li>
+					<li id="currentiss"><a href="/archive/v14/">Current Volume</a></li>
+						<li id="archives"><a href="/archive/">Archive</a></li>
+        <li id="scientific_integrity"><a style="color: #CC0000;" href="/scientific_integrity/">Scientific Integrity</a></li>
+		<li id="about"><a href="/editorial-policies/">Editorial Policies</a></li>
+		<li id="ethics"><a href="/ethics-statement/">Publication Ethics Statements</a></li>
+		<li id="ot_special_collections"><a href="/collections/">Special Collections</a></li>
+		<li id="ot_videos"><a href="/videos/interview/">Interviews with Outstanding Authors</a></li>
+		<li id="ot_news"><a href="/news/pr/">Oncotarget In The News</a></li>
+		<li id="ot_conferences"><a href="/news/conferences/">Sponsored Conferences</a></li>
+		<li id="search"><a href="/search/">Search</a></li>
+		<li id="contact"><a href="/contact/">Contact Information</a>
+		
+								</ul>
+	<!-- end custom-->
+	</div>
+
+	<div class="block secblock topredblock">
+		<div class="a_new_domain_link">
+			<p>
+				Oncotarget (a primarily oncology-focused, peer-reviewed, open access journal) aims to maximize research impact through insightful peer-review; eliminate borders between specialties by linking different fields of oncology, cancer research and biomedical sciences; and foster application of basic and clinical science.
+			</p>
+			<p>
+				Its scope is unique. The term "oncotarget" encompasses all molecules, pathways, cellular functions, cell types, and even tissues that can be viewed as targets relevant to cancer as well as other diseases. <b>The term was introduced in the inaugural Editorial</b>, <a class="anchor-no-underline" href="https://www.oncotarget.com/article/101/">Introducing Oncotarget</a>.
+			</p>
+			<p>
+				As of January 1, 2022, <em>Oncotarget</em> has shifted to a continuous publishing model. Papers will now be published continuously within yearly volumes in their final and complete form and then quickly released to Pubmed.
+			</p>
+		</div>
+		<div class="a_new_domain_link"></div>
+	</div>
+
+
+	
+	<div class="block secblock topredblock">
+		<p class="navbar-section"><span style="font-size:13px;font-weight:700;margin-left:0.3em;"></span></p>
+		<h4 class="navbar-section">Publication Alerts</h4>
+
+		
+		<div style="padding: 10px;">
+			Subscribe to receive alerts once a paper has been published by Oncotarget.
+		</div>
+		<div style="text-align:center;">
+			<a href="/subscribe/" class="subscribe-button">Subscribe</a>
+		</div>
+
+		
+			</div>
+
+  
+  
+
+  
+
+    <div style="padding:10px 4px 10px 10px;display:block;" class="block secblock topredblock">
+        <p style="font-size: 1.1em;">Impact Journals, LLC is the publisher of Oncotarget: <a class="anchor-no-underline" target="_blank" href="https://www.impactjournals.com/">www.impactjournals.com</a>.</p>
+        <p style="font-size: 1.1em;">Impact Journals meets the Wellcome Trust Publisher Requirements, and is now a member of the <a class="anchor-no-underline" target="_blank" href="https://docs.google.com/document/d/1iKsQN2I4S45SdWox4wuPPW8sQpS9B7h1TK1ThJUOGYo/edit">Wellcome Trust List of Compliant Publishers</a>.</p>
+        <p style="font-size: 1.1em;">Impact Journals is a member of the <a class="anchor-no-underline" target="_blank" href="https://www.sspnet.org/">Society for Scholarly Publishing</a>.</p>
+    </div>
+
+	
+		<div class="block secblock topredblock" style="padding:10px 4px 10px 10px;display:block;">
+		<p>On December 23, 2022, Oncotarget server experienced a DDoS attack. As a result, Oncotarget site was inaccessible for a few hours. Oncotarget team swiftly dealt with the situation and took it under control.
+		This malicious action will be reported to the FBI.</p>
+	</div>
+
+			
+
+
+
+
+
+</div>
+
+
+<div id="main" style="width:75%; clear:none; float:right;">
+
+
+<div id="content">
+<style scoped>
+
+	.rhs_banners {
+		display: table;
+		float: right;
+		margin-right: 10px;
+	}
+	.addthis_container-row {
+		display: table-row;
+	}
+	
+	.addthis_container {
+		display: table-cell;
+		padding:8px;
+	}
+	.article-notice .banner-main {
+		font-size: 16px;
+	}
+	.article-notice-investigation .banner-main strong {
+		font-size: 16px;
+	}
+
+	.article-notice-investigation .banner-main {
+		height: 45px;
+	}
+
+	span.investigation-warning {
+		/*margin-left: 0 !important;*/
+	}
+
+	</style>
+
+
+
+	<style scoped>
+	
+		#articleTitle {
+			left: 0 !important;
+		}
+		.__dimensions_badge_embed__ {
+			margin-bottom: 5px;
+		}
+		.__dimensions_badge_embed__ .__dimensions_Badge_style_small_circle .__dimensions_Badge_Image {
+			width: 50px;
+			height: 50px;
+		}
+		.__dimensions_badge_embed__ > .__dimensions_Link, .__dimensions_badge_embed__ > .__dimensions_Link:hover {
+			margin-right: 0.75em;
+		}
+		.__dimensions_badge_embed__ .__dimensions_Badge_style_small_circle .__db_score {
+			font-size: 28px;
+		}
+		.altmetric-embed > a {
+			padding-right: 7px;
+		}
+		.special_collections_banner-row {
+			display: table-row;
+		}
+
+		.special_collections_banner {
+			display: table-cell;
+			width: 165px;
+			padding: 1px;
+			border: 1px solid #e8e8e8;
+		}
+		.special_collections_banner img {
+			width: 165px;
+			max-height: 100px;
+		}
+	
+			</style>
+
+	<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+
+	<div class="issue-info" style="display: none">
+		Published in <a href="/archive/v9/i20/">Oncotarget V9I20</a>, <span class="issue-date">Mar 16, 2018</span>
+	</div>
+
+
+
+
+
+			<h4 class="tocSectionTitle">Meta-Analysis:</h4>
+
+					
+
+		<div class = "titleAndBadge">
+												<h1 id="articleTitle" class="tocArticleTitle">Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis</h1>
+		</div>
+
+					<div class="rhs_banners">
+			<!-- start AddThis -->
+							<div class="addthis_container-row">
+															
+							<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+						
+						
+							<script type="text/javascript">
+								var addthis_pub = '{$sharingUserName}';
+							</script>
+						
+										<div class="addthis_container">
+						<a href="http://www.addthis.com/bookmark.php"
+							onmouseover="return addthis_open(this, '', '', 'Prevalence of human papillomavirus genotypes and relative risk of cervical cancer in China: a systematic review and meta-analysis')"
+							onmouseout="addthis_close()" onclick="return addthis_sendto()">
+							<img src="https://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" border="0" alt="Bookmark and Share" style="border:0;padding:0" />
+						</a>
+						<script type="text/javascript" src="https://s7.addthis.com/js/200/addthis_widget.js"></script>
+					</div>
+								</div>
+						<!-- end AddThis -->
+
+						</div>
+
+			<div class="galleria">
+				<p>
+																		<a href="https://www.oncotarget.com/article/24169/pdf/" class="file" target="_parent">PDF</a>&nbsp;|&nbsp;																																<a href="https://www.oncotarget.com/article/24169/text/" class="file" target="_parent">HTML</a>																		
+											<span>&nbsp;|&nbsp;&nbsp;<a href="javascript:openRTWindow('https://www.oncotarget.com/index.php?journal=oncotarget&amp;page=rt&amp;op=suppFiles&amp;path%5B%5D=24169&amp;path%5B%5D=75968');" class="file">Supplementary Files</a></span>
+					
+											<span>&nbsp;|&nbsp;&nbsp;<a href="javascript:openRTWindow('https://www.oncotarget.com/index.php?journal=oncotarget&amp;page=rt&amp;op=captureCite&amp;path%5B%5D=24169&amp;path%5B%5D=75968');" class="file">How to cite</a></span>
+					
+					
+					
+					
+					
+									</p>
+
+				<p style="margin-top:6px;">
+					<div class="article-issue-info">
+																			Oncotarget. 2018; 9:15386-15397. <a href="https://doi.org/10.18632/oncotarget.24169">https://doi.org/10.18632/oncotarget.24169</a>
+											</div>
+				</p>
+			</div>
+
+							<div class="metrics metrics-extendable">
+					<p class="metrics-p">
+						<span class="metrics-bold" style="float:left;margin-right: 5px;">Metrics: </span>
+						<span style="float:left;">
+																																		<span class="metrics-bold">PDF</span> 2004 views										<span class="metrics-bold metrics-divider">&nbsp;|&nbsp;&nbsp;</span>
+																																																																														<span class="metrics-bold">HTML</span> 3394 views											<span class="metrics-bold metrics-divider">&nbsp;|&nbsp;&nbsp;</span>
+																																								</span>
+						<span class="metrics-explained">?</span>
+						<span>&nbsp;</span>
+					</p>
+				</div>
+					
+		<div id="primitiveHeader">
+			<p class="author" id="titleAuthors"  align="justify" >
+				<span id="p213675" class="p213675 author special">Hui-hui Xu&nbsp;<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%79%61%6e%77%68%63%6f%6d@%79%61%68%6f%6f.%63%6f%6d" class="miniemail">&#x5f;</a></span><span id="p213676" class="p213676 author special">, Kai Wang</span><span id="p213677" class="p213677 author special">, Xing-Jun Feng</span><span id="p213678" class="p213678 author special">, Shan-shan Dong</span><span id="p213679" class="p213679 author special">, Aifen Lin</span><span id="p213680" class="p213680 author special">, Ling-Zhi Zheng</span><span id="p213681" class="p213681 author special"> and&nbsp;Wei-hua Yan</span>			 </p>
+		</div>
+
+					<div id="articleAbstract">
+				 				<h2 class="body-heading" id="abstractHeader">Abstract</h2>
+				<div class="body-bodytext">
+					<div id="extendedInfo"><script type="text/javascript">// <![CDATA[
+$('.header-date').hide();$('#titleAuthors').hide();$('#abstractHeader').hide();
+// ]]></script> <div id="primitiveHeader"><p class="Authors">Hui-Hui Xu<span class="AuthorSuper" id="A1">1</span>, Kai Wang<span class="AuthorSuper" id="A2">2</span>, Xing-Jun Feng<span class="AuthorSuper" id="A2">2</span>, Shan-Shan Dong<span class="AuthorSuper" id="A3">3</span>, Aifen Lin<span class="AuthorSuper" id="A3">3</span>, Ling-Zhi Zheng<span class="AuthorSuper" id="A2">2</span> and Wei-Hua Yan<span class="AuthorSuper" id="A1">1</span></p> <p id="A1" class="org"><span class="AuthorNumber">1</span>Laboratory of Gynecologic Oncology, Medical Research Center, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China</p> <p id="A2" class="org"><span class="AuthorNumber">2</span>Department of Gynecology and Obstetrics, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China</p> <p id="A3" class="org"><span class="AuthorNumber">3</span>Human Tissue Bank, Taizhou Hospital of Zhejiang Province, Wenzhou Medical University, Linhai, Zhejiang, China</p> <p id="fn" class="pub-info">Correspondence to:</p> <p id="vcard">Ling-Zhi Zheng, email: <a href="/cdn-cgi/l/email-protection#fb81939e959c9781bb9e95819e969e9fd5989496"><span class="__cf_email__" data-cfemail="047e6c616a63687e44616a7e616961602a676b69">[email&#160;protected]</span></a></p> <p id="vcard">Wei-Hua Yan, email: <a href="/cdn-cgi/l/email-protection#661f0708110e05090b261f070e09094805090b"><span class="__cf_email__" data-cfemail="126b737c657a717d7f526b737a7d7d3c717d7f">[email&#160;protected]</span></a></p> <p class="Keywords"><span class="CorespondanceBold">Keywords:</span> human papillomavirus; cervical cancer; cervical precancerous lesion; genotype; meta-analysis</p> <p class="Date"><span class="CorespondanceBold">Received:</span> May 09, 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="CorespondanceBold">Accepted:</span> December 06, 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="CorespondanceBold">Epub:</span> January 11, 2018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="CorespondanceBold">Published:</span> March 16, 2018</p></div></div> <p class="body-heading">ABSTRACT</p> <p class="BodyText">High-risk HPV (hrHPV) is related to cervical carcinogenesis, although clinical data comparing the natural history and carcinogenic potential of type-specific HPV remain limited. Furthermore, the nationwide prevalence rates of overall and type-specific HPV among women with cervical precancerous lesions and cancer have not been reported. Here, a meta-analysis was performed for type-specific HPV distribution among 30,165 HPV-positive women, including 12,094 invasive cervical cancers (ICCs), 10,026 cervical intraepithelial neoplasia grade 2/3 (CIN2/3), 3246 CIN1, and 4799 normal cervices from 45 PCR-based studies. We found that HPV16 was the most common hrHPV type involved in cervical disease. The HPV16 positivity rate varied little across normal (22.7%) and CIN1 individuals (23.6%) but increased through the CIN2 (37.6%) and CIN3 patients (51.9%) to 65.6% in ICC cases. HPV16, 18, 35, 39, 45, and 59 were more frequent in ICC than CIN3, with ICC:CIN3 ratios ranging from 2.3 for HPV18 to 1.1 for HPV35/45. HPV31, 33, 52, and 58 were more frequent in CIN3 compared with normal cervices but less common in ICC compared with CIN3 (ICC:CIN3 ratios ranging from 0.6 for HPV58 and 0.4 for HPV52). The ICC:normal ratios were particularly high for HPV18, 52 and 58 in West China (4.1, 3.9 and 2.9, respectively) and for HPV45 and 59 in North China (1.6 and 1.1, respectively). In summary, this study is the most comprehensive analysis of type-specific HPV distribution in cervical carcinogenesis and could be valuable for HPV-based cervical cancer screening strategies and vaccination policies in China.</p>
+				</div>
+			</div>
+			<hr/>
+		
+		<!-- begin <html> -->
+ <div class="sns"> <h2 class="Heading">INTRODUCTION</h2> <p class="BodyText">Cervical cancer is the second most common female malignancy worldwide. In China, approximately 98,900 new cases were reported in 2015, which accounted for 18.7% of the global incidence [<a href="#R1">1</a>]. Human papillomavirus (HPV), commonly transmitted through sexual activity, was recognized as an important cause of cervical precancerous lesions or cancer. To date, 14 HPV types have been classified as &#x201C;high-risk&#x201D; for their strong carcinogenic potentials. HPV16 and HPV18 are well-known carcinogenic genotypes; additionally, HPV31, 33, 35, 39, 45, 51, 52, 56, 58, 59, 66, and 68 are also strongly associated with cervical cancer [<a href="#R2">2</a>, <a href="#R3">3</a>]. In this scenario, numerous epidemiologic studies, most from Europe or the United States, have shown that nearly 100% of patients with cervical cancer test positive for HPV [<a href="#R3">3</a>&#x2013;<a href="#R6">6</a>]. These results have led to approaches in which HPV testing is an option for primary screening with HPV16/18 genotyping along with a cocktail test of 12 other high-risk HPV (hrHPV) genotypes [<a href="#R7">7</a>]. HPV testing is more sensitive than cytology in primary screening and offers a longer negative predictive value for cervical cancer [<a href="#R5">5</a>&#x2013;<a href="#R7">7</a>].</p> <p class="BodyText">Cervical cancer incidence and mortality have been increasing and are a major public health problem in China. China has the world&#x2019;s largest population (approximately 1.37 billion), with approximately 70% of individuals living in rural regions where the incidence of cervical cancer is extremely high [<a href="#R8">8</a>]. Most cervical cancer screening in China is opportunistic, and cancer incidence rates vary throughout the country [<a href="#R8">8</a>, <a href="#R9">9</a>]. In addition, economic factors, education, and HPV genotype distribution, which vary among geographical regions, must also be taken into account. Moreover, comprehensive clinical data on HPV genotype prevalence and relative risk of cervical cancer in Chinese females are lacking.</p> <p class="BodyText">In this study, we performed a systematic review and meta-analysis of type-specific HPV distribution across the complete spectrum of cervical diagnoses from normal to invasive cervical cancer (ICC). With updated data and detailed analyses, we further evaluated how influential parameters (such as geographical region, HPV DNA source, and PCR primers) affected the results from the meta-analysis.</p> <h2 class="Heading">RESULTS</h2> <h3 class="SubHeading">Summary of eligible studies</h3> <p class="BodyText">We retrieved 1274 citations from the search strategy (Appendix S1), and 190 potentially relevant articles were identified for full-text review. Data were abstracted from 45 eligible studies that met the eligibility criteria [<a href="#R10">10</a>&#x2013;<a href="#R54">54</a>]. The study flow diagram is shown in <a href="#F1">Figure 1</a>.</p> <div class="OncoFigure"> <div class="image" id="F1"><img class="thumbImage" alt="PRISMA flow diagram for identification of studies for meta-analysis." src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338727" title="PRISMA flow diagram for identification of studies for meta-analysis."/></div> <p class="FigureText"><span class="FigureHeading">Figure 1: PRISMA flow diagram for identification of studies for meta-analysis.</span></p> </div> <h3 class="SubHeading">Study characteristics</h3> <p class="BodyText">Forty-five eligible studies published between 1996 and 2016, including forty-one single-center [<a href="#R10">10</a>&#x2013;<a href="#R50">50</a>] and four multi-center studies [<a href="#R51">51</a>&#x2013;<a href="#R54">54</a>], were documented in this review. Among these studies, 12 were conducted in East China [<a href="#R10">10</a>&#x2013;<a href="#R21">21</a>], 3 in South China [<a href="#R22">22</a>&#x2013;<a href="#R24">24</a>], 4 in West China [<a href="#R25">25</a>&#x2013;<a href="#R28">28</a>], 14 in North China [<a href="#R29">29</a>&#x2013;<a href="#R42">42</a>], 3 in Taiwan [<a href="#R43">43</a>&#x2013;<a href="#R45">45</a>], 4 in Hong Kong [<a href="#R46">46</a>&#x2013;<a href="#R49">49</a>], and 1 in Macao [<a href="#R50">50</a>].</p> <p class="BodyText">A total of 49,997 eligible women from 32 provinces and municipalities were recruited to participate in these studies (<a href="#F2">Figure 2</a>). Out of 49,997 women tested for overall HPV prevalence, 19,361 (38.7%) had normal cervices, 4877 (9.8%) CIN1, 11,967 (23.9%) CIN2/3, and 13,792 (27.6%) ICCs. The overall HPV distribution stratified by cervical disease grade and geographical region is shown in <a href="#T1">Table 1</a>. Eastern China contributed the largest number of samples (20,292, 40.6%), followed by Northern China (13,390, 26.8%), Taiwan (6521, 13.0%), Hong Kong (3297, 6.6%), and Western China (2428, 4.9%). Of the 49,997 women, 1496 (3.0%) were non-Han Chinese women including 1431 Uyghur [<a href="#R28">28</a>] and 65 Mongolian [<a href="#R38">38</a>].</p> <div class="OncoFigure"> <div class="image" id="F2"><img class="thumbImage" alt="National map of China showing all the geographical sites included in this meta-analysis." src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338728" title="National map of China showing all the geographical sites included in this meta-analysis."/></div> <p class="FigureText"><span class="FigureHeading">Figure 2: National map of China showing all the geographical sites included in this meta-analysis.</span></p> </div> <div class="OncoFigure"> <p class="TableText" id="T1"><b>Table 1: Overall HPV prevalence in 49997 women from China, stratified by cervical disease grade and geographical region</b></p> <div class="image"><img class="thumbImage" alt="" src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=347870" title=""/></div> <p class="TableText">Abbreviations: ICC: invasive cervical cancer; CIN: cervical intraepithelial neoplasia.</p> </div> <h3 class="SubHeading">Overall HPV prevalence and meta-analysis</h3> <p class="BodyText">A total of 30,165 women were HPV-positive. Overall HPV prevalence increased with the degree of cervical disease severity from 24.8% in normal cervices to 87.7% in ICC (<i>P</i> &#x003C; 0.001) (<a href="#T1">Table 1</a>). The pooled prevalence of overall HPV types among women with ICC was 91.1% (95% CI 88.7&#x2013;93.1%) and displayed significant heterogeneity, I<sup>2</sup> = 93.2%, <i>P</i> &#x003C; 0.0001 (<a href="#F3">Figure 3</a>). Differences in the HPV positivity rate by geographical region varied obviously among pathological categories. In normal cervices, the overall HPV prevalence varied substantially by region, ranging from approximately 10% in Taiwan/Hong Kong to more than 20% in mainland China. For ICC, the overall HPV prevalence was consistent (more than 95%) in Taiwan, Hong Kong, and Macao but ranged from 77.5% to 92.9% and yielded an average of 83.7% (95% CI 82.9&#x2013;88.2%) in mainland China. The overall HPV prevalence rates in SCC, ADC and unspecified ICC were 86.9% (5840/6721), 71.5% (459/642) and 90.1% (5795/6429), respectively.</p> <div class="OncoFigure"> <div class="image" id="F3"><img class="thumbImage" alt="Forest plot of the overall HPV prevalence in cervical cancer." src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338729" title="Forest plot of the overall HPV prevalence in cervical cancer."/></div> <p class="FigureText"><span class="FigureHeading">Figure 3: Forest plot of the overall HPV prevalence in cervical cancer.</span></p> </div> <p class="BodyText">After stratified by HPV DNA source, we found that the prevalence rates of overall HPV types in cervical cancer from tissues were consistently significantly higher than that from exfoliated cells in all geographical regions (<i>P</i> &#x003C; 0.05). With regard to PCR primers, HPV prevalence was higher in samples that were tested using SPF1/GP6+ (99.3%, 95% CI 99.0&#x2013;99.7%) and/or SP10 (95.1%, 95% CI 93.6&#x2013;96.7%) primers when compared with MY09/11 (86.1%, 95% CI 84.9&#x2013;87.3%) and/or PGMY09/11 (83.6%, 95% CI 82.6&#x2013;84.5%) primers (<i>P</i> &#x003C; 0.001). Meanwhile, the meta-analysis of the HPV prevalence in women with cervical cancer based on HPV DNA source, different region, publication calendar period, and PCR primers is shown in <a href="#T2">Table 2</a>.</p> <div class="OncoFigure"> <p class="TableText" id="T2"><b>Table 2: Meta-analysis of the HPV prevalence in women with ICC, stratified by HPV DNA source, across region, publication calendar period, and PCR primers</b></p> <div class="image"><img class="thumbImage" alt="" src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=347869" title=""/></div> <p class="TableText">95% CI: 95% confidence interval; NA: not available.</p> </div> <h3 class="SubHeading">Type-specific HPV prevalence and risk of cervical cancer</h3> <p class="BodyText">Type-specific HPV prevalence in HPV-positive women stratified by cervical disease grade is shown in Supplementary Table 3. HPV16 was the most frequently detected hrHPV type in every grade. HPV16 positivity rate varied little between cervicitis and normal tissues (22.7%, 95% CI 21.5&#x2013;24.0%) and CIN1 (23.6%, 95% CI 22.0&#x2013;25.3%) but increased through CIN2 (37.6%, 95% CI 35.5&#x2013;39.7%) and CIN3 (51.9%, 95% CI 50.1&#x2013;53.7%) to reach 65.6% (95% CI 64.7&#x2013;66.4%) in ICC. HPV18 positivity varied very little between cervicitis and normal tissues and CIN3 (5.6&#x2013;7.9%) but increased to 12.6% (95% CI 12.0&#x2013;13.2%) in ICC. HPV58 was the second most common type in ICC (12.6%, 95% CI 12.0&#x2013;13.2%). Notably, HPV52 was the second most common type in cervicitis/CIN1/CIN2 (16.3&#x2013;22.0%), but the prevalence rate decreased remarkably through CIN3 (15.7%, ranked third) and reduce to 6.5% in ICC (ranked fourth). For the next five most common hrHPV types in ICC, including HPV33, 31, 59, 45, and 39, the positivity rate ranged from 2.1% to 5.5%. For the next five least common hrHPV types in ICC, including HPV51, 56, 68, 35, and 66, the positivity rate ranged from 0.7% to 1.4%. HPV16, 18 and 45 were the only hrHPV types found more frequently in ICC than in cervicitis/normal samples, with the ICC:cervicitis/normal ratios of 2.9, 2.2 and 1.4, respectively. HPV31, 33, 52, and 58 were more frequent in CIN3 in comparison with cervicitis/normal samples, but less common in ICC compared with CIN3 (ICC:CIN3 ratios ranging from 0.6 for HPV58 and down to 0.4 for HPV52). HPV16, 18, 35, 39, 45, and 59 were more frequent in ICC than CIN3, with ICC:CIN3 ratios ranging from 2.3 for HPV18 to 1.1 for HPV35/45.</p> <p class="BodyText">When stratified by geographical region, we found increased HPV16 positivity with lesion severity to be similar in all regions, with ICC:cervicitis/normal ratios ranging from 2.4 in North China to 4.2 in East China (<a href="#F4">Figure 4</a> and Supplementary Table 1). The increased HPV18 positivity between normal and ICC cases was observed across all regions, with ICC:cervicitis/normal ratios between 1.8 and 4.1. For HPV58 and HPV52, a relatively elevated in ICC:cervicitis/normal ratio (2.9 and 3.9, respectively) was observed in West China and not apparent in other regions. With regard to HPV DNA source, we found that the prevalence of type-specific HPV in HPV-positive women with cervical cancer based on exfoliated cells were universally higher than that in tissues. HPV58 was the second most common type in exfoliated cells but ranked third in tissues (<a href="#T3">Table 3</a>).</p> <div class="OncoFigure"> <div class="image" id="F4"><img class="thumbImage" alt="Type-specific HPV distribution by geographic region in Chinese women with ICC." src="https://www.oncotarget.com/index.php?journal=oncotarget&page=article&op=viewFile&path%5B%5D=24169&path%5B%5D=75968&path%5B%5D=338730" title="Type-specific HPV distribution by geographic region in Chinese women with ICC."/></div> <p class="FigureText"><span class="FigureHeading">Figure 4: Type-specific HPV distribution by geographic region in Chinese women with ICC.</span></p> </div> <div class="OncoFigure"> <p class="TableText" id="T3"><b>Table 3: Type-specific HPV prevalence in HPV-positive women with cervical cancer, stratified by HPV DNA source</b></p> <table class="oncotable"> <thead class="oncothead"> <tr> <th class="OncoCell" rowspan="2"><p class="TableText"></p></th> <th class="OncoCell" colspan="3"><p class="TableText2"><b>Total</b></p></th> <th class="OncoCell" colspan="3"><p class="TableText2"><b>Cells-based detection</b></p></th> <th class="OncoCell" colspan="3"><p class="TableText2"><b>Tissue-based detection</b></p></th> </tr> <tr> <th class="OncoCell"><p class="TableText2"><i><b>N</b></i></p></th> <th class="OncoCell"><p class="TableText2"><i><b>n</b></i></p></th> <th class="OncoCell"><p class="TableText2"><b>% (95% CI)</b></p></th> <th class="OncoCell"><p class="TableText2"><i><b>N</b></i></p></th> <th class="OncoCell"><p class="TableText2"><i><b>n</b></i></p></th> <th class="OncoCell"><p class="TableText2"><b>% (95% CI)</b></p></th> <th class="OncoCell"><p class="TableText2"><i><b>N</b></i></p></th> <th class="OncoCell"><p class="TableText2"><i><b>n</b></i></p></th> <th class="OncoCell"><p class="TableText2"><b>% (95% CI)</b></p></th> </tr> </thead> <tbody> <tr> <td class="OncoCell"><p class="TableText"><b>Type-specific HPV</b></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> <td class="OncoCell"><p class="TableText"></p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV16</p></td> <td class="OncoCell"><p class="TableText2">12020</p></td> <td class="OncoCell"><p class="TableText2">7882</p></td> <td class="OncoCell"><p class="TableText2">65.6 (64.7&#x2013;66.4)</p></td> <td class="OncoCell"><p class="TableText2">7483</p></td> <td class="OncoCell"><p class="TableText2">5021</p></td> <td class="OncoCell"><p class="TableText2">67.1 (66.0&#x2013;68.2)</p></td> <td class="OncoCell"><p class="TableText2">4537</p></td> <td class="OncoCell"><p class="TableText2">2861</p></td> <td class="OncoCell"><p class="TableText2">63.1 (61.7&#x2013;64.5)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV18</p></td> <td class="OncoCell"><p class="TableText2">12020</p></td> <td class="OncoCell"><p class="TableText2">1516</p></td> <td class="OncoCell"><p class="TableText2">12.6 (12.0&#x2013;13.2)</p></td> <td class="OncoCell"><p class="TableText2">7483</p></td> <td class="OncoCell"><p class="TableText2">841</p></td> <td class="OncoCell"><p class="TableText2">11.2 (10.5&#x2013;12.0)</p></td> <td class="OncoCell"><p class="TableText2">4537</p></td> <td class="OncoCell"><p class="TableText2">675</p></td> <td class="OncoCell"><p class="TableText2">14.9 (13.8&#x2013;15.9)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV58</p></td> <td class="OncoCell"><p class="TableText2">11984</p></td> <td class="OncoCell"><p class="TableText2">1507</p></td> <td class="OncoCell"><p class="TableText2">12.6 (12.0&#x2013;13.2)</p></td> <td class="OncoCell"><p class="TableText2">7476</p></td> <td class="OncoCell"><p class="TableText2">1005</p></td> <td class="OncoCell"><p class="TableText2">13.4 (12.7&#x2013;14.2)</p></td> <td class="OncoCell"><p class="TableText2">4508</p></td> <td class="OncoCell"><p class="TableText2">502</p></td> <td class="OncoCell"><p class="TableText2">11.1 (10.2&#x2013;12.1)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV52</p></td> <td class="OncoCell"><p class="TableText2">11744</p></td> <td class="OncoCell"><p class="TableText2">759</p></td> <td class="OncoCell"><p class="TableText2">6.5 (6.0&#x2013;6.9)</p></td> <td class="OncoCell"><p class="TableText2">7324</p></td> <td class="OncoCell"><p class="TableText2">488</p></td> <td class="OncoCell"><p class="TableText2">6.7 (6.1&#x2013;7.2)</p></td> <td class="OncoCell"><p class="TableText2">4420</p></td> <td class="OncoCell"><p class="TableText2">271</p></td> <td class="OncoCell"><p class="TableText2">6.1 (5.4&#x2013;6.8)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV33</p></td> <td class="OncoCell"><p class="TableText2">11099</p></td> <td class="OncoCell"><p class="TableText2">608</p></td> <td class="OncoCell"><p class="TableText2">5.5 (5.1&#x2013;5.9)</p></td> <td class="OncoCell"><p class="TableText2">7483</p></td> <td class="OncoCell"><p class="TableText2">376</p></td> <td class="OncoCell"><p class="TableText2">5.0 (4.5&#x2013;5.5)</p></td> <td class="OncoCell"><p class="TableText2">3616</p></td> <td class="OncoCell"><p class="TableText2">232</p></td> <td class="OncoCell"><p class="TableText2">6.4 (5.6&#x2013;7.2)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV31</p></td> <td class="OncoCell"><p class="TableText2">11181</p></td> <td class="OncoCell"><p class="TableText2">393</p></td> <td class="OncoCell"><p class="TableText2">3.5 (3.2&#x2013;3.9)</p></td> <td class="OncoCell"><p class="TableText2">7476</p></td> <td class="OncoCell"><p class="TableText2">291</p></td> <td class="OncoCell"><p class="TableText2">3.9 (3.5&#x2013;4.3)</p></td> <td class="OncoCell"><p class="TableText2">3705</p></td> <td class="OncoCell"><p class="TableText2">102</p></td> <td class="OncoCell"><p class="TableText2">2.8 (2.2&#x2013;3.3)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV59</p></td> <td class="OncoCell"><p class="TableText2">7178</p></td> <td class="OncoCell"><p class="TableText2">186</p></td> <td class="OncoCell"><p class="TableText2">2.6 (2.2&#x2013;3.0)</p></td> <td class="OncoCell"><p class="TableText2">3640</p></td> <td class="OncoCell"><p class="TableText2">115</p></td> <td class="OncoCell"><p class="TableText2">3.2 (2.6&#x2013;3.7)</p></td> <td class="OncoCell"><p class="TableText2">3538</p></td> <td class="OncoCell"><p class="TableText2">71</p></td> <td class="OncoCell"><p class="TableText2">2.0 (1.5&#x2013;2.5)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV45</p></td> <td class="OncoCell"><p class="TableText2">5659</p></td> <td class="OncoCell"><p class="TableText2">118</p></td> <td class="OncoCell"><p class="TableText2">2.1 (1.7&#x2013;2.5)</p></td> <td class="OncoCell"><p class="TableText2">2902</p></td> <td class="OncoCell"><p class="TableText2">35</p></td> <td class="OncoCell"><p class="TableText2">1.2 (0.8&#x2013;1.6)</p></td> <td class="OncoCell"><p class="TableText2">2757</p></td> <td class="OncoCell"><p class="TableText2">83</p></td> <td class="OncoCell"><p class="TableText2">3.0 (2.4&#x2013;3.6)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV39</p></td> <td class="OncoCell"><p class="TableText2">7337</p></td> <td class="OncoCell"><p class="TableText2">162</p></td> <td class="OncoCell"><p class="TableText2">2.2 (1.9&#x2013;2.5)</p></td> <td class="OncoCell"><p class="TableText2">4066</p></td> <td class="OncoCell"><p class="TableText2">83</p></td> <td class="OncoCell"><p class="TableText2">2.0 (1.6&#x2013;2.5)</p></td> <td class="OncoCell"><p class="TableText2">3271</p></td> <td class="OncoCell"><p class="TableText2">79</p></td> <td class="OncoCell"><p class="TableText2">2.4 (1.9&#x2013;2.9)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV51</p></td> <td class="OncoCell"><p class="TableText2">4931</p></td> <td class="OncoCell"><p class="TableText2">69</p></td> <td class="OncoCell"><p class="TableText2">1.4 (1.1&#x2013;1.7)</p></td> <td class="OncoCell"><p class="TableText2">2336</p></td> <td class="OncoCell"><p class="TableText2">41</p></td> <td class="OncoCell"><p class="TableText2">1.8 (1.2&#x2013;2.3)</p></td> <td class="OncoCell"><p class="TableText2">2595</p></td> <td class="OncoCell"><p class="TableText2">28</p></td> <td class="OncoCell"><p class="TableText2">1.1 (0.7&#x2013;1.5)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV56</p></td> <td class="OncoCell"><p class="TableText2">5648</p></td> <td class="OncoCell"><p class="TableText2">74</p></td> <td class="OncoCell"><p class="TableText2">1.3 (1.0&#x2013;1.6)</p></td> <td class="OncoCell"><p class="TableText2">3141</p></td> <td class="OncoCell"><p class="TableText2">51</p></td> <td class="OncoCell"><p class="TableText2">1.6 (1.2&#x2013;2.1)</p></td> <td class="OncoCell"><p class="TableText2">2507</p></td> <td class="OncoCell"><p class="TableText2">23</p></td> <td class="OncoCell"><p class="TableText2">0.9 (0.5&#x2013;1.3)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV68</p></td> <td class="OncoCell"><p class="TableText2">3582</p></td> <td class="OncoCell"><p class="TableText2">48</p></td> <td class="OncoCell"><p class="TableText2">1.3 (1.0&#x2013;1.7)</p></td> <td class="OncoCell"><p class="TableText2">3035</p></td> <td class="OncoCell"><p class="TableText2">42</p></td> <td class="OncoCell"><p class="TableText2">1.4 (1.0&#x2013;1.8)</p></td> <td class="OncoCell"><p class="TableText2">547</p></td> <td class="OncoCell"><p class="TableText2">6</p></td> <td class="OncoCell"><p class="TableText2">1.1 (0.2&#x2013;2.0)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV35</p></td> <td class="OncoCell"><p class="TableText2">5131</p></td> <td class="OncoCell"><p class="TableText2">60</p></td> <td class="OncoCell"><p class="TableText2">1.2 (0.9&#x2013;1.5)</p></td> <td class="OncoCell"><p class="TableText2">2456</p></td> <td class="OncoCell"><p class="TableText2">32</p></td> <td class="OncoCell"><p class="TableText2">1.3 (0.9&#x2013;1.8)</p></td> <td class="OncoCell"><p class="TableText2">2675</p></td> <td class="OncoCell"><p class="TableText2">28</p></td> <td class="OncoCell"><p class="TableText2">1.0 (0.7&#x2013;1.4)</p></td> </tr> <tr> <td class="OncoCell"><p class="TableText">HPV66</p></td> <td class="OncoCell"><p class="TableText2">2338</p></td> <td class="OncoCell"><p class="TableText2">16</p></td> <td class="OncoCell"><p class="TableText2">0.7 (0.4&#x2013;1.0)</p></td> <td class="OncoCell"><p class="TableText2">1874</p></td> <td class="OncoCell"><p class="TableText2">16</p></td> <td class="OncoCell"><p class="TableText2">0.9 (0.4&#x2013;1.3)</p></td> <td class="OncoCell"><p class="TableText2">464</p></td> <td class="OncoCell"><p class="TableText2">0</p></td> <td class="OncoCell"><p class="TableText2">NA</p></td> </tr> </tbody> </table> <p class="TableText">95% CI: 95% confidence interval; NA: not available.</p> </div> <h3 class="SubHeading">Study quality and publication bias</h3> <p class="BodyText">The quality assessment of all eligible studies was based on the Agency for Healthcare Research and Quality (AHRQ) scale, which is shown in Supplementary Table 2, and the assessment results provided reasonable confidence in the reliability of the meta-analysis. The methodological quality assessment was considered high in thirty-four studies [<a href="#R10">10</a>&#x2013;<a href="#R15">15</a>, <a href="#R17">17</a>, <a href="#R19">19</a>&#x2013;<a href="#R23">23</a>, <a href="#R25">25</a>&#x2013;<a href="#R32">32</a>, <a href="#R39">39</a>&#x2013;<a href="#R45">45</a>, <a href="#R47">47</a>&#x2013;<a href="#R53">53</a>] and moderate in eleven studies [<a href="#R16">16</a>, <a href="#R18">18</a>, <a href="#R24">24</a>, <a href="#R33">33</a>&#x2013;<a href="#R38">38</a>, <a href="#R46">46</a>, <a href="#R54">54</a>]. Five studies had full scores for the representativeness of the cross-sectional study [<a href="#R10">10</a>, <a href="#R17">17</a>, <a href="#R20">20</a>, <a href="#R23">23</a>, <a href="#R43">43</a>], but most of them lacked scores because subjects were not consecutive. Other studies lacked scores for incomplete follow-up data. Egger&#x2019;s and Begg&#x2019;s tests were performed to assess the publication bias and proved to be insignificant (both <i>P</i> = 0.33).</p> <h2 class="Heading">DISCUSSION</h2> <p class="BodyText">HPV is a sexually transmitted infection, and high-risk HPV types have been shown to be the etiological agents of cervical cancer. Two meta-analyses have been published on the distribution of HPV types in the cervix among Chinese females, but the results were controversial [<a href="#R55">55</a>, <a href="#R56">56</a>]. First, selected samples were identified by cytology or histology for study inclusion criteria. It is worth noting that the distribution of HPV types in cytology findings is different from those in histology assessment, which is the gold standard for diagnosis. Second, HPV testing might be especially useful for the detection of ADC, which can be difficult to identify using cytology [<a href="#R57">57</a>]. Our study is the first to analyze nationwide clinical data on HPV types across the complete spectrum of cervical disease confirmed by cervical pathological diagnosis. The objective was to compare the correlation between type-specific HPV infections and the risk of cervical cancer. With the updated data and more detailed analysis, in this study, geographical region, HPV DNA source, and PCR primers, which have not been included in previous studies, were further analyzed.</p> <p class="BodyText">In these summarized data from China, we found that HPV16 was the most frequently detected hrHPV type in each cervical disease grade, and the positivity rate steadily increased from normal histology to ICCs among all geographical regions (Supplementary Table 1 and Supplementary Table 3), indicating an increased long-term risk for cervical cancer with HPV16 infection [<a href="#R58">58</a>&#x2013;<a href="#R60">60</a>]. The same pattern was found for HPV18. The pooled prevalence rates of HPV16 and 18 in cervical cancer were 66.8% (95% CI 62.5&#x2013;70.8%) (Supplementary Figure 1) and 11.8% (95% CI 9.8&#x2013;14.1%) (Supplementary Figure 2), respectively. Our data showed that the HPV16 positivity rate was similar to the previously published global data (64.7 &#x00B1; 3.6%) but lower for HPV18 (16.5 &#x00B1; 2.9%) [<a href="#R58">58</a>]. Compared with the rest of the world, the HPV16/18 prevalence for ICCs (78.2%) in this study was similar to that reported for Eastern Asia (77.5%), lower than Western/Central Asia (88.1%), Europe (83.1%), and North America (80.8%), and higher than Latin America (66.4%) [<a href="#R58">58</a>, <a href="#R61">61</a>]. These results strengthen the hypothesis that the distribution of HPV16/18 variants is related to geographical or racial distribution [<a href="#R62">62</a>], and HPV variants that differ in their biological properties may present differences in carcinogenic potential.</p> <p class="BodyText">Consistent with previous epidemiological studies, HPV16, 52 and 58 were the dominant hrHPV types in the general Chinese population [<a href="#R63">63</a>, <a href="#R64">64</a>]. Our analysis showed that HPV52 and 58 were the 2nd and 3rd most common hrHPV types among women with lower grade lesions. The HPV52 positivity rate decreased remarkably from normal histology (16.3%, ranked second) to ICC (6.5%, ranked fourth), but HPV58 was still the common type in ICC (12.6%, ranked second). These findings showed that HPV52 and 58 were important etiological agents for cervical carcinogenesis in China; however, HPV52 was less carcinogenic than HPV58. In addition, HPV52 and 58 were more frequent in CIN3 than in normal cervices, but less common in ICCs. This pattern was also observed for HPV31 and HPV33. These results suggested that HPV31, 33, 52, and 58 could confer higher risks for CIN3 than other non-HPV16/18 types, supporting the results from previous studies [<a href="#R58">58</a>&#x2013;<a href="#R60">60</a>, <a href="#R65">65</a>].</p> <p class="BodyText">Alpha-7 species containing HPV18, 39, 45, 59 and 68, which are proportionally overrepresented in ADC [<a href="#R66">66</a>], are known to be less efficiently detected by routine cytological screening [<a href="#R67">67</a>, <a href="#R68">68</a>]. In the present meta-analysis, a total of 5480 SCC and 459 ADC cases with positive HPV status were included (Supplementary Table 4). ADC constituted less than 8% of all ICCs; therefore, the type-specific HPV prevalence in ICC is mainly driven by the findings for SCC. Our results confirmed that alpha-7 HPV types are significantly higher in ADC (46.9%) than in SCC (10.1%) (<i>P</i> &#x003C; 0.001). Moreover, HPV18 was the most common alpha-7 type (44.4% in ADC vs. 9.1% in SCC), and similar patterns were also found for HPV39, 45, 59 and 68.</p> <p class="BodyText">HPV35, 51, 56, 66, and 68 types found in &#x003C; 1.5% of ICC represented an important proportion of low-grade cervical lesions. The lower ICC:normal ratios suggested that such types have relatively low carcinogenic potential. Of note, the ICC:normal ratios for HPV45 and HPV58 were consistently higher, suggesting a higher carcinogenic potential compared with all other non-HPV16/18 types.</p> <p class="BodyText">Meta-analysis on the prevalence of overall HPV types showed a higher rate detected in a subgroup of tissues than in exfoliated cells (<a href="#T2">Table 2</a>). However, the prevalence of type-specific HPV in HPV-positive women with cervical cancer based on cells was universally higher than that on tissues (<a href="#T3">Table 3</a>). Our findings suggested that the HPV prevalence in cells did not correspond well to that observed in tissues. It should be noted that the complex link between historical infections and current disease status might be related to HPV genome integration status [<a href="#R69">69</a>]. In addition, HPV type-specific primers are usually designed to amplify shorter sequences of HPV DNA and might be more sensitive for detection of HPV DNA sequences. Indeed, our study showed that the HPV detection rate of ICC in Taiwan was much higher using SPF1/GP6+ (99.3%, 95% CI 99.0&#x2013;99.7%) to amplify an 184-bp fragment when compared with other PCR primer sets.</p> <p class="BodyText">It is necessary to consider the limitations of our meta-analysis while interpreting the results. First, potential heterogeneity associated with the cross-sectional study design and its inherent risk of bias, including the variations in population characteristics, PCR-based HPV detection protocols, quality of diagnosis and cervical screening strategies among the studies, must be considered. Second, heterogeneity could not be ruled out even given the pre-designed subgroup analysis by geographical region, PCR primer sets and publication calendar period. To address this issue, we chose the random effect model meta-analysis to combine data. Third, 77.4% of the patients included in the meta-analysis came from only two macro-geographical regions of mainland China (40.6% in the East and 26.8% in the North, respectively). Thus, one should be cautious when extrapolating our summary results to all regions of China. Fourth, several studies did not include for a broad range for type-specific HPV [<a href="#R15">15</a>, <a href="#R38">38</a>&#x2013;<a href="#R40">40</a>, <a href="#R46">46</a>, <a href="#R51">51</a>, <a href="#R53">53</a>].</p> <p class="BodyText">Our present meta-analysis suggested a significantly increased risk of cervical cancer associated with high-risk HPV genotype infection. HPV16, 18 and 58 were the most frequently observed genotypes in cervical cancer specimens and showed a strong association with the development of cancer. However, the association between type-specific HPV distribution and cervical cancer risk was slightly influenced by factors such as geographical regions, HPV DNA sources, and PCR primers. It should be noted that the laboratory standardization and quality assurance of HPV genotyping methods may increase data comparability and improve virological surveillance in the future vaccine era of China.</p> <h2 class="Heading">MATERIALS AND METHODS</h2> <h3 class="SubHeading">Consent statement</h3> <p class="BodyText">As this study was a systematic review and meta-analysis, we did not include any humans and/or animals. This study was approved by the Institutional Medical Ethics Review Board of Taizhou Hospital in Zhejiang Province.</p> <h3 class="SubHeading">Search strategy</h3> <p class="BodyText">This meta-analysis was performed in adherence with the guidelines outlined in the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) [<a href="#R70">70</a>] (Supplementary Table 5, PRISMA Checklist). We used PubMed/MEDLINE (NCBI), the Cochrane Central Register of Controlled Trials (Wiley), China National Knowledge Infrastructure (CNKI), and the VIP database for Chinese Technical Periodicals (VIP) to search for relevant articles published from the earliest date available to November 15, 2016. The search strategy is described in Appendix S1. Furthermore, we reviewed the references cited in the retrieved articles to search for additional relevant studies.</p> <h3 class="SubHeading">Eligibility criteria</h3> <p class="BodyText">The participants were females from China who were included in studies of cervical disease associated with HPV. Eligible studies met the following inclusion criteria: 1) using consensus PCR primers, 2) overall and type-specific HPV elicitation, and 3) confirmed by cervical pathological diagnosis. The exclusion criteria were as follows: 1) duplicated data, 2) reviews, letters, conference reports or degree thesis, 3) studies on HIV patients or other sexually transmitted pathogens, 4) studies on gestational or vaccinated women, 5) HPV genotypes not stratified by lesion grade or fewer than 10 cases, and 6) HPV DNA types fewer than 3 high-risk genotypes identified.</p> <h3 class="SubHeading">Data extraction</h3> <p class="BodyText">Two investigators (SS. Dong and XJ. Feng) independently extracted data from eligible studies. Disagreements were resolved by discussion or involvement of a third investigator (HH. Xu). For each eligible study, the following items were extracted: first author, publication year, region of China, study design, HPV DNA source, PCR primers, pathological diagnosis, sample size, and the number of overall or type-specific HPV-positive samples. For a subset of studies reporting such data, the overall prevalence of multiple infections (which may also include low-risk HPV types) was also extracted. Detail information on all included studies is presented in Supplementary Table 4. Each study was classified according to the following criteria: 1) four macro-geographical regions of mainland China (East, West, South, and North, respectively), Taiwan, Hong Kong, and Macao, 2) HPV DNA source (exfoliated cells, fresh biopsies, fixed biopsies), and 3) histological diagnosis (CIN1, CIN2, CIN3, ICC, squamous cell carcinoma (SCC), or adeno/adenosquamous carcinoma (ADC)).</p> <h3 class="SubHeading">Quality assessment</h3> <p class="BodyText">Two investigators (LZ. Zheng and A. Lin) independently assessed the quality/risk of bias for each eligible study according the quality assessment forms from the AHRQ (<a href="https://www.ncbi.nlm.nih.gov/books/NBK35156/">https://www.ncbi.nlm.nih.gov/books/NBK35156/</a>) [<a href="#R71">71</a>]. A third investigator (K. Wang) resolved the disagreements. In this meta-analysis, the methodological quality of all eligible studies was assessed by AHRQ and included an 11-item yes/no/unclear response option: the &#x201C;Yes&#x201D; was scored as &#x201C;1&#x201D;, and &#x201C;No&#x201D; or &#x201C;Unclear&#x201D; was scored &#x201C;0&#x201D;. Study quality was assessed as follows: high quality = 8&#x2013;11; moderate quality = 4&#x2013;7; low quality = 0&#x2013;3.</p> <h3 class="SubHeading">Statistical analysis</h3> <p class="BodyText">We calculated the prevalence of the overall HPV and type-specific HPV (14 high-risk HPV types: HPV 16, 18, 31, 33, 35, 39, 45, 51, 52, 56, 58, 59, 66 and 68; 2 low-risk HPV types: HPV 6 and 11) among Chinese women with cervical precancerous lesions and ICCs. Type-specific HPV prevalence was defined as the proportion of HPV-positive women in which a particular HPV type was detected, so sample sizes differed among the type-specific analyses. Odds ratios (ORs) and relative 95% confidence intervals (95% CI) were calculated using SPSS version 15.0 (SPSS Inc., Chicago, IL). <i>P</i> values were two-sided, and statistical significance was accepted if the <i>P</i> value was 0.05 or less.</p> <p class="BodyText">Meta-analysis was conducted using a random effects model. The I<sup>2</sup> statistic quantified the heterogeneity among the studies, and <i>P</i> &#x003C; 0.10 was considered indicative of significant heterogeneity. Forest plots were used to display the results graphically. To examine the potential publication bias, we used the Egger&#x2019;s and Begg&#x2019;s tests, where <i>P</i> &#x003C; 0.05 was considered to be statistically significant. All analyses were performed using the R statistical software, and the Metaprop command was used as it provides appropriate methods for dealing with proportions with 100% [<a href="#R72">72</a>].</p> <h3 class="SubHeading" style="color: #ac2b31;">Author contributions</h3> <p class="BodyText">WHY and HHX designed the study. HHX, SSD and XJF screened the studies and extracted data. LZZ, AL and KW analyzed the data and provided statistical guidance. WHY and HHX drafted the manuscript. All authors read and approved the final manuscript.</p> <h2 class="Heading">ACKNOWLEDGMENTS AND FUNDING</h2> <p class="BodyText">This work was supported by grants from the Science and Technology Bureau of Zhejiang Province (2016C33231), the National Natural Science Foundation of China (31370920, 81372247), and the Zhejiang Provincial program for the cultivation of high-level innovative health talents.</p> <h2 class="Heading">CONFLICTS OF INTEREST</h2> <p class="BodyText">The authors declare that they have no competing interests.</p> <h2 class="Heading">REFERENCES</h2> <p class="ReferenceList" id="R1">1. Chen W, Zheng R, Baade PD, Zhang S, Zeng H, Bray F, Jemal A, Yu XQ, He J. Cancer statistics in China, 2015. CA Cancer J Clin. 2016; 66:115&#x2013;32.</p> <p class="ReferenceList" id="R2">2. Crosbie EJ, Einstein MH, Franceschi S, Kitchener HC. Human papillomavirus and cervical cancer. Lancet. 2013; 382:889&#x2013;99.</p> <p class="ReferenceList" id="R3">3. Mu&#x00F1;oz N, Bosch FX, de Sanjos&#x00E9; S, Herrero R, Castellsagu&#x00E9; X, Shah KV, Snijders PJ, Meijer CJ; International Agency for Research on Cancer Multicenter Cervical Cancer Study Group. Epidemiologic classification of human papillomavirus types associated with cervical cancer. N Engl J Med. 2003; 348:518&#x2013;27.</p> <p class="ReferenceList" id="R4">4. Cogliano V, Baan R, Straif K, Grosse Y, Secretan B, El Ghissassi F; WHO International Agency for Research on Cancer. Carcinogenicity of human papillomaviruses. Lancet Oncol. 2005; 6:204.</p> <p class="ReferenceList" id="R5">5. Ronco G, Dillner J, Elfstr&#x00F6;m KM, Tunesi S, Snijders PJ, Arbyn M, Kitchener H, Segnan N, Gilham C, Giorgi-Rossi P, Berkhof J, Peto J, Meijer CJ; International HPV screening working group. Efficacy of HPV-based screening for prevention of invasive cervical cancer: follow-up of four European randomized controlled trials. Lancet. 2014; 383:524&#x2013;32.</p> <p class="ReferenceList" id="R6">6. C Kitchener H, Canfell K, Gilham C, Sargent A, Roberts C, Desai M, Peto J. The clinical effectiveness and cost-effectiveness of primary human papillomavirus cervical screening in England: extended follow-up of the ARTISTIC randomised trial cohort through three screening rounds. Health Technol Assess. 2014; 18:1&#x2013;196.</p> <p class="ReferenceList" id="R7">7. Huh WK, Ault KA, Chelmow D, Davey DD, Goulart RA, Garcia FA, Kinney WK, Massad LS, Mayeaux EJ, Saslow D, Schiffman M, Wentzensen N, Lawson HW, et al. Use of primary high-risk human papillomavirus testing for cervical cancer screening: interim clinical guidance. Gynecol Oncol. 2015; 136:178&#x2013;82.</p> <p class="ReferenceList" id="R8">8. Zhao FH, Lin MJ, Chen F, Hu SY, Zhang R, Belinson JL, Sellors JW, Franceschi S, Qiao YL, Castle PE; Cervical Cancer Screening Group in China. Performance of high-risk human papillomavirus DNA testing as a primary screen for cervical cancer: a pooled analysis of individual patient data from 17 population-based studies from China. Lancet Oncol. 2010; 11:1160&#x2013;71.</p> <p class="ReferenceList" id="R9">9. Pan QJ, Hu SY, Guo HQ, Zhang WH, Zhang X, Chen W, Cao J, Jiang Y, Zhao FH, Qiao YL. Liquid-based cytology and human papillomavirus testing: a pooled analysis using the data from 13 population-based cervical cancer screening studies from China. Gynecol Oncol. 2014; 133:172&#x2013;9.</p> <p class="ReferenceList" id="R10">10. Xu H, Lin A, Shao X, Shi W, Zhang Y, Yan W. Diagnostic accuracy of high-risk HPV genotyping in women with high-grade cervical lesions: evidence for improving the cervical cancer screening strategy in China. Oncotarget. 2016; 7:83775&#x2013;83. <a href="https://doi.org/10.18632/oncotarget.11959">http://doi.org/10.18632/oncotarget.11959</a>.</p> <p class="ReferenceList" id="R11">11. Shen XH, Liu SH. Human papillomavirus genotypes associated with mucopurulent cervicitis and cervical cancer in Hangzhou, China. Asian Pac J Cancer Prev. 2013; 14:3603&#x2013;6.</p> <p class="ReferenceList" id="R12">12. Wu LL, Huang L, Wu XZ. Clinical significance of distribution of human papoilloma virus in high grade cervical intraepithelial neoplasia and cervical cancer. Chin J Nosocomiol. 2013; 23:2125&#x2013;32.</p> <p class="ReferenceList" id="R13">13. Dong CL, Chen GJ, Lu JH, Chen MC, Xu F. Role of human papilloma virus genotyping in prevention of cervical cancer. Chin J Nosocomiol. 2011; 21:4858&#x2013;60.</p> <p class="ReferenceList" id="R14">14. Hong D, Ye F, Chen H, L&#x00FC; W, Cheng Q, Hu Y, Xie X. Distribution of human papillomavirus genotypes in the patients with cervical carcinoma and its precursors in Zhejiang Province, China. Int J Gynecol Cancer. 2008; 18:104&#x2013;9.</p> <p class="ReferenceList" id="R15">15. Xu XX, Zhou JS, Yuan SH, Yu H, Lou HM. Distribution of HPV Genotype in Invasive Cervical Carcinoma and Cervical Intraepithelial Neoplasia in Zhejiang Province, Southeast China:Establishing the Baseline for Surveillance. Int J Environ Res Public Health. 2015; 12:10794&#x2013;805.</p> <p class="ReferenceList" id="R16">16. Huang S, Afonina I, Miller BA, Beckmann AM. Human papillomavirus types 52 and 58 are prevalent in cervical cancers from Chinese women. Int J Cancer. 1997; 70:408&#x2013;11.</p> <p class="ReferenceList" id="R17">17. Gu Y, Ma C, Zou J, Zhu Y, Yang R, Xu Y, Zhang Y. Prevalence characteristics of high-risk human papillomaviruses in women living in Shanghai with cervical precancerous lesions and cancer. Oncotarget. 2016; 7:24656&#x2013;63. <a href="https://doi.org/10.18632/oncotarget.8262">http://doi.org/10.18632/oncotarget.8262</a>.</p> <p class="ReferenceList" id="R18">18. Wu D, Cai L, Huang M, Zheng Y, Yu J. Prevalence of genital human papillomavirus infection and genotypes among women from Fujian province, PR China. Eur J Obstet Gynecol Reprod Biol. 2010; 151:86&#x2013;90.</p> <p class="ReferenceList" id="R19">19. Zhao FH, Zhu FC, Chen W, Li J, Hu YM, Hong Y, Zhang YJ, Pan QJ, Zhu JH, Zhang X, Chen Y, Tang H, Zhang H, et al. Baseline prevalence and type distribution of human papillomavirus in healthy Chinese women aged 18&#x2013;25 years enrolled in a clinical trial. Int J Cancer. 2014; 135:2604&#x2013;11.</p> <p class="ReferenceList" id="R20">20. Zhu X, Liu H, Wu H, Liu W, Yin L, Sun X. Carcinogenic ability quantification of human papilloma virus subtypes in eastern China. J Med Virol. 2015; 87:2106&#x2013;13.</p> <p class="ReferenceList" id="R21">21. Yuan X, Yang Y, Gu D, Liu H, Yang H, Wang M. Prevalence of human papillomavirus infection among women with and without normal cervical histology in Shandong Province, China. Arch Gynecol Obstet. 2011; 283:1385&#x2013;89.</p> <p class="ReferenceList" id="R22">22. Cai HB, Ding XH, Chen CC. Prevalence of single and multiple human papillomavirus types in cervical cancer and precursor lesions in Hubei, China. Oncology. 2009; 76:157&#x2013;61.</p> <p class="ReferenceList" id="R23">23. Wang L, Wu B, Li J, Chen L. Prevalence of human papillomavirus and its genotype among 1336 invasive cervical cancer patients in Hunan province, central south China. J Med Virol. 2015; 87:516&#x2013;21.</p> <p class="ReferenceList" id="R24">24. Liu J, Rose B, Huang X, Liao G, Carter J, Wu X, Thompson C. Comparative analysis of characteristics of women with cervical cancer in high- versus low-incidence regions. Gynecol Oncol. 2004; 94:803&#x2013;10.</p> <p class="ReferenceList" id="R25">25. Li J, Mei J, Wang X, Hu L, Lin Y, Yang P. Human papillomavirus type-specific prevalence in women with cervical intraepithelial neoplasm in Western China. J Clin Microbiol. 2012; 50:1079&#x2013;81.</p> <p class="ReferenceList" id="R26">26. Li J, Zhang D, Zhang Y, Wang X, Lin Y, Hu L. Prevalence and genotype distribution of human papillomavirus in women with cervical cancer or high-grade precancerous lesions in Chengdu, western China. Int J Gynaecol Obstet. 2011; 112:131&#x2013;4.</p> <p class="ReferenceList" id="R27">27. Wu EQ, Zhang GN, Yu XH, Ren Y, Fan Y, Wu YG, Kong W, Zha X. Evaluation of high-risk human papillomaviruses type distribution in cervical cancer in Sichuan province of China. BMC Cancer. 2008; 8:202.</p> <p class="ReferenceList" id="R28">28. Du R, Chen ZF, Li XH, Ding Y, Zhang Y. Human papillomavirus infection among Uyghur women with cervical intraepithelial neoplasia in Xinjiang area. Eur J Gynaecol Oncol. 2015; 36:564&#x2013;8.</p> <p class="ReferenceList" id="R29">29. Xiao M, Xu Q, Li H, Gao H, Bie Y, Zhang Z. Prevalence of Human Papillomavirus Genotypes Among Women With High-Grade Cervical Lesions in Beijing, China. Medicine. 2016; 95(3):e2555.</p> <p class="ReferenceList" id="R30">30. Ding X, Liu Z, Su J, Yan D, Sun W, Zeng Z. Human papillomavirus type-specific prevalence in women referred for colposcopic examination in Beijing. J Med Virol. 2014; 86:1937&#x2013;43.</p> <p class="ReferenceList" id="R31">31. Hou R, Xu C, Zhang S, Wu M, Zhang W. Distribution of human papillomavirus genotype and cervical neoplasia among women with abnormal cytology in Beijing, China. Int J Gynaecol Obstet. 2012; 119:257&#x2013;61.</p> <p class="ReferenceList" id="R32">32. Li C, Wu M, Wang J, Zhang S, Zhu L, Pan J, Zhang W. A population-based study on the risks of cervical lesion and human papillomavirus infection among women in Beijing, People&#x2019;s Republic of China. Cancer Epidemiol Biomarkers Prev. 2010; 19:2655&#x2013;64.</p> <p class="ReferenceList" id="R33">33. Li Y, Wang Y, Jia C, Ma Y, Lan Y, Wang S. Detection of human papillomavirus genotypes with liquid bead microarray in cervical lesions of northern Chinese patients. Cancer Genet Cytogenet. 2008; 182:12&#x2013;7.</p> <p class="ReferenceList" id="R34">34. Liu X, Li Q, Chen W, Li L, Shen G, Zhang X. p16 and PR immunoreactivity and human papillomavirus infection in endocervical adenocarcinoma. Zhonghua zhong liu za zhi. 2014; 36:263&#x2013;7. [Article in Chinese].</p> <p class="ReferenceList" id="R35">35. Ma Q, Hou M, Yang XF. Screening of the genital human papillomavirus infection among 8581 women in the First Affiliated Hospital of Xi&#x2019;an Jiaotong University. Zhongguo Yi Xue Ke Xue Yuan Xue Bao. 2014; 36:277&#x2013;82.</p> <p class="ReferenceList" id="R36">36. Wu Y, Zhang Q, Liu B, Yu G. The analysis of the entire HLA, partial non-HLA and HPV for Chinese women with cervical cancer. J Med Virol. 2008; 80:1808&#x2013;13.</p> <p class="ReferenceList" id="R37">37. Liu G, Yu L, Song H, Mi R, Chen Y. Clinical value of human papillomavirus genotyping testing in the diagnosis of cervical intraepithelial neoplasia. Zhonghua fu chan ke za zhi. 2014; 49:446&#x2013;50. [Article in Chinese].</p> <p class="ReferenceList" id="R38">38. Wu EQ, Yu XH, Zha X, Zhang GN, Wang JH, Fan Y, Tang YY, Zhao ZX, Wu YG, Kong W. Distribution of human papillomavirus genotypes in archival cervical lesions in eastern inner Mongolian autonomous region, China. Int J Gynecol Cancer. 2009; 19:919&#x2013;23.</p> <p class="ReferenceList" id="R39">39. Liu W, Wu EQ, Yu XH, Feng LH, Jiang CL, Zha X, Kong W. Detection of human papillomavirus genotypes associated with mucopurulent cervicitis and cervical cancer in Changchun, China. Int J Gynaecol Obstet. 2013; 120:124&#x2013;6.</p> <p class="ReferenceList" id="R40">40. Zhao Y, Lin H, Shen D, Xuan Y, Lin Z. Distribution of HPV genotypes in uterine cervical lesions in Yanbian, northern China. Pathol Int. 2008; 58:643&#x2013;7.</p> <p class="ReferenceList" id="R41">41. Sun ZR, Ji YH, Zhou WQ, Zhang SL, Jiang WG, Ruan Q. Characteristics of HPV prevalence among women in Liaoning province, China. Int J Gynaecol Obstet. 2010; 109:105&#x2013;9.</p> <p class="ReferenceList" id="R42">42. Yang L, Li N, Guo LW, Li Q, Cui H, Dai M. Prevalence of human papilloma virus and analysis of its risk factors in Daqing city, Heilongjiang province in 2010. Zhonghua yu fang yi xue za zhi. 2013; 47:118&#x2013;23. [Article in Chinese].</p> <p class="ReferenceList" id="R43">43. Chao A, Jao MS, Huang CC, Huang HJ, Cheng HH, Yang JE, Hsueh S, Chen TC, Qiu JT, Lin CT, Fu CJ, Chou HH, Lai CH. Human papillomavirus genotype in cervical intraepithelial neoplasia grades 2 and 3 of Taiwanese women. Int J Cancer. 2011; 128:653&#x2013;9.</p> <p class="ReferenceList" id="R44">44. Lai HC, Sun CA, Yu MH, Chen HJ, Liu HS, Chu TY. Favorable clinical outcome of cervical cancers infected with human papilloma virus type 58 and related types. Int J Cancer. 1999; 84:553&#x2013;7.</p> <p class="ReferenceList" id="R45">45. Ding DC, Hsu HC, Huang RL, Lai HC, Lin CY, Yu MH, Chu TY. Type-specific distribution of HPV along the full spectrum of cervical carcinogenesis in Taiwan: an indication of viral oncogenic potential. Eur J Obstet Gynecol Reprod Biol. 2008; 140:245&#x2013;51.</p> <p class="ReferenceList" id="R46">46. Chan MK, Lau KM, Tsui Y, Wong FW, Huang DP. Human papillomavirus infection in Hong Kong Chinese women with normal and abnormal cervix-detection by polymerase chain reaction method on cervical scrapes. Gynecol Oncol. 1996; 60:217&#x2013;23.</p> <p class="ReferenceList" id="R47">47. Chan PK, Cheung TH, Li WH, Yu MY, Chan MY, Yim SF, Ho WC, Yeung AC, Ho KM, Ng HK. Attribution of human papillomavirus types to cervical intraepithelial neoplasia and invasive cancers in Southern China. Int J Cancer. 2012; 131:692&#x2013;705.</p> <p class="ReferenceList" id="R48">48. Lau YM, Cheung TH, Yeo W, Mo F, Yu MY, Lee KM, Ho WC, Yeung AC, Law PT, Chan PK. Prognostic implication of human papillomavirus types and species in cervical cancer patients undergoing primary treatment. PloS one. 2015; 10:e0122557.</p> <p class="ReferenceList" id="R49">49. Liu SS, Tsang PC, Chan KY, Cheung AN, Chan KK, Leung RC, Ngan HY. Distribution of six oncogenic types of human papillomavirus and type 16 integration analysis in Chinese women with cervical precancerous lesions and carcinomas. Tumour Bio. 2008; 29:105&#x2013;13.</p> <p class="ReferenceList" id="R50">50. Hlaing T, Yip YC, Ngai KL, Vong HT, Wong SI, Ho WC, Batalha SL, Chan PK. Distribution of human papillomavirus genotypes among cervical intraepithelial neoplasia and invasive cancers in Macao. J Med Virol. 2010; 82:1600&#x2013;5.</p> <p class="ReferenceList" id="R51">51. Lo KW, Wong YF, Chan MK, Li JC, Poon JS, Wang VW, Zhu SN, Zhang TM, He ZG, Wu QL, Li GD, Tam JS, Kahn T, et al. Prevalence of human papillomavirus in cervical cancer: a multicenter study in China. Int J Cancer. 2002; 100:327&#x2013;31.</p> <p class="ReferenceList" id="R52">52. Zhang R, Velicer C, Chen W, Liaw KL, Wu EQ, Liu B, Cui JF, Belinson JL, Zhang X, Shen GH, Chen F, Qiao YL. Human papillomavirus genotype distribution in cervical intraepithelial neoplasia grades 1 or worse among 4215 Chinese women in a population-based study. Cancer Epidemiol. 2013; 37:939&#x2013;45.</p> <p class="ReferenceList" id="R53">53. Chen W, Zhang X, Molijn A, Jenkins D, Shi JF, Quint W, Schmidt JE, Wang P, Liu YL, Li LK, Shi H, Liu JH, Xie X, et al. Human papillomavirus type-distribution in cervical cancer in China: the importance of HPV 16 and 18. Cancer Causes Control. 2009; 20:1705&#x2013;13.</p> <p class="ReferenceList" id="R54">54. Wu Y, Chen Y, Li L, Yu G, Zhang Y, He Y. Associations of high-risk HPV types and viral load with cervical cancer in China. J Clin Virol. 2006; 35:264&#x2013;9.</p> <p class="ReferenceList" id="R55">55. Bao YP, Li N, Wang H, Qiao YL. Study on the distribution of human papillomavirus types in cervix among Chinese women: a meta-analysis. Zhonghua Liu Xing Bing Xue Za Zhi. 2007; 28:941&#x2013;6. [Article in Chinese].</p> <p class="ReferenceList" id="R56">56. Bao YP, Li N, Smith JS, Qiao YL. Human papillomavirus type-distribution in the cervix of Chinese women: a meta-analysis. Int J STD AIDS. 2008; 19:106&#x2013;11.</p> <p class="ReferenceList" id="R57">57. Katki HA, Kinney WK, Fetterman B, Lorey T, Poitras NE, Cheung L, Demuth F, Schiffman M, Wacholder S, Castle PE. Cervical cancer risk for women undergoing concurrent testing for human papillomavirus and cervical cytology: a population-based study in routine clinical practice. Lancet Oncol. 2011; 12:663&#x2013;72.</p> <p class="ReferenceList" id="R58">58. Guan P, Howell-Jones R, Li N, Bruni L, de Sanjos&#x00E9; S, Franceschi S, Clifford GM. Human papillomavirus types in 115,789 HPV-positive women: a meta-analysis from cervical infection to cancer. Int J Cancer. 2012; 131:2349&#x2013;59.</p> <p class="ReferenceList" id="R59">59. Schiffman M, Glass AG, Wentzensen N, Rush BB, Castle PE, Scott DR, Buckland J, Sherman ME, Rydzak G, Kirk P, Lorincz AT, Wacholder S, Burk RD. A long-term prospective study of type-specific human papillomavirus infection and risk of cervical neoplasia among 20,000 women in the Portland Kaiser Cohort Study. Cancer Epidemiol Biomarkers Prev. 2011; 20:1398&#x2013;409.</p> <p class="ReferenceList" id="R60">60. Chen HC, Schiffman M, Lin CY, Pan MH, You SL, Chuang LC, Hsieh CY, Liaw KL, Hsing AW, Chen CJ; CBCSP-HPV Study Group. Persistence of type-specific human papillomavirus infection and increased long-term risk of cervical cancer. J Natl Cancer Inst. 2011; 103:1387&#x2013;96.</p> <p class="ReferenceList" id="R61">61. Ciapponi A, Bardach A, Glujovsky D, Gibbons L, Picconi MA. Type-specific HPV prevalence in cervical cancer and high-grade lesions in Latin America and the Caribbean: systematic review and meta-analysis. PLoS One. 2011; 6:e25493.</p> <p class="ReferenceList" id="R62">62. Chen AA, Gheit T, Franceschi S, Tommasino M, Clifford GM; IARC HPV Variant Study Group. Human Papillomavirus 18 Genetic Variation and Cervical Cancer Risk Worldwide. J Virol. 2015; 89:10680&#x2013;7.</p> <p class="ReferenceList" id="R63">63. Wang R, Guo XL, Wisman GB, Schuuring E, Wang WF, Zeng ZY, Zhu H, Wu SW. Nationwide prevalence of human papillomavirus infection and viral genotype distribution in 37 cities in China. BMC Infect Dis. 2015; 15:257.</p> <p class="ReferenceList" id="R64">64. Li J, Huang R, Schmidt JE, Qiao YL. Epidemiological features of Human Papillomavirus (HPV) infection among women living in Mainland China. Asian Pac J Cancer Prev. 2013; 14:4015&#x2013;23.</p> <p class="ReferenceList" id="R65">65. Matsumoto K, Oki A, Furuta R, Maeda H, Yasugi T, Takatsuka N, Mitsuhashi A, Fujii T, Hirai Y, Iwasaka T, Yaegashi N, Watanabe Y, Nagai Y, et al. Predicting the progression of cervical precursor lesions by human papillomavirus genotyping: A prospective cohort study. Int J Cancer. 2011; 128:2898&#x2013;910.</p> <p class="ReferenceList" id="R66">66. Clifford G, Franceschi S. Members of the human papillomavirus type 18 family (alpha-7 species) share a common association with adenocarcinoma of the cervix. Int J Cancer. 2008; 122:1684&#x2013;5.</p> <p class="ReferenceList" id="R67">67. Ronco G, Giorgi-Rossi P, Carozzi F, Confortini M, Dalla Palma P, Del Mistro A, Ghiringhello B, Girlando S, Gillio-Tos A, De Marco L, Naldoni C, Pierotti P, Rizzolo R, et al. Efficacy of human papillomavirus testing for the detection of invasive cervical cancers and cervical intraepithelial neoplasia: a randomised controlled trial. Lancet Oncol. 2010; 11:249&#x2013;57.</p> <p class="ReferenceList" id="R68">68. Ault KA, Joura EA, Kjaer SK, Iversen OE, Wheeler CM, Perez G, Brown DR, Koutsky LA, Garland SM, Olsson SE, Tang GW, Ferris DG, Paavonen J, et al. Adenocarcinoma <i>in situ</i> and associated human papillomavirus type distribution observed in two clinical trials of a quadrivalent human papillomavirus vaccine. Int J Cancer. 2011; 128:1344&#x2013;53.</p> <p class="ReferenceList" id="R69">69. Liu Y, Zhang C, Gao W, Wang L, Pan Y, Gao Y, Lu Z, Ke Y. Genome-wide profiling of the human papillomavirus DNA integration in cervical intraepithelial neoplasia and normal cervical epithelium by HPV capture technology. Sci Rep. 2016; 6:35427.</p> <p class="ReferenceList" id="R70">70. Moher D, Liberati A, Tetzlaff J, Altman DG; PRISMA Group. Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement. PLoS Med. 2009; 6:e1000097.</p> <p class="ReferenceList" id="R71">71. Wells G, Shea B, O&#x2019;Connell D, Peterson J, Welch V, Losos M, Tugwell P. The Newcastle-Ottawa Scale (NOS) for assessing the quality of nonrandomised studies in meta-analyses. Ottawa Hospital Research Institute. 2011. <a href="http://www.ohri.ca/programs/clinical_epidemiology/oxford.asp">http://www.ohri.ca/programs/clinical_epidemiology/oxford.asp</a>.</p> <p class="ReferenceList" id="R72">72. Nyaga VN, Arbyn M, Aerts M. Metaprop: a Stata command to perform meta-analysis of binomial data. Arch Public Health. 2014; 72:39.</p> </div> 
+<!-- end </html> -->
+
+	
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+	if ($("#extendedInfo").length || $("#PDFer").length) {
+		$(".oldStyle").hide();
+		$("#sidebarRTAuthorBios").hide();
+	}
+	if(!$('#AuthorInformation').length) {
+		$(".oldStyle").hide();
+		$("#sidebarRTAuthorBios").hide();
+	}
+</script>
+
+
+
+
+<script type="text/javascript">
+var rmHeaderBorderTop = {
+	noBD: function(){
+		var artPageHeadings = document.getElementsByClassName('Heading');
+		for (var i = 0; i < artPageHeadings.length; i++) {
+			artPageHeadings[i].setAttribute('style','border-top-width:0px');
+		}
+	}
+}
+rmHeaderBorderTop.noBD();
+</script>
+
+
+
+<script>
+	window.addEventListener("load", pageLoaded, false);
+	function pageLoaded() {
+		let tarArtBT = $('#content > div.titleAndBadge');
+		if (tarArtBT[0].children[0].className === "altmetric-embed altmetric-hidden") {
+			tarArtBT[0].children[0].nextElementSibling.setAttribute('class', 'tocArticleTitleHidden');
+		}
+	}
+</script>
+
+
+
+	<div style="position:relative; top:10px;">
+		<div id="trendmd-suggestions"></div>		<br />
+		<a rel="license" target="_new" href="https://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="/images/80x15.png" /></a>
+		All site content, except where otherwise noted, is licensed under a <a target="_blank" rel="license" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.
+		<br/>
+		<span class="article__pii">
+							PII: <em>24169</em>
+					</span>
+	</div>
+
+</div>
+<div style="clear:both;"/>
+</div>
+
+	
+		<script defer src='//js.trendmd.com/trendmd.min.js' data-trendmdconfig='{"journal_id":"76717", "element":"#trendmd-suggestions"}'></script>
+	
+
+	<script type="text/javascript">
+		
+		let tracker = null;
+		let trenmd_widget = $("#trendmd-suggestions");
+		let lft_sbar = $("#leftSidebar");
+		let prev_container_height = 0;
+	
+		new MutationObserver(() => {
+			let child = $(trenmd_widget).children('div').first();
+			if (child && !tracker) {
+				$(child).find('h3:contains("We recommend")').html("Recommended articles from TrendMD").css('text-transform','none');
+				tracker = new MutationObserver(() => {
+					let container_height = $(child).height();
+					if (prev_container_height == container_height) { return; }
+	
+					$(trenmd_widget).height(container_height);
+					$(lft_sbar).height($(lft_sbar).height()-prev_container_height);
+					dispatchEvent(new Event('load'));
+					prev_container_height = container_height;
+				}).observe($(child).get(0), { attributes:true, subtree: true });
+			}
+		}).observe(document.querySelector('div#trendmd-suggestions'), { childList: true });
+	
+	</script>
+
+</body>
+</html>

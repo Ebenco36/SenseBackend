@@ -8,7 +8,12 @@ from App.Request.ApiRequest import ApiRequest
 from urllib.parse import urljoin
 from App.Request.Headers import headers
 from App.Services import Service
-from App.Utils.Helpers import format_text_to_json, json_to_dataframe_and_save, save_json_to_csv
+from App.Utils.Helpers import (
+    format_text_to_json,
+    check_file_existence, 
+    create_directory_if_not_exists,
+    getDOI, process_new_sheet
+)
 from App.Services.Factories.ServiceFactory import ServiceFactory
 
 
@@ -65,22 +70,6 @@ def scraping():
 
 
 def embase_access():
-    # This operation is not allowed here. Execute this on the server and get all the records here.
-    # form_data = {
-    #     "module": "SubmitQuery",
-    #     "search_type": "advanced",
-    #     "search_action": "search",
-    #     "rand": "0cf67c60-ddb0-14d6-9d2b-bfdbf6fbcffe",
-    #     "search_query": "'Human immunodeficiency virus'",
-    #     "tico_scope": "doc",
-    #     "search_maptoemtree": "true",
-    #     "search_extensive": "true",
-    #     "search_narrowterms": "true",
-    #     "search_map_explosion_extensive": "",
-    #     "search_startyear": "2023",
-    #     "search_endyear": "2023",
-    #     "yearsAll": "on"
-    # }
     head = """
             Host: www.embase.com
             User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0
@@ -104,3 +93,46 @@ def embase_access():
     headers = format_text_to_json(head)
     print(ServiceFactory.create_service("embase").fetch(headers))
 
+def furtherProcessEmbase():
+    # check if file already exist to avoid start all over again.
+    dir = "../results/"
+    create_directory_if_not_exists(dir)
+    CSV_FILE = 'withFullTextLink.csv'
+    if check_file_existence(dir, CSV_FILE):
+        print("We have a file so we do not need to download anything...")
+        # itemInfo_itemIdList_doi
+        df = pd.read_csv(dir+CSV_FILE)
+        # check if DF has 'full_text_URL', 'full_text_content_type'
+        if(not 'full_text_URL' in df.columns and not 'full_text_content_type' in df.columns):
+            result = df['itemInfo_itemIdList_doi'].apply(lambda row: getDOI(row))
+            # Create a new DataFrame with the results
+            result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])
+            # Concatenate the new DataFrame with the original DataFrame
+            df = pd.concat([df, result_df], axis=1)
+        # Use a context manager to ensure proper file closure
+        df.to_csv(dir+CSV_FILE, index=False)
+        """Create our new dataframe and save it"""
+        process_new_sheet(df)
+    else:
+        # itemInfo_itemIdList_doi
+        df = pd.read_csv('EMBASE/EMBASECOMBINED.csv')
+        df = df.head(1)
+        # df['full_text'] = df['itemInfo_itemIdList_doi'].apply(lambda row: getContent("", row))
+        result = df['itemInfo_itemIdList_doi'].apply(lambda row: getDOI(row))
+        # Create a new DataFrame with the results
+        result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])
+        # Concatenate the new DataFrame with the original DataFrame
+        df = pd.concat([df, result_df], axis=1)
+        # Save DataFrame to a CSV file
+        df.to_csv(dir+CSV_FILE, index=False)
+        process_new_sheet(df)
+
+
+def ilove_access():
+    head = """
+            Host: www.embase.com
+            User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0
+            Accept: application/json, text/javascript, */*; q=0.01
+        """
+    headers = format_text_to_json(head)
+    print(ServiceFactory.create_service("ilove").fetch(headers))
