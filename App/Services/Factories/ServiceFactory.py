@@ -5,7 +5,7 @@ from App.Services.Factories.LoveV import LoveV
 class ServiceFactory:
     SERVICES = {
         'embase': EMBASE,
-        'loveV': LoveV,
+        'L.ove': LoveV,
         # Add more services here
     }
 

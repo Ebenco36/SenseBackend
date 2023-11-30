@@ -6,7 +6,7 @@ def getDataFilters(dataset):
 
     review_tags = getUniqueCommaSeperatedColumnValues(dataset, "review_tags") 
     # number_of_studies_tags = getUniqueCommaSeperatedColumnValues(dataset, "number_of_studies_tags")
-    population_OtherSpecificGroup = getUniqueCommaSeperatedColumnValues(dataset, "population_OtherSpecificGroup")
+    population_OtherSpecificGroup = getUniqueCommaSeperatedColumnValues(dataset, "population_OtherSpecificGroup_tags")
     population_specificGroup_tags = getUniqueCommaSeperatedColumnValues(dataset, "population_specificGroup_tags")
     # population_specificGroup_acronyms_ = getUniqueCommaSeperatedColumnValues(dataset, "population_specificGroup_acronyms_")
     population_ageGroup_tags = getUniqueCommaSeperatedColumnValues(dataset, "population_ageGroup_tags")
@@ -32,7 +32,7 @@ def getDataFilters(dataset):
 
     table = {
         "review_tags" : review_tags,
-        "population_OtherSpecificGroup" : population_OtherSpecificGroup,
+        "population_OtherSpecificGroup_tags" : population_OtherSpecificGroup,
         "population_specificGroup_tags" : population_specificGroup_tags,
         # "population_specificGroup_acronyms_": population_specificGroup_acronyms_,
         "population_ageGroup_tags" : population_ageGroup_tags,
@@ -62,7 +62,7 @@ def getDataFilters(dataset):
         # { "key": "review_tags", "value" : review_tags, "order": 8},
         { "key": "population_specificGroup_tags", "value" : population_specificGroup_tags, "order": 1},
         # { "key": "population_ageGroup_tags", "value" : population_ageGroup_tags, "order": 1},
-        { "key": "population_OtherSpecificGroup", "value" : population_OtherSpecificGroup, "order": 2},
+        { "key": "population_OtherSpecificGroup_tags", "value" : population_OtherSpecificGroup, "order": 2},
         { "key": "population_immuneStatus_tags", "value" : population_immuneStatus_tags, "order": 3},
         filter_keys_by_prefix(table, "intervention", 4),
         filter_keys_by_prefix(table, "topic", 5),
@@ -81,7 +81,7 @@ def getDataFilters(dataset):
 
 def lookUpTable(dataset):
     review_tags = getUniqueCommaSeperatedColumnValues(dataset, "review_tags") 
-    population_OtherSpecificGroup = getUniqueCommaSeperatedColumnValues(dataset, "population_OtherSpecificGroup")
+    population_OtherSpecificGroup = getUniqueCommaSeperatedColumnValues(dataset, "population_OtherSpecificGroup_tags")
     population_specificGroup_tags = getUniqueCommaSeperatedColumnValues(dataset, "population_specificGroup_tags")
     # population_specificGroup_acronyms_ = getUniqueCommaSeperatedColumnValues(dataset, "population_specificGroup_acronyms_")
     population_ageGroup_tags = getUniqueCommaSeperatedColumnValues(dataset, "population_ageGroup_tags")
@@ -104,7 +104,7 @@ def lookUpTable(dataset):
 
     table = {
         "review_tags" : review_tags,
-        "population_OtherSpecificGroup" : population_OtherSpecificGroup,
+        "population_OtherSpecificGroup_tags" : population_OtherSpecificGroup,
         "population_specificGroup_tags" : population_specificGroup_tags,
         # "population_specificGroup_acronyms_": population_specificGroup_acronyms_,
         "population_ageGroup_tags" : population_ageGroup_tags,
@@ -159,22 +159,47 @@ def split_string_by_capital(input_string):
     return ''.join(result)
 
 
+# def search_dataframe(dataframe, query):
+#     filtered_data = dataframe.copy()
+
+#     for key, values in query.items():
+#         if key in dataframe.columns:
+#             if values:
+#                 if isinstance(values, list):
+#                     # Check if values are present in a comma-separated string
+#                     # Convert 'Column1' to string
+#                     dataframe[key] = dataframe[key].astype(str)
+#                     condition = dataframe[key].apply(lambda x: isinstance(x, str) and any(search_item in x.split(', ') for search_item in values))
+#                 else:
+#                     # Check if single value is present in a string
+#                     condition = dataframe[key].apply(lambda x: values in x.split(', '))
+
+#                 # Apply the condition to filter the DataFrame
+#                 filtered_data = filtered_data[condition]
+
+#     return filtered_data
+
+
 def search_dataframe(dataframe, query):
     filtered_data = dataframe.copy()
 
-    for key, values in query.items():
-        if key in dataframe.columns:
-            if values:
-                if isinstance(values, list):
-                    # Check if values are present in a comma-separated string
-                    # Convert 'Column1' to string
-                    dataframe[key] = dataframe[key].astype(str)
-                    condition = dataframe[key].apply(lambda x: isinstance(x, str) and any(search_item in x.split(', ') for search_item in values))
-                else:
-                    # Check if single value is present in a string
-                    condition = dataframe[key].apply(lambda x: values in x.split(', '))
+    # Exclude 'intervention', 'topic', 'outcome' from the query items
+    excluded_keys = {'intervention', 'topic', 'outcome'}
+    valid_keys = set(query.keys()) - excluded_keys
 
-                # Apply the condition to filter the DataFrame
-                filtered_data = filtered_data[condition]
+    for key in valid_keys:
+        if key not in dataframe.columns:
+            raise KeyError(f"Key '{key}' not found in DataFrame columns.")
+
+        dataframe[key] = dataframe[key].astype(str).str.lower()
+
+        values = query[key]
+        if values:
+            if isinstance(values, list):
+                condition = dataframe[key].apply(lambda x: any(search_item.lower() in x.split(', ') for search_item in values))
+            else:
+                condition = dataframe[key].apply(lambda x: values.lower() in x.split(', '))
+
+            filtered_data = filtered_data[condition]
 
     return filtered_data

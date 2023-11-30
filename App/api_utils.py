@@ -95,13 +95,14 @@ def embase_access():
 
 def furtherProcessEmbase():
     # check if file already exist to avoid start all over again.
-    dir = "../results/"
+    dir = "./results/"
     create_directory_if_not_exists(dir)
     CSV_FILE = 'withFullTextLink.csv'
     if check_file_existence(dir, CSV_FILE):
         print("We have a file so we do not need to download anything...")
         # itemInfo_itemIdList_doi
         df = pd.read_csv(dir+CSV_FILE)
+        # df =df.head(4)
         # check if DF has 'full_text_URL', 'full_text_content_type'
         if(not 'full_text_URL' in df.columns and not 'full_text_content_type' in df.columns):
             result = df['itemInfo_itemIdList_doi'].apply(lambda row: getDOI(row))
@@ -112,11 +113,12 @@ def furtherProcessEmbase():
         # Use a context manager to ensure proper file closure
         df.to_csv(dir+CSV_FILE, index=False)
         """Create our new dataframe and save it"""
-        process_new_sheet(df)
+        process_new_sheet(df).to_csv("./results/ProcessedDataNew.csv")
     else:
         # itemInfo_itemIdList_doi
         df = pd.read_csv('EMBASE/EMBASECOMBINED.csv')
-        df = df.head(1)
+        # df = df.head(4)
+        # print(df['itemInfo_itemIdList_doi'])
         # df['full_text'] = df['itemInfo_itemIdList_doi'].apply(lambda row: getContent("", row))
         result = df['itemInfo_itemIdList_doi'].apply(lambda row: getDOI(row))
         # Create a new DataFrame with the results
@@ -125,14 +127,23 @@ def furtherProcessEmbase():
         df = pd.concat([df, result_df], axis=1)
         # Save DataFrame to a CSV file
         df.to_csv(dir+CSV_FILE, index=False)
-        process_new_sheet(df)
+        process_new_sheet(df).to_csv("./results/ProcessedDataNew.csv")
 
 
 def ilove_access():
     head = """
-            Host: www.embase.com
-            User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0
-            Accept: application/json, text/javascript, */*; q=0.01
+            Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.5
+            Connection: keep-alive
+            DNT: 1
+            Host: api.iloveevidence.com
+            Sec-Fetch-Dest: document
+            Sec-Fetch-Mode: navigate
+            Sec-Fetch-Site: none
+            Sec-Fetch-User: ?1
+            Upgrade-Insecure-Requests: 1
+            User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0
         """
     headers = format_text_to_json(head)
-    print(ServiceFactory.create_service("ilove").fetch(headers))
+    ServiceFactory.create_service("L.ove").fetch(headers)

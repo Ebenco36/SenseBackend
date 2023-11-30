@@ -819,3 +819,12 @@ def getUniqueCommaSeperatedColumnValues(df, column_name):
     return sorted(filtered_list)
 
 
+# Function to clean up the JSON data
+def clean_json(json_str):
+    # Replace NaN with None
+    json_str = json_str.replace("NaN", "null")
+    
+    # Replace single quotes with double quotes around keys and values
+    json_str = json_str.replace("'", "\"")
+
+    return json_str

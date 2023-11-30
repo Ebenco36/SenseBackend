@@ -8,6 +8,8 @@ from App.Utils.Helpers import (
 from App.Utils.Reexpr import pattern_dict_regex
 import pandas as pd
 
+from App.api_utils import ilove_access
+
 
 def loopThrough():
     # check if file already exist to avoid start all over again.
@@ -45,6 +47,8 @@ def loopThrough():
         df.to_csv(dir+CSV_FILE, index=False)
         process_new_sheet(df).to_csv("./results/ProcessedDataNew.csv")
 
-loopThrough()
+# loopThrough()
 
 # print(search_and_extract_html("https://www.sciencedirect.com/science/article/pii/S2405852118300211", pattern_dict_regex))
+
+ilove_access()

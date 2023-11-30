@@ -1,7 +1,7 @@
 pattern_dict_regex = {
     "review": r'\b(?:systematic review|Literature Review|review|Meta-Analysis|Critical Review|Peer Review|Book Review|Editorial Review|Review Article)\b',
     "number_of_studies": r'\b(?:\d+ studies|\d+ study)\b',
-    "population_specificGroup": r'\b(?:mother|mother of|father|father of|travelers|elderly|Older adults/elderly|men|woman|child|children|adolescent|adult|young|kids|newborn|baby|babies|Young Adults)\b',
+    "population_specificGroup": r'\b(?:mother|mother of|father|father of|elderly|Older adults/elderly|men|woman|child|children|adolescent|adult|young|kids|newborn|baby|babies|Young Adults)\b',
     "population_OtherSpecificGroup": r'\b(?:travelers|caregivers|caregiver|parents|parents/caregivers|healthcare|healthcare workers|pregnant|pregnant women)\b',
     "population_ageGroup": r'\b(?:\d{1}-\d{1} years|\d{1}-\d{1} years|\d{2}-\d{2} years?|between \d{1}-\d{1} years|between \d{1}-\d{2} years|between \d{2}-\d{2} years?)\b',
     "population_immuneStatus": r'\b(?:immunocompromised|healthy)\b',
