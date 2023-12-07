@@ -15,3 +15,26 @@ net use /PERSISTENT:YES Z: \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%U
 \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME%
 
 net use Y: \\sshfs.r\%USERNAME%@hpc-login01.rki.local\scratch\%USERNAME% /user:awotoroe mypassword_was_here /p:yes
+
+
+docker build -t sense_project .
+
+docker-compose up --build -d
+
+touch /opt/homebrew/etc/openssl@3/certs/.pem
+
+
+python manage.py db drop && rm -rf migrations && python manage.py db init && python manage.py db migrate -m "Initial migration" && python manage.py db upgrade
+
+
+
+docker tag my_image my_registry/my_repository:latest
+docker tag dbmerge-sense_app:latest ebenco36/dbmerge-sense_app:latest
+
+docker push ebenco36/dbmerge-sense_app:latest
+
+
+
+docker pull my_registry/my_repository:latest
+
+docker run -p 8080:5500 --name my_container -d my_registry/my_repository:latest

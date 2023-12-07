@@ -1,0 +1,97 @@
+version: '3.9'
+
+services:
+  sense_app:
+    container_name: sense_project
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${FLASK_RUN_PORT}:5000"
+    depends_on:
+      - sense_postgres
+      - sense_celery
+    env_file:
+      - .env
+    volumes:
+      - flask-app-data:/app/data
+    networks:
+      - app-networks
+
+  sense_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: sense_project
+      POSTGRES_USER: sense_project_user
+      POSTGRES_PASSWORD: sense_project_user
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file: 
+      - .env
+    ports:
+      - "5433:5432"
+    networks:
+      - app-networks
+
+  sense_celery:
+    image: celery:latest
+    container_name: sense_project_celery
+    # Adjust Celery configuration as needed
+    environment:
+      - BROKER_URL=pyamqp://user:password@sense_rabbitmq:5673//
+      - CELERY_RESULT_BACKEND=${DATABASE_URL}
+    depends_on:
+      - sense_postgres
+      - sense_rabbitmq
+    networks:
+      - app-networks
+
+  sense_rabbitmq:
+    container_name: sense_project_rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - 15673:15672
+      - 5673:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq/
+    networks:
+      - app-networks
+
+  sense_pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5051:80"
+    depends_on:
+      - sense_postgres
+    networks:
+      - app-networks
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - sense_app
+    networks:
+      - app-networks
+
+# shared network
+networks:
+  app-networks:
+    driver: bridge
+
+
+volumes:
+  flask-app-data:
+  mysql-data:
+  rabbitmq-data:
+  pgdata:

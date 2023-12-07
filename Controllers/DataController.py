@@ -67,7 +67,7 @@ def dataPage():
     page = int(request.args.get('page', 1))
     records_per_page = int(request.args.get('records_per_page', 100))
     post_data = request.get_json()
-
+    print(post_data)
     for key in post_data:
         if(key in post_data and post_data[key] and len(post_data[key]) > 0):
             # Filter rows based on the list of values
