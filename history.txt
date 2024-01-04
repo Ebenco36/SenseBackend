@@ -26,15 +26,28 @@ touch /opt/homebrew/etc/openssl@3/certs/.pem
 
 python manage.py db drop && rm -rf migrations && python manage.py db init && python manage.py db migrate -m "Initial migration" && python manage.py db upgrade
 
-
-
 docker tag my_image my_registry/my_repository:latest
 docker tag dbmerge-sense_app:latest ebenco36/dbmerge-sense_app:latest
 
 docker push ebenco36/dbmerge-sense_app:latest
 
-
-
 docker pull my_registry/my_repository:latest
 
 docker run -p 8080:5500 --name my_container -d my_registry/my_repository:latest
+
+
+snakemake -j 4
+
+
+gunicorn -w 4 server:app -p 5400
+
+gunicorn -w 4 -b 0.0.0.0:5400 server:app
+
+ gunicorn -w 4 -b 0.0.0.0:5400 --reload server:app
+
+
+
+
+
+sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+sh -c "$(wget -q https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O -)"
