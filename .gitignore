@@ -6,3 +6,5 @@
 Medline/
 L-OVE/
 EMBASE/
+.ipynb_checkpoints/
+__pycache__/
