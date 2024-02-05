@@ -8,3 +8,4 @@ L-OVE/
 EMBASE/
 .ipynb_checkpoints/
 __pycache__/
+:project.sqlite
