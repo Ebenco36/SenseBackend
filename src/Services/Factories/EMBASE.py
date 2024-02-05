@@ -5,7 +5,8 @@ from retry import retry
 from src.Services.Service import Service
 from src.Request.ApiRequest import ApiRequest
 from src.Utils.Helpers import (
-    create_directory_if_not_exists, 
+    create_directory_if_not_exists,
+    process_data_valid, 
     save_json_to_csv, 
     append_json_response_to_file, 
     json_to_dataframe_and_save, 
@@ -176,7 +177,7 @@ class EMBASE(Service):
                         # pageList.append(rec.get("bibrecords")[0])
                         append_json_response_to_file(rec, "EMBASE/EMBASEexportPage_" + str(page) + "__" + str(offset) + ".json")
                 convert_json_to_List_of_dict()
-                self.furtherProcessEmbase("EMBASE/")
+                self.furtherProcessEmbaseValid("EMBASE/")
 
     # @retry(exceptions=requests.exceptions.ProxyError, tries=3, delay=2, backoff=2)                
     def retrieveRecord(self, offset = 0, size = 10):
@@ -197,6 +198,12 @@ class EMBASE(Service):
         with open(data_path, 'r') as json_file:
             json_data = json.load(json_file)
         json_to_dataframe_and_save(json_data, filename)
+    
+    
+    def furtherProcessEmbaseValid(self, dir):
+        data = pd.read_csv('EMBASE/EMBASECOMBINED.csv')
+        result_dataframe = process_data_valid(data)
+        result_dataframe.to_csv(dir+"/EMBASE.csv", index=False)
     
     
     def furtherProcessEmbase(self, dir):

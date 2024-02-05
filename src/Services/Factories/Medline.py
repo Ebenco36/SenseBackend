@@ -8,7 +8,14 @@ from pandas import json_normalize
 from Bio import Medline as MedlinePackage, Entrez
 from Bio.Entrez import efetch, read
 from src.Services.Service import Service
-from src.Request.ApiRequest import ApiRequest
+from src.Utils.Helpers import (
+    create_directory_if_not_exists,
+    check_file_existence, 
+    create_directory_if_not_exists,
+    getDOI,
+    process_data_valid, process_new_sheet
+)
+
 Entrez.email = "ebenco94@gmail.com"
 
 class Medline(Service):
@@ -48,9 +55,9 @@ class Medline(Service):
         for i in range(0, len(pubmed_ids), batch_size):
             batch_ids = ",".join(pubmed_ids[i:i+batch_size])
             self.fetch_pubmed_results(batch_ids, email, i)
-            
+        
         print("We are done downloading data for each batch")
-        self.merge_files_by_pattern("Medline/Batches", "batch_*", "Medline/Medline.csv")
+        self.merge_files_by_pattern("Medline/Batches", "modified_batch_*", "Medline/Medline.csv")
 
 
     def fetch_pubmed_results(self, batch_ids, email, i):
@@ -73,6 +80,13 @@ class Medline(Service):
             # Normalize JSON and save to CSV
             df = json_normalize(medline_dicts)
             df.to_csv('Medline/Batches/batch_' + str(i) + '.csv', index=False)
+            print("Done downloading batch " + str(i))
+            self.furtherProcessMedlineValid(
+                "Medline/Batches/", 
+                'batch_' + str(i) + '.csv', 
+                "Medline/Batches/modified_batch_" + str(i) + ".csv"
+            )
+            print("Done processing batch " + str(i))
 
         except subprocess.CalledProcessError as e:
             # Handle any errors that may occur during command execution
@@ -109,3 +123,43 @@ class Medline(Service):
         merged_df.to_csv(output_file_path, index=False)
 
         print(f"Matching files in '{directory_path}' have been merged into '{output_file_path}'.")
+
+
+    def furtherProcessMedlineValid(self, dir, CSV_FILE, file_modified_name ):
+        data = pd.read_csv(dir+CSV_FILE)
+        result_dataframe = process_data_valid(data)
+        result_dataframe.to_csv(file_modified_name, index=False)
+    
+    def furtherProcessMedline(self, dir, CSV_FILE, file_modified_name ):
+        # check if file already exist to avoid start all over again.
+        create_directory_if_not_exists(dir)
+        if check_file_existence(dir, CSV_FILE):
+            print("We have a file so we do not need to download anything...")
+            # itemInfo_itemIdList_doi
+            df = pd.read_csv(dir+CSV_FILE)
+            # df =df.head(4)
+            # check if DF has 'full_text_URL', 'full_text_content_type'
+            if(not 'full_text_URL' in df.columns and not 'full_text_content_type' in df.columns):
+                result = df['AID'].apply(lambda row: getDOI(row))
+                # Create a new DataFrame with the results
+                result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])
+                # Concatenate the new DataFrame with the original DataFrame
+                df = pd.concat([df, result_df], axis=1)
+            # Use a context manager to ensure proper file closure
+            df.to_csv(dir+CSV_FILE, index=False)
+            """Create our new dataframe and save it"""
+            process_new_sheet(df).to_csv(file_modified_name)
+        else:
+            # itemInfo_itemIdList_doi
+            df = pd.read_csv(dir+CSV_FILE)
+            # df = df.head(4)
+            # print(df['itemInfo_itemIdList_doi'])
+            # df['full_text'] = df['itemInfo_itemIdList_doi'].apply(lambda row: getContent("", row))
+            result = df['AID'].apply(lambda row: getDOI(row))
+            # Create a new DataFrame with the results
+            result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])
+            # Concatenate the new DataFrame with the original DataFrame
+            df = pd.concat([df, result_df], axis=1)
+            # Save DataFrame to a CSV file
+            df.to_csv(dir+CSV_FILE, index=False)
+            process_new_sheet(df).to_csv(file_modified_name)

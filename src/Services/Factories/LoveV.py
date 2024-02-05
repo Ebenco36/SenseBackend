@@ -9,7 +9,8 @@ from src.Utils.Helpers import (
     create_directory_if_not_exists,
     check_file_existence, 
     create_directory_if_not_exists,
-    getDOI, process_new_sheet
+    getDOI,
+    process_data_valid, process_new_sheet
 )
 
 class LoveV(Service):
@@ -202,13 +203,19 @@ def process_csv_files(directory_path, file_path_processed):
             file_name_with_extension = os.path.basename(csv_file)
             
             # Save the modified DataFrame back to the CSV file or to a new file
-            furtherProcessiLove(directory_path, file_name_with_extension, modified_csv_file)
+            furtherProcessiLoveValid(directory_path, file_name_with_extension, modified_csv_file)
             
             print(f"Processed: {csv_file} -> {modified_csv_file}")
         else:
             print("Already processed...")
         
 
+
+def furtherProcessiLoveValid(dir, CSV_FILE, file_modified_name ):
+    data = pd.read_csv(dir+CSV_FILE)
+    result_dataframe = process_data_valid(data)
+    result_dataframe.to_csv(file_modified_name, index=False)
+        
 def furtherProcessiLove(dir, CSV_FILE, file_modified_name ):
     # check if file already exist to avoid start all over again.
     # dir = "./results/"

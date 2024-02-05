@@ -1,13 +1,29 @@
+import json
+import re
 import requests
 from src.Utils.Helpers import (
-    check_file_existence, 
+    ageRangeSearchAlgorithm,
+    check_file_existence,
+    convert_dict_to_dataframe,
+    create_columns_from_text, 
     create_directory_if_not_exists,
-    getDOI, process_new_sheet,
-    search_and_extract_html
+    extract_identifier_from_url,
+    find_overlapping_groups,
+    getDOI,
+    is_sciencedirect_url,
+    is_within_range,
+    process_data_valid, process_new_sheet,
+    replace_with_acronyms,
+    search_and_extract_html,
+    unique_elements,
+    xml_to_text
 )
 from src.Utils.Reexpr import pattern_dict_regex
 import pandas as pd
-
+import cloudscraper
+from bs4 import BeautifulSoup
+from src.Utils.data import population_acronyms
+from src.Utils.ResolvedReturn import preprocessResolvedData
 from src.api_utils import embase_access, ilove_access, cochrane_access, medline_access
 
 
@@ -59,6 +75,7 @@ def furtherProcessiLoveRunthrough():
         print("We have a file so we do not need to download anything...")
         # itemInfo_itemIdList_doi
         df = pd.read_csv(dir+CSV_FILE)
+        df = df.rename(columns=lambda x: x.strip())
         # df =df.head(4)
         # check if DF has 'full_text_URL', 'full_text_content_type'
         if(not 'full_text_URL' in df.columns and not 'full_text_content_type' in df.columns):
@@ -74,6 +91,7 @@ def furtherProcessiLoveRunthrough():
     else:
         # itemInfo_itemIdList_doi
         df = pd.read_csv('L-OVE/LOVE.csv')
+        df = df.rename(columns=lambda x: x.strip())
         # df = df.head(4)
         # print(df['itemInfo_itemIdList_doi'])
         # df['full_text'] = df['itemInfo_itemIdList_doi'].apply(lambda row: getContent("", row))
@@ -89,7 +107,7 @@ def furtherProcessiLoveRunthrough():
 
 # print(search_and_extract_html("https://www.sciencedirect.com/science/article/pii/S2405852118300211", pattern_dict_regex))
 
-#ilove_access()
+# ilove_access()
 
 
 #cochrane_access()
@@ -100,3 +118,16 @@ def furtherProcessiLoveRunthrough():
 
 
 medline_access()
+
+from src.Utils.Reexpr import searchRegEx
+
+from src.Utils.Helpers import search_and_extract_html_valid
+
+
+
+
+
+# Read data from CSV
+# data = pd.read_csv("withFullTextLink.csv")
+# result_dataframe = process_data_valid(data)
+# print(result_dataframe.to_csv("testHH.csv"))

@@ -12,5 +12,5 @@ from src.api_utils import (
     
 embase_access()
 ilove_access()
-cochrane_access()
 medline_access()
+cochrane_access()

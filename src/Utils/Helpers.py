@@ -12,7 +12,9 @@ import cloudscraper
 from bs4 import BeautifulSoup
 from pandas import json_normalize
 import xml.etree.ElementTree as ET
-from PyPDF2 import PdfReader, PdfFileReader, errors
+from src.Utils.Reexpr import searchRegEx
+# from PyPDF2 import PdfReader, PdfFileReader, errors
+from pypdf import PdfReader, PdfReader, errors
 from src.Utils.data import population_acronyms
 from src.Utils.Reexpr import pattern_dict_regex
 from src.Utils.ResolvedReturn import ourColumns, preprocessResolvedData
@@ -233,22 +235,24 @@ def extract_ttltext(row):
         row = ast.literal_eval(row)
         return row[0]['ttltext'].replace('@hit_start', '').replace('@hit_end', '')
     except Exception as e:
-        return None
+        return row
 
 # Define a function to extract 'paras' field
 def extract_paras(row):
     try:
         row = ast.literal_eval(row)
-        return row[0]['paras'][0].replace('@hit_start', '').replace('@hit_end', '')
+        abstract = row[0]['paras'][0].replace('@hit_start', '').replace('@hit_end', '')
+        return abstract
     except Exception as e:
-        return None
+        return row
 
 def extract_source(row):
     try:
         row = ast.literal_eval(row)
-        return row[0]
+        journal = row[0]
+        return journal
     except Exception as e:
-        return None
+        return row
 
 # Define a function to extract values from the JSON string safely
 def extract_citations(row):
@@ -279,7 +283,7 @@ def extract_country(row):
         country = row[0]['affiliation']['country']['content']
         return country
     except (KeyError, Exception):
-        return None
+        return row
 
 def process_domains(row):
     try:
@@ -312,7 +316,7 @@ def extract_keywords_from_pdf(pdf_file_path, keyword_pattern = None):
     try:
         # Open the PDF file
         pdf_file = open(pdf_file_path, 'rb')
-        pdf_reader = PdfFileReader(pdf_file)
+        pdf_reader = PdfReader(pdf_file)
 
         # Extract text from the PDF
         pdf_text = ''
@@ -399,7 +403,122 @@ def xml_to_text(xml_content):
 
     return complete_text
 
+def search_and_extract_html_valid(url):
+    # Create a session
+    with requests.Session() as session:
+        max_retries = 5  # Set the maximum number of retry attempts
 
+        for retry_count in range(1, max_retries + 1):
+            try:
+                # Fetch the HTML content of a webpage
+                # science direct with exception to APIKEY
+                if(is_sciencedirect_url(url)):
+                    key_id = extract_identifier_from_url(url)
+                    url = "https://api.elsevier.com/content/article/pii/"+key_id+"?apiKey=4c0c39804a18d64a4fc58bc1953c05bc"
+
+                user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                response = requests.get(url, headers={'User-Agent': user_agent})
+                if(response.status_code == 403):
+                    scraper = cloudscraper.create_scraper()
+                    response = scraper.get(url, headers={'User-Agent': user_agent})
+
+                if response.status_code == 200:
+                    _content = response.content
+
+                    if(is_sciencedirect_url(url)):
+                        page_content = xml_to_text(_content)
+                    else:
+                        # Parse HTML using BeautifulSoup
+                        soup = BeautifulSoup(_content, 'html.parser')
+
+                        # Extract text from the parsed HTML
+                        page_content = soup.get_text()
+
+                    result = create_columns_from_text(page_content, searchRegEx)
+                    print("We are done with " + url)
+                    return result
+                elif response.status_code == 403:
+                    print(f"Received 403 error on attempt {retry_count}. Retrying...")
+                else:
+                    print(f"Failed to retrieve the paper. Status code: {response.status_code}")
+                    # break  # Break the loop for other status codes
+            except Exception as e:
+                return {"error": str(e)}
+            
+def process_data_valid(data, key='doi'):
+    new_data = pd.DataFrame()
+    for column_ in data.columns:
+        column = column_.strip()
+        # if column in columns_to_process:
+        if column == 'itemInfo_dbCollection':
+            new_data["DBCOllection"] = data[column].apply(lambda x: convert_content_to_comma_separated_string(x, "content"))
+        if column == 'head_correspondence' or column == 'PL' or column == 'countries':
+            new_data["country"] = data[column_].apply(extract_country)
+            new_data["region"] = new_data["country"].apply(get_region_by_country_name)
+        if column == 'head_citationTitle_titleText' or column == 'TI' or column == "title":
+            new_data["title"] = data[column_].apply(extract_ttltext)
+        if column == 'head_abstracts_abstracts' or column == 'AB' or column == "abstract":
+            new_data["abstract"] = data[column_].apply(extract_paras)
+        if column == 'head_source_sourceTitle' or column == 'JT' or column == "journal":
+            new_data["journal"] = data[column_].apply(extract_source)
+        if column == 'head_source_publicationYear' or column == "year":
+            new_data["year"] = data[column_]
+        if column == 'head_source_publicationDate' or column == 'DP':
+            new_data["publication_date_obj"] = data[column_]
+            if(column == 'DP'):
+                # Extract the year and create a new 'Year' column
+                try:
+                    new_data['year'] = pd.to_datetime(new_data['publication_date_obj'], errors='coerce').dt.year
+                except (Exception) as e:
+                    pass
+        if column == 'itemInfo_itemIdList_doi' or column == 'doi' or column == 'AID':
+            new_data["doi"] = data[column_]
+        if column == 'head_enhancement_descriptors':
+            domains_data = data[column_].apply(process_domains)
+            domain_df = pd.DataFrame(domains_data.tolist(), columns=['domain', 'other_domain'])
+            new_data = pd.concat([new_data, domain_df], axis=1)
+        if column == 'head_authorList_authors' or column == 'authors' or column == 'AU':
+            new_data['authors'] = data[column_]
+        if column == 'itemInfo_itemIdList_pii' or column == 'id' or column == 'IS':
+            new_data['PII'] = data[column_]
+        if column == 'full_text_URL':
+            new_data['URL'] = data[column_]
+        if column == 'full_text_content_type':
+            new_data['document_type'] = data[column_]
+        if column == 'head_citationInfo':
+            citation_data = data[column_].apply(extract_citations)
+            citation_df = pd.DataFrame(citation_data.tolist(), columns=['citation_type', 'citation_lang', 'citation_keywords'])
+            new_data = pd.concat([new_data, citation_df], axis=1)
+        else:
+            pass
+            # new_data[column] = data[column_]
+    # check if url exist
+    if(not 'full_text_URL' in new_data.columns):    
+        # Apply the getDOI function to the 'doi' column
+        result = new_data[key].apply(lambda row: getDOI(row))
+
+        # Create a new DataFrame with the results
+        result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])
+
+    # Apply search_and_extract_html to the 'full_text_URL' column
+    keyword_data = result_df['full_text_URL'].apply(lambda x: search_and_extract_html_valid(x))
+
+    # Convert the list of dictionaries to a DataFrame
+    # Filter out None values
+    keyword_data = keyword_data.dropna()
+
+    # Check if there are any valid results before creating the DataFrame
+    if not keyword_data.empty:
+        keyword_data_df = pd.DataFrame.from_records(keyword_data)
+
+        # Concatenate the DataFrames horizontally
+        merged_df = pd.concat([new_data, result_df, keyword_data_df], axis=1)
+    else:
+        merged_df = pd.DataFrame()
+
+    return merged_df
+
+   
 def search_and_extract_html(url, patterns:dict = {}, context_length=100):
     # Create a session
     with requests.Session() as session:
@@ -477,7 +596,7 @@ def search_and_extract_pdf(pdf_file_path, pattern, context_length=100):
         pdf_file = open(pdf_file_path, 'rb')
 
         # Create a PDF reader object
-        pdf_reader = PdfFileReader(pdf_file)
+        pdf_reader = PdfReader(pdf_file)
 
         # Initialize a list to store results
         results = []
@@ -704,6 +823,7 @@ def check_resource_type(url):
 
 def process_new_sheet(df):
     # Specify the columns you want to process
+    """
     columns_to_process = [
         'itemInfo_dbCollection',
         'itemInfo_history_dateCreated',
@@ -729,7 +849,7 @@ def process_new_sheet(df):
         'authors','classification',
         'doi','year','publication_type',
         'title','abstract','clinicaltrials',
-        'registry_of_trials','countries',
+        'registry_of_trials','countries', 'PL ', 
         'links','journal','excluded',
         'reason_for_discrepancy','matches_criteria',
         'relations_status','study_design',
@@ -737,43 +857,45 @@ def process_new_sheet(df):
         'highlighted_title','keywords','threads','screening_info'
 
     ]
+    """
 
     new_data = pd.DataFrame()
-    for column in df.columns:
-        if column in columns_to_process:
-            if column == 'itemInfo_dbCollection':
-                new_data["DBCOllection"] = df[column].apply(lambda x: convert_content_to_comma_separated_string(x, "content"))
-            if column == 'head_correspondence':
-                new_data["country"] = df[column].apply(extract_country)
-                new_data["region"] = new_data["country"].apply(get_region_by_country_name)
-            if column == 'head_citationTitle_titleText':
-                new_data["title"] = df[column].apply(extract_ttltext)
-            if column == 'head_abstracts_abstracts':
-                new_data["abstract"] = df[column].apply(extract_paras)
-            if column == 'head_source_sourceTitle':
-                new_data["journal_source"] = df[column].apply(extract_source)
-            if column == 'head_source_publicationYear':
-                new_data["year"] = df[column]
-            if column == 'head_source_publicationDate':
-                new_data["publication_date_obj"] = df[column]
-            if column == 'head_enhancement_descriptors':
-                data = df[column].apply(process_domains)
-                domain_df = pd.DataFrame(data.tolist(), columns=['domain', 'other_domain'])
-                new_data = pd.concat([new_data, domain_df], axis=1)
-            if column == 'head_authorList_authors':
-                new_data['authors'] = df[column]
-            if column == 'itemInfo_itemIdList_pii':
-                new_data['PII'] = df[column]
-            if column == 'full_text_URL':
-                new_data['URL'] = df[column]
-            if column == 'full_text_content_type':
-                new_data['document_type'] = df[column]
-            if column == 'head_citationInfo':
-                citation_data = df[column].apply(extract_citations)
-                citation_df = pd.DataFrame(citation_data.tolist(), columns=['citation_type', 'citation_lang', 'citation_keywords'])
-                new_data = pd.concat([new_data, citation_df], axis=1)
-            else:
-                new_data[column] = df[column]
+    for column_ in df.columns:
+        column = column_.strip()
+        # if column in columns_to_process:
+        if column == 'itemInfo_dbCollection':
+            new_data["DBCOllection"] = df[column].apply(lambda x: convert_content_to_comma_separated_string(x, "content"))
+        if column == 'head_correspondence' or column == 'PL' or column == 'countries':
+            new_data["country"] = df[column_].apply(extract_country)
+            new_data["region"] = new_data["country"].apply(get_region_by_country_name)
+        if column == 'head_citationTitle_titleText' or column == 'TI' or column == "title":
+            new_data["title"] = df[column_].apply(extract_ttltext)
+        if column == 'head_abstracts_abstracts' or column == 'AB' or column == "abstract":
+            new_data["abstract"] = df[column_].apply(extract_paras)
+        if column == 'head_source_sourceTitle' or column == 'JT' or column == "journal":
+            new_data["journal"] = df[column_].apply(extract_source)
+        if column == 'head_source_publicationYear' or column == "year":
+            new_data["year"] = df[column_]
+        if column == 'head_source_publicationDate' or column == 'DP':
+            new_data["publication_date_obj"] = df[column_]
+        if column == 'head_enhancement_descriptors':
+            data = df[column_].apply(process_domains)
+            domain_df = pd.DataFrame(data.tolist(), columns=['domain', 'other_domain'])
+            new_data = pd.concat([new_data, domain_df], axis=1)
+        if column == 'head_authorList_authors' or column == 'authors' or column == 'AU':
+            new_data['authors'] = df[column_]
+        if column == 'itemInfo_itemIdList_pii' or column == 'id' or column == 'IS':
+            new_data['PII'] = df[column_]
+        if column == 'full_text_URL':
+            new_data['URL'] = df[column_]
+        if column == 'full_text_content_type':
+            new_data['document_type'] = df[column_]
+        if column == 'head_citationInfo':
+            citation_data = df[column_].apply(extract_citations)
+            citation_df = pd.DataFrame(citation_data.tolist(), columns=['citation_type', 'citation_lang', 'citation_keywords'])
+            new_data = pd.concat([new_data, citation_df], axis=1)
+        else:
+            new_data[column] = df[column_]
     
     pattern_dict = pattern_dict_regex
     keyword_data = df['full_text_URL'].apply(lambda x:search_and_extract_html(x, pattern_dict))
@@ -862,3 +984,170 @@ def xml_to_dict(self, element):
         else:
             result[child.tag] = child.text
     return result
+
+
+
+def ageRangeSearchAlgorithm(matches) -> list(list()):
+    numerical_values_and_operators = []
+    for match in matches:
+        match_values = re.findall(r'(less than|greater than|<|>|\d+)(?:-(\d+))? (\w+)', match.group(), flags=re.IGNORECASE)
+        if match_values:
+            if match_values[0][0].isdigit():
+                start = int(match_values[0][0])
+                end = int(match_values[0][1]) if match_values[0][1] else None
+            elif match_values[0][0].lower() in ['less than', 'greater than']:
+                start = int(match_values[0][1]) if (match_values[0][1] and match_values[0][1].isdigit()) else None
+                end = int(match_values[0][2]) if (match_values[0][2] and match_values[0][2].isdigit()) else None
+            else:
+                # Handle other cases where the format doesn't match expectations
+                continue
+            operator = "="
+            if(match_values[0][0].lower() in ['greater than', '>']):
+                operator = ">"
+            elif(match_values[0][0].lower() in ['less than', '<']):
+                operator = "<"
+            # set None value based on operators
+            if(operator == "<" and start is None):
+                start = 0
+                end = end # not substract 1 becos that will be done in is_within_range function
+            elif(operator == ">" and start is None):
+                start = end + 1
+                end = 1000000 #imaginary unlimited age
+            elif(operator == "=" and end is None):
+                end = start
+            numerical_values_and_operators.append([start, end, operator])
+            
+    return numerical_values_and_operators
+
+
+def find_overlapping_groups(check_range, list_of_ranges):
+    """
+    Find all groups (sublists) that overlap with the given range.
+    
+    Parameters:
+    - check_range: The range to check [start, end].
+    - list_of_ranges: A list of ranges where each sublist contains three items [start, end, operator].
+    
+    Returns:
+    - A list of sublists that overlap with the given range.
+    """
+    overlapping_groups = []
+    for sublist in list_of_ranges:
+        start, end, operator = sublist[0], sublist[1], sublist[2]
+        
+        # Check if the ranges overlap
+        if start < check_range[1] and end > check_range[0]:
+            overlapping_groups.append(sublist)
+        elif start >= check_range[0] and end <= check_range[1]:
+            overlapping_groups.append(sublist)
+    
+    return overlapping_groups
+
+
+def append_to_dict_value(my_dict, key, values):
+    if key in my_dict:
+        my_dict[key].extend(values)
+    else:
+        my_dict[key] = values
+        
+"""
+    This function helps in preprocessing and generating new columns to fit in into our work.
+"""  
+def convert_dict(data, delimiter="#"):
+    result = {}
+
+    for key, value in data.items():
+        if not value:
+            continue
+
+        # Split the key using the specified delimiter
+        parts = key.split(delimiter)
+
+        if len(parts) > 1:
+            category = delimiter.join(parts[:-1])
+            specific_item = parts[-1]
+
+            if category not in result:
+                result[category] = specific_item
+            else:
+                result[category] += f", {specific_item}"
+
+        result[key] = value
+
+    return result
+
+
+def create_columns_from_text(document, searchRegEx):
+    result_columns = {}
+    for category, subcategories in searchRegEx.items():
+        for subcategory, terms_dict in subcategories.items():
+            for term_key, term_list in terms_dict.items():
+                column_name = f"{category}#{subcategory}#{term_key}"
+                result_columns[column_name] = None
+                # result_columns[column_name] = None
+                assigned_values = {}
+                if category == "Population" and subcategory == "AgeGroup":
+                    for age_range, age_keywords in terms_dict.items():
+                        # Extract range from the key
+                        age_range_values = list(map(int, re.findall(r'\d+', age_range)))
+                        # Extract potential age ranges from the document
+                        placeholder = r'\d{1,3}'
+                        potential_age_ranges = re.finditer(
+                            rf'\b(?:ages {placeholder} to {placeholder}|ages {placeholder}-{placeholder}|{placeholder} to {placeholder} years|{placeholder}to{placeholder} yrs|{placeholder}-{placeholder} yrs|{placeholder}-{placeholder} years|{placeholder} - {placeholder} years|{placeholder} - {placeholder} yrs|less than {placeholder} year|less than {placeholder} years|less than {placeholder} yrs|{placeholder} years|{placeholder} yrs|{placeholder} age)\b',
+                            document, flags=re.IGNORECASE
+                        )
+                        
+                        # Check if any potential age range overlaps with the specified age range
+                        found_age_ranges = ageRangeSearchAlgorithm(potential_age_ranges)
+                        overlapping_ranges = find_overlapping_groups(age_range_values, found_age_ranges)
+                        
+                        assigned_values[age_range] = overlapping_ranges
+                    """
+                        Search for other keywords such as Newborn and others
+                    """
+                    list_search_item = []
+                    for term in term_list:
+                        term_pattern = re.compile(fr'\b{term}\b', flags=re.IGNORECASE)
+                        if term_pattern.search(document):
+                            list_search_item.append(term_key)
+                    """
+                    this function helps to append other searched items aside from the age ranges
+                    """
+                    append_to_dict_value(assigned_values, term_key, list(set(list_search_item)))
+                    
+                    # Store the assigned age values for the current column
+                    result_columns[column_name] = assigned_values[term_key]
+                else:
+                    for term in term_list:
+                        term_pattern = re.compile(fr'\b{term}\b', flags=re.IGNORECASE)
+                        if term_pattern.search(document):
+                            assigned_values[term] = term
+                            # Store the assigned values for the current column
+                    result_columns[column_name] = list(assigned_values.values())
+    result_columns = convert_dict(result_columns)
+    return result_columns
+
+
+def convert_dict_to_dataframe(data_dict):
+    # Create a DataFrame with a single row
+    df = pd.DataFrame([data_dict])
+
+    return df
+
+
+def is_within_range(lower_limit, upper_limit, range_val:list, step=1):
+    start, end, _ = tuple(range_val)
+    if (lower_limit in range(start, end, step) or upper_limit in range(start, end, step)):
+        resp = True
+    else:
+        resp = False
+    
+    print(start, end, lower_limit, upper_limit, resp)
+    return resp
+
+
+
+
+# data = pd.read_csv("withFullTextLink.csv")
+# result_dataframe = process_data_valid(data)
+# print(result_dataframe.to_csv("testHH.csv"))
