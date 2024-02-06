@@ -16,14 +16,15 @@ def index():
     table_name = 'common_columns'
     
     # Replace 'column1, column2' with the columns you want to retrieve
-    columns_to_select = "'Outcome#Death', 'Intervention#Vaccine-Options', 
-        'Intervention#Vaccine-preventable-disease', 'Outcome#Hospitalization', 'Outcome#ICU', 
-        'Outcome#Infection', PII, 'Population#AgeGroup', 'Population#ImmuneStatus', 
-        'Population#SpecificGroup', 'Topic#Acceptance', 'Topic#Administration', 
-        'Topic#Coverage', 'Topic#Economic-Aspects', 'Topic#Efficacy-Effectiveness', 
-        'Topic#Ethical-Issues', 'Topic#Modeling', 'Topic#Risk-Factor', 'Topic#Safety',
-        'abstract', 'country', 'full_text_URL', 'doi', 'journal', 'region', 'title', 'year'"
 
+    columns_to_select = """`Outcome#Death`, `Intervention#Vaccine-Options`, 
+        `Intervention#Vaccine-preventable-disease`, `Outcome#Hospitalization`, `Outcome#ICU`, 
+        `Outcome#Infection`, PII, `Population#AgeGroup`, `Population#ImmuneStatus`, 
+        `Population#SpecificGroup`, `Topic#Acceptance`, `Topic#Administration`, 
+        `Topic#Coverage`, `Topic#Economic-Aspects`, `Topic#Efficacy-Effectiveness`, 
+        `Topic#Ethical-Issues`, `Topic#Modeling`, `Topic#Risk-Factor`, `Topic#Safety`,
+        `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year`
+    """
     # Get parameters from the request
     page = request.args.get('page', default=1, type=int)
     per_page = request.args.get('per_page', default=10, type=int)
