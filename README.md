@@ -1,11 +1,3 @@
-# InfoMarket Challenge
-
-This is a technical challenge proposed by the [InfoMarket](https://infomarketpesquisa.com/) company. The challenge is to build a simple CRUD in any language and using any relational database. As a personal choice, I preferred to use the Flask microframework in Python and the PostgreSQL database.
-
-The CRUD involves two models:
-- An User model containing the user's name and user's age
-- An Adddress model containing information about the user's address: street, number, city, state
-
 The relationship between User and Address is One-To-One.
 
 The FlaskSQLAlchemy library is a flask extension that makes it easier to use SQLAlchemy ORM and facilitate the execution of migrations.
