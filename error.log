@@ -1,0 +1,1485 @@
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 175, in preprocess_grouped_columns
+    data = get_table_columns(Journal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 169, in get_table_columns
+    columns = inspector.get_columns(table.name)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Table' object has no attribute 'get_columns'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 175, in preprocess_grouped_columns
+    for key, value in data.items():
+                      ^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 173, in preprocess_grouped_columns
+    data = get_table_columns(Journal)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 168, in get_table_columns
+    column_names = {column['name']: column for column in table.columns}
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 168, in <dictcomp>
+    column_names = {column['name']: column for column in table.columns}
+                    ~~~~~~^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/operators.py", line 461, in __getitem__
+    return self.operate(getitem, index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 873, in operate
+    return op(self.comparator, *other, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/operators.py", line 461, in __getitem__
+    return self.operate(getitem, index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/type_api.py", line 77, in operate
+    return o[0](self.expr, op, *(other + o[1:]), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/default_comparator.py", line 181, in _getitem_impl
+    _unsupported_impl(expr, op, other, **kw)
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/default_comparator.py", line 185, in _unsupported_impl
+    raise NotImplementedError(
+NotImplementedError: Operator 'getitem' is not supported on this expression
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 176, in preprocess_grouped_columns
+    category, subcategory = key.split("#", 1)
+    ^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 20, in indexFilters
+    return jsonify(data)
+           ^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/__init__.py", line 342, in jsonify
+    return current_app.json.response(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Column is not JSON serializable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 20, in indexFilters
+    return jsonify(data)
+           ^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/__init__.py", line 342, in jsonify
+    return current_app.json.response(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Column is not JSON serializable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 20, in indexFilters
+    return jsonify(data)
+           ^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/__init__.py", line 342, in jsonify
+    return current_app.json.response(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Column is not JSON serializable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 20, in indexFilters
+    return jsonify(data)
+           ^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/__init__.py", line 342, in jsonify
+    return current_app.json.response(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Column is not JSON serializable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 187, in preprocess_grouped_columns
+    category, subcategory = key.split("#", 1)
+    ^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 188, in preprocess_grouped_columns
+    category, subcategory = key.split("#", maxsplit=1)
+    ^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/server.py", line 17, in indexFilters
+    data = preprocess_grouped_columns()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 212, in preprocess_grouped_columns
+    if len(values) == 1 and values[0] == subcategory:
+                            ~~~~~~^^^
+TypeError: 'set' object is not subscriptable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 53, in indexFilters
+    data = preprocess_columns(["country", "region"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 167, in preprocess_columns
+    for column_name, values in columns.items():
+                               ^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 53, in indexFilters
+    data = preprocess_columns(["country", "region"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 173, in preprocess_columns
+    simple_values = [value for value in values if not isinstance(value, (list, dict)) and not value.startswith("[{") and not value.endswith("}]")]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/src/Journals/services.py", line 173, in <listcomp>
+    simple_values = [value for value in values if not isinstance(value, (list, dict)) and not value.startswith("[{") and not value.endswith("}]")]
+                                                                                              ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'startswith'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 54, in indexFilters
+    return jsonify(data)
+           ^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/__init__.py", line 342, in jsonify
+    return current_app.json.response(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/homebrew/Cellar/python@3.11/3.11.6_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 61, in search
+    request_data = request.json
+                   ^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/werkzeug/wrappers/request.py", line 548, in json
+    return self.get_json()
+           ^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/werkzeug/wrappers/request.py", line 591, in get_json
+    return self.on_json_loading_failed(None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/wrappers.py", line 128, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/werkzeug/wrappers/request.py", line 631, in on_json_loading_failed
+    raise BadRequest(
+werkzeug.exceptions.BadRequest: 400 Bad Request: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 79, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), search_query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1553, in _execute_clauseelement
+    keys = sorted(distilled_params[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'int' and 'str'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: near "#SpecificGroup": syntax error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 79, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) near "#SpecificGroup": syntax error
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE Population#SpecificGroup IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR Topic#Economic-Aspects IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR Topic#Efficacy-Effectiveness IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR Topic#Ethical-Issues IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR country IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR year IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: unrecognized token: ":"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 79, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) unrecognized token: ":"
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR `Topic#Economic-Aspects` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR `Topic#Efficacy-Effectiveness` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR `Topic#Ethical-Issues` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR `country` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) OR `year` IN (:%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s, :%s) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 79, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Efficacy-Effectiveness` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Ethical-Issues` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `country` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `year` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: near "Population": syntax error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) near "Population": syntax error
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE ``Population#SpecificGroup`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Economic-Aspects`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Efficacy-Effectiveness`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Ethical-Issues`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``country`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``year`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Efficacy-Effectiveness` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Ethical-Issues` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `country` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `year` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *search_query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1553, in _execute_clauseelement
+    keys = sorted(distilled_params[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'int' and 'str'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), tuple(search_query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1553, in _execute_clauseelement
+    keys = sorted(distilled_params[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'int' and 'str'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *search_query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1553, in _execute_clauseelement
+    keys = sorted(distilled_params[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'int' and 'str'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: near "Population": syntax error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) near "Population": syntax error
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE ``Population#SpecificGroup`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Economic-Aspects`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Efficacy-Effectiveness`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Ethical-Issues`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``country`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``year`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Efficacy-Effectiveness` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Ethical-Issues` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `country` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `year` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Efficacy-Effectiveness` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Ethical-Issues` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `country` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `year` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 39, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 84, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Efficacy-Effectiveness` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `Topic#Ethical-Issues` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `country` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR `year` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: near "Population": syntax error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 41, in get_columns_from_table
+    result = connection.execute(text(query), *[str(item) for item in search_query])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) near "Population": syntax error
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE ``Population#SpecificGroup`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Economic-Aspects`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Efficacy-Effectiveness`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``Topic#Ethical-Issues`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``country`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR ``year`` IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 80, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=search_query, search_columns=search_columns)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 45, in get_columns_from_table
+    result = connection.execute(text(query), *[value for sublist in search_query for value in sublist])
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 45, in <listcomp>
+    result = connection.execute(text(query), *[value for sublist in search_query for value in sublist])
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 31, in get_columns_from_table
+    for column, values in search_query:
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 31, in get_columns_from_table
+    for column, values in search_query:
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 31, in get_columns_from_table
+    for column, values in search_query:
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 31, in get_columns_from_table
+    for column, values in tuple(search_query):
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 31, in get_columns_from_table
+    for column, values in zip(search_query):
+        ^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 44, in get_columns_from_table
+    result = db.engine.execute(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?) OR `Topic#Efficacy-Effectiveness` IN (?) OR `Topic#Ethical-Issues` IN (?) OR `country` IN (?, ?, ?, ?) OR `year` IN (?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 44, in get_columns_from_table
+    result = db.engine.execute(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?) OR `Topic#Efficacy-Effectiveness` IN (?) OR `Topic#Ethical-Issues` IN (?) OR `country` IN (?, ?, ?, ?) OR `year` IN (?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 46, in get_columns_from_table
+    result = db.engine.execute(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?) OR `Topic#Efficacy-Effectiveness` IN (?) OR `Topic#Ethical-Issues` IN (?) OR `country` IN (?, ?, ?, ?) OR `year` IN (?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 71, in search
+    data = get_columns_from_table(table_name, columns_to_select, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 47, in get_columns_from_table
+    result = db.engine.execute(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 14, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `Population#SpecificGroup` IN (?, ?, ?, ?) OR `Topic#Economic-Aspects` IN (?) OR `Topic#Efficacy-Effectiveness` IN (?) OR `Topic#Ethical-Issues` IN (?) OR `country` IN (?, ?, ?, ?) OR `year` IN (?, ?, ?) LIMIT 10 OFFSET 0]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 2, and there are 0 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 74, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 41, in get_columns_from_table
+    total_result = db.engine.execute(query)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 2, and there are 0 supplied.
+[SQL: SELECT `abstract`, `country`, `full_text_URL`, `doi`, `journal`, `region`, `title`, `year` FROM common_columns WHERE `year` IN (?, ?)]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 0, and there are 2 supplied.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 74, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=request_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 42, in get_columns_from_table
+    total_result = db.engine.execute(total_query, search_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in execute
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 468, in warned
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3267, in execute
+    return connection.execute(statement, *multiparams, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Incorrect number of bindings supplied. The current statement uses 0, and there are 2 supplied.
+[SQL: SELECT COUNT(*) FROM common_columns]
+[parameters: (2020, 2019)]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 61, in search
+    request_data = filter_non_empty_lists(request.json)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 68, in filter_non_empty_lists
+    return {key: value for key, value in dictionary.items() if value}
+                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 61, in search
+    request_data = filter_non_empty_lists(request.json)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 68, in filter_non_empty_lists
+    return {key: value for key, value in dictionary.items() if value}
+                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 61, in search
+    request_data = filter_non_empty_lists(request.json)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 68, in filter_non_empty_lists
+    return {key: value for key, value in dictionary.items() if value}
+                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 63, in search
+    page = request_data.args.get('page', default=1, type=int)
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'args'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 43, in get_columns_from_table
+    total_result = db.engine.execute(total_query, search_values)
+                                                  ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_values' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 41, in get_columns_from_table
+    if search_conditions:
+       ^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_conditions' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 41, in get_columns_from_table
+    if search_conditions and search_values:
+       ^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_conditions' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 51, in get_columns_from_table
+    result = db.engine.execute(query, search_values)
+                                      ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_values' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 51, in get_columns_from_table
+    if search_values:
+       ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_values' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 55, in get_columns_from_table
+    rows = result.fetchall()
+           ^^^^^^
+UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 51, in get_columns_from_table
+    if search_values:
+       ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'search_values' where it is not associated with a value
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/.sense_env/lib/python3.11/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/app.py", line 75, in search
+    data = get_columns_from_table(table_name, columns_to_select, page, per_page, search_query=search_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/database/services.py", line 58, in get_columns_from_table
+    return {'data': data, 'total_rows': total_rows, 'page': page, 'per_page': per_page}
+                                        ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'total_rows' where it is not associated with a value

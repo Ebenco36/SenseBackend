@@ -1146,8 +1146,6 @@ def is_within_range(lower_limit, upper_limit, range_val:list, step=1):
     return resp
 
 
-
-
 # data = pd.read_csv("withFullTextLink.csv")
 # result_dataframe = process_data_valid(data)
 # print(result_dataframe.to_csv("testHH.csv"))
