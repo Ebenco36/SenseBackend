@@ -36,8 +36,8 @@ def get_columns_from_table(table_name, columns_to_select, page=1, per_page=10, s
                 search_values.extend(values)
 
         if search_conditions:
-            query += f" WHERE {' OR '.join(search_conditions)}"
-            total_query += f" WHERE {' OR '.join(search_conditions)}"
+            query += f" WHERE {' AND '.join(search_conditions)}"
+            total_query += f" WHERE {' AND '.join(search_conditions)}"
             
     if search_values:
         # Execute the query to get total rows count
