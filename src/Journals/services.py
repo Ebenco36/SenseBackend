@@ -177,10 +177,6 @@ def preprocess_columns(columns):
             grouped_data[column_name] = simple_values
     return grouped_data
 
-
-
-  
-
 from sqlalchemy import distinct
 
 def preprocess_grouped_columns():
