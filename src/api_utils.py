@@ -7,12 +7,11 @@ import pandas as pd
 from src.Request.ApiRequest import ApiRequest
 from urllib.parse import urljoin
 from src.Request.Headers import headers
-from src.Services import Service
+from src.Services import GeneralPDFWebScraper, Service
 from src.Utils.Helpers import (
     format_text_to_json,
 )
 from src.Services.Factories.ServiceFactory import ServiceFactory
-
 
 def scraping():
     import requests
@@ -65,7 +64,6 @@ def scraping():
         print(response.text)
         print("Failed to retrieve the webpage")
 
-
 def embase_access():
     head = """
             Host: www.embase.com
@@ -90,7 +88,6 @@ def embase_access():
     headers = format_text_to_json(head)
     ServiceFactory.create_service("embase").fetch(headers)
     
-    
 def ilove_access():
     head = """
             Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
@@ -108,8 +105,7 @@ def ilove_access():
         """
     headers = format_text_to_json(head)
     ServiceFactory.create_service("L.ove").fetch(headers)
-        
-        
+              
 def medline_access():
     head = """
             Host: www.embase.com
@@ -121,30 +117,10 @@ def medline_access():
     headers = format_text_to_json(head)
     ServiceFactory.create_service("medline").fetch()
     
-
 def cochrane_access():
-    head = """
-        authority:www.cochranelibrary.com
-        method:POST
-        path:/en/advanced-search/search-manager?p_p_id=scolarissearchresultsportlet_WAR_scolarissearchresults&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=get-query-result-counts&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=2
-        scheme:https
-        Accept:application/json, text/javascript, */*; q=0.01
-        Accept-Encoding:gzip, deflate, br
-        Accept-Language:en-GB,en-US;q=0.9,en;q=0.8
-        Content-Length:2914
-        Content-Type:application/x-www-form-urlencoded; charset=UTF-8
-        Cookie:GUEST_LANGUAGE_ID=en_US; COOKIE_SUPPORT=true; osano_consentmanager_uuid=8c1fd0b4-1c3d-4eb9-8169-e0496269349f; osano_consentmanager=urgXNfqlfpUPrarNpGmUZ782396AHPD7PoA6HqYnfEf-svBX_Hpb20R3cZ_IimbCt8q-SmfrssvOaCA0czyhBXxHzrBQ5mSKGQ6wBLzBgYs-0kDT5gOcY5MBTl4BGmz8yewzlw8o9zIKsgPAX0FsQhdWExL0g4BYcdWe8og-1-9mNaR3xe5liyJjR0gitAs1uT_I2JMNT2Xftut7U64VNw02Ah2zM1l4-FLQLfFUC7ud5u39IOmeMpz1r8qZkpqNmZbAnqwQi9owkwnUJaPTvrOc9Ik=; JSESSIONID=cspbwgreclprt160x1~2886A8EF9BA61EA55A95C5896426D4E1; SID_REP=DF77514EC68E969CD6D7205BF27FD66C; SCOLAUTHSESSIONID=E9A52B2370B0E15BB32A22D9B128199A; cf_clearance=YiLdyQ.Zouty8fSp5nMMK4uMfThFleTjo2wTGyLuH2c-1704111394-0-2-c67a6992.ab6f4418.917b3672-0.2.1704111394; _ga_BRLBHKT9XF=GS1.1.1704111426.1.0.1704111426.0.0.0; LFR_SESSION_STATE_20159=1704111426856; __cf_bm=8x_gs4iSOcea7JGsfUJCgvYVqwGGyb0q5Rd6VCwrqOY-1704112322-1-AbQ7MKQvsmh0qe3rrULgi3JefSNpHQqZDXKo5+lepzEX7gRkUvV3UQ1W5SyaqHLwAG6T7ArdmDa0DV8G9nK63lk=; SCOL_SESSION_TIMEOUT=1740 Mon, 01 Jan 2024 13:06:07 GMT
-        Origin:https://www.cochranelibrary.com
-        Referer:https://www.cochranelibrary.com/advanced-search/search-manager
-        Sec-Ch-Ua:"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"
-        Sec-Ch-Ua-Mobile:?0
-        Sec-Ch-Ua-Platform:"macOS"
-        Sec-Fetch-Dest:empty
-        Sec-Fetch-Mode:cors
-        Sec-Fetch-Site:same-origin
-        User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-        X-Requested-With: XMLHttpRequest
-    """
-    headers = format_text_to_json(head)
-    print(headers)
-    ServiceFactory.create_service("cochrane").fetch(headers)
+    ServiceFactory.create_service("cochrane").fetch({})
+    
+
+def ovid_access():
+    headers = {}
+    ServiceFactory.create_service("ovid").fetch(headers)

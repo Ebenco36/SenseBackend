@@ -53,3 +53,29 @@ sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edi
 sh -c "$(wget -q https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O -)"
 
 https://www.nlm.nih.gov/bsd/mms/medlineelements.html#dp
+
+python -m venv sense_app
+
+
+brew install pyenv
+
+pyenv install --list
+
+
+pyenv install 3.11
+
+
+pyenv global 3.8.10
+
+
+
+pyenv local 3.11
+/Users/AwotoroE-Dev/.pyenv/versions/3.11.9/bin/python
+
+
+gunicorn -w 4 --graceful-timeout 30 -k gevent -b 0.0.0.0:5100 --reload server:app
+
+
+python ./src/Commands/dynamic_table.py ./OVID/data.csv ovid_db --primary DOI --fallback 'Digital Object Identifier'
+python ./src/Commands/dynamic_table.py ./L-OVE/LOVE.csv  love_db --primary id
+python ./src/Commands/dynamic_table.py ./Cochrane/citation-export.csv  cochrane_db --primary 'Cochrane Review ID'

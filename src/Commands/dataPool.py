@@ -6,11 +6,13 @@ from src.api_utils import (
     embase_access, 
     ilove_access, 
     cochrane_access, 
-    medline_access
+    medline_access,
+    ovid_access
 )
 
     
-embase_access()
-ilove_access()
-medline_access()
-cochrane_access()
+# embase_access()
+# ilove_access()
+# medline_access()
+# cochrane_access()
+ovid_access()

@@ -1,14 +1,18 @@
 /results
-.sense_env/
+sense-app/
 .ipynb_checkpoints/
 Medline/
 L-OVE/
+Cochrane/
+EMBASE/
+OVID/
+results/
 .vscode/
 :project.sqlite
-/EMBASE
+/OVID
+/Cochrane
 /Medline
 /"L-OVE"
-/results
 
 # Byte-compiled / optimized Python files
 __pycache__/

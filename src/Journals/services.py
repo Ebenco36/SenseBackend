@@ -2,7 +2,11 @@ from flask import abort, send_file
 import pandas as pd
 from sqlalchemy import func
 from database.db import db
-from sqlalchemy import select, func, desc, or_, Table, Column, String, inspect
+from sqlalchemy import (
+    select, func, 
+    desc, or_, Table, 
+    Column, String, inspect
+)
 from sqlalchemy import text
 from sqlalchemy.sql import select
 from sqlalchemy.orm import Query
@@ -10,6 +14,7 @@ from sqlalchemy import or_
 from sqlalchemy.ext.declarative import declarative_base
 from collections import OrderedDict
 from sqlalchemy import MetaData
+from sqlalchemy import distinct
 
 Base = declarative_base()
 
@@ -19,7 +24,6 @@ def get_all_items():
 def getJournals():
     Journal = db.Table("common_columns", db.metadata, autoload_with=db.engine)
     return Journal
-
 
 def apply_search_and_filter(query, search_term):
     Journal = getJournals()
@@ -67,7 +71,6 @@ def get_items(request):
     paginated_items = items.paginate(page=page, per_page=per_page, error_out=False)
     return paginated_items
 
-
 def get_table_as_dataframe(table_name):
     # Reflect the table using SQLAlchemy
     table = db.Table(table_name, db.metadata, autoload_with=db.engine)
@@ -87,8 +90,6 @@ def get_table_as_dataframe(table_name):
 
     return df
     
-
-
 class PaginatedQuery(Query):
     def paginate(self, page, per_page=10, error_out=True):
         if error_out and page < 1:
@@ -128,7 +129,6 @@ def get_table_as_dataframe_exception(table_name, filter_column=None, filter_valu
     total_rows = db.session.execute(select([func.count()]).select_from(table).where(getattr(table.columns, filter_column) == filter_value)).scalar()
 
     return {'data': df.to_dict(orient='records'), 'total_rows': total_rows, 'page': page, 'per_page': per_page}
-
 
 def get_table_as_dataframe_download(table_name, filter_column=None, filter_value=None):
     # Reflect the table using SQLAlchemy
@@ -176,8 +176,6 @@ def preprocess_columns(columns):
             simple_values = [value for value in values if isinstance(value, str) and not value.startswith("[{") and not value.endswith("}]") and not value.startswith("[") and not value.endswith("]")]
             grouped_data[column_name] = simple_values
     return grouped_data
-
-from sqlalchemy import distinct
 
 def preprocess_grouped_columns():
     Journal = getJournals()

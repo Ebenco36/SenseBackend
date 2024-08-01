@@ -101,7 +101,6 @@ class DataProcessorResource(Resource):
         # Return the result as JSON using Flask's jsonify function
         return jsonify(result)
 
-
 class DataFilterResource(Resource):
 
     def get(self):
@@ -111,7 +110,6 @@ class DataFilterResource(Resource):
         
         # Return the result as JSON using Flask's jsonify function
         return jsonify(result)
-
 
 class DataProcessorFilterResource(Resource):
     def get(self, row_id):

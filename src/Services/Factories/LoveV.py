@@ -117,9 +117,10 @@ class LoveV(Service):
                 df.to_csv(csv_filename, index=False, encoding='utf-8')
 
                 print(f"Records spooled and saved to {csv_filename}.")
-        process_csv_files(file_path, file_path_processed)  
+        # come back to this later
+        # process_csv_files(file_path, file_path_processed)  
         print("All records saved successfully. Now merging files into one csv")
-        merge_files_by_pattern("L-OVE/Batches/Processed", "batch_*", "L-OVE/LOVE.csv")
+        merge_files_by_pattern("L-OVE/Batches", "batch_*", "L-OVE/LOVE.csv")
         print("Done merging the csv files.")
         
         return self
