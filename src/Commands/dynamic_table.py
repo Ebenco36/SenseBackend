@@ -3,10 +3,11 @@ import os
 sys.path.append(os.getcwd())
 import csv
 import argparse
-from sqlalchemy import create_engine, Column, Integer, String, Float, Text, inspect, MetaData
+from sqlalchemy import create_engine, Column, Integer, BigInteger, String, Float, Text, inspect, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app import db, app
+csv.field_size_limit(10**10)
 
 Base = declarative_base()
 
@@ -21,7 +22,7 @@ def parse_csv(file_path):
 def infer_column_type(value, max_length=255):
     """Infer SQLAlchemy column type based on the value and handle length."""
     if value.isdigit():
-        return Integer
+        return BigInteger
     try:
         float(value)
         return Float

@@ -7,7 +7,7 @@ import pandas as pd
 from src.Request.ApiRequest import ApiRequest
 from urllib.parse import urljoin
 from src.Request.Headers import headers
-from src.Services import GeneralPDFWebScraper, Service
+from src.Services import Service
 from src.Utils.Helpers import (
     format_text_to_json,
 )
@@ -106,7 +106,7 @@ def ilove_access():
     headers = format_text_to_json(head)
     ServiceFactory.create_service("L.ove").fetch(headers)
               
-def medline_access():
+def medline_access(searchText="COvid"):
     head = """
             Host: www.embase.com
             User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0
@@ -115,12 +115,18 @@ def medline_access():
             Accept-Encoding: gzip, deflate, br
         """
     headers = format_text_to_json(head)
-    ServiceFactory.create_service("medline").fetch()
-    
-def cochrane_access():
-    ServiceFactory.create_service("cochrane").fetch({})
-    
+    ServiceFactory.create_service("medline").fetch(searchText)
 
+def medline_class_access(searchText="COvid"):
+    ServiceFactory.create_service("medline_class").fetch(searchText)
+    
+def cochrane_access(searchText="COvid"):
+    ServiceFactory.create_service("cochrane").fetch(searchText)
+    
 def ovid_access():
     headers = {}
     ServiceFactory.create_service("ovid").fetch(headers)
+    
+def ovid_new_access():
+    headers = {}
+    ServiceFactory.create_service("ovid_new").fetch()

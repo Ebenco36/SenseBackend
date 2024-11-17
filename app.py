@@ -14,7 +14,6 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
 from utils.http import bad_request, not_found, not_allowed, internal_error
 from src.middlewares.auth_middleware import token_required
-from src.Journals.services import preprocess_columns, preprocess_grouped_columns
 load_dotenv()  # load env files
 
 def create_app():

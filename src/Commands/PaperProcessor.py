@@ -1,86 +1,152 @@
-from flask import request, jsonify
-import fitz
-from bs4 import BeautifulSoup
-import csv
 import sys
 import os
-sys.path.append(os.getcwd())
-from src.Commands.TaggingSystem import TaggingSystem
-from src.Services.GeneralPDFWebScraper import GeneralPDFWebScraper
 import re
-from app import db, app
+import fitz
+import ast
+import pandas as pd
+import requests
+from itertools import chain
+sys.path.append(os.getcwd())
+from bs4 import BeautifulSoup
+from flask import request, jsonify
+from src.Commands.regexp import searchRegEx
+from src.Commands.TaggingSystem import Tagging
+from src.Services.Factories.GeneralPDFScraper.CochranePDFWebScraper import CochranePDFWebScraper
+from src.Services.Factories.GeneralPDFScraper.LOVEPDFWebScraper import LOVEPDFWebScraper
+from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
+from src.Services.Factories.GeneralPDFScraper.MedlinePDFWebScraper import MedlinePDFWebScraper
+from src.Services.Factories.GeneralPDFScraper.OVIDPDFWebScraper import OVIDPDFWebScraper
+from src.Commands.TaggingSystemFunctionBased import TaggingSystemFunctionBased
 
 class PaperProcessor:
-    def __init__(self, query="SELECT DOI FROM love_db where primary_id = 1", csv_file_path="papers_tags.csv"):
+    DOI_PREFIX = "https://dx.doi.org/"
+
+    def __init__(self, db_handler, csv_file_path, server_headers=None):
+        self.db_handler = db_handler
+        self.tag_columns = set()
         self.csv_file_path = csv_file_path
-        self.csv_columns = ["doi"]
-        self.query = query
+        self.server_headers = server_headers
+        self.data = []
 
-    def process_papers(self):
-        with app.app_context():
-            conn = db.engine.raw_connection()
-            cursor = conn.cursor()
-            cursor.execute(self.query)
-            papers = cursor.fetchall()
-            cursor.close()
-            conn.close()
+    def process_papers(self, db_name=None):
+        """Processes all papers and saves the extracted data to CSV files."""
+        papers = self.db_handler.fetch_papers()
+        self.tag_columns.update(["Id", "doi", "doi_url"])
+        
+        for paper in papers:
+            text, doi_url, paper_id, doi = self._process_single_paper(paper, db_name)
+            if text:
+                tags = self._apply_tagging(text, doi_url, paper_id, doi)
+                
+                self.data.append(tags)
+        self._save_data_to_csv()
+        
+        return pd.DataFrame(self.data)
 
-            # Append tag columns dynamically
-            self.csv_columns.append("adolescent_young_adult_age_range")
+    @staticmethod
+    def extract_dois(doi_string):
+        if doi_string:
+            """Extracts DOIs from a string formatted as a list of DOIs."""
+            try:
+                doi_list = ast.literal_eval(doi_string)
+                return [doi.split()[0] for doi in doi_list if "[doi]" in doi]
+            except (EOFError, ValueError) as e:
+                print(f"Error extracting DOIs: {e}")
+                return []
+        else:
+            print("DOI not found!!!")
 
-            with open(self.csv_file_path, mode='w', newline='', encoding='utf-8') as csv_file:
-                writer = csv.DictWriter(csv_file, fieldnames=self.csv_columns)
-                writer.writeheader()
+    def _process_single_paper(self, paper, db_name):
+        """Processes a single paper by scraping and tagging its content."""
+        paper_id, doi, doi_link = paper[0], paper[1], paper[2] if len(paper) == 3 else None
+        doi_url = self._construct_doi_url(doi, doi_link, db_name)
+        scraper = self._select_scraper(doi_url, db_name)
+        if doi_url:
+            try:
+                text = scraper.fetch_and_extract_first_valid_pdf_text()
+            except Exception as e:
+                print(f"EOFError encountered while processing PDF content for DOI: {doi_url} - {e}")
+                text = ""
+            return text, doi_url, paper_id, doi
+        else:
+            return None, None, None, None
 
-                for paper in papers:
-                    doi = paper[0]
-                    doi_url = doi if "https://dx.doi.org/" in doi else "https://dx.doi.org/" + doi
-                    scraper = GeneralPDFWebScraper(doi_url)
-                    print(doi_url)
-                    # print(scraper.fetch_and_extract_first_valid_pdf_text())
-                    text = scraper.fetch_and_extract_first_valid_pdf_text()
+    def _select_scraper(self, doi_url, db_name):
+        """Selects the appropriate scraper based on the database name."""
+        if db_name == "Cochrane":
+            return CochranePDFWebScraper(doi_url, db_name, self.server_headers)
+        elif db_name == "LOVE":
+            return LOVEPDFWebScraper(doi_url, db_name, self.server_headers)
+        elif db_name == "Medline":
+            return MedlinePDFWebScraper(doi_url, db_name, self.server_headers)
+        elif db_name == "OVID":
+            return OVIDPDFWebScraper(doi_url, db_name, self.server_headers)
+        else:
+            return GeneralPDFWebScraper(doi_url, db_name, self.server_headers)
 
-                    if text:
-                        tagging_system = TaggingSystem()
+    def _construct_doi_url(self, doi, doi_link, db_name):
+        """Constructs the DOI URL based on the database name and DOI."""
+        if db_name == "Cochrane":
+            doi_link = doi_link or doi
+            return "https://www.cochranelibrary.com" + self._cochrane_doi_path(doi_link)
+        elif db_name == "Medline":
+            doi_list = self.extract_dois(doi)
+            if doi_list:
+                return self.DOI_PREFIX + doi_list[0]
+            else:
+                print("No valid DOI found.")
+                return ""
+        return doi if self.DOI_PREFIX in doi.lower() else self.DOI_PREFIX + doi
 
-                        # Register all the tagging methods
-                        tagging_system.register_tag_method("intervention_vaccinePredictableDisease_tags", TaggingSystem.tag_intervention_vaccinePredictableDisease_tags)
-                        tagging_system.register_tag_method("population_OtherSpecificGroup_tags", TaggingSystem.tag_population_OtherSpecificGroup_tags)
-                        tagging_system.register_tag_method("population_specificGroup_acronyms_", TaggingSystem.tag_population_specificGroup_acronyms)
-                        tagging_system.register_tag_method("intervention_vaccineOptions_tags", TaggingSystem.tag_intervention_vaccineOptions_tags)
-                        tagging_system.register_tag_method("topic_efficacyEffectiveness_tags", TaggingSystem.tag_topic_efficacyEffectiveness_tags)
-                        tagging_system.register_tag_method("population_specificGroup_tags", TaggingSystem.tag_population_specificGroup_tags)
-                        tagging_system.register_tag_method("population_immuneStatus_tags", TaggingSystem.tag_population_immuneStatus_tags)
-                        tagging_system.register_tag_method("outcome_hospitalization_tags", TaggingSystem.tag_outcome_hospitalization_tags)
-                        tagging_system.register_tag_method("topic_administration_tags", TaggingSystem.tag_topic_administration_tags)
-                        tagging_system.register_tag_method("topic_immunogenicity_tags", TaggingSystem.tag_topic_immunogenicity_tags)
-                        tagging_system.register_tag_method("population_ageGroup_tags", TaggingSystem.tag_population_ageGroup_tags)
-                        tagging_system.register_tag_method("topic_ethicalIssues_tags", TaggingSystem.tag_topic_ethicalIssues_tags)
-                        tagging_system.register_tag_method("number_of_studies_tags", TaggingSystem.tag_number_of_studies_tags)
-                        tagging_system.register_tag_method("outcome_infection_tags", TaggingSystem.tag_outcome_infection_tags)
-                        tagging_system.register_tag_method("topic_acceptance_tags", TaggingSystem.tag_topic_acceptance_tags)
-                        tagging_system.register_tag_method("topic_coverage_tags", TaggingSystem.tag_topic_coverage_tags)
-                        tagging_system.register_tag_method("topic_economic_tags", TaggingSystem.tag_topic_economic_tags)
-                        tagging_system.register_tag_method("outcome_death_tags", TaggingSystem.tag_outcome_death_tags)
-                        tagging_system.register_tag_method("topic_safety_tags", TaggingSystem.tag_topic_safety_tags)
-                        tagging_system.register_tag_method("outcome_ICU_tags", TaggingSystem.tag_outcome_ICU_tags)
-                        tagging_system.register_tag_method("review_tags", TaggingSystem.tag_review_tags)
+    def construct_pdf_url(self, full_url):
+        """Constructs the PDF URL path based on the DOI prefix and article code."""
+        if "/full" in full_url and "/doi/" in full_url:
+            doi_prefix = full_url.split('/')[-2]
+            article_code = doi_prefix.split('.')[1]  # Assumes format with article code
+            pdf_url = f"/cdsr/doi/10.1002/{doi_prefix}/pdf/CDSR/{article_code}/{article_code}.pdf"
+            return pdf_url
+        else:
+            print("Invalid URL format for Cochrane PDF.")
+            return ""
 
+    def _cochrane_doi_path(self, doi):
+        """Constructs the path for Cochrane's DOI format."""
+        return self.construct_pdf_url(doi)
 
-                        tags =  tagging_system.apply_tags(text) 
-                        tags["doi_url"] = doi_url,
-                        writer.writerow(tags)
-                    
-                    
-csv_file_path_love = 'love_papers_tags.csv'
-query_love_db = "SELECT DOI FROM love_db where primary_id = 1"
-paper_processor = PaperProcessor(query=query_love_db, csv_file_path=csv_file_path_love)
-paper_processor.process_papers()
-print({"status": "success", "message": "Papers processed and CSV generated.", "csv_file_path": csv_file_path})
+    def _apply_tagging(self, text, doi_url, paper_id, doi):
+        """Applies tagging to the text content and structures the results."""
+        tagger = Tagging(text)
+        tags = tagger.create_columns_from_text(searchRegEx)
+        tags["Id"] = paper_id
+        tags["doi"] = doi
+        tags["doi_url"] = doi_url
+        
+        # Flatten complex data types
+        return self.flatten_tags(tags)
+    
+    def flatten_tags(self, tags):
+        """Convert nested lists or other complex data types to flattened strings."""
+        for key, value in tags.items():
+            # Check if key starts with "Population#AgeGroup"
+            if key.startswith("Population#AgeGroup") and isinstance(value, list):
+                # Retain only the last item for keys starting with Population#AgeGroup
+                if value:
+                    tags[key] = value[-1] if isinstance(value[-1], list) else value[-1]
+            elif isinstance(value, list):
+                # Flatten nested lists for other keys
+                flattened_value = list(chain.from_iterable(
+                    v if isinstance(v, list) else [v] for v in value
+                ))
+                tags[key] = ', '.join(str(v) for v in flattened_value)
+            elif isinstance(value, str):
+                # Strip whitespace for strings
+                tags[key] = value.strip()
+        
+        return tags
 
+    def _save_data_to_csv(self):
+        """Saves the processed data into separate CSV files."""
+        sorted_columns = sorted(self.tag_columns)
+        df = pd.DataFrame(self.data)
 
-csv_file_path_ovid = 'ovid_papers_tags.csv'
-query_ovid_db = "SELECT DOI FROM ovid_db where primary_id = 1"
-paper_processor = PaperProcessor(query=query_ovid_db, csv_file_path=csv_file_path_ovid)
-paper_processor.process_papers()
-print({"status": "success", "message": "Papers processed and CSV generated.", "csv_file_path": csv_file_path})
+        df.to_csv(f"{self.csv_file_path}_1.csv", index=False, encoding='utf-8')

@@ -1117,6 +1117,16 @@ def create_columns_from_text(document, searchRegEx):
                     
                     # Store the assigned age values for the current column
                     result_columns[column_name] = assigned_values[term_key]
+                
+                elif(category == "NoOfStudies" and subcategory == "number_of_studies"):
+                    for term in term_list:
+                        term = r'(?:\d+ ' + term + ')'
+                        term_pattern = re.compile(fr'\b{term}\b', flags=re.IGNORECASE)
+                        if term_pattern.search(document):
+                            assigned_values[term] = term
+                            # Store the assigned values for the current column
+                    result_columns[column_name] = list(assigned_values.values())
+                    
                 else:
                     for term in term_list:
                         term_pattern = re.compile(fr'\b{term}\b', flags=re.IGNORECASE)
@@ -1145,7 +1155,190 @@ def is_within_range(lower_limit, upper_limit, range_val:list, step=1):
     print(start, end, lower_limit, upper_limit, resp)
     return resp
 
+import requests
+from urllib.parse import urlparse
 
-# data = pd.read_csv("withFullTextLink.csv")
-# result_dataframe = process_data_valid(data)
-# print(result_dataframe.to_csv("testHH.csv"))
+def is_complete_url(url):
+    parsed = urlparse(url)
+    # A complete URL has a scheme (http, https) and netloc (domain)
+    return bool(parsed.scheme and parsed.netloc)
+
+def get_final_url(url):
+    try:
+        while True:
+            # Make a GET request without following redirects
+            response = requests.get(url, allow_redirects=False)
+            # Check if the response status code indicates a redirect
+            if response.status_code in (301, 302, 303, 307, 308):
+                # Update the URL to the new location
+                url = response.headers.get('Location')
+            else:
+                # No more redirects, return the final URL
+                if is_complete_url(url):
+                    return url
+                return guess_host(url)
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+        return guess_host(url)
+
+
+
+def guess_host(relative_path):
+    common_hosts = [
+        "https://www.frontiersin.org",
+        "https://journals.plos.org",
+        "https://www.nature.com",
+        "https://www.tandfonline.com",
+        "https://elifesciences.org",
+    ]
+    
+    # Iterate through possible hosts and attempt a match
+    for host in common_hosts:
+        test_url = host + relative_path
+        try:
+            # Check if the URL is valid and accessible
+            response = requests.head(test_url, allow_redirects=True, timeout=5)
+            if response.status_code == 200:
+                return test_url
+        except requests.RequestException:
+            continue  # Skip to the next host
+
+    return "Unable to determine the host. Please specify or verify the correct base URL."
+  
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
+def extract_pdf_links(url, headless=True):
+    """
+    Extracts all PDF links from a given webpage using Selenium.
+
+    Args:
+        url (str): The URL of the webpage to scan for PDF links.
+        headless (bool): Whether to run the browser in headless mode. Defaults to True.
+
+    Returns:
+        list: A list of found PDF URLs. Returns an empty list if no PDF links are found.
+    """
+    # Set up Selenium WebDriver options
+    options = Options()
+    if headless:
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
+    try:
+        # Navigate to the target URL
+        driver.get(url)
+
+        # Find all anchor tags
+        links = driver.find_elements(By.TAG_NAME, "a")
+
+        # Filter and collect PDF links
+        pdf_links = [
+            link.get_attribute("href")
+            for link in links
+            if link.get_attribute("href") and ".pdf" in link.get_attribute("href").lower()
+        ]
+
+        # Return the list of PDF links
+        return pdf_links
+
+    except Exception as e:
+        print(f"Error while extracting PDF links: {e}")
+        return []
+
+    finally:
+        # Close the browser
+        driver.quit()
+
+
+
+from bs4 import BeautifulSoup
+
+def html_to_plain_text_selenium(url, headless=True):
+    print(url)
+    """
+    Fetches a webpage using Selenium, extracts its HTML content, converts it to plain text, 
+    and saves it to a text file.
+
+    Args:
+        url (str): The URL of the webpage to fetch.
+        output_file (str): Path to the output text file to save the plain text content.
+        headless (bool): Whether to run the browser in headless mode.
+
+    Returns:
+        None
+    """
+    # Set up Selenium options
+    options = webdriver.ChromeOptions()
+    if headless:
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36")
+
+    # Initialize WebDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
+    try:
+        # Navigate to the webpage
+        driver.get(url)
+
+        # Fetch the full page HTML content
+        page_html = driver.page_source
+
+        # Use BeautifulSoup to parse the HTML and extract plain text
+        soup = BeautifulSoup(page_html, "html.parser")
+        plain_text = soup.get_text(separator="\n", strip=True)
+
+        return plain_text
+
+    except Exception as e:
+        print(f"Error occurred while processing the page: {e}")
+
+    finally:
+        # Close the browser
+        driver.quit()
+        
+def get_final_redirected_url(url, headless=True):
+    """
+    Gets the final redirected URL, including handling dynamic JavaScript or meta-refresh-based redirections, using Selenium.
+
+    Parameters:
+        url (str): The initial URL to start tracking.
+        headless (bool): Whether to run the browser in headless mode. Defaults to True.
+
+    Returns:
+        str: The final redirected URL.
+
+    Raises:
+        Exception: If there is an error setting up Selenium or navigating the URL.
+    """
+    # Configure Selenium WebDriver
+    options = Options()
+    if headless:
+        options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+
+    # Use ChromeDriverManager to handle the WebDriver setup
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
+    try:
+        # Navigate to the initial URL
+        driver.get(url)
+
+        # Return the final URL
+        return driver.current_url
+    except Exception as e:
+        raise Exception(f"Error getting final URL: {e}")
+    finally:
+        # Ensure the browser is closed
+        driver.quit()

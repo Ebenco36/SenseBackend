@@ -144,9 +144,10 @@ searchRegEx ={
         },
         "Economic-Aspects": {
            "Economic-Aspects": [
-               "cost effectiveness", "cost-effectiveness", 
-               "cost", "cost effectiveness", "economic evaluation", 
-               "Cost-effectiveness of HPV vaccination strategies"
+                "economic", "cost", "financial", "economic impact",
+                "cost effectiveness", "cost-effectiveness", 
+                "cost", "cost effectiveness", "economic evaluation", 
+                "Cost-effectiveness of HPV vaccination strategies"
            ] 
         },
         "Modeling": {
@@ -185,6 +186,22 @@ searchRegEx ={
                 "death", "mortality", "overall mortality", 
                 "cancer related mortality", "on overall and cancer mortality"
             ],
+        }
+    },
+    "Reviews": {
+        "Reviews": {
+            "review": [
+                "systematic review", "Literature Review", "review", 
+                "Meta-Analysis", "Critical Review", "Peer Review", 
+                "Book Review", "Editorial Review", "Review Article"
+            ]
+        }
+    },
+    "Studies": {
+        "NoOfStudies": {
+            "number_of_studies": [
+                "studies", "studies"
+            ]
         }
     },
     "Intervention": {
