@@ -117,7 +117,7 @@ def medline_access(searchText="COvid"):
     headers = format_text_to_json(head)
     ServiceFactory.create_service("medline").fetch(searchText)
 
-def medline_class_access(searchText="COvid"):
+def medline_class_access(searchText=["antimicrobial resistance", "machine learning in healthcare"]):
     ServiceFactory.create_service("medline_class").fetch(searchText)
     
 def cochrane_access(searchText="COvid"):

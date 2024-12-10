@@ -110,7 +110,7 @@ def clean_data_for_insertion(row, model):
             try:
                 cleaned_data[column] = float(value)
             except ValueError:
-                print("there is a problem with " + column)
+                print("there is a problem with " + column + " Value: " + value)
                 cleaned_data[column] = None
         else:
             cleaned_data[column] = value

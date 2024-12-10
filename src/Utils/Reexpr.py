@@ -26,7 +26,7 @@ pattern_dict_regex = {
 searchRegEx ={
     "Population": {
         "AgeGroup": {
-            "Newborn_0-1": [
+            "Newborn_0__1": [
                 'newborn',
                 'babies',
                 'baby',
@@ -36,21 +36,21 @@ searchRegEx ={
                 'youngsters',
                 'small children'
             ],
-            "Children_2-9": [
+            "Children_2__9": [
                 "child", "children"
             ],
-            "Adolescents_10-17": [
+            "Adolescents_10__17": [
                 "adolescents", "adolescent", "young adults"
             ],
-            "Adults_18-64": [
+            "Adults_18__64": [
                 "adults", "adult"
             ],
-            "OlderAdults_65-10000": [
+            "OlderAdults_65__10000": [
                 "elderly", "older adults"
             ]
         },
-        "SpecificGroup": {
-            "HealthcareWorkers": [
+        "Specific__Group": {
+            "Healthcare__Workers": [
                 "Physician",
                 "Nurse",
                 "Surgeon",
@@ -82,17 +82,17 @@ searchRegEx ={
                 "Cardiologist",
                 "Gastroenterologist"
             ],
-            "PregnantWomen": [
+            "Pregnant__Women": [
                 "pregnant", "pregnant women"
             ],
             "Travellers": [
                 "traveller"
             ],
-            "ParentsCaregivers": [
+            "Parents__Caregivers": [
                 "parents", "caregivers"
             ]
         },
-        "ImmuneStatus": {
+        "Immune__Status": {
             "Immunocompromised": [
                 "immunocompromised"
             ],
@@ -102,8 +102,8 @@ searchRegEx ={
         }
     },
     "Topic": {
-        "Efficacy-Effectiveness": {
-           "Efficacy-Effectiveness": [
+        "Efficacy__Effectiveness": {
+           "Efficacy__Effectiveness": [
                "effectiveness", "impact of", "effectiveness of", "efficacy"
            ] 
         },
@@ -112,8 +112,8 @@ searchRegEx ={
                "safety", "adverse effects", "adverse events"
            ] 
         },
-        "Risk-Factor": {
-           "Risk-Factor": [
+        "Risk__Factor": {
+           "Risk__Factor": [
                "risk factor", "risk"
            ] 
         },
@@ -142,8 +142,8 @@ searchRegEx ={
                "Two doses of"
            ] 
         },
-        "Economic-Aspects": {
-           "Economic-Aspects": [
+        "Economic__Aspects": {
+           "Economic__Aspects": [
                 "economic", "cost", "financial", "economic impact",
                 "cost effectiveness", "cost-effectiveness", 
                 "cost", "cost effectiveness", "economic evaluation", 
@@ -155,8 +155,8 @@ searchRegEx ={
                "modeling"
            ] 
         },
-        "Ethical-Issues": {
-           "Ethical-Issues": [
+        "Ethical__Issues": {
+           "Ethical__Issues": [
                "racial", "ethnic", 
                "ethnic minority", "racial minority", 
                "racial/ethnic", "racial/ethnic minority", 
@@ -198,15 +198,15 @@ searchRegEx ={
         }
     },
     "Studies": {
-        "NoOfStudies": {
-            "number_of_studies": [
+        "No__Of__Studies": {
+            "number__of__studies": [
                 "studies", "studies"
             ]
         }
     },
     "Intervention": {
-        "Vaccine-preventable-disease": {
-            "COVID-19": [
+        "Vaccine__preventable__disease": {
+            "COVID__19": [
                 "COVID-19", "COVID", "COVID 19"
             ],
             "Influenza": [
@@ -219,17 +219,17 @@ searchRegEx ={
                 "rotavirus"
             ]
         },
-        "Vaccine-Options": {
+        "Vaccine__Options": {
             "Live": [
                 "live"
             ],
-            "Non-Live": [
+            "Non__Live": [
                 "non-live"
             ],
             "Adjuvants": [
                 "adjuvants"
             ],
-            "Non-Adjuvanted": [
+            "Non__Adjuvanted": [
                 "non-adjuvanted"
             ]
         },

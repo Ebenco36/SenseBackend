@@ -8,68 +8,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 493, in wrapper
-    return self.make_response(data, code, headers=headers)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 522, in make_response
-    resp = self.representations[mediatype](data, *args, **kwargs)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/representations/json.py", line 21, in output_json
-    dumped = dumps(data, **settings) + "\n"
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
-    return cls(
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
-    chunks = list(chunks)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
-    o = _default(o)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type Response is not JSON serializable
-An internal server error occurred
-Traceback (most recent call last):
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 295, in error_router
-    return self.handle_error(e)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 310, in handle_error
-    _handle_flask_propagate_exceptions_config(current_app, e)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 493, in wrapper
-    return self.make_response(data, code, headers=headers)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 522, in make_response
-    resp = self.representations[mediatype](data, *args, **kwargs)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/representations/json.py", line 21, in output_json
-    dumped = dumps(data, **settings) + "\n"
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
-    return cls(
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
-    chunks = list(chunks)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
-    o = _default(o)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type Response is not JSON serializable
-An internal server error occurred
-Traceback (most recent call last):
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 295, in error_router
-    return self.handle_error(e)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 310, in handle_error
-    _handle_flask_propagate_exceptions_config(current_app, e)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 493, in wrapper
-    return self.make_response(data, code, headers=headers)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 522, in make_response
-    resp = self.representations[mediatype](data, *args, **kwargs)
-  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/representations/json.py", line 21, in output_json
-    dumped = dumps(data, **settings) + "\n"
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
-    return cls(
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
-    chunks = list(chunks)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
-    o = _default(o)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.19_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type Response is not JSON serializable
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/DBMerge/sense-app/lib/python3.9/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+TypeError: get() got an unexpected keyword argument 'id'

@@ -95,12 +95,14 @@ python ./src/Commands/dynamic_table.py ./MedlineData/medline_results.csv  medlin
 
 python ./src/Commands/UnifyCSV.py
 
+python ./src/Commands/dynamic_table.py ./HPV_training_set_HHL_AP_complete.csv  rough_db --primary 'Id'
+
 python ./src/Commands/dynamic_table.py ./output/unified_output.csv  all_db --primary 'Id'
 
 example: python script.py data.csv my_table --primary id_column1 id_column2 --fallback fallback_column1 fallback_column2
 Tagging pipeline for all papers
 =====================================================
-python paper_processing_pipeline.py
+python .src/Commands/PaperProcessorPipeline.py
 
 
 

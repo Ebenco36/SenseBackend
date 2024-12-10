@@ -5,8 +5,8 @@ from io import BytesIO
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from src.Commands.SeleniumPool import PDFDownloader
-from src.Utils.Helpers import extract_pdf_links
 from charset_normalizer import detect
+from src.Utils.Helpers import extract_pdf_links, clean_special_characters
 from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
 import PyPDF2
 
@@ -20,8 +20,7 @@ class MedlinePDFWebScraper(GeneralPDFWebScraper):
         session (requests.Session): A session for making HTTP requests with optional headers.
     """
 
-    def __init__(self, url, DB_name=None, header=None):
-        self.url = url
+    def __init__(self, DB_name=None, header=None):
         self.DB_name = DB_name
         self.session = requests.Session()
         self.session.headers.update(header or {
@@ -30,7 +29,13 @@ class MedlinePDFWebScraper(GeneralPDFWebScraper):
             "Accept-Language": "en-US,en;q=0.9",
             # "Accept-Encoding": "gzip, deflate, br"
         })
+        super().__init__(self.DB_name, self.session)
     
+    def set_doi_url(self, url):
+        self.url = url
+        super().set_doi_url(self.url)
+        return self
+        
     def generate_random_email(self, domain="gmail.com"):
         """Generates a random email address for Unpaywall API access."""
         local_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
@@ -38,70 +43,20 @@ class MedlinePDFWebScraper(GeneralPDFWebScraper):
         print(f"Generated email: {email}")
         return email
 
-    def fetch_pdf_urls(self):
-        """
-        Fetches all PDF URLs from the redirected URL by parsing HTML content.
-        Handles special cases like 'linkinghub' URLs with Unpaywall support.
 
-        Returns:
-            list: List of URLs pointing to PDF files.
-        """
-        pdfs = []
-        try:
-            redirected_url = self.fetch_redirected_url()
-            if not redirected_url:
-                print(f"Failed to fetch redirected URL for {self.url}")
-                return []
-            
-            if 'linkinghub' in redirected_url:
-                doi = self.extract_doi_from_url(self.url)
-                
-                if doi:
-                    pdf_urls = self.fetch_from_unpaywall(doi)
-                    pdfs = pdf_urls if pdf_urls else [doi]
-                
-            elif redirected_url:
-                pdf_links = extract_pdf_links(redirected_url)
-                pdfs = pdf_links
-                    
-            else:
-                doi = self.extract_doi_from_url(self.url)
-                if doi:
-                    pdfs = self.fetch_from_unpaywall(doi)
-                else:
-                    pdfs = []
-            
-            if len(pdfs) == 0:
-                doi = self.extract_doi_from_url(self.url)
-                if doi:
-                    pdfs = self.fetch_from_unpaywall(doi)
-                else:
-                    pdfs = []
-            
-                 
-            return pdfs
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching PDF URLs: {e}")
-            return []
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return []
+    # def fetch_and_extract_first_valid_pdf_text(self):
+    #     """
+    #     Fetches and extracts text from the first available PDF URL, or falls back to HTML content.
 
+    #     Returns:
+    #         str: Extracted text content from the first valid PDF or HTML as fallback.
+    #     """
+    #     pdf_urls = self.fetch_pdf_urls_2()
+    #     # for pdf_url in pdf_urls:
+    #     pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
+    #     if pdf_content and "application/pdf" in content_type:
+    #         text = self.extract_text_from_pdf(pdf_content)
+    #         if text:
+    #             return clean_special_characters(text)
 
-    def fetch_and_extract_first_valid_pdf_text(self):
-        """
-        Fetches and extracts text from the first available PDF URL, or falls back to HTML content.
-
-        Returns:
-            str: Extracted text content from the first valid PDF or HTML as fallback.
-        """
-        pdf_urls = self.fetch_pdf_urls()
-        # for pdf_url in pdf_urls:
-        pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
-        if pdf_content and "application/pdf" in content_type:
-            text = self.extract_text_from_pdf(pdf_content)
-            if text:
-                return text
-
-        return self.fetch_text_from_html()
+    #     return self.fetch_text_from_html()

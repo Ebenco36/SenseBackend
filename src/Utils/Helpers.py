@@ -4,8 +4,8 @@ import csv
 import re
 import json
 import xmltodict
-from urllib.parse import urlparse
 import requests
+import unicodedata
 import pycountry
 import pandas as pd
 import cloudscraper
@@ -17,6 +17,7 @@ from src.Utils.Reexpr import searchRegEx
 from pypdf import PdfReader, PdfReader, errors
 from src.Utils.data import population_acronyms
 from src.Utils.Reexpr import pattern_dict_regex
+from urllib.parse import urlparse, parse_qs, urlencode
 from src.Utils.ResolvedReturn import ourColumns, preprocessResolvedData
 
 """
@@ -182,10 +183,14 @@ def getDOI(doi):
         return url
     else:
         return doi
+def contains_http_or_https(url):
+    return bool(re.search(r'https?://', url))
 
 def downloadDOIPDF(doi_path):
     base_url = 'https://dx.doi.org/'
     # Replace 'your_pdf_url' with the URL of the PDF you want to extract text from
+    if contains_http_or_https(doi_path):
+        doi_url = doi_path
     doi_url = base_url + doi_path
 
     # doi_url = 'https://dx.doi.org/10.1038/s41435-018-0040-1'
@@ -1249,6 +1254,7 @@ def extract_pdf_links(url, headless=True):
         return pdf_links
 
     except Exception as e:
+        print(url)
         print(f"Error while extracting PDF links: {e}")
         return []
 
@@ -1295,15 +1301,16 @@ def html_to_plain_text_selenium(url, headless=True):
         # Use BeautifulSoup to parse the HTML and extract plain text
         soup = BeautifulSoup(page_html, "html.parser")
         plain_text = soup.get_text(separator="\n", strip=True)
-
         return plain_text
 
     except Exception as e:
         print(f"Error occurred while processing the page: {e}")
+        return ""
 
     finally:
         # Close the browser
         driver.quit()
+        return ""
         
 def get_final_redirected_url(url, headless=True):
     """
@@ -1342,3 +1349,182 @@ def get_final_redirected_url(url, headless=True):
     finally:
         # Ensure the browser is closed
         driver.quit()
+
+def extract_unique_countries(unique_items):
+    """
+    Extracts unique country names from a list of mixed strings and lists.
+    If the list contains any non-string items except None, the original list is returned.
+
+    Parameters:
+        unique_items (list): List of strings containing country names or lists of country names.
+
+    Returns:
+        list: Sorted list of unique country names, or the original list if it contains invalid items.
+    """
+    # Filter out None values
+    unique_items = [item for item in unique_items if item is not None]
+
+    # Check if all remaining items are strings
+    if not all(isinstance(item, str) for item in unique_items):
+        return unique_items
+
+    processed_items = set()  # Using a set to store unique country names
+
+    for item in unique_items:
+        try:
+            # Check if the item looks like a list
+            if item.startswith("[") and item.endswith("]"):
+                # Safely evaluate the string as a Python list
+                countries = ast.literal_eval(item)
+                processed_items.update(countries)
+            elif item.strip():  # If it's not empty, add it directly
+                processed_items.add(item.strip())
+        except Exception as e:
+            print(f"Error processing item '{item}': {e}")
+
+    # Convert to sorted list for cleaner output
+    return sorted(processed_items)
+
+
+def preprocess_languages(language_list):
+    """
+    Preprocess a list of language entries to extract unique individual languages.
+
+    Parameters:
+        language_list (list): A list of strings containing language names, potentially combined with commas.
+
+    Returns:
+        list: A sorted list of unique individual languages.
+    """
+    processed_languages = set()
+
+    for item in language_list:
+        # Split the language string by commas and strip whitespace
+        languages = [lang.strip() for lang in item.split(',')]
+        # Add each language to the set to ensure uniqueness
+        processed_languages.update(languages)
+
+    # Convert the set to a sorted list for cleaner output
+    return sorted(processed_languages)
+
+def convert_elsevier_to_sciencedirect(url):
+    """
+    Converts an Elsevier linkinghub URL to a ScienceDirect URL.
+
+    Parameters:
+        url (str): The linkinghub.elsevier.com URL to convert.
+
+    Returns:
+        str: The corresponding ScienceDirect URL, or an error message if the URL format is invalid.
+    """
+    try:
+        # Parse the URL
+        parsed_url = urlparse(url)
+        path_segments = parsed_url.path.split('/')
+
+        # Check for valid Elsevier linkinghub format
+        if "linkinghub.elsevier.com" not in parsed_url.netloc or "pii" not in path_segments:
+            return "Invalid Elsevier linkinghub URL."
+
+        # Extract the PII (Publisher Item Identifier)
+        pii_index = path_segments.index("pii") + 1
+        if pii_index < len(path_segments):
+            pii = path_segments[pii_index]
+        else:
+            return "PII not found in the URL."
+
+        # Construct the ScienceDirect URL
+        sciencedirect_url = (
+            f"https://www.sciencedirect.com/science/article/abs/pii/{pii}?{urlencode({'via': 'ihub'})}"
+        )
+
+        return sciencedirect_url
+
+    except Exception as e:
+        return f"An error occurred: {e}"
+    
+def clean_special_characters(text):
+    """
+    Cleans a string by replacing or removing special characters, formatting artifacts, and non-standard whitespaces.
+
+    Parameters:
+        text (str): The input string to clean.
+
+    Returns:
+        str: The cleaned string.
+    """
+    # Replace non-breaking spaces (\xa0) and other whitespace variants with a single space
+    text = text.replace("\xa0", " ").replace("\t", " ").replace("\r", " ").replace("\n", " ")
+
+    # Normalize Unicode characters to their closest ASCII equivalent
+    text = unicodedata.normalize("NFKD", text)
+
+    # Replace uncommon dash variations with a standard dash
+    text = re.sub(r"[‐‑‒–—―]", "-", text)
+
+    # Replace special quotes with standard quotes
+    text = text.replace("“", "\"").replace("”", "\"").replace("‘", "'").replace("’", "'")
+
+    # Remove common non-text artifacts (e.g., ©, ®, ™, …)
+    text = re.sub(r"[©®™…]", "", text)
+
+    # Remove URLs
+    text = re.sub(r"http[s]?://\S+|www\.\S+", "", text)
+
+    # Remove any remaining non-alphanumeric characters except essential punctuation
+    text = re.sub(r"[^a-zA-Z0-9,.\-!?\"'() ]+", " ", text)
+
+    # Replace multiple consecutive spaces with a single space
+    text = re.sub(r"\s+", " ", text)
+
+    # Trim leading and trailing spaces
+    text = text.strip()
+
+    return text
+
+import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
+import json
+import time
+
+def load_cookies(driver, cookies_file):
+    """
+    Load cookies from a file into the Selenium driver.
+
+    Parameters:
+        driver: Selenium WebDriver instance.
+        cookies_file: Path to the JSON file containing cookies.
+    """
+    with open(cookies_file, "r") as file:
+        cookies = json.load(file)
+        for cookie in cookies:
+            driver.add_cookie(cookie)
+
+def fetch_all_content_for_linked(url, cookies_file):
+    try:
+        # Start an undetected Chrome browser
+        driver = uc.Chrome()
+
+        # Open the target page
+        driver.get(url)
+
+        # Load cookies
+        load_cookies(driver, cookies_file)
+
+        # Refresh the page to apply cookies
+        driver.refresh()
+        time.sleep(1)
+        all_text = ""
+        # Extract all visible content from all elements
+        try:
+            all_elements = driver.find_elements(By.XPATH, "//*")
+            all_text = "\n".join([element.text.strip() for element in all_elements if element.text.strip()])
+        except Exception:
+            all_text = "Content not found."
+    
+        driver.quit()
+
+        return all_text
+    
+    except Exception as e:
+        return f"Error occurred: {e}"

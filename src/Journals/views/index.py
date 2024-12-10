@@ -1,6 +1,7 @@
-from flask import request, jsonify
+from flask import request
 from flask_restful import Resource
 from src.Journals.services import JSONService
+from src.Utils.response import ApiResponse
 
 # Initialize JSONService
 json_service = JSONService()
@@ -19,14 +20,24 @@ class RecordsAPI(Resource):
         }
         """
         try:
-            payload = request.json
+            payload = request.get_json()
             if not payload:
-                return {"error": "Invalid payload"}, 400
+                return ApiResponse.error(message="Invalid payload: Missing or malformed JSON", status_code=400)
 
             response = json_service.create(payload)
-            return response, 201 if "success" in response else 400
+            if response.get("success"):
+                return ApiResponse.success(
+                    message=response.get("message", "Record created successfully"), 
+                    status_code=201
+                )
+            else:
+                return ApiResponse.error(
+                    errors=response.get("error", "Unknown error occurred"), 
+                    status_code=400
+                )
         except Exception as e:
-            return {"error": str(e)}, 500
+            logger.error(f"Error in RecordsAPI.post: {str(e)}")
+            return ApiResponse.error(message="An unexpected error occurred", status_code=500)
 
     def get(self):
         """
@@ -41,13 +52,21 @@ class RecordsAPI(Resource):
         }
         """
         try:
+            # Determine payload source based on request type
             query_params = request.args.to_dict()
-            payload = request.json if request.is_json else query_params
+            payload = request.get_json() if request.is_json else query_params
 
+            # Call the service layer to handle the logic
             response = json_service.read(payload)
-            return response, 200 if "success" in response else 400
+
+            # Use ApiResponse to format the response
+            if "success" in response:
+                return ApiResponse.success(data=response.get("data", {}), message="Operation successful", status_code=200)
+            else:
+                return ApiResponse.error(errors=response.get("error", "Unknown error"), status_code=400)
         except Exception as e:
-            return {"error": str(e)}, 500
+            # Handle unexpected exceptions with ApiResponse
+            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
 
     def put(self, record_id):
         """
@@ -59,15 +78,24 @@ class RecordsAPI(Resource):
         }
         """
         try:
-            payload = request.json
+            payload = request.get_json()
             if not payload:
-                return {"error": "Invalid payload"}, 400
+                return ApiResponse.error(message="Invalid payload: Missing or malformed JSON", status_code=400)
 
+            # Add `record_id` to the payload
             payload["record_id"] = record_id
+
+            # Process the update using the service layer
             response = json_service.update(payload)
-            return response, 200 if "success" in response else 400
+
+            # Determine the response based on the service output
+            if "success" in response:
+                return ApiResponse.success(data=response, message="Record updated successfully", status_code=200)
+            else:
+                return ApiResponse.error(errors=response.get("error", "Unknown error occurred"), status_code=400)
         except Exception as e:
-            return {"error": str(e)}, 500
+            # Handle unexpected exceptions
+            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
 
     def delete(self, record_id):
         """
@@ -76,12 +104,22 @@ class RecordsAPI(Resource):
             ?table=my_table
         """
         try:
+            # Get table name from query parameters
             table_name = request.args.get("table")
             if not table_name:
-                return {"error": "Table name is required"}, 400
+                return ApiResponse.error(message="Table name is required", status_code=400)
 
+            # Prepare the payload for deletion
             payload = {"table": table_name, "record_id": record_id}
+
+            # Process the delete operation
             response = json_service.delete(payload)
-            return response, 200 if "success" in response else 400
+
+            # Check the response for success or error
+            if "success" in response:
+                return ApiResponse.success(data=response, message="Record deleted successfully", status_code=200)
+            else:
+                return ApiResponse.error(errors=response.get("error", "Unknown error occurred"), status_code=400)
         except Exception as e:
-            return {"error": str(e)}, 500
+            # Handle unexpected exceptions
+            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)

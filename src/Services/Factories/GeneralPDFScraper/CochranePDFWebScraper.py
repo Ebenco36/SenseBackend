@@ -4,6 +4,7 @@ from io import BytesIO
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from src.Commands.SeleniumPool import PDFDownloader
+from src.Utils.Helpers import clean_special_characters
 from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
 import PyPDF2
 
@@ -18,8 +19,7 @@ class CochranePDFWebScraper(GeneralPDFWebScraper):
         session (requests.Session): HTTP session with custom headers for Cochrane.
     """
 
-    def __init__(self, url, DB_name="Cochrane", header=None):
-        self.url = url
+    def __init__(self, DB_name="Cochrane", header=None):
         self.DB_name = DB_name
         self.session = requests.Session()
         self.session.headers.update(header or {
@@ -32,8 +32,13 @@ class CochranePDFWebScraper(GeneralPDFWebScraper):
         if self.DB_name == "Cochrane":
             self._initialize_cochrane_session()
         
-        super().__init__(self.url, self.DB_name, self.session)
-
+        super().__init__(self.DB_name, self.session)
+        
+    def set_doi_url(self, url):
+        self.url = url
+        super().set_doi_url(self.url)
+        return self
+        
     def _initialize_cochrane_session(self):
         """Sets Cochrane-specific headers and manages keep-alive requests."""
         cochrane_alive_url = "https://www.cochranelibrary.com/delegate/scolarisauthportlet/keep-alive"
@@ -68,30 +73,34 @@ class CochranePDFWebScraper(GeneralPDFWebScraper):
             response = self.session.get(self.url)
             response.raise_for_status()
             soup = BeautifulSoup(response.content, 'html.parser')
-            return soup.get_text()
+            return clean_special_characters(soup.get_text())
         except requests.exceptions.RequestException as e:
             print(f"Error fetching HTML content for Cochrane: {e}. But we are trying a different method.")
             from src.Utils.Helpers import html_to_plain_text_selenium
-            return html_to_plain_text_selenium(self.url, headless=True)
+            return clean_special_characters(
+                html_to_plain_text_selenium(
+                    self.url, 
+                    headless=True
+                )
+            )
 
-    def fetch_and_extract_first_valid_pdf_text(self):
-        """
-        Fetches the first available PDF content from Cochrane URL, extracts text, 
-        or returns HTML text as a fallback if PDF is not available.
-        """
-        self.session.headers.update({
-            "Accept-Encoding": "gzip, deflate, br"
-        })
-        pdf_urls = self.fetch_pdf_urls()
-        # for pdf_url in pdf_urls:
-        print(pdf_urls[0])
-        pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
-        if pdf_content and "application/pdf" in content_type:
-            text = self.extract_text_from_pdf(pdf_content)
-            if text:
-                return text
+    # def fetch_and_extract_first_valid_pdf_text(self):
+    #     """
+    #     Fetches the first available PDF content from Cochrane URL, extracts text, 
+    #     or returns HTML text as a fallback if PDF is not available.
+    #     """
+    #     self.session.headers.update({
+    #         "Accept-Encoding": "gzip, deflate, br"
+    #     })
+    #     pdf_urls = self.fetch_pdf_urls()
+        
+    #     pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
+    #     if pdf_content and "application/pdf" in content_type:
+    #         text = self.extract_text_from_pdf(pdf_content)
+    #         if text:
+    #             return clean_special_characters(text)
 
-        # Fallback to HTML content if no valid PDF is found
-        if self.DB_name == "Cochrane":
-            return self.fetch_text_from_html_for_cochrane()
-        return self.fetch_text_from_html()
+    #     # Fallback to HTML content if no valid PDF is found
+    #     if self.DB_name == "Cochrane":
+    #         return self.fetch_text_from_html_for_cochrane()
+    #     return self.fetch_text_from_html()

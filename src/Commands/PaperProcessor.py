@@ -11,12 +11,13 @@ from bs4 import BeautifulSoup
 from flask import request, jsonify
 from src.Commands.regexp import searchRegEx
 from src.Commands.TaggingSystem import Tagging
+from src.Utils.Helpers import contains_http_or_https
 from src.Services.Factories.GeneralPDFScraper.CochranePDFWebScraper import CochranePDFWebScraper
 from src.Services.Factories.GeneralPDFScraper.LOVEPDFWebScraper import LOVEPDFWebScraper
 from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
 from src.Services.Factories.GeneralPDFScraper.MedlinePDFWebScraper import MedlinePDFWebScraper
 from src.Services.Factories.GeneralPDFScraper.OVIDPDFWebScraper import OVIDPDFWebScraper
-from src.Commands.TaggingSystemFunctionBased import TaggingSystemFunctionBased
+# from src.Commands.TaggingSystemFunctionBased import TaggingSystemFunctionBased
 
 class PaperProcessor:
     DOI_PREFIX = "https://dx.doi.org/"
@@ -26,6 +27,7 @@ class PaperProcessor:
         self.tag_columns = set()
         self.csv_file_path = csv_file_path
         self.server_headers = server_headers
+        self.scrapers = {}
         self.data = []
 
     def process_papers(self, db_name=None):
@@ -73,16 +75,21 @@ class PaperProcessor:
 
     def _select_scraper(self, doi_url, db_name):
         """Selects the appropriate scraper based on the database name."""
-        if db_name == "Cochrane":
-            return CochranePDFWebScraper(doi_url, db_name, self.server_headers)
-        elif db_name == "LOVE":
-            return LOVEPDFWebScraper(doi_url, db_name, self.server_headers)
-        elif db_name == "Medline":
-            return MedlinePDFWebScraper(doi_url, db_name, self.server_headers)
-        elif db_name == "OVID":
-            return OVIDPDFWebScraper(doi_url, db_name, self.server_headers)
-        else:
-            return GeneralPDFWebScraper(doi_url, db_name, self.server_headers)
+        if db_name not in self.scrapers:
+            # Instantiate and cache the scraper for the given database
+            if db_name == "Cochrane":
+                self.scrapers[db_name] = CochranePDFWebScraper(db_name, self.server_headers)
+            elif db_name == "LOVE":
+                self.scrapers[db_name] = LOVEPDFWebScraper(db_name, self.server_headers)
+            elif db_name == "Medline":
+                self.scrapers[db_name] = MedlinePDFWebScraper(db_name, self.server_headers)
+            elif db_name == "OVID":
+                self.scrapers[db_name] = OVIDPDFWebScraper(db_name, self.server_headers)
+            else:
+                self.scrapers[db_name] = LOVEPDFWebScraper(db_name, self.server_headers)
+
+        # Reuse the cached instance and set the DOI URL
+        return self.scrapers[db_name].set_doi_url(doi_url)
 
     def _construct_doi_url(self, doi, doi_link, db_name):
         """Constructs the DOI URL based on the database name and DOI."""
@@ -96,8 +103,15 @@ class PaperProcessor:
             else:
                 print("No valid DOI found.")
                 return ""
-        return doi if self.DOI_PREFIX in doi.lower() else self.DOI_PREFIX + doi
+        return self.format_doi(doi)
 
+
+    def format_doi(self, doi):
+        if (self.DOI_PREFIX in doi.lower() or contains_http_or_https(doi)):
+            return doi
+        else:
+            return self.DOI_PREFIX + doi
+    
     def construct_pdf_url(self, full_url):
         """Constructs the PDF URL path based on the DOI prefix and article code."""
         if "/full" in full_url and "/doi/" in full_url:

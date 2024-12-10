@@ -102,10 +102,15 @@ class GeneralPDFWebScraper:
             # Parse the URL to get the path
             url = url.lower()
             parsed_url = urlparse(url)
+            # Also check using regular patterns
+            doi_pattern = r'10.\d{4,9}/[-._;()/:A-Z0-9]+'
+            match = re.search(doi_pattern, url, re.IGNORECASE)
             # The DOI is usually the part of the path after 'dx.doi.org/'
             if 'dx.doi.org' in parsed_url.netloc:
                 doi = parsed_url.path.lstrip('/')  # Remove leading slashes
                 return doi
+            elif(match):
+                return match.group(0)
             else:
                 print("Invalid DOI URL format")
                 return None

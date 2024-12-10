@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint
 from flask_restful import Api
 from src.Journals.routes import journal_routes
+from src.Pages.routes import pages_routes
 
 class RouteInitialization:
     def __init__(self):
@@ -9,6 +10,12 @@ class RouteInitialization:
                 "name": "journals", 
                 "blueprint":  Blueprint('Journals', __name__, static_url_path="assets"), 
                 "register_callback": journal_routes, 
+                "url_prefix": "/api/v1"
+            },
+            {
+                "name": "pages", 
+                "blueprint":  Blueprint('Pages', __name__, static_url_path="assets"), 
+                "register_callback": pages_routes, 
                 "url_prefix": "/api/v1"
             },
             

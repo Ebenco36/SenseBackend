@@ -1,0 +1,32 @@
+[
+    {
+        "domain": ".sciencedirect.com",
+        "httpOnly": true,
+        "name": "SESSION_ID",
+        "path": "/",
+        "secure": true,
+        "value": "abcdef1234567890"
+    },
+    {
+        "domain": ".sciencedirect.com",
+        "httpOnly": true,
+        "name": "ACCESS_TOKEN",
+        "path": "/",
+        "secure": true,
+        "value": "xyz0987654321"
+    },
+    {
+        "domain": ".sciencedirect.com",
+        "name": "locale",
+        "path": "/",
+        "secure": false,
+        "value": "en"
+    },
+    {
+        "domain": ".sciencedirect.com",
+        "name": "OTHER_COOKIE",
+        "path": "/",
+        "secure": false,
+        "value": "example_value"
+    }
+]

@@ -1,18 +1,34 @@
 from Bio import Entrez, Medline
 import pandas as pd
 from io import StringIO
+import time
+import requests
 
 class MedlineClass:
     def __init__(self):
         """
         Initializes the MedlineClass with email and API key for Entrez.
-        
-        Parameters:
-            email (str): Your email address for NCBI access.
-            api_key (str): Your NCBI API key.
         """
         Entrez.email = "ebenco94@gmail.com"
         Entrez.api_key = "d4658719b8b55fb6817d221776bbddece608"
+
+    def validate_query(self, query):
+        """
+        Validates the query to ensure it is meaningful.
+        
+        Parameters:
+            query (str): The search query.
+        
+        Returns:
+            bool: True if the query is valid, False otherwise.
+        """
+        if not query.strip():
+            print("Empty query. Skipping.")
+            return False
+        if len(query.strip()) < 3:  # Avoid single characters or very short queries
+            print(f"Query '{query}' is too short. Skipping.")
+            return False
+        return True
 
     def search_medline(self, query):
         """
@@ -24,15 +40,34 @@ class MedlineClass:
         Returns:
             list: A list of PubMed article IDs.
         """
-        # Set retmax to a high number to retrieve all records (up to NCBI's limit)
-        handle = Entrez.esearch(db="pubmed", term=query, retmax=100000)
-        record = Entrez.read(handle)
-        handle.close()
-        return record["IdList"]
+        all_ids = []
+        retmax = 10000
+        retstart = 0
+
+        while True:
+            try:
+                handle = Entrez.esearch(db="pubmed", term=query, retmax=retmax, retstart=retstart)
+                record = Entrez.read(handle)
+                handle.close()
+
+                all_ids.extend(record["IdList"])
+
+                # If fewer results than retmax are returned, we're done
+                if len(record["IdList"]) < retmax:
+                    break
+
+                retstart += retmax
+                time.sleep(0.5)  # To avoid exceeding rate limits
+            except Exception as e:
+                print(f"Error during search with query '{query}': {e}")
+                break
+
+        print(f"Total IDs retrieved for query '{query}': {len(all_ids)}")
+        return all_ids
 
     def fetch_details(self, id_list):
         """
-        Fetches article details in MEDLINE format for given article IDs.
+        Fetches article details in MEDLINE format for given article IDs in batches.
         
         Parameters:
             id_list (list): List of PubMed article IDs.
@@ -40,59 +75,164 @@ class MedlineClass:
         Returns:
             list: A list of article records as dictionaries.
         """
-        ids = ",".join(id_list)
-        handle = Entrez.efetch(db="pubmed", id=ids, rettype="medline", retmode="text")
-        records = Medline.parse(StringIO(handle.read()))
-        handle.close()
+        records = []
+        batch_size = 5000
+
+        for start in range(0, len(id_list), batch_size):
+            batch_ids = ",".join(id_list[start:start + batch_size])
+
+            try:
+                handle = Entrez.efetch(db="pubmed", id=batch_ids, rettype="medline", retmode="text")
+                batch_records = Medline.parse(StringIO(handle.read()))
+                records.extend(batch_records)
+                handle.close()
+                time.sleep(0.5)  # Respect NCBI rate limits
+            except Exception as e:
+                print(f"Error fetching batch {start}: {e}")
+                continue
+
+        print(f"Total records fetched: {len(records)}")
         return list(records)
 
+    def clean_doi(self, doi_list):
+        """
+        Cleans DOI strings to remove unwanted annotations like '[doi]'.
+        
+        Parameters:
+            doi_list (list): List of DOIs from the record.
+        
+        Returns:
+            str: Cleaned DOI string.
+        """
+        return "; ".join([doi.split()[0] for doi in doi_list if "doi" in doi.lower()])
+
+    def clean_dataset(self, df):
+        """
+        Cleans a dataset by normalizing, parsing, and handling missing or inconsistent data.
+
+        Parameters:
+            df (DataFrame): Raw dataset containing Medline data.
+
+        Returns:
+            DataFrame: A cleaned and processed dataset.
+        """
+        # Normalize column names
+        df.columns = [col.strip().replace(" ", "_").lower() for col in df.columns]
+
+        # Handle missing data
+        df.fillna({
+            'abstract': 'No abstract available', 
+            'authors': 'Unknown',
+            'doi': 'Unknown DOI',
+            'publication_type': 'Unknown',
+            'country': 'Unknown'
+        }, inplace=True)
+
+        # Clean abstract field
+        if 'abstract' in df.columns:
+            df['abstract'] = df['abstract'].str.replace('\n', ' ').str.strip()
+
+        # Extract publication year
+        if 'publication_date' in df.columns:
+            df['publication_year'] = pd.to_datetime(df['publication_date'], errors='coerce').dt.year
+
+        # Remove duplicate entries based on PMID
+        if 'pmid' in df.columns:
+            df.drop_duplicates(subset=['pmid'], inplace=True)
+
+        return df
+
+    def generate_random_email(self, domain="gmail.com"):
+        import random
+        import string
+        """Generates a random email address for Unpaywall API access."""
+        local_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+        email = f"{local_part}@{domain}"
+        # print(f"Generated email: {email}")
+        return email
+    
+    def fetch_from_unpaywall(self, doi):
+        """
+        Uses Unpaywall API to fetch open access PDF URL for a given DOI.
+
+        Args:
+            doi (str): The DOI to fetch the open access link.
+
+        Returns:
+            list: List containing the open access PDF URL if available.
+        """
+        email = self.generate_random_email()
+        try:
+            unpaywall_api_url = f"https://api.unpaywall.org/v2/{doi}?email={email}"
+            response = requests.get(unpaywall_api_url)
+            response.raise_for_status()
+            data = response.json()
+            return data
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching from Unpaywall: {e}")
+            return {}
+        
     def fetch(self, queries):
         """
-        Fetches articles for all queries, and saves data in CSV format.
+        Fetches articles for all queries, preprocesses, and saves cleaned data in CSV format.
         
         Parameters:
             queries (list): List of search queries for PubMed.
-            output_file (str): Name of the output CSV file.
         """
         all_data = []
 
         for query in queries:
-            id_list = self.search_medline(query)
-            records = self.fetch_details(id_list)
+            if not self.validate_query(query):
+                continue  # Skip invalid queries
 
-            # Process each record and convert to a dictionary
+            print(f"Processing query: {query}")
+            id_list = self.search_medline(query)
+
+            if not id_list:
+                print(f"No results found for query: {query}")
+                continue
+
+            print(f"Found {len(id_list)} articles for query: {query}")
+            records = self.fetch_details(id_list)
+                
+            # Convert each Medline record to a dictionary
             for record in records:
+                get_other_fields = {}
+                doi = self.clean_doi(record.get("AID", []))
+                if doi:
+                    get_other_fields = self.fetch_from_unpaywall(doi)
+                
                 record_data = {
                     "PMID": record.get("PMID", ""),
-                    "Status": record.get("STAT", ""),
-                    "Journal ID": record.get("JID", ""),
-                    "Volume": record.get("VI", ""),
-                    "Issue": record.get("IP", ""),
-                    "Publication Date": record.get("DP", ""),
                     "Title": record.get("TI", ""),
-                    "Pages": record.get("PG", ""),
-                    "DOI": record.get("AID", ""),
                     "Abstract": record.get("AB", ""),
                     "Authors": "; ".join(record.get("AU", [])),
-                    "Author Affiliations": "; ".join(record.get("AD", [])),
-                    "Language": record.get("LA", ""),
-                    "Publication Type": record.get("PT", ""),
+                    "Publication Date": record.get("DP", ""),
+                    "Journal": record.get("JT", ""),
                     "Country": record.get("PL", ""),
+                    "Language": "; ".join(record.get("LA", [])),
                     "MeSH Terms": "; ".join(record.get("MH", [])),
-                    "Substances": "; ".join(record.get("RN", [])),
-                    "Source": record.get("SO", ""),
-                    "Query": query
+                    "Publication Type": "; ".join(record.get("PT", [])),
+                    "DOI": doi,
+                    "Query": query,
+                    "year": get_other_fields.get("year", ""),
+                    "open_access": "Open Access" if get_other_fields.get("is_oa", False) == True else "Not Open Access",
                 }
                 all_data.append(record_data)
 
-        # Save all data to CSV
+        # Create a DataFrame and preprocess it
         df = pd.DataFrame(all_data)
-        df.to_csv("Medline-base/medline_results.csv", index=False)
-        print(f"Data saved to Medline-base/medline_results.csv")
+
+        if not df.empty:
+            print(f"Cleaning dataset with {len(df)} records...")
+            df = self.clean_dataset(df)
+            output_path = "MedlineData/medline_results.csv"
+            df.to_csv(output_path, index=False)
+            print(f"Data saved to {output_path}")
+        else:
+            print("No data to save.")
 
 # Example usage:
-# email = "your_email@example.com"
-# api_key = "your_api_key"
 # queries = ["antimicrobial resistance", "machine learning in healthcare"]
-# medline = MedlineClass(email, api_key)
+# medline = MedlineClass()
 # medline.fetch(queries)

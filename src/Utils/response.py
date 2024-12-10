@@ -1,20 +1,20 @@
-from flask import jsonify
+from flask import jsonify, make_response
 
 class ApiResponse:
     @staticmethod
-    def success(data=None, message='Success', status_code=200):
+    def success(data={}, message='Success', status_code=200):
         response = {
             'status': 'success',
             'message': message,
             'data': data
         }
-        return jsonify(response, status_code)
+        return make_response(jsonify(response), status_code)
 
     @staticmethod
-    def error(message='Error', status_code=400, errors=None):
+    def error(message='Error', status_code=400, errors={}):
         response = {
             'status': 'error',
             'message': message,
             'errors': errors
         }
-        return jsonify(response, status_code)
+        return make_response(jsonify(response), status_code)

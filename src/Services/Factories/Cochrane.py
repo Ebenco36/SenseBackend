@@ -61,6 +61,37 @@ class Cochrane(Service):
             return last_page
         return 0
     
+    def generate_random_email(self, domain="gmail.com"):
+        import random
+        import string
+        """Generates a random email address for Unpaywall API access."""
+        local_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+        email = f"{local_part}@{domain}"
+        # print(f"Generated email: {email}")
+        return email
+    
+    def fetch_from_unpaywall(self, doi):
+        """
+        Uses Unpaywall API to fetch open access PDF URL for a given DOI.
+
+        Args:
+            doi (str): The DOI to fetch the open access link.
+
+        Returns:
+            list: List containing the open access PDF URL if available.
+        """
+        email = self.generate_random_email()
+        try:
+            unpaywall_api_url = f"https://api.unpaywall.org/v2/{doi}?email={email}"
+            response = requests.get(unpaywall_api_url)
+            response.raise_for_status()
+            data = response.json()
+            return data
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching from Unpaywall: {e}")
+            return {}
+        
+        
     def fetch_cochrane_data_and_save(self, search_text, output_dir):
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
@@ -121,6 +152,10 @@ class Cochrane(Service):
             doi = ""
             if doi_match:
                 doi = doi_match.group(1)
+            
+            get_other_fields = {}
+            if doi:
+                get_other_fields = self.fetch_from_unpaywall(doi)
                 
             # Replace "/full" at the end with "/pdf/full"
             pdf_url = doi_link.replace("/full", "/pdf/full")
@@ -139,6 +174,9 @@ class Cochrane(Service):
                 "resultStage": result_stage,
                 "authors": author_list,
                 "abstract": abstract,
+                "year": get_other_fields.get("year", ""),
+                "journal": get_other_fields.get("journal_name", ""),
+                "open_access": "Open Access" if get_other_fields.get("is_oa", False) == True else "Not Open Access",
                 **pico_data  # Merge PICO data fields
             })
 

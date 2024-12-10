@@ -30,10 +30,79 @@ class CSVUnifier:
                 
                 # Add a source column with the specified source name
                 df['Source'] = source_name
+                
+                # Check if 'Id' column exists, otherwise create one
+                if 'Id' not in df.columns and 'id' not in df.columns:
+                    df['Id'] = [f"{source_name}_{i+1}" for i in range(len(df))]
+                    
+                # Extended mapping dictionary for language codes
+                language_map = {
+                    "eng": "English", "chi": "Chinese", "spa": "Spanish", "fre": "French",
+                    "ger": "German", "jpn": "Japanese", "tur": "Turkish", "rus": "Russian",
+                    "ita": "Italian", "hun": "Hungarian", "swe": "Swedish", "ara": "Arabic",
+                    "kor": "Korean", "por": "Portuguese", "hin": "Hindi", "heb": "Hebrew",
+                    "dut": "Dutch", "dan": "Danish", "nor": "Norwegian", "pol": "Polish",
+                    "tha": "Thai", "vie": "Vietnamese", "gre": "Greek", "ukr": "Ukrainian",
+                    "cze": "Czech", "rom": "Romanian", "tam": "Tamil", "ben": "Bengali"
+                }
+                if 'language' in df.columns:
+                    # Replace abbreviations with full forms
+                    df["language"] = df["language"].map(language_map).fillna("Unknown")
+                # Extract year from Date column if it exists
+                if 'publication_year' in df.columns and 'year' in df.columns:
+                    # Use 'publication_year' if available, otherwise fallback to 'year'
+                    df['Year'] = df['publication_year'].fillna(df['year']).fillna(-1).astype(int)
+                    # df.rename(columns={"year": "Year"}, inplace=True)
+                elif 'publication_year' in df.columns:
+                    # Only 'publication_year' exists
+                    df['Year'] = df['publication_year'].fillna(-1).astype(int)
+                elif 'year' in df.columns:
+                    # Only 'year' exists
+                    df['Year'] = df['year'].astype(int)
+                    # df.rename(columns={"year": "Year"}, inplace=True)
+                elif 'Date' in df.columns:
+                    # Extract year from 'Date' column
+                    df['Year'] = self.extract_year(df['Date']).fillna(-1).astype(int)
+                else:
+                    # Neither column exists, create 'Year' with NaN values
+                    df['Year'] = pd.NA
+                    
                 self.dataframes.append(df)
             except Exception as e:
                 print(f"Error loading {path}: {e}")
 
+    @staticmethod
+    def extract_year(date_series: pd.Series) -> pd.Series:
+        """Extracts the year from a series of dates in various formats."""
+        try:
+            # Define possible date formats to try
+            date_formats = [
+                '%Y %b %d',  # e.g., '2024 Dec 1'
+                '%d %B %Y',  # e.g., '17 December 2020'
+                '%Y',        # e.g., '2024'
+            ]
+
+            # Initialize a series with NaT
+            parsed_dates = pd.Series(pd.NaT, index=date_series.index)
+
+            # Attempt parsing with each format
+            for date_format in date_formats:
+                unparsed = parsed_dates.isna()  # Identify unparsed dates
+                parsed_dates[unparsed] = pd.to_datetime(
+                    date_series[unparsed], format=date_format, errors='coerce'
+                )
+
+            # Extract the year
+            years = parsed_dates.dt.year
+
+            # Ensure integers for valid years and NaN for missing values
+            return years.astype('Int64')  # Nullable integer type
+        except Exception as e:
+            print(f"Error extracting year: {e}")
+            return pd.Series([None] * len(date_series), dtype='Int64')
+
+        
+        
     def get_combined_columns(self) -> List[str]:
         """Determines combined columns from all DataFrames, prioritizing common columns."""
         all_columns = set()
@@ -75,11 +144,46 @@ class CSVUnifier:
         unified_data.to_csv(output_path, index=False)
         print(f"Unified CSV saved to {output_path}")
         
-        
+from datetime import datetime
+def get_latest_file(directory, prefix, suffix):
+    """
+    Get the latest file in a directory based on a date in the filename.
+
+    :param directory: Path to the directory to search for files.
+    :param prefix: The prefix of the filename to match (e.g., "merged_journal_data_").
+    :param suffix: The suffix or file extension to match (e.g., ".csv").
+    :return: The full path of the latest file or None if no matching file is found.
+    """
+    latest_file = None
+    latest_date = None
+
+    for filename in os.listdir(directory):
+        if filename.startswith(prefix) and filename.endswith(suffix):
+            # Extract the date part of the filename
+            date_str = filename[len(prefix):-len(suffix)]
+            try:
+                file_date = datetime.strptime(date_str, "%Y-%m-%d")
+                if latest_date is None or file_date > latest_date:
+                    latest_date = file_date
+                    latest_file = filename
+            except ValueError:
+                # Skip files with invalid date formats
+                continue
+
+    if latest_file:
+        return os.path.join(directory, latest_file)
+    return None
+
+directory = f"./OVIDNew/"
+prefix = "merged_journal_data_"
+suffix = ".csv"
+
+latest_file = get_latest_file(directory, prefix, suffix)
+     
 csv_sources = {
     "Cochrane/cochrane_combined_output.csv": "Cochrane",
     "MedlineData/medline_results.csv": "Medline",
-    "OVIDNew/merged_journal_data_2024-11-13.csv": "OVID",
+    f"{latest_file}": "OVID",
     "L-OVE/LOVE.csv": "LOVE"
 }
 
@@ -87,34 +191,43 @@ common_columns = ['Id', 'Title', 'Authors', 'DOI']
 
 rename_maps = {
     "Cochrane/cochrane_combined_output.csv": {
-        "cdIdentifier": "Id",
+        "cdIdentifier": "other_id",
         "title": "Title",
         "doi_link": "DOI",
         "doi": "DOI_only",
         "modifiedDate": "Date",
         "resultType": "Result_type",
-        "resultStage": "Result_stage",
+        "resultStage": "Publication_type",
         "authors": "Authors",
         "patient_population": "Cochrane_patient_population",
         "intervention": "Cochrane_intervention",
         "comparator": "Cochrane_comparator",
         "outcomes": "Cochrane_outcomes",
-        "abstract": "Abstract"                     
+        "abstract": "Abstract",
+        "journal": "Journal",
+        "open_access": "Open_access"                 
     },
     "MedlineData/medline_results.csv": {
-        "PMID": "Id",
-        "Publication Date": "Date",
-        "Source": "Medline_source"
+        "pmid": "other_id",
+        "title": "Title",
+        "abstract": "Abstract",
+        "authors": "Authors",
+        "publication_date": "Date",
+        "journal": "Journal",
+        "country": "Country", 
+        "publication_type": "Publication_type",
+        "doi": "DOI",
+        "open_access": "Open_access"   
     },
-    "OVIDNew/merged_journal_data_2024-11-13.csv": {
-        # Custom renaming for OVID if needed
+    f"{latest_file}": {
+        "PublicationType": "Publication_type",
+        "DateDelivered": "Date"
     },
     "L-OVE/LOVE.csv": {
-        "id": "Id",
+        "id": "other_id",
         "authors": "Authors",
         "classification": "Classification",
         "doi": "DOI",
-        "year": "Year",
         "publication_type": "Publication_type",
         "title": "Title",
         "abstract": "Abstract",
