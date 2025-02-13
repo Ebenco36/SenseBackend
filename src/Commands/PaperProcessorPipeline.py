@@ -64,6 +64,7 @@ class PaperProcessorPipeline:
 
             while True:
                 # Dynamically create a query for the current batch
+                
                 batch_query = f"{query} AND primary_id > {last_id} ORDER BY primary_id ASC LIMIT {batch_size}"
                 db_handler.query = batch_query  # Update query directly in db_handler
 
@@ -78,7 +79,6 @@ class PaperProcessorPipeline:
 
                 # Save last processed ID for the next iteration
                 last_id = data_return["Id"].max()
-
                 # Update the database with processed data
                 updater.update_columns_for_existing_records(data_return, id_column='Id')
 
@@ -86,6 +86,8 @@ class PaperProcessorPipeline:
                 self.update_tracker(db_handler, db_name, last_id)
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             print(f"Error processing source {db_name}: {e}")
         finally:
             db_handler.close_connection()
@@ -100,22 +102,22 @@ class PaperProcessorPipeline:
 #     sources = [
 #         {
 #             "query": "SELECT primary_id, \"DOI\" FROM all_db WHERE \"Source\"='Cochrane'",
-#             "csv_file_path": "output/papers_data",
+#             "csv_file_path": "Data/output/papers_data",
 #             "db_name": "Cochrane"
 #         },
 #         {
 #             "query": "SELECT primary_id, \"DOI\" FROM all_db WHERE \"Source\"='LOVE'",
-#             "csv_file_path": "output/papers_data_love",
+#             "csv_file_path": "Data/output/papers_data_love",
 #             "db_name": "LOVE"
 #         },
 #         {
 #             "query": "SELECT primary_id, \"DOI\" FROM all_db WHERE \"Source\"='OVID'",
-#             "csv_file_path": "output/papers_data_OVID",
+#             "csv_file_path": "Data/output/papers_data_OVID",
 #             "db_name": "OVID"
 #         },
 #         {
 #             "query": "SELECT primary_id, \"DOI\" FROM all_db WHERE \"Source\"='Medline'",
-#             "csv_file_path": "output/papers_data_medline",
+#             "csv_file_path": "Data/output/papers_data_medline",
 #             "db_name": "Medline"
 #         }
 #     ]

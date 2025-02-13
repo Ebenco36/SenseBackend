@@ -11,12 +11,13 @@ from src.Services.Service import Service
 from urllib.parse import urlparse, parse_qs, urlencode
 
 class OvidJournalDataFetcher(Service):
-    def __init__(self, base_url="https://ovidsp.dc1.ovid.com/ovid-new-a/ovidweb.cgi", max_pages=10):
+    # "https://ovidsp.dc1.ovid.com/ovid-new-b/ovidweb.cgi?=&S=BCGGFPLEGDACKLOAKPIJIHMIOHBKAA00&Get Bib Display=Titles|G|S.sh.25|1|100&on_msp=1&CitManPrev=S.sh.25|1|100&undefined=Too many results to sort&cmRecords=Ex: 1-4, 7&cmRecords=Ex: 1-4, 7&results_per_page=100&results_per_page=100&startRecord=1&FORMAT=title&FIELDS=SELECTED&output mode=display&WebLinkReturn=Titles=S.sh.25|1|100&FORMAT=title&FIELDS=SELECTED&Datalist=S.sh.25|1|100&gsrd_params=S.sh.25|1|100|&analytics_display=msp&startRecord_subfooter=1&SELECT=S.sh.25|&issue_record_range=1-51215"
+    def __init__(self, base_url="https://ovidsp.dc1.ovid.com/ovid-new-a/ovidweb.cgi", max_pages=1000000):
         self.session = requests.Session()
         self.base_url = base_url
         # Set the date-based directory for storing data
         self.date_str = datetime.now().strftime("%Y-%m-%d")
-        self.data_dir = f"OVIDNew/data_{self.date_str}"
+        self.data_dir = f"Data/OVIDNew/data_{self.date_str}"
         os.makedirs(self.data_dir, exist_ok=True)
         self.max_pages = max_pages
         self.url = self.get_url_from_config("ovid_url")
@@ -88,63 +89,63 @@ class OvidJournalDataFetcher(Service):
         return rebuilt_url
 
     def fetch(self):
-        # Initial URL parameters
         params, self.base_url = self.extract_params_from_url(self.url)
-        print(params)
-
-        # Extract total_records from issue_record_range parameter
-        # total_records = int(params["issue_record_range"].split("-")[-1])
         page_number = 1
-        fetched_records = 0   # Counter to keep track of fetched records
+        results_per_page = int(params.get("results_per_page", [100])[0])  # Default to 100 if not provided
 
         while page_number <= self.max_pages:
-            # Update startRecord and other pagination parameters
-            try:
-                if isinstance(params["results_per_page"], list):
-                    results_per_page = int(params["results_per_page"][0])  # Extract the first element
-                else:
-                    results_per_page = int(params["results_per_page"])  # Convert directly
-            except Exception as e:
-                results_per_page = 100
+            if page_number == 1:
+                # Page 1 logic
+                start_record = 1
+                params["Get Bib Display"] = f"Titles|G|S.sh.30|{start_record}|{results_per_page}"
+            else:
+                # Page 2 and beyond logic
+                start_record = (page_number - 1) * results_per_page + 1
+                params["Get Bib Display"] = f"Titles|F|S.sh.30|{start_record}|{results_per_page}"
 
-            # Calculate startRecord
-            start_record = (page_number - 1) * results_per_page + 1
+            # Update `startRecord` and `startRecord_subfooter`
             params["startRecord"] = str(start_record)
             params["startRecord_subfooter"] = str(start_record)
-            # params["Get Bib Display"] = f"Titles|{'F' if page_number % 2 == 0 else 'B'}|S.sh.62|{start_record}|{results_per_page}"
-            # params["WebLinkReturn"] = f"Titles={'F' if page_number % 2 == 0 else 'B'}|S.sh.62|{start_record + int(results_per_page)}|{results_per_page}"
 
-            # Set filename to check if page data already exists
+            # WebLinkReturn is constant
+            params["WebLinkReturn"] = f"Titles=F|S.sh.30|1|{results_per_page}"
+            
+                  # Set filename to check if page data already exists
             filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
             if os.path.exists(filename):
                 print(f"Data for page {page_number} already saved as {filename}. Skipping download.")
                 page_number += 1
                 continue
-
-            # Construct the dynamic URL for the current page
-            # query_string = urlencode(params)
-            url = self.rebuild_url(self.base_url, params)# f"{self.base_url}?{query_string}"
+                
+            # Construct the URL
+            url = self.rebuild_url(self.base_url, params)
             print(f"Fetching page {page_number}: {url}")
 
-            # Request and parse the page
+            # Fetch and process the response
             response = self.session.get(url)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, "html.parser")
 
-            # Extract data and save to CSV
+            # Extract data
             journals = self._extract_data(soup)
+            if not journals:
+                print(f"No records found on page {page_number}. Stopping.")
+                break
+
+            # Save data to CSV
+            filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
             self._save_to_csv(journals, filename)
 
-            # Check if there is a "Next" button to navigate further
+            # Check for "Next" button
             next_button = soup.select_one('.n-mb .next-prev input.titles-nav-button[aria-label="Next"]')
-            if next_button:
-                page_number += 1
-            else:
+            if not next_button:
                 print("No more pages available.")
                 break
 
-        # Merge all CSV files into a single file
+            page_number += 1
+
         self.merge_csv_files()
+
         
         
     def _extract_data(self, soup):
@@ -271,7 +272,7 @@ class OvidJournalDataFetcher(Service):
                 data["NumberOfReferences"] = references_text
 
             # Language
-            language_tag = record.select_one('.titles-other:has(span:contains("Language"))')
+            language_tag = record.select_one('.titles-other:has(span:contains("Language")):not(:has(span:contains("Summary Language")))')
             if language_tag:
                 language_text = language_tag.text.replace("Language", "").strip()
                 data["Language"] = language_text
@@ -326,7 +327,7 @@ class OvidJournalDataFetcher(Service):
 
     def merge_csv_files(self):
         # Define the output file for the merged CSV with date
-        merged_filename = os.path.join("OVIDNew", f"merged_journal_data_{self.date_str}.csv")
+        merged_filename = os.path.join("Data/OVIDNew", f"merged_journal_data_{self.date_str}.csv")
 
         # Collect all individual CSV files in the date directory
         all_files = glob.glob(os.path.join(self.data_dir, "*.csv"))

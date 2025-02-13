@@ -67,25 +67,6 @@ def create_dynamic_model(columns, table_name, sample_rows):
 
     additional_columns = {
         "intervention_vaccinePredictableDisease_tags": Text,
-        "population_OtherSpecificGroup_tags": Text,
-        "population_specificGroup_acronyms_": Text,
-        "topic_efficacyEffectiveness_tags": Text,
-        "intervention_vaccineOptions_tags": Text,
-        "population_specificGroup_tags": Text,
-        "population_immuneStatus_tags": Text,
-        "outcome_hospitalization_tags": Text,
-        "topic_immunogenicity_tags": Text,
-        "topic_administration_tags": Text,
-        "topic_ethicalIssues_tags": Text,
-        "population_ageGroup_tags": Text,
-        "outcome_infection_tags": Text,
-        "number_of_studies_tags": Text,
-        "topic_acceptance_tags": Text,
-        "topic_coverage_tags": Text,
-        "topic_economic_tags": Text,
-        "outcome_death_tags": Text,
-        "topic_safety_tags": Text,
-        "outcome_ICU_tags": Text
     }
     attrs.update(additional_columns)
 
@@ -116,24 +97,30 @@ def clean_data_for_insertion(row, model):
             cleaned_data[column] = value
     return cleaned_data
 
-def check_existing_record(session, model, row, primary_columns, fallback_columns):
-    """Check if a record already exists based on primary and fallback columns."""
-    filters = [getattr(model, col) == row.get(col) for col in primary_columns if col in row and row.get(col)]
-    fallback_filters = [getattr(model, col) == row.get(col) for col in fallback_columns if col in row and row.get(col)]
-    if filters:
-        existing_record = session.query(model).filter(*filters).first()
-        if existing_record:
-            return existing_record
-    
-    if fallback_filters:
-        existing_record = session.query(model).filter(*fallback_filters).first()
-        if existing_record:
-            return existing_record
-    
-    return None
 
-def seed_data(file_path, model, primary_columns, fallback_columns):
-    """Seed the database with data from the CSV file and log errors."""
+def check_existing_record_and_update(session, model, row, primary_columns):
+    """Check if a record exists based on primary columns and update if new data exists."""
+    filters = {col: row.get(col) for col in primary_columns if col in row and row.get(col) is not None}
+    if not filters:
+        return False  # Skip rows without valid primary column values.
+
+    existing_record = session.query(model).filter_by(**filters).first()
+
+    if existing_record:
+        # Compare and update only if there's new data.
+        updated = False
+        for key, value in row.items():
+            if key in model.__table__.columns and getattr(existing_record, key) != value:
+                setattr(existing_record, key, value)
+                updated = True
+        if updated:
+            session.add(existing_record)  # Mark as updated
+        return True  # Record exists and was updated
+    else:
+        return False
+
+def seed_data(file_path, model, primary_columns):
+    """Seed the database with data from the CSV file, updating or adding records as needed."""
     error_log = []
     with app.app_context():
         Session = sessionmaker(bind=db.engine)
@@ -143,23 +130,18 @@ def seed_data(file_path, model, primary_columns, fallback_columns):
             for row in reader:
                 try:
                     cleaned_row = clean_data_for_insertion(row, model)
-                    existing_record = check_existing_record(session, model, cleaned_row, primary_columns, fallback_columns)
-                    
-                    if existing_record:
-                        for key, value in cleaned_row.items():
-                            setattr(existing_record, key, value)
-                    else:
+                    if not check_existing_record_and_update(session, model, cleaned_row, primary_columns):
+                        # Add a new record if it doesn't exist.
                         record = model(**cleaned_row)
                         session.add(record)
-                    
                 except Exception as e:
                     error_log.append({'row': row, 'error': str(e)})
                     continue
             session.commit()
         print('Data seeded successfully!')
-    
+
     if error_log:
-        print('The following rows were not inserted:')
+        print('The following rows encountered errors:')
         for error in error_log:
             print(f"Row: {error['row']} - Error: {error['error']}")
         with open('error_log.csv', 'w', newline='') as csvfile:
@@ -168,6 +150,60 @@ def seed_data(file_path, model, primary_columns, fallback_columns):
             writer.writeheader()
             for error in error_log:
                 writer.writerow({'row': error['row'], 'error': error['error']})
+                
+# OLD IMPLEMENTATION HERE                
+# def check_existing_record(session, model, row, primary_columns, fallback_columns):
+#     """Check if a record already exists based on primary and fallback columns."""
+#     filters = [getattr(model, col) == row.get(col) for col in primary_columns if col in row and row.get(col)]
+#     fallback_filters = [getattr(model, col) == row.get(col) for col in fallback_columns if col in row and row.get(col)]
+#     if filters:
+#         existing_record = session.query(model).filter(*filters).first()
+#         if existing_record:
+#             return existing_record
+    
+#     if fallback_filters:
+#         existing_record = session.query(model).filter(*fallback_filters).first()
+#         if existing_record:
+#             return existing_record
+    
+#     return None
+
+# def seed_data(file_path, model, primary_columns, fallback_columns):
+#     """Seed the database with data from the CSV file and log errors."""
+#     error_log = []
+#     with app.app_context():
+#         Session = sessionmaker(bind=db.engine)
+#         session = Session()
+#         with open(file_path, 'r') as file:
+#             reader = csv.DictReader(file)
+#             for row in reader:
+#                 try:
+#                     cleaned_row = clean_data_for_insertion(row, model)
+#                     existing_record = check_existing_record(session, model, cleaned_row, primary_columns, fallback_columns)
+                    
+#                     if existing_record:
+#                         for key, value in cleaned_row.items():
+#                             setattr(existing_record, key, value)
+#                     else:
+#                         record = model(**cleaned_row)
+#                         session.add(record)
+                    
+#                 except Exception as e:
+#                     error_log.append({'row': row, 'error': str(e)})
+#                     continue
+#             session.commit()
+#         print('Data seeded successfully!')
+    
+#     if error_log:
+#         print('The following rows were not inserted:')
+#         for error in error_log:
+#             print(f"Row: {error['row']} - Error: {error['error']}")
+#         with open('error_log.csv', 'w', newline='') as csvfile:
+#             fieldnames = ['row', 'error']
+#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#             writer.writeheader()
+#             for error in error_log:
+#                 writer.writerow({'row': error['row'], 'error': error['error']})
 
 def main():
     """Main function to create and seed a dynamic table from a CSV file."""
@@ -185,7 +221,8 @@ def main():
 
     columns, rows = parse_csv(file_path)
     model = create_dynamic_model(columns, table_name, rows)
-    seed_data(file_path, model, primary_columns, fallback_columns)
+    # seed_data(file_path, model, primary_columns, fallback_columns)
+    seed_data(file_path, model, primary_columns)
 
 if __name__ == '__main__':
     main()

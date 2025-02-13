@@ -13,19 +13,19 @@ class PaperProcessingPipeline:
         self.db_queries = {
             "Ovid": {
                 "query": 'SELECT upper("DOI") FROM ovid_db WHERE primary_id IN (1, 2, 3, 4, 5)',
-                "csv_file_path": 'output/ovid_papers_tags'
+                "csv_file_path": 'Data/output/ovid_papers_tags'
             },
             "Cochrane": {
                 "query": 'SELECT upper("doi"), doi_link FROM cochrane_db WHERE primary_id IN (1, 2)',
-                "csv_file_path": 'output/cochrane_papers_tags'
+                "csv_file_path": 'Data/output/cochrane_papers_tags'
             },
             "Love": {
                 "query": 'SELECT upper("doi") FROM love_db WHERE primary_id IN (1, 2)',
-                "csv_file_path": 'output/love_papers_tags'
+                "csv_file_path": 'Data/output/love_papers_tags'
             },
             "Medline": {
                 "query": 'SELECT upper("DOI") FROM medline_db WHERE primary_id IN (1, 2)',
-                "csv_file_path": 'output/medline_papers_tags'
+                "csv_file_path": 'Data/output/medline_papers_tags'
             }
         }
         # Ensure output directory exists

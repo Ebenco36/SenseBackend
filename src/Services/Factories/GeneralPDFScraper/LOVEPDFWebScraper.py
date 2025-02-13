@@ -34,21 +34,3 @@ class LOVEPDFWebScraper(GeneralPDFWebScraper):
         super().set_doi_url(self.url)
         return self
         
-    # def fetch_and_extract_first_valid_pdf_text(self):
-    #     """
-    #     Fetches the first available PDF content from the LOVE Database URL, extracts text,
-    #     or falls back to HTML content if no valid PDF is available.
-
-    #     Returns:
-    #         str: Extracted text content from the first valid PDF or HTML fallback.
-    #     """
-    #     self.session.headers.update({
-    #         "Accept-Encoding": "gzip, deflate, br"
-    #     })
-    #     pdf_urls = self.fetch_pdf_urls()
-    #     pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
-    #     if pdf_content and content_type == "application/pdf":
-    #         text = self.extract_text_from_pdf(pdf_content)
-    #         if text:
-    #             return clean_special_characters(text)
-    #     return self.fetch_text_from_html()

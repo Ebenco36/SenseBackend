@@ -14,6 +14,8 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
 from utils.http import bad_request, not_found, not_allowed, internal_error
 from src.middlewares.auth_middleware import token_required
+from celery_app import make_celery
+
 load_dotenv()  # load env files
 
 def create_app():
@@ -26,6 +28,7 @@ def create_app():
      supports_credentials=True)
     Mail(app)
     admin = Admin(app)
+    celery = make_celery(app)
 
     
     # Configure logging to write to a file

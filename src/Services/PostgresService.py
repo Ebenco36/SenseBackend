@@ -209,7 +209,6 @@ class PostgresService:
             print(f"Error deleting record: {e}")
             return False
         
-        
     def select(self, *columns):
         """Specify columns to select."""
         self._columns = ", ".join(self.quote_identifier(col) for col in columns) if columns else "*"
@@ -408,7 +407,6 @@ class PostgresService:
         except Exception as e:
             return f"Error building query: {str(e)}"
         
-        
     def get_total_records(self):
         """Get the total number of records matching the conditions."""
         query = f"SELECT COUNT(*) FROM {self._table}"
@@ -469,7 +467,6 @@ class PostgresService:
 
         return self
 
-
     def from_raw_input(self, raw_input):
         """
         Populate the query builder using raw input data.
@@ -484,13 +481,11 @@ class PostgresService:
                 self.where(column, values[0])  # Use WHERE for single value
         return self
 
-
     def first(self):
         """Fetch the first result."""
         self._limit = 1
         results = self.execute()
         return results[0] if results else None
-
 
     def get_column_names(self, table_name):
         """
@@ -512,7 +507,6 @@ class PostgresService:
         except SQLAlchemyError as e:
             print(f"Error fetching column names: {str(e)}")
             return {"error": str(e)}
-        
         
     def execute_raw_query(self, query, params=None):
         """
@@ -590,7 +584,6 @@ class PostgresService:
             },
         }
         
-    
     def get_unique_items_from_column(self, table_name, column_name):
         from src.Utils.Helpers import extract_unique_countries
         """
@@ -616,7 +609,6 @@ class PostgresService:
             print(f"Error: {e}")
             return []
 
-        
     def get_summary_statistics(self):
         """
         Fetches summary statistics grouped individually and by Year for each feature: Country, Journal, and Source.

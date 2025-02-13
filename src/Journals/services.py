@@ -362,7 +362,9 @@ class JSONService:
                 # Fetch synonyms from searchRegEx if available
                 synonyms = []
                 if category in searchRegEx and subgroup in searchRegEx[category]:
-                    synonyms = searchRegEx[category][subgroup].get(corrected_value, [])
+                    tuple_vals = searchRegEx[category][subgroup].get(corrected_value, [])
+                    synonyms = [f"{item[0]}:{item[1]}" for item in tuple_vals if isinstance(item, tuple) and len(item) == 2]
+                    
 
                 # Ensure display value is included in synonyms
                 if corrected_value not in synonyms:

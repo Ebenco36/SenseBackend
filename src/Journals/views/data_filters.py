@@ -44,7 +44,6 @@ class FilterAPI(Resource):
             # Handle unexpected exceptions
             return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
 
-
 class FetchRecordAPI(Resource):
     def get(self, id):
         try:
@@ -60,7 +59,6 @@ class FetchRecordAPI(Resource):
         except Exception as e:
             # Handle unexpected exceptions
             return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
-
 
 class ProcessUserSelectionAPI(Resource):
     def post(self):

@@ -226,7 +226,7 @@ class MedlineClass:
         if not df.empty:
             print(f"Cleaning dataset with {len(df)} records...")
             df = self.clean_dataset(df)
-            output_path = "MedlineData/medline_results.csv"
+            output_path = "Data/MedlineData/medline_results.csv"
             df.to_csv(output_path, index=False)
             print(f"Data saved to {output_path}")
         else:

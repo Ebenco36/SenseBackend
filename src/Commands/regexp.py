@@ -1,245 +1,471 @@
 searchRegEx ={
-    "Population": {
-        "AgeGroup": {
-            "Newborn_0__1": [
-                'newborn',
-                'babies',
-                'baby',
-                'infant',
-                'toddlers',
-                'young ones',
-                'youngsters',
-                'small children'
+    "popu": {
+        "age__group": {
+            "nb_0__1": [
+                ('newborn', 'nb'),
+                ('babies', 'nb'),
+                ('baby', 'nb'),
+                ('infant', 'nb'),
+                ('toddlers', 'nb'),
+                ('young ones', 'nb'),
+                ('youngsters', 'nb'),
+                ('small children', 'nb')
             ],
-            "Children_2__9": [
-                "child", "children"
+            "chi_2__9": [
+                ("child", "chi"), ("children", "chi")
             ],
-            "Adolescents_10__17": [
-                "adolescents", "adolescent", "young adults"
+            "ado_10__17": [
+                ("adolescents", "ado"), ("adolescent", "ado"), ("young adults", "ado")
             ],
-            "Adults_18__64": [
-                "adults", "adult"
+            "adu_18__64": [
+                ("adults", "adu"), ("adult", "adu")
             ],
-            "OlderAdults_65__10000": [
-                "elderly", "older adults"
+            "eld_65__10000": [
+                ("elderly", "eld"), ("older adults", "eld")
             ]
         },
-        "Specific__Group": {
-            "Healthcare__Workers": [
-                "Physician",
-                "Nurse",
-                "Surgeon",
-                "Dentist",
-                "Pharmacist",
-                "Physical Therapist",
-                "Occupational Therapist",
-                "Medical Laboratory Technologist",
-                "Radiologist",
-                "Dietitian/Nutritionist",
-                "Respiratory Therapist",
-                "Speech-Language Pathologist",
-                "Physician Assistant",
-                "Nurse Practitioner",
-                "Certified Nursing Assistant (CNA)",
-                "Medical Assistant",
-                "Paramedic/EMT",
-                "Midwife",
-                "Psychologist",
-                "Social Worker (Clinical)",
-                "Hospital Administrator",
-                "Medical Researcher",
-                "Health Educator",
-                "Orthopedic Technician",
-                "Optometrist",
-                "Podiatrist",
-                "Anesthesiologist",
-                "Neurologist",
-                "Cardiologist",
-                "Gastroenterologist"
+        "specific__group": {
+            "hcw": [
+                ("Physician", "hcw"),
+                ("Nurse", "hcw"),
+                ("Surgeon", "hcw"),
+                ("Dentist", "hcw"),
+                ("Pharmacist", "hcw"),
+                ("Physical Therapist", "hcw"),
+                ("Occupational Therapist", "hcw"),
+                ("Medical Laboratory Technologist", "hcw"),
+                ("Radiologist", "hcw"),
+                ("Dietitian/Nutritionist", "hcw"),
+                ("Respiratory Therapist", "hcw"),
+                ("Speech-Language Pathologist", "hcw"),
+                ("Physician Assistant", "hcw"),
+                ("Nurse Practitioner", "hcw"),
+                ("Certified Nursing Assistant (CNA)", "hcw"),
+                ("Medical Assistant", "hcw"),
+                ("Paramedic/EMT", "hcw"),
+                ("Midwife", "hcw"),
+                ("Psychologist", "hcw"),
+                ("Social Worker (Clinical)", "hcw"),
+                ("Hospital Administrator", "hcw"),
+                ("Medical Researcher", "hcw"),
+                ("Health Educator", "hcw"),
+                ("Orthopedic Technician", "hcw"),
+                ("Optometrist", "hcw"),
+                ("Podiatrist", "hcw"),
+                ("Anesthesiologist", "hcw"),
+                ("Neurologist", "hcw"),
+                ("Cardiologist", "hcw"),
+                ("Gastroenterologist", "hcw")
             ],
-            "Pregnant__Women": [
-                "pregnant", "pregnant women"
+            "pw": [
+                ("pregnant", "pw"), ("pregnant women", "pw")
             ],
-            "Travellers": [
-                "traveller"
+            "tra": [
+                ("traveller", "tra")
             ],
-            "Parents__Caregivers": [
-                "parents", "caregivers"
+            "pcg": [
+                ("parents", "cg"), ("caregivers", "cg")
             ]
         },
-        "Immune__Status": {
-            "Immunocompromised": [
-                "immunocompromised"
+        "immune__status": {
+            "imu": [
+                ("immunocompromised", "imu")
             ],
-            "Healthy": [
-                "healthy"
-            ]
-        }
-    },
-    "Topic": {
-        "Efficacy__Effectiveness": {
-           "Efficacy__Effectiveness": [
-               "effectiveness", "impact of", "effectiveness of", "efficacy", "VE", "CI",
-               "efficacy rate", "effectiveness rate", "vaccine efficacy"
-            ]
-        },
-        "Safety": {
-           "Safety": [
-               "safety", "adverse effects", "adverse events"
-           ] 
-        },
-        "Risk__Factor": {
-           "Risk__Factor": [
-               "risk factor", "risk"
-           ] 
-        },
-        "Coverage": {
-           "Coverage": [
-               "coverage", "uptake", "the uptake", "actual uptake", "vaccine uptake"
-           ] 
-        },
-        "Acceptance": {
-           "Acceptance": [
-               "acceptance", "Barrier", "vaccine barriers", 
-               "knowledge", "vaccination willingness and intentions", 
-               "HPV vaccine acceptability, acceptability", 
-               "Awareness and knowledge", "Awareness", 
-               "facilitators of and barriers", 
-               "awareness,knowledge, acceptability, and intention", 
-               "knowledge and acceptability", "knowledge and awareness", 
-               "attitudes and beliefs", "Knowledge and Attitude",  
-               "attitude", "knowledge, awareness, and attitude"
-           ] 
-        },
-        "Administration": {
-           "Administration": [
-               "administration", "vaccine types", "dose schedules", 
-               "vaccine types and dose schedules", "different dose schedules", 
-               "Two doses of"
-           ] 
-        },
-        "Economic__Aspects": {
-           "Economic__Aspects": [
-                "economic", "cost", "financial", "economic impact",
-                "cost effectiveness", "cost-effectiveness", 
-                "cost", "cost effectiveness", "economic evaluation", 
-                "Cost-effectiveness of HPV vaccination strategies"
-           ] 
-        },
-        "Modeling": {
-           "Modeling": [
-               "modeling"
-           ] 
-        },
-        "Ethical__Issues": {
-           "Ethical__Issues": [
-               "racial", "ethnic", 
-               "ethnic minority", "racial minority", 
-               "racial/ethnic", "racial/ethnic minority", 
-               "racial disparity", "ethnic disparity", 
-               "minority", "minority population"
-           ] 
-        },
-    },
-    "Outcome": {
-        "Infection": {
-            "Infection": [
-                "infection"
-            ],
-        },
-        "Hospitalization": {
-            "Hospitalization": [
-                "hospitalization"
-            ]
-        },
-        "ICU": {
-            "ICU": [
-                "ICU", "intensive care unit", "intensive care"
-            ]
-        },
-        "Death": {
-            "Death": [
-                "death", "mortality", "overall mortality", 
-                "cancer related mortality", "on overall and cancer mortality"
-            ],
-        }
-    },
-    "Reviews": {
-        "Reviews": {
-            "review": [
-                "systematic review", "Literature Review", "review", 
-                "Meta-Analysis", "Critical Review", "Peer Review", 
-                "Book Review", "Editorial Review", "Review Article"
+            "hty": [
+                ("healthy", "hty")
             ]
         }
     },
-    "Studies": {
-        "No__Of__Studies": {
-            "number__of__studies": [
-                "study", "studies", "RCT", 
-                "NRSI", "cross sectional", 
-                "mixed method", "qualitative",
-                'randomized controlled trial',
-                'randomised controlled trial',
-                'randomized trial',
-                'randomised trial'
+    "topic": {
+        "eff": {
+           "eff": [
+                ("effectiveness", "eff"), ("impact of", "eff"), 
+                ("effectiveness of", "eff"), ("efficacy", "eff"), 
+                ("VE", "eff"), ("CI", "eff"), ("RR", "eff"), ("OR", "eff"), ("odds ratios", "eff"), 
+                ("odds ratio (OR)", "eff"), ("odds ratios (ORs)", "eff"), ("IRR", "eff"),
+                ("relative risks(RR)", "eff"), ("relative risks", "eff"),
+                ("efficacy rate", "eff"), ("effectiveness rate", "eff"), ("vaccine efficacy", "eff")
+            ]
+        },
+        "safety": {
+           "saf": [
+               ("safety", "saf"), ("adverse effects", "saf"), ("adverse events", "saf")
+           ] 
+        },
+        "risk__factor": {
+           "rf": [
+               ("risk factor", "rf"), ("risk", "rf")
+           ] 
+        },
+        "coverage": {
+           "cov": [
+               ("coverage", "cov"), ("uptake", "cov"), ("the uptake", "cov"),
+               ("actual uptake", "cov"), ("vaccine uptake", "cov")
+           ] 
+        },
+        "acceptance": {
+           "kaa": [
+               ("acceptance", "kaa"), ("Barrier", "kaa"), ("vaccine barriers", "kaa"), 
+               ("knowledge", "kaa"), ("vaccination willingness and intentions", "kaa"), 
+               ("HPV vaccine acceptability", "kaa"), 
+               ("Awareness and knowledge", "kaa"), ("Awareness", "kaa"), 
+               ("facilitators of and barriers", "kaa"), 
+               ("awareness,knowledge, acceptability, and intention", "kaa"), 
+               ("knowledge and acceptability", "kaa"), ("knowledge and awareness", "kaa"), 
+               ("attitudes and beliefs", "kaa"), ("Knowledge and Attitude", "kaa"),  
+               ("attitude", "kaa"), ("knowledge, awareness, and attitude", "kaa")
+           ] 
+        },
+        "adm": {
+           "adm": [
+               ("administration", "adm"), ("vaccine types", "adm"), ("dose schedules", "adm"), 
+               ("vaccine types and dose schedules", "adm"), ("different dose schedules", "adm"), 
+               ("Two doses of", "adm")
+           ] 
+        },
+        "eco": {
+           "eco": [
+                ("economic", "eco"), ("cost", "eco"), ("financial", "eco"), ("economic impact", "eco"),
+                ("cost effectiveness", "eco"), ("cost-effectiveness", "eco"), 
+                ("economic evaluation", "eco"), 
+                ("Cost-effectiveness of HPV vaccination strategies", "eco")
+           ] 
+        },
+        "modeling": {
+           "mod": [
+               ("modeling", "mod")
+           ] 
+        },
+        "ethical__issues": {
+           "eth": [
+               ("racial", "eth"), ("ethnic", "eth"), 
+               ("ethnic minority", "eth"), ("racial minority", "eth"), 
+               ("racial/ethnic", "eth"), ("racial/ethnic minority", "eth"), 
+               ("racial disparity", "eth"), ("ethnic disparity", "eth"), 
+               ("minority", "eth"), ("minority population", "eth")
+           ] 
+        },
+    },
+    "outcome": {
+        "infection": {
+            "inf": [
+                ("infection", "inf")
+            ],
+        },
+        "hospital": {
+            "hos": [
+                ("hospitalization", "hos")
+            ]
+        },
+        "icu": {
+            "icu": [
+                ("ICU", "icu"), ("intensive care unit", "icu"), ("intensive care", "icu")
+            ]
+        },
+        "death": {
+            "dea": [
+                ("death", "dea"), ("mortality", "dea"), ("overall mortality", "dea"), 
+                ("cancer related mortality", "dea"), ("on overall and cancer mortality", "dea")
+            ],
+        }
+    },
+    "reviews": {
+        "review": {
+            "rev": [
+                ("systematic review", "rev"), ("Literature Review", "rev"), ("review", "rev"), 
+                ("Meta-Analysis", "rev"), ("Critical Review", "rev"), ("Peer Review", "rev"), 
+                ("Book Review", "rev"), ("Editorial Review", "rev"), ("Review Article", "rev")
             ]
         }
     },
-    "Intervention": {
-        "Vaccine__preventable__disease": {
-            "COVID__19": [
-                "COVID-19", "COVID", "COVID 19"
-            ],
-            "Influenza": [
-                "influenza"
-            ],
-            "Dengue": [
-                "dengue"
-            ],
-            "Rotavirus": [
-                "rotavirus"
+    "studies": {
+        "studie__no": {
+            "sty": [
+                ("study", "sty"), ("studies", "sty"),
+                ("RCT", "rct"),
+                ('randomized controlled trial', "rct"),
+                ('randomised controlled trial', "rct"),
+                ('randomized trial', "rct"),
+                ('randomised trial', "rct"),
+                ('clinical trial', "rct"),
+                ("double-blind study", "rct"), 
+                ("placebo-controlled", "rct"),
+                ("randomised comparative", "rct"),
+                ("NRSI", "nrsi"), 
+                ("non-randomized studies of interventions", "nrsi"),
+                ("observational studies", "nrsi"), 
+                ("quasi-experimental", "nrsi"), 
+                ("non-randomized controlled study", "nrsi"),
+                ("non-randomised studies", "nrsi"),
+                ("natural experiment", "nrsi"),
+                ("test-negative designs", "nrsi"),
+                ("cross-sectional", "nrsi"), 
+                ("cross sectional", "nrsi"),
+                ("controlled clinical", "nrsi"), 
+                ("cohort study", "nrsi"), 
+                ("cohort-study", "nrsi"), 
+                ("prospective study", "nrsi"), 
+                ("retrospective study", "nrsi"), 
+                ("longitudinal study", "nrsi"),
+                ("case-control study", "nrsi"),
+                ("pre-post studies", "nrsi"),
+                ("interrupted time series", "nrsi"),
+                ("case reports", "nrsi"),
+                ("case series", "nrsi"),
+                ("mixed methods", "mmtd"),
+                ("mixed-methods", "mmtd"),
+                ("convergent design", "mmtd"), 
+                ("explanatory sequential design", "mmtd"),
+                ("qualitative study", "quanti"),
             ]
         },
-        "Vaccine__Options": {
-            "Live": [
-                "live"
+    },
+    "intervention": {
+        "vpd": {
+            "covid": [
+                ("COVID-19", "covid"), ("COVID", "covid"), ("COVID 19", "covid"), ("SARS-CoV-2", "covid")
             ],
-            "Non__Live": [
-                "non-live"
+            "aden": [
+                ("Adenovirus", "aden")
             ],
-            "Adjuvants": [
-                "adjuvants"
+            "anth": [
+                ("anthrax", "anth")
             ],
-            "Non__Adjuvanted": [
-                "non-adjuvanted"
+            "camp": [
+                ("Campylobacter", "camp")
             ],
-            "quadrivalent": [
-                "quadrivalent", "4vHPV"
+            "chol": [
+                ("Cholera", "chol"), ("Vibrio cholerae", "chol"),
+                ("cholerae", "chol")
             ],
-            "bivalent": [
-                "bivalent", "2vHPV"
+            "Q__fever": [
+                ("Q fever", "coxi"), ("Coxiella burnetii", "coxi"),
+                ("Q-fever", "coxi")
+            ],
+            "diph": [
+                ("Diphtheria", "diph")
+            ],
+            "ebol": [
+                ("Ebola", "ebol")
+            ],
+            "ente": [
+                ("Enterovirus", "ente")
+            ],
+            "esch" : [
+                ("Escherichia coli (ETEC)", "esch")
+            ],
+            "hib": [
+                ("Haemophilus influenzae type b", "hib")
+            ],
+            "ha": [
+                ("Hepatitis A", "ha")
+            ],
+            "hb": [
+                ("Hepatitis B", "hb")
+            ],
+            "hc": [
+                ("Hepatitis C", "hc")
+            ],
+            "he": [
+                ("Hepatitis E", "he")
+            ],
+            "hs": [
+                ("Herpes simplex", "hs")
+            ],
+            "hz": [
+                ("Shingles, Herpes zoster", "hz")
+            ],
+            "hiv": [
+                ("HIV / AIDS", "hiv"), ("HIV", "hiv"), ("AIDS", "hiv"),
+                ("HIV/AIDS", "hiv")
+            ],
+            "hpv": [
+                ("Human papillomavirus", "hpv"), ("HPV", "hpv")
+            ],
+            "je": [
+                ("Japanese encephalitis", "je")
+            ],
+            "leis": [
+                ("Leishmaniasis", "leis"), ("Leishmania", "leis")
+            ],
+            "lyme": [
+                ("Lyme disease, Borreliosis", "lyme"), ("Borreliosis", "lyme"), 
+                ("Lyme disease", "lyme")
+            ],
+            "mala": [
+                ("Malaria", "mala"), ("Plasmodia", "mala")
+            ],
+            "meas": [
+                ("Measles", "meas")
+            ],
+            "meni": [
+                ("Meningococcal", "meni"), ("Neisseria", "meni")
+            ],
+            "mump": [
+                ("Mumps", "mump")
+            ],
+            "leprosy": [
+                ("Leprosy", "myle"), ("Mycobacterium leprae", "myle")
+            ],
+            "myva": [
+                ("Mycobacterium vaccae", "myva")
+            ],
+            "pert": [
+                ("Pertussis", "pert"), ("Bordetella", "pert")
+            ],
+            "plag": [
+                ("Plague", "plag")
+            ],
+            "pneu": [
+                ("Pneumococcal", "pneu")
+            ],
+            "poli": [
+                ("Poliovirus", "poli"), ("Poliomyelitis", "poli")
+            ],
+            "pseu": [
+                ("Pseudomonas aeruginosa", "pseu")
+            ],
+            "rabies": [
+                ("Rabies", "rabi")
+            ],
+            "rsv": [
+                ("Respiratory syncytial virus", "rsv"), ("rsv", "rsv")
+            ],
+            "rubella": [
+                ("Rubella", "rube")
+            ],
+            "salm": [
+                ("Salmonella", "salm")
+            ],
+            "shig": [
+                ("Shigella", "shig")
+            ],
+            "smal": [
+                ("Smallpox", "smal"), ("Variola", "smal")
+            ],
+            "strb": [
+                ("Streptococcus group B", "strb")
+            ],
+            "tetanus": [
+                ("Tetanus", "tt")
+            ],
+            "tbe": [
+                ("Tick-borne encephalitis", "tbe")
+            ],
+            "tb": [
+                ("Tuberculosis", "tb")
+            ],
+            "typh": [
+                ("Typhoid", "typh")
+            ],
+            "vari": [
+                ("Varicella, Chickenpox", "vari")
+            ],
+            "yf": [
+                ("Yellow fever", "yf")
+            ],
+            "zika": [
+                ("Zika", "zika")
+            ],
+            "infl": [
+                ("influenza", "infl")
+            ],
+            "deng": [
+                ("dengue", "deng")
+            ],
+            "rota": [
+                ("rotavirus", "rota")
+            ]
+        },
+        "vaccine__options": {
+            "live": [
+                ("live", "live")
+            ],
+            "non__live": [
+                ("non-live", "nonlive")
+            ],
+            "adjuvants": [
+                ("adjuvants", "adjuvants")
+            ],
+            "non__djuvanted": [
+                ("non-adjuvanted", "nonadjuvants")
+            ],
+            "quad": [
+                ("quadrivalent", "quad"), ("4vHPV", "4vHPV")
+            ],
+            "biva": [
+                ("bivalent", "biva"), ("2vHPV", "2vHPV")
             ],
         },
     },
-    "Gender": {
-        "Group": {
-            "Sex": [
-                "male", "female", "divers", 
-                "other", "non-binary", 
-                "transgender", "cisgender",
-                "intersex", "genderqueer", 
-                "genderfluid", "prefer not to say", 
-                "unspecified", "unknown", "girl", 
-                "boy", "women", "men"
+    "gender": {
+        "group": {
+            "sex": [
+                ("male", "male"), ("female", "female"), ("divers", "divers"), 
+                ("other", "other"), ("non-binary", "nonbinary"), 
+                ("transgender", "transgender"), ("cisgender", "cisgender"),
+                ("intersex", "intersex"), ("genderqueer", "genderqueer"), 
+                ("genderfluid", "genderfluid"), ("prefer not to say", "pnts"), 
+                ("unspecified", "unspecified"), ("unknown", "unknown"), ("girl", "girl"), 
+                ("boy", "boy"), ("women", "women"), ("men", "men")
             ]
         }
     },
-    "Population": {
-        "Group": {
-            "Population": [
-                "N - population", "population size", "sample size", "number of participants",
-                "subjects", "study participants", "participant"
+    "particip": {
+        "group": {
+            "members": [
+                ("N - population", "npopu"), ("population size", "popus"), ("sample size", "samsi"), 
+                ("number of participants", "numpa"), ("subjects", "subj"), ("study participants", "studyp"), 
+                ("participant", "participant"), ("students", "students"), ("parents", "parents"), ("women", "women"),
+                ("men", "men"), ("mothers", "mothers"), ("daughters", "daughters"), ("girls", "girls"), ("guardians", "guardians"), 
+                ("adolescents", "adolescents"), ("young adult", "youngadult"), ("male", "male"), ("female", "female")
+            ]
+        }
+    },
+    "lit_search_dates": {
+        "dates": {
+            "dates": [
+            ]
+        }
+    },
+    "open_acc": {
+        "opn_access": {
+            "op_ac": [
+                ("open access", "oa"), 
+                ("oa", "oa"), 
+                ("free access", "oa"), 
+                ("gold open access", "oa"), 
+                ("creative commons", "oa"),
+                ("open research", "oa"), 
+                ("fully open", "oa"), 
+                ("free full text", "oa"), 
+                ("oa license", "oa"), 
+                ("unrestricted access", "oa")
+            ]
+        }
+    },
+    "study_country": {
+        "countries": {
+            "countries": [
+            ]
+        }, 
+        "study_count": {
+            "count": [
+            ]
+        }
+    },
+    "title_popu": {
+        "title_pop": {
+            "title": [
+                "Physician", "Nurse", "Surgeon", "Dentist", "Pharmacist", "Physical Therapist", 
+                "Occupational Therapist", "Medical Laboratory Technologist", "Radiologist",
+                "Dietitian/Nutritionist", "Respiratory Therapist","Speech-Language Pathologist", 
+                "Physician Assistant", "Nurse Practitioner", "Certified Nursing Assistant (CNA)", 
+                "Medical Assistant", "Paramedic/EMT", "Midwife", "Psychologist", "Social Worker (Clinical)",
+                "Hospital Administrator", "Medical Researcher", "Health Educator", "Orthopedic Technician",
+                "Optometrist", "Podiatrist", "Anesthesiologist", "Neurologist", "Cardiologist",
+                "Gastroenterologist", "pregnant women", "pregnant", "traveller","parents","caregivers",
+                "male", "female", "females and males", "female and male"
             ]
         }
     }

@@ -19,7 +19,6 @@ def fetch_first_scholar_result(title):
     try:
         if results.get("organic_results"):
             first_result = results["organic_results"][0]
-            print(results["organic_results"][0].get("link"))
             return first_result.get("link", "")  # Assuming the DOI or relevant URL is in 'link'
         else:
             return ''

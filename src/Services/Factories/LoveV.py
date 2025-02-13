@@ -35,22 +35,24 @@ class LoveV(Service):
     def retrieveRecord(self, page = 1):
         # https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review,primary-study&hide_excluded=true&page=1&sort_by=year&show_summary=true
         # url = 'https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review,primary-study&hide_excluded=true&page=' + str(page) + '&sort_by=year&show_summary=true'
-        url = "https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references"
+        # url = "https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references"
+        url = f"https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review&hide_excluded=true&page={page}&sort_by=year&show_summary=true"
         print(url)
         """
             Work on payload
         """
-        payload = {
-            "sort_by": "year",
-            "metadata_ids": [
-                "603b9fe03d05151f35cf13dc"
-            ],
-            "query": "(5 AND 17)",
-            "page": page,
-            "size": 10
-        }
+        # payload = {
+        #     "sort_by": "year",
+        #     "metadata_ids": [
+        #         "5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc"
+        #     ],
+        #     # "query": "(5 AND 17)",
+        #     "classification_filter": "systematic-review",
+        #     "page": page,
+        #     "size": 10
+        # }
         record_details_data = ApiRequest('json', url, headers=self.auth_headers)
-        rec = record_details_data.send_data(payload)
+        rec = record_details_data.fetch_records() #.send_data(payload)
         data = rec.get('data')
         return data
     
@@ -62,8 +64,8 @@ class LoveV(Service):
         # 10 is the number of record per page
         max_records = 10 * save_interval
         # Save DataFrame to a CSV file
-        file_path = 'L-OVE/Batches/'
-        file_path_processed = 'L-OVE/Batches/Processed/'
+        file_path = 'Data/L-OVE/Batches/'
+        file_path_processed = 'Data/L-OVE/Batches/Processed/'
 
         create_directory_if_not_exists(file_path)
 
@@ -120,7 +122,7 @@ class LoveV(Service):
         # come back to this later
         # process_csv_files(file_path, file_path_processed)  
         print("All records saved successfully. Now merging files into one csv")
-        merge_files_by_pattern("L-OVE/Batches", "batch_*", "L-OVE/LOVE.csv")
+        merge_files_by_pattern("Data/L-OVE/Batches", "batch_*", "Data/L-OVE/LOVE.csv")
         print("Done merging the csv files.")
         
         return self

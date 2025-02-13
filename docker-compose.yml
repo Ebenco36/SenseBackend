@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   sense_app:
     container_name: sense_project
@@ -7,16 +5,26 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${FLASK_RUN_PORT}:5000"
+      - "${FLASK_RUN_PORT}:8081"
     depends_on:
       - sense_postgres
-      - sense_celery
     env_file:
       - .env
     volumes:
-      - flask-app-data:/app/data
+      - sense-app:/app/data
     networks:
-      - app-networks
+      - sense-networks
+
+  frontend:
+    build: ../../Downloads/SenseFrontend
+    container_name: SenseFrontend
+    ports:
+      - "8081:80" # Expose frontend on localhost:8081
+    networks:
+      - sense-networks
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:${FLASK_RUN_PORT} # Use Docker service name
+
 
   sense_postgres:
     image: postgres:latest
@@ -31,67 +39,29 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - app-networks
+      - sense-networks
 
-  sense_celery:
-    image: celery:latest
-    container_name: sense_project_celery
-    # Adjust Celery configuration as needed
-    environment:
-      - BROKER_URL=pyamqp://user:password@sense_rabbitmq:5673//
-      - CELERY_RESULT_BACKEND=${DATABASE_URL}
-    depends_on:
-      - sense_postgres
-      - sense_rabbitmq
-    networks:
-      - app-networks
-
-  sense_rabbitmq:
-    container_name: sense_project_rabbitmq
-    hostname: rabbitmq
-    image: rabbitmq:management
+  sense_redis:
+    image: redis
+    deploy:
+      resources:
+        limits:
+          memory: 2G 
+    container_name: senseRedis
     ports:
-      - 15673:15672
-      - 5673:5672
-    environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password
+      - "6379:6379"  # Expose the Redis port
     volumes:
-      - rabbitmq-data:/var/lib/rabbitmq/
+      - redis-data:/data
     networks:
-      - app-networks
-
-  sense_pgadmin:
-    image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5051:80"
-    depends_on:
-      - sense_postgres
-    networks:
-      - app-networks
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - sense_app
-    networks:
-      - app-networks
+      - sense-networks
 
 # shared network
 networks:
-  app-networks:
+  sense-networks:
     driver: bridge
 
 
 volumes:
-  flask-app-data:
-  mysql-data:
-  rabbitmq-data:
+  sense-app:
+  redis-data:
   pgdata:

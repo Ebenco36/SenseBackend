@@ -6,6 +6,8 @@ from sqlalchemy.exc import ProgrammingError
 from app import db, app
 import sys
 import os
+import traceback
+
 sys.path.append(os.getcwd())
 
 class DatabaseUpdater:
@@ -20,7 +22,7 @@ class DatabaseUpdater:
             self.table_name = table_name
             self.engine = db.engine
             self.metadata = MetaData(bind=self.engine)
-            self.metadata.reflect()
+            self.metadata.reflect(bind=self.engine, autoload_with=self.engine)
 
         if table_name in self.metadata.tables:
             self.table = self.metadata.tables[table_name]
@@ -64,8 +66,6 @@ class DatabaseUpdater:
                     print(f"Column '{sanitized_name}' added to the table '{self.table_name}'.")
                 except ProgrammingError as e:
                     print(f"Error adding column '{sanitized_name}': {e}")
-            # else:
-                # print(f"Column '{sanitized_name}' already exists in the table '{self.table_name}'.")
 
     def get_sql_column_type(self, column_type):
         """
@@ -80,6 +80,26 @@ class DatabaseUpdater:
         }
         return mapping.get(column_type, "VARCHAR")
 
+    def flatten_dict(self, d, parent_key='', sep='__'):
+        """
+        Recursively flattens a nested dictionary, converting lists and nested dictionaries to strings.
+        """
+        items = []
+        for k, v in d.items():
+            new_key = f"{parent_key}{sep}{k}" if parent_key else k
+
+            if isinstance(v, dict):
+                # Recursively flatten sub-dictionaries
+                items.extend(self.flatten_dict(v, new_key, sep=sep).items())
+            elif isinstance(v, list):
+                # Convert lists to comma-separated strings
+                items.append((new_key, ', '.join(map(str, v))))
+            else:
+                # Otherwise, just add the key-value pair
+                items.append((new_key, str(v)))  # Ensure all values are strings
+
+        return dict(items)
+
     def update_columns_for_existing_records(self, df, id_column):
         """
         Updates columns for existing records in the database table.
@@ -89,30 +109,35 @@ class DatabaseUpdater:
         self.ensure_columns_exist(inferred_columns)
 
         with self.Session() as session:
-            for _, row in df.iterrows():
-                record_id = row.get(id_column)
-                if pd.isnull(record_id):
-                    print(f"Skipping row with {id_column} = None")
-                    continue
+            try:
+                for _, row in df.iterrows():
+                    record_id = row.get(id_column)
+                    if pd.isnull(record_id):
+                        print(f"Skipping row with {id_column} = None")
+                        continue
 
-                row_data = {
-                    self.sanitize_column_name(col): row[col]
-                    for col in df.columns
-                    if col != id_column and self.sanitize_column_name(col) in self.table.columns
-                }
+                    row_data = {
+                        self.sanitize_column_name(col): row[col]
+                        for col in df.columns
+                        if col != id_column and self.sanitize_column_name(col) in self.table.columns
+                    }
 
-                try:
+                    # Flatten row_data in case of nested structures
+                    flat_row_data = self.flatten_dict(row_data)
+                    # print("Row data to update:", flat_row_data)
                     session.execute(
                         self.table.update()
                         .where(self.table.c[db_id_column] == record_id)
-                        .values(**row_data)
+                        .values(**flat_row_data)
                     )
                     print(f"Updated record with {db_id_column} = {record_id}")
-                except Exception as e:
-                    print(f"Failed to update record {record_id}: {e}")
 
-            session.commit()
-            print("Database records have been updated successfully.")
+                session.commit()
+                print("Database records have been updated successfully.")
+            except Exception as e:
+                session.rollback()
+                print(f"Failed to update records: {e}")
+                print(traceback.format_exc())
 
     def insert_new_records(self, df, id_column):
         """
@@ -123,30 +148,31 @@ class DatabaseUpdater:
         self.ensure_columns_exist(inferred_columns)
 
         with self.Session() as session:
-            for _, row in df.iterrows():
-                record_id = row.get(id_column)
-                if pd.isnull(record_id):
-                    print(f"Skipping row with {id_column} = None")
-                    continue
+            try:
+                for _, row in df.iterrows():
+                    record_id = row.get(id_column)
+                    if pd.isnull(record_id):
+                        print(f"Skipping row with {id_column} = None")
+                        continue
 
-                row_data = {
-                    self.sanitize_column_name(col): row[col]
-                    for col in df.columns
-                    if self.sanitize_column_name(col) in self.table.columns
-                }
+                    row_data = {
+                        self.sanitize_column_name(col): row[col]
+                        for col in df.columns
+                        if self.sanitize_column_name(col) in self.table.columns
+                    }
 
-                # Check if record exists
-                existing_record = session.query(self.table).filter_by(**{db_id_column: record_id}).first()
+                    existing_record = session.query(self.table).filter(self.table.c[db_id_column] == record_id).first()
 
-                if not existing_record:
-                    try:
+                    if not existing_record:
                         session.execute(self.table.insert().values(**row_data))
                         print(f"Inserted new record with {db_id_column} = {record_id}")
-                    except Exception as e:
-                        print(f"Failed to insert record {record_id}: {e}")
 
-            session.commit()
-            print("New records have been inserted successfully.")
+                session.commit()
+                print("New records have been inserted successfully.")
+            except Exception as e:
+                session.rollback()
+                print(f"Failed to insert records: {e}")
+                print(traceback.format_exc())
 
     def close_connection(self):
         """

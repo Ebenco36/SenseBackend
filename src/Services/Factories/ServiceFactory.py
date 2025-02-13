@@ -1,21 +1,15 @@
 from src.Services import Service
-from src.Services.Factories.EMBASE import EMBASE
 from src.Services.Factories.LoveV import LoveV
-from src.Services.Factories.Medline import Medline
 from src.Services.Factories.MedlineClass import MedlineClass
 from src.Services.Factories.Cochrane import Cochrane
-from src.Services.Factories.OVID import OVID
 from src.Services.Factories.OVIDNew import OvidJournalDataFetcher 
 # OVID new update but still requires manual work a little
 
 class ServiceFactory:
     SERVICES = {
-        'embase': EMBASE,
         'L.ove': LoveV,
-        'medline': Medline,
         'cochrane': Cochrane,
         'medline_class': MedlineClass,
-        'ovid': OVID,
         'ovid_new': OvidJournalDataFetcher
         # Add more services here
     }

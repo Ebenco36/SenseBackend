@@ -60,9 +60,11 @@ class CSVUnifier:
                     # Only 'year' exists
                     df['Year'] = df['year'].astype(int)
                     # df.rename(columns={"year": "Year"}, inplace=True)
-                elif 'Date' in df.columns:
+                elif 'Date' in df.columns and not 'Year' in df.columns:
                     # Extract year from 'Date' column
                     df['Year'] = self.extract_year(df['Date']).fillna(-1).astype(int)
+                elif 'Year' in df.columns:
+                    df['Year'] = df['Year']
                 else:
                     # Neither column exists, create 'Year' with NaN values
                     df['Year'] = pd.NA
@@ -174,24 +176,24 @@ def get_latest_file(directory, prefix, suffix):
         return os.path.join(directory, latest_file)
     return None
 
-directory = f"./OVIDNew/"
+directory = f"./Data/OVIDNew/"
 prefix = "merged_journal_data_"
 suffix = ".csv"
 
 latest_file = get_latest_file(directory, prefix, suffix)
      
 csv_sources = {
-    "Cochrane/cochrane_combined_output.csv": "Cochrane",
-    "MedlineData/medline_results.csv": "Medline",
+    "Data/Cochrane/cochrane_combined_output.csv": "Cochrane",
+    "Data/MedlineData/medline_results.csv": "Medline",
     f"{latest_file}": "OVID",
-    "L-OVE/LOVE.csv": "LOVE"
+    "Data/L-OVE/LOVE.csv": "LOVE"
 }
 
 common_columns = ['Id', 'Title', 'Authors', 'DOI']
 
 rename_maps = {
-    "Cochrane/cochrane_combined_output.csv": {
-        "cdIdentifier": "other_id",
+    "Data/Cochrane/cochrane_combined_output.csv": {
+        "cdIdentifier": "verification_id",
         "title": "Title",
         "doi_link": "DOI",
         "doi": "DOI_only",
@@ -207,8 +209,8 @@ rename_maps = {
         "journal": "Journal",
         "open_access": "Open_access"                 
     },
-    "MedlineData/medline_results.csv": {
-        "pmid": "other_id",
+    "Data/MedlineData/medline_results.csv": {
+        "pmid": "verification_id",
         "title": "Title",
         "abstract": "Abstract",
         "authors": "Authors",
@@ -221,10 +223,11 @@ rename_maps = {
     },
     f"{latest_file}": {
         "PublicationType": "Publication_type",
-        "DateDelivered": "Date"
+        "DateDelivered": "Date",
+        "TitleLink": "verification_id"
     },
-    "L-OVE/LOVE.csv": {
-        "id": "other_id",
+    "Data/L-OVE/LOVE.csv": {
+        "id": "verification_id",
         "authors": "Authors",
         "classification": "Classification",
         "doi": "DOI",
@@ -242,4 +245,4 @@ rename_maps = {
 }
 
 unifier = CSVUnifier(csv_sources, common_columns=common_columns, rename_maps=rename_maps)
-unifier.save_unified_csv("output/unified_output.csv")
+unifier.save_unified_csv("Data/output/unified_output.csv")

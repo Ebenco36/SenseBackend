@@ -26,7 +26,6 @@ class JsonApiService(ApiService):
     def post_data(self, data):
         try:
             response = requests.post(self.api_url, json=data)
-            print(response)
             if response.status_code == 200:
                 resp = {
                     "data": response.json(),

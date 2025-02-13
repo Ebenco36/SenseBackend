@@ -17,7 +17,36 @@ class DatabaseHandler:
             cursor.close()
             conn.close()
             return papers
+        
+    def fetch_papers_with_column_names(self):
+        """
+        Fetches papers using the predefined query and maps data to column names.
+        """
+        with app.app_context():
+            # Establish a raw database connection
+            conn = db.engine.raw_connection()
+            cursor = conn.cursor()
 
+            try:
+                # Execute the query
+                cursor.execute(self.query)
+
+                # Fetch all rows
+                rows = cursor.fetchall()
+
+                # Get column names from cursor description
+                column_names = [desc[0] for desc in cursor.description]
+
+                # Map rows to column names
+                papers = [dict(zip(column_names, row)) for row in rows]
+
+                return papers
+            finally:
+                # Ensure resources are released
+                cursor.close()
+                conn.close()
+    
+    
     def update_query(self, new_query):
         """
         Updates the query for this DatabaseHandler instance.

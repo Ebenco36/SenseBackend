@@ -29,7 +29,6 @@ def validate_create_body(body: dict) -> None:
 
 
 def validate_update_body(body: dict) -> None:
-    print(body)
     if (
         'name' in body and not isinstance(body['name'], str)
         or 'age' in body and not isinstance(body['age'], int)

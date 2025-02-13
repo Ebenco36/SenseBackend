@@ -21,6 +21,8 @@ docker build -t sense_project .
 
 docker-compose up --build -d
 
+docker compose -f docker-compose.yml up -d
+
 touch /opt/homebrew/etc/openssl@3/certs/.pem
 
 
@@ -73,32 +75,20 @@ pyenv local 3.11
 /Users/AwotoroE-Dev/.pyenv/versions/3.11.9/bin/python
 
 
-gunicorn -w 4 --graceful-timeout 30 -k gevent -b 0.0.0.0:5100 --reload server:app
-
-
-Fetch data from host online
-=====================================================
-from src.api_utils import embase_access, ilove_access, cochrane_access, medline_access, ovid_access, medline_class_access
-
-medline_class_access()
-cochrane_access()
-ilove_access()
-ovid_access()
+gunicorn -w 4 --graceful-timeout 30 -k gevent -b 0.0.0.0:5400 --reload server:app
 
 
 Seed data to database
 =====================================================
-python ./src/Commands/dynamic_table.py ./OVID/data.csv ovid_db --primary DOI --fallback 'Digital Object Identifier'
-python ./src/Commands/dynamic_table.py ./L-OVE/LOVE.csv  love_db --primary id
-python ./src/Commands/dynamic_table.py ./Cochrane/cochrane_combined_output.csv  cochrane_db --primary 'cdIdentifier'
-python ./src/Commands/dynamic_table.py ./MedlineData/medline_results.csv  medline_db --primary 'PMID'
+python ./src/Commands/dynamic_table.py ./Data/OVID/data.csv ovid_db --primary DOI --fallback 'Digital Object Identifier'
+python ./src/Commands/dynamic_table.py ./Data/L-OVE/LOVE.csv  love_db --primary id
+python ./src/Commands/dynamic_table.py ./Data/Cochrane/cochrane_combined_output.csv  cochrane_db --primary 'cdIdentifier'
+python ./src/Commands/dynamic_table.py ./Data/MedlineData/medline_results.csv  medline_db --primary 'PMID'
 
 python ./src/Commands/UnifyCSV.py
-
 python ./src/Commands/dynamic_table.py ./HPV_training_set_HHL_AP_complete.csv  rough_db --primary 'Id'
-
-python ./src/Commands/dynamic_table.py ./output/unified_output.csv  all_db --primary 'Id'
-
+python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db --primary 'verification_id'
+python ./src/Commands/CountryRegionManager.py
 example: python script.py data.csv my_table --primary id_column1 id_column2 --fallback fallback_column1 fallback_column2
 Tagging pipeline for all papers
 =====================================================
@@ -113,33 +103,9 @@ export PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)
 export CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 
-
-Web server
-
-export AIRFLOW_HOME=~/airflow  # Set the Airflow home directory
-airflow db init                # Initialize the Airflow database
-
-
-Create a user account for accessing the Airflow web interface:
-
-airflow users create \
-    --username admin \
-    --password admin_password \
-    --firstname Admin \
-    --lastname User \
-    --role Admin \
-    --email admin@example.com
-
-
-
-Start the Airflow web server and scheduler:
-
-airflow webserver --port 8080 &  # Starts the webserver on http://localhost:8080
-airflow scheduler &               # Starts the scheduler in the background
-
-
-airflow webserver --port 8080 & airflow scheduler & 
-
-
-
 Quadrivalent vaccines for the immunization  of adults against influenza: a systematic review
+
+Testing
+
+python ./src/Commands/dynamic_table.py ./enriched_output.csv  all_db --primary 'unique_id'
+docker compose --env-file .env -f docker-compose.yml up -d

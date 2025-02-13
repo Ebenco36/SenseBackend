@@ -2,14 +2,14 @@
 
 rule all:
     input:
-        "output/ovid_papers_tags",
-        "output/cochrane_papers_tags",
-        "output/love_papers_tags",
-        "output/medline_papers_tags"
+        "Data/output/ovid_papers_tags",
+        "Data/output/cochrane_papers_tags",
+        "Data/output/love_papers_tags",
+        "Data/output/medline_papers_tags"
 
 rule process_ovid:
     output:
-        "output/ovid_papers_tags"
+        "Data/output/ovid_papers_tags"
     log:
         "logs/process_ovid.log"
     shell:
@@ -19,7 +19,7 @@ rule process_ovid:
 
 rule process_cochrane:
     output:
-        "output/cochrane_papers_tags"
+        "Data/output/cochrane_papers_tags"
     log:
         "logs/process_cochrane.log"
     shell:
@@ -29,7 +29,7 @@ rule process_cochrane:
 
 rule process_love:
     output:
-        "output/love_papers_tags"
+        "Data/output/love_papers_tags"
     log:
         "logs/process_love.log"
     shell:
@@ -39,7 +39,7 @@ rule process_love:
 
 rule process_medline:
     output:
-        "output/medline_papers_tags"
+        "Data/output/medline_papers_tags"
     log:
         "logs/process_medline.log"
     shell:

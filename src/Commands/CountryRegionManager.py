@@ -35,6 +35,7 @@ class CountryRegionManager:
         self.db_service = PostgresService()
         
         self.country_aliases = {
+            "Kyrgyztan": "Kyrgyzstan",
             "China (Republic : 1949- )": "China",
             "England": "United Kingdom",
             "Korea (South)": "South Korea",

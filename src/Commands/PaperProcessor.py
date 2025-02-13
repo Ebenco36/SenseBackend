@@ -32,10 +32,10 @@ class PaperProcessor:
 
     def process_papers(self, db_name=None):
         """Processes all papers and saves the extracted data to CSV files."""
-        papers = self.db_handler.fetch_papers()
+        papers = self.db_handler.fetch_papers_with_column_names()
         self.tag_columns.update(["Id", "doi", "doi_url"])
-        
         for paper in papers:
+            db_name = db_name if (db_name and db_name != "all") else paper.get("Source", "Cochrane")
             text, doi_url, paper_id, doi = self._process_single_paper(paper, db_name)
             if text:
                 tags = self._apply_tagging(text, doi_url, paper_id, doi)
@@ -48,27 +48,38 @@ class PaperProcessor:
     @staticmethod
     def extract_dois(doi_string):
         if doi_string:
-            """Extracts DOIs from a string formatted as a list of DOIs."""
             try:
-                doi_list = ast.literal_eval(doi_string)
-                return [doi.split()[0] for doi in doi_list if "[doi]" in doi]
-            except (EOFError, ValueError) as e:
+                # Check if the string is a list or a single DOI
+                if doi_string.startswith("[") and doi_string.endswith("]"):
+                    # Parse the string as a list
+                    doi_list = ast.literal_eval(doi_string)
+                    return [doi.split()[0] for doi in doi_list if "[doi]" in doi]
+                else:
+                    # Treat the string as a single DOI
+                    return [doi_string]
+            except (SyntaxError, ValueError, TypeError) as e:
                 print(f"Error extracting DOIs: {e}")
                 return []
         else:
             print("DOI not found!!!")
+            return []
 
     def _process_single_paper(self, paper, db_name):
         """Processes a single paper by scraping and tagging its content."""
-        paper_id, doi, doi_link = paper[0], paper[1], paper[2] if len(paper) == 3 else None
+        
+        paper_id = paper.get("primary_id", None)
+        doi = paper.get("DOI", None)
+        doi_link = paper.get("doi_url", None)
+        source = paper.get("Source", None)
         doi_url = self._construct_doi_url(doi, doi_link, db_name)
         scraper = self._select_scraper(doi_url, db_name)
+        
         if doi_url:
             try:
                 text = scraper.fetch_and_extract_first_valid_pdf_text()
             except Exception as e:
                 print(f"EOFError encountered while processing PDF content for DOI: {doi_url} - {e}")
-                text = ""
+                text = scraper.fetch_text_from_html()
             return text, doi_url, paper_id, doi
         else:
             return None, None, None, None
@@ -94,7 +105,7 @@ class PaperProcessor:
     def _construct_doi_url(self, doi, doi_link, db_name):
         """Constructs the DOI URL based on the database name and DOI."""
         if db_name == "Cochrane":
-            doi_link = doi_link or doi
+            doi_link = doi
             return "https://www.cochranelibrary.com" + self._cochrane_doi_path(doi_link)
         elif db_name == "Medline":
             doi_list = self.extract_dois(doi)
@@ -134,28 +145,25 @@ class PaperProcessor:
         tags["Id"] = paper_id
         tags["doi"] = doi
         tags["doi_url"] = doi_url
-        
         # Flatten complex data types
-        return self.flatten_tags(tags)
+        response = self.flatten_tags(tags)
+        
+        return response
     
     def flatten_tags(self, tags):
         """Convert nested lists or other complex data types to flattened strings."""
         for key, value in tags.items():
-            # Check if key starts with "Population#AgeGroup"
-            if key.startswith("Population#AgeGroup") and isinstance(value, list):
-                # Retain only the last item for keys starting with Population#AgeGroup
-                if value:
-                    tags[key] = value[-1] if isinstance(value[-1], list) else value[-1]
-            elif isinstance(value, list):
-                # Flatten nested lists for other keys
-                flattened_value = list(chain.from_iterable(
-                    v if isinstance(v, list) else [v] for v in value
-                ))
-                tags[key] = ', '.join(str(v) for v in flattened_value)
+            if isinstance(value, list):
+                # Select only the last list if multiple lists exist
+                if isinstance(value[-1], list):
+                    value = value[-1]  # Take the last list for processing
+                
+                # Convert the selected list to a comma-separated string
+                tags[key] = ", ".join(map(str, value)) if isinstance(value, list) else str(value)
+
             elif isinstance(value, str):
-                # Strip whitespace for strings
-                tags[key] = value.strip()
-        
+                tags[key] = value.strip()  # Remove unnecessary whitespace
+            
         return tags
 
     def _save_data_to_csv(self):

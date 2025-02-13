@@ -42,21 +42,3 @@ class MedlinePDFWebScraper(GeneralPDFWebScraper):
         email = f"{local_part}@{domain}"
         print(f"Generated email: {email}")
         return email
-
-
-    # def fetch_and_extract_first_valid_pdf_text(self):
-    #     """
-    #     Fetches and extracts text from the first available PDF URL, or falls back to HTML content.
-
-    #     Returns:
-    #         str: Extracted text content from the first valid PDF or HTML as fallback.
-    #     """
-    #     pdf_urls = self.fetch_pdf_urls_2()
-    #     # for pdf_url in pdf_urls:
-    #     pdf_content, content_type = self.fetch_pdf_content(pdf_urls[0])
-    #     if pdf_content and "application/pdf" in content_type:
-    #         text = self.extract_text_from_pdf(pdf_content)
-    #         if text:
-    #             return clean_special_characters(text)
-
-    #     return self.fetch_text_from_html()
