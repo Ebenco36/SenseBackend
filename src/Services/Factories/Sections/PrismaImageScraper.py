@@ -210,7 +210,7 @@ class PrismaImageScraper:
             # Perform OCR with structured text mode
             extracted_text = pytesseract.image_to_string(img_array, lang=lang, config="--psm 6")
             # Define PRISMA-related keywords
-            prisma_image_keywords = {"identification", "screening", "eligibility", "included"}
+            prisma_image_keywords = {"identification", "screening", "eligibility", "included", "excluded"}
 
             if any(keyword in extracted_text.lower() for keyword in prisma_image_keywords):
                 return extracted_text.strip()
