@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from src.Journals.services import JSONService
+from src.Journals.Services.services import JSONService
 from src.Utils.response import ApiResponse
 
 # Initialize JSONService

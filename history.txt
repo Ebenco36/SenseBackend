@@ -77,6 +77,10 @@ pyenv local 3.11
 
 gunicorn -w 4 --graceful-timeout 30 -k gevent -b 0.0.0.0:5400 --reload server:app
 
+gunicorn --preload --bind 0.0.0.0:5400 server:app
+
+gunicorn --preload --bind 0.0.0.0:5400 --access-logfile ./logs/access.log --error-logfile ./logs/error.log -m 007 server:app
+
 
 Seed data to database
 =====================================================

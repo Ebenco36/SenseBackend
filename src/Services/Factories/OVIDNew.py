@@ -51,7 +51,6 @@ class OvidJournalDataFetcher(Service):
 
         return params_dict, base_url
 
-
     def get_url_from_config(self, key_name):
         """
         Retrieves a URL from the `config` table based on the provided key name.
@@ -146,8 +145,6 @@ class OvidJournalDataFetcher(Service):
 
         self.merge_csv_files()
 
-        
-        
     def _extract_data(self, soup):
         """
         Extracts data from the HTML for each journal record and splits the Source field.
@@ -209,6 +206,12 @@ class OvidJournalDataFetcher(Service):
             if pub_type_tag:
                 data["PublicationType"] = pub_type_tag.text.strip().strip("[]")
 
+            
+            pub_accession_number_tag = record.select_one(".article-ui")
+            if pub_accession_number_tag:
+                data["PublicationAccessionNumber"] = pub_accession_number_tag.get_text(strip=True).replace("AN:", "").replace("UI:", "")
+                
+                
             # Abstract
             abstract_tag = record.select_one(".titles-ab")
             if abstract_tag:
@@ -307,11 +310,10 @@ class OvidJournalDataFetcher(Service):
 
         return records
 
-
     def _save_to_csv(self, journals, filename):
         headers = [
             "Title", "TitleLink", "Authors", "Database", 
-            "Journal", "OtherInfo",  "PublicationType", "Abstract", "URL", "DOI",
+            "Journal", "OtherInfo",  "PublicationType", "PublicationAccessionNumber", "Abstract", "URL", "DOI",
             "CorrespondenceEmail", "CorrespondenceAddress", "Institution", "Country",
             "Publisher", "JournalAbbreviation", "EmtreeHeadings", "NumberOfReferences", 
             "Language", "DateCreated", "UpdateDate", "DateDelivered", "Year"
@@ -334,8 +336,9 @@ class OvidJournalDataFetcher(Service):
 
         # Combine all CSV files into one DataFrame
         df_list = [pd.read_csv(file) for file in all_files]
-        merged_df = pd.concat(df_list, ignore_index=True)
+        if (len(df_list) > 0):
+            merged_df = pd.concat(df_list, ignore_index=True)
 
-        # Save the merged DataFrame to a single CSV file
-        merged_df.to_csv(merged_filename, index=False, encoding="utf-8")
-        print(f"All CSV files merged into {merged_filename}")
+            # Save the merged DataFrame to a single CSV file
+            merged_df.to_csv(merged_filename, index=False, encoding="utf-8")
+            print(f"All CSV files merged into {merged_filename}")

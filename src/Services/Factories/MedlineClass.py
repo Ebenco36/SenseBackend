@@ -3,6 +3,7 @@ import pandas as pd
 from io import StringIO
 import time
 import requests
+from tqdm import tqdm  # Progress bar library
 
 class MedlineClass:
     def __init__(self):
@@ -78,7 +79,8 @@ class MedlineClass:
         records = []
         batch_size = 5000
 
-        for start in range(0, len(id_list), batch_size):
+        print(f"📥 Fetching details for {len(id_list)} articles...")
+        for start in tqdm(range(0, len(id_list), batch_size), desc="📄 Downloading records", unit="batch"):
             batch_ids = ",".join(id_list[start:start + batch_size])
 
             try:
@@ -185,7 +187,7 @@ class MedlineClass:
             if not self.validate_query(query):
                 continue  # Skip invalid queries
 
-            print(f"Processing query: {query}")
+            # print(f"Processing query: {query}")
             id_list = self.search_medline(query)
 
             if not id_list:
@@ -196,7 +198,8 @@ class MedlineClass:
             records = self.fetch_details(id_list)
                 
             # Convert each Medline record to a dictionary
-            for record in records:
+            print("📝 Processing records...")
+            for record in tqdm(records, desc="🛠 Processing", unit="record"):
                 get_other_fields = {}
                 doi = self.clean_doi(record.get("AID", []))
                 if doi:
@@ -214,7 +217,7 @@ class MedlineClass:
                     "MeSH Terms": "; ".join(record.get("MH", [])),
                     "Publication Type": "; ".join(record.get("PT", [])),
                     "DOI": doi,
-                    "Query": query,
+                    # "Query": query,
                     "year": get_other_fields.get("year", ""),
                     "open_access": "Open Access" if get_other_fields.get("is_oa", False) == True else "Not Open Access",
                 }
@@ -224,7 +227,7 @@ class MedlineClass:
         df = pd.DataFrame(all_data)
 
         if not df.empty:
-            print(f"Cleaning dataset with {len(df)} records...")
+            print(f"🧹 Cleaning dataset with {len(df)} records...")
             df = self.clean_dataset(df)
             output_path = "Data/MedlineData/medline_results.csv"
             df.to_csv(output_path, index=False)

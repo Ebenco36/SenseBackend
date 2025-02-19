@@ -4,6 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from dotenv import load_dotenv
 import math
 import os
+import pandas as pd
+import altair as alt
 
 class QueryHelper:
     """Helper class for building SQL queries and parameters."""
@@ -608,7 +610,139 @@ class PostgresService:
         except Exception as e:
             print(f"Error: {e}")
             return []
+        
+    def generate_chart(self, data):
+        df_year_source = pd.DataFrame(data['year_source'])
+        df_country = pd.DataFrame(data['country'])
+        df_journal = pd.DataFrame(data['journal'])
+        df_source = pd.DataFrame(data['source'])
+        
+        # Colorblind-friendly palette
 
+        colorblind_palette = "tableau20"  # Alternative: "viridis", "set2"
+        okabe_ito_colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#0072B2", "#D55E00", "#CC79A7"]
+
+        source_color_mapping = {
+            "LOVE": "#a6cee3", 
+            "OVID": "#1f78b4", 
+            "Cochrane": "#b2df8a", 
+            "Medline": "#33a02c"
+        }
+        source_domain = list(source_color_mapping.keys())  # List of categories
+        source_range_ = list(source_color_mapping.values())  # Corresponding colors
+
+        # Year & Source bar chart
+        chart_year_source = (
+            alt.Chart(df_year_source)
+            .transform_calculate(
+                Year="datum.Year !== null ? datum.Year : 'Unknown'"  # Replaces null with "Unknown"
+            )
+            .mark_bar()
+            .encode(
+                x=alt.X('Year:O', title='Year', axis=alt.Axis(labelAngle=-45)),
+                y=alt.Y('sum(record_count):Q', title='Total Records'),
+                color=alt.Color(
+                    'Source:N', 
+                    legend=alt.Legend(orient="bottom", direction="horizontal"), 
+                    title='Source', 
+                    scale=alt.Scale(
+                        domain=source_domain, 
+                        range=source_range_
+                    )
+                ), #scheme=colorblind_palette
+                tooltip=[
+                    alt.Tooltip('Year:O', title='Year'),
+                    alt.Tooltip('Source:N', title='Source'),
+                    alt.Tooltip('sum(record_count):Q', title='Total Records')
+                ]
+            )
+            .properties(width="container", height=400, title='Records Over Time by Source')
+            .configure(autosize="fit")
+            .interactive()
+        )
+
+        # Country bar chart
+        df_country['Country'] = df_country['Country'].replace('[]', 'Unknown')
+        chart_country = (
+            alt.Chart(df_country)
+            .mark_bar()
+            .encode(
+                x=alt.X('Country:N', title='Country', axis=alt.Axis(labelAngle=-45)),
+                y=alt.Y('record_count:Q', title='Total Records'),
+                color=alt.Color(
+                    'Country:N', 
+                    legend=alt.Legend(orient="bottom", direction="horizontal"), 
+                    scale=alt.Scale(scheme=colorblind_palette)
+                ),
+                tooltip=[
+                    alt.Tooltip('Country:N', title='Country'),
+                    alt.Tooltip('record_count:Q', title='Total Records')
+                ]
+            )
+            .properties(width="container", height=300, title='Records by Country')
+            .configure(
+                autosize="fit"
+            ).interactive()
+        )
+
+        # Journal bar chart
+        chart_journal = (
+            alt.Chart(df_journal)
+            .mark_bar()
+            .encode(
+                x=alt.X('Journal:N', title='Journal', axis=alt.Axis(labelAngle=-45)),
+                y=alt.Y('record_count:Q', title='Total Records'),
+                color=alt.Color(
+                    'Journal:N', 
+                    legend=alt.Legend(orient="bottom", direction="horizontal"), 
+                    scale=alt.Scale(
+                        domain=source_domain, 
+                        range=source_range_
+                    )
+                ),
+                tooltip=[
+                    alt.Tooltip('Journal:N', title='Journal'),
+                    alt.Tooltip('record_count:Q', title='Total Records')
+                ]
+            )
+            .properties(width="container", height=300, title='Records by Journal')
+            .configure(
+                autosize="fit"
+            )
+            .interactive()
+        )
+
+        # Source bar chart
+        chart_source = (
+            alt.Chart(df_source)
+            .mark_bar()
+            .encode(
+                x=alt.X('Source:N', title='Source', axis=alt.Axis(labelAngle=-45)),
+                y=alt.Y('record_count:Q', title='Total Records'),
+                color=alt.Color(
+                    'Source:N', 
+                    legend=alt.Legend(orient="bottom", direction="horizontal"), 
+                    scale=alt.Scale(domain=df_source['Source'].unique(), range=okabe_ito_colors)
+                ),
+                tooltip=[
+                    alt.Tooltip('Source:N', title='Source'),
+                    alt.Tooltip('record_count:Q', title='Total Records')
+                ]
+            )
+            .properties(width="container", height=300, title='Records by Source')
+            .configure(
+                autosize="fit"
+            )
+            .interactive()
+        )
+        
+        return {
+            "year_source": chart_year_source.to_dict(), 
+            "country": chart_country.to_dict(), 
+            "journal": chart_journal.to_dict(), 
+            "source": chart_source.to_dict()
+        }
+        
     def get_summary_statistics(self):
         """
         Fetches summary statistics grouped individually and by Year for each feature: Country, Journal, and Source.
@@ -655,6 +789,14 @@ class PostgresService:
                     GROUP BY "Source"
                     ORDER BY record_count DESC
                     LIMIT 4;
+                """,
+                "ovid_grouping": """
+                    SELECT "Database", COUNT(*) AS record_count
+                    FROM all_db
+                    WHERE "Source"='OVID'
+                    GROUP BY "Database"
+                    ORDER BY record_count DESC
+                    LIMIT 4;
                 """
             }
             with self.engine.connect() as connection:
@@ -666,9 +808,12 @@ class PostgresService:
                         dict(row) for row in result
                     ]
 
+            # print(summary_stats)
+            charts = self.generate_chart(summary_stats)
             return {
                 "status": "success",
-                "data": summary_stats
+                "data": summary_stats,
+                "charts": charts
             }
 
         except Exception as e:

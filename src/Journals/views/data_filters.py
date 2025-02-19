@@ -4,11 +4,12 @@ from io import BytesIO, StringIO
 from flask_restful import Resource
 from src.Utils.response import ApiResponse
 from src.Commands.regexp import searchRegEx
-from src.Journals.services import JSONService
+from src.Journals.Services.services import JSONService
 from flask import request, jsonify, send_file, make_response
 
 # Initialize JSONService
 json_service = JSONService()
+
 
 class FilterAPI(Resource):
     def get(self):
@@ -20,29 +21,76 @@ class FilterAPI(Resource):
 
             # Process the request using the service layer
             columns = json_service.get_columns_from_table(payload)
+            
             response = json_service.process_columns_with_hash(columns, searchRegEx)
-            regions, countries, languages, years  = json_service.get_other_filters()
+
+            regions, countries, languages, years = json_service.get_other_filters()
 
             data = {
                 "tag_filters": response.get("data", {}),
                 "others": {
-                    "languages": languages,
-                    "countries": countries,
-                    "regions": regions,
-                    "years": years,
+                    "Review Language": sorted(
+                        set(
+                            languages + [ 
+                                "Arabic", "Bosnian", "Bulgarian", "Chinese", "Croatian", "Czech", 
+                                "Danish", "Dutch", "English", "French", "German", "Greek", "Hebrew"
+                                "Italian", "Japanese", "Korean", "Norwegian", "Persian", "Polish"
+                                "Portuguese", "Russian", "Spanish", "Turkish"
+                            ]
+                        )
+                    ),  #  +
+                    "Country": sorted(
+                        set(
+                            countries
+                            + [
+                                "Germany", "France", "Turkey", "China",
+                                "Brasil", "Canada", "Nigeria",
+                            ]
+                        )
+                    ),
+                    "Region": sorted(
+                        set(regions + [
+                                "Americas", "Europe", "Africa", "Asia", 
+                                "North America", "South America",
+                                "Oceania", "Unknown"
+                            ]
+                        )
+                    ),
+                    "publication Year": sorted(
+                        set(
+                            [int(float(year)) for year in years] + [
+                                2025, 2024, 2023, 2022, 2021, 2020, 
+                                2019, 2018, 2017, 2016, 2015, 2014, 
+                                2013, 2012, 2011
+                            ]
+                        ),
+                        reverse=True,
+                    ),  # ,
                     "Amster 2 Overall Rating": [
-                        "High", "Moderate", "Low", "Critically Low", "Not Applicable"
-                    ]
-                }
+                        "High",
+                        "Moderate",
+                        "Low",
+                        "Critically Low",
+                        "Not Applicable",
+                    ],
+                },
             }
             # Check for success in the response
             if "success" in response:
-                return ApiResponse.success(data=data, message="Columns processed successfully", status_code=200)
+                return ApiResponse.success(
+                    data=data, message="Columns processed successfully", status_code=200
+                )
             else:
-                return ApiResponse.error(errors=response.get("error", "Unknown error occurred"), status_code=400)
+                return ApiResponse.error(
+                    errors=response.get("error", "Unknown error occurred"),
+                    status_code=400,
+                )
         except Exception as e:
             # Handle unexpected exceptions
-            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
+            return ApiResponse.error(
+                message="An unexpected error occurred", errors=str(e), status_code=500
+            )
+
 
 class FetchRecordAPI(Resource):
     def get(self, id):
@@ -53,12 +101,22 @@ class FetchRecordAPI(Resource):
             response = json_service.search_by_id(query_params)
             # Check for success in the response
             if "success" in response:
-                return ApiResponse.success(data=response.get("data", {}), message="Record fetched sucessfully.", status_code=200)
+                return ApiResponse.success(
+                    data=response.get("data", {}),
+                    message="Record fetched sucessfully.",
+                    status_code=200,
+                )
             else:
-                return ApiResponse.error(errors=response.get("error", "Unknown error occurred"), status_code=400)
+                return ApiResponse.error(
+                    errors=response.get("error", "Unknown error occurred"),
+                    status_code=400,
+                )
         except Exception as e:
             # Handle unexpected exceptions
-            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
+            return ApiResponse.error(
+                message="An unexpected error occurred", errors=str(e), status_code=500
+            )
+
 
 class ProcessUserSelectionAPI(Resource):
     def post(self):
@@ -88,7 +146,10 @@ class ProcessUserSelectionAPI(Resource):
             # Parse JSON payload
             payloads = request.get_json()
             if not payloads:
-                return ApiResponse.error(message="Invalid payload: Missing or malformed JSON", status_code=400)
+                return ApiResponse.error(
+                    message="Invalid payload: Missing or malformed JSON",
+                    status_code=400,
+                )
 
             # Extract data from the payload
             user_selection = payloads.get("user_selections", [])
@@ -111,25 +172,33 @@ class ProcessUserSelectionAPI(Resource):
                 pagination=pagination,
                 order_by=order_by,
                 additional_conditions=additional_conditions,
-                return_sql=False
+                return_sql=False,
             )
 
             # Check for success in the service response
             if "success" not in response or not response["success"]:
-                return ApiResponse.error(errors=response.get("error", "Unknown error occurred"), status_code=400)
+                return ApiResponse.error(
+                    errors=response.get("error", "Unknown error occurred"),
+                    status_code=400,
+                )
 
             # Handle export functionality
             if export_format:
                 return self.export_response(response["data"], export_format)
 
             # Return JSON response if no export is requested
-            return ApiResponse.success(data=response, message="Data processed successfully", status_code=200)
+            return ApiResponse.success(
+                data=response, message="Data processed successfully", status_code=200
+            )
 
         except Exception as e:
             # Log traceback for debugging
             import traceback
+
             traceback.print_exc()
-            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
+            return ApiResponse.error(
+                message="An unexpected error occurred", errors=str(e), status_code=500
+            )
 
     @staticmethod
     def export_response(data, export_format):
@@ -140,7 +209,9 @@ class ProcessUserSelectionAPI(Resource):
         :return: Flask response containing the exported file.
         """
         if not data:
-            return ApiResponse.error(message="No data available to export.", status_code=400)
+            return ApiResponse.error(
+                message="No data available to export.", status_code=400
+            )
 
         # Convert data to a DataFrame for export
         df = pd.DataFrame(data)
@@ -165,7 +236,7 @@ class ProcessUserSelectionAPI(Resource):
                 excel_buffer,
                 mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 as_attachment=True,
-                download_name="data.xlsx"
+                download_name="data.xlsx",
             )
 
         # Handle JSON export
@@ -176,7 +247,11 @@ class ProcessUserSelectionAPI(Resource):
             return response
 
         # Unsupported format
-        return ApiResponse.error(message=f"Export format '{export_format}' is not supported.", status_code=400)
+        return ApiResponse.error(
+            message=f"Export format '{export_format}' is not supported.",
+            status_code=400,
+        )
+
 
 class SummaryStatisticsAPI(Resource):
     """
@@ -190,7 +265,10 @@ class SummaryStatisticsAPI(Resource):
         try:
             # Use the service to get summary statistics
             summary_stats = json_service.get_summary_statistics()
-            return ApiResponse.success(data=summary_stats, message="success", status_code=200)
+            return ApiResponse.success(
+                data=summary_stats, message="success", status_code=200
+            )
         except Exception as e:
-            return ApiResponse.error(message="An unexpected error occurred", errors=str(e), status_code=500)
-            
+            return ApiResponse.error(
+                message="An unexpected error occurred", errors=str(e), status_code=500
+            )

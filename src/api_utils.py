@@ -30,7 +30,45 @@ def ilove_access():
     headers = format_text_to_json(head)
     ServiceFactory.create_service("L.ove").fetch(headers)
             
-def medline_class_access(searchText=["antimicrobial resistance", "machine learning in healthcare"]):
+def medline_class_access(searchText=[
+    """
+        (
+        (review[pt] OR "review, tutorial"[pt] OR "review, academic"[pt])
+        AND 
+        (
+            medline[tw] OR medlars[tw] OR embase[tw] OR pubmed[tw] OR cochrane[tw]
+            OR scisearch[tw] OR psychinfo[tw] OR psycinfo[tw]
+            OR psychlit[tw] OR psyclit[tw] 
+            OR cinahl[tw] 
+            OR ((hand[tw] AND search*[tw]) OR (manual*[tw] AND search*[tw]))
+            OR ("electronic database*"[tw] OR "bibliographic database*"[tw] OR "computerized database*"[tw] OR "online database*"[tw])
+            OR pooling[tw] OR pooled[tw] OR "mantel haenszel"[tw]
+            OR peto[tw] OR dersimonian[tw] OR "der simonian"[tw] OR "fixed effect"[tw]
+            OR "retraction of publication"[pt] OR "retracted publication"[pt]
+        )
+        )
+        OR
+        (
+        meta-analysis[pt] 
+        OR meta-analysis[sh] 
+        OR (meta-analys*[tw] OR meta analys*[tw] OR metaanalys*[tw])
+        OR (systematic*[tw] AND review*[tw])
+        OR (quantitative*[tw] AND review*[tw])
+        OR (methodologic*[tw] AND review*[tw])
+        OR ("integrative research review"[tw] OR "research integration"[tw])
+        )
+        AND
+        (
+        immunization[mesh] 
+        OR Immunization Programs[mesh] 
+        OR vaccines[mesh]
+        OR (immunisation[tiab] OR immunization[tiab] OR immunise[tiab] OR immunize[tiab] OR vaccine[tiab])
+        )
+        AND humans[filter]
+        AND 
+        ("2011"[edat] : "3000"[edat])
+    """
+    ]):
     ServiceFactory.create_service("medline_class").fetch(searchText)
     
 def cochrane_access(searchText="COvid"):

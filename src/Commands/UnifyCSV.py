@@ -52,14 +52,14 @@ class CSVUnifier:
                 if 'publication_year' in df.columns and 'year' in df.columns:
                     # Use 'publication_year' if available, otherwise fallback to 'year'
                     df['Year'] = df['publication_year'].fillna(df['year']).fillna(-1).astype(int)
-                    # df.rename(columns={"year": "Year"}, inplace=True)
+                    df.drop(columns=['year'], errors='ignore')
                 elif 'publication_year' in df.columns:
                     # Only 'publication_year' exists
                     df['Year'] = df['publication_year'].fillna(-1).astype(int)
                 elif 'year' in df.columns:
                     # Only 'year' exists
                     df['Year'] = df['year'].astype(int)
-                    # df.rename(columns={"year": "Year"}, inplace=True)
+                    df.drop(columns=['year'], errors='ignore')
                 elif 'Date' in df.columns and not 'Year' in df.columns:
                     # Extract year from 'Date' column
                     df['Year'] = self.extract_year(df['Date']).fillna(-1).astype(int)
@@ -224,7 +224,7 @@ rename_maps = {
     f"{latest_file}": {
         "PublicationType": "Publication_type",
         "DateDelivered": "Date",
-        "TitleLink": "verification_id"
+        "PublicationAccessionNumber": "verification_id"
     },
     "Data/L-OVE/LOVE.csv": {
         "id": "verification_id",

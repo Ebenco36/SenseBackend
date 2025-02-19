@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from src.Commands.regexp import searchRegEx
 from src.Utils.Helpers import preprocess_languages
 from src.Services.PostgresService import PostgresService, QueryHelper
-
+from src.Journals.Services.APIResponseNormalizer import APIResponseNormalizer
 class JSONService:
     """Service for interacting with the database using JSON payloads for CRUD operations."""
 
@@ -376,9 +376,14 @@ class JSONService:
                     "synonyms": synonyms,  # Include display value if not already in synonyms
                     "additional_context": None  # Placeholder for additional metadata
                 }
-                
+        
+        data = {key: dict(value) for key, value in structured_data.items()}
+        # Normalize the response
+        normalizer = APIResponseNormalizer()
+        normalized_response = normalizer.normalize_response(data)
+        # print(normalized_response)
         # Convert to a standard dictionary for output
-        return {"success": True, "data": {key: dict(value) for key, value in structured_data.items()}}
+        return {"success": True, "data": normalized_response}
     
     def map_user_selection_to_column(self, user_selections):
         """

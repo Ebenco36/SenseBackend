@@ -33,6 +33,7 @@ class Cochrane(Service):
         self.JSESSIONID = self.get_url_from_config("JSESSIONID")
         self.cookies = None
         self.cookies = {"JSESSIONID": self.JSESSIONID}
+        print(self.cookies)
         # Define headers
         # self.session.headers.update(
         # self.headers
@@ -55,7 +56,7 @@ class Cochrane(Service):
             return result[0] if result else None
         except Exception as e:
             print(f"Error retrieving URL from config: {e}")
-            return None
+            return os.environ.get("JSESSIONID")
         
     def authenticate(self, headers):
         self.session.headers.update(headers)
@@ -76,7 +77,7 @@ class Cochrane(Service):
 
         headers = {
             "Accept": "text/html, */*; q=0.01",
-            "Accept-Encoding": "gzip, deflate, br, zstd",
+            # "Accept-Encoding": "gzip, deflate, br, zstd",
             "Accept-Language": "en-GB-oxendict,en-US;q=0.9,en;q=0.8,yo;q=0.7",
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
@@ -133,6 +134,7 @@ class Cochrane(Service):
                 response = requests.get(
                     url, headers=headers, cookies=self.cookies, params=params
                 )
+                
 
                 if response.status_code == 200 or response.status_code == 201:
                     print("Request was successful!")

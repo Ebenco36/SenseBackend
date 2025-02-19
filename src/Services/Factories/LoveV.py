@@ -15,7 +15,7 @@ from src.Utils.Helpers import (
 
 class LoveV(Service):
 
-    def __init__(self, pageSize = 200):
+    def __init__(self, pageSize = 500):
         self.pageSize = pageSize
 
 
@@ -35,34 +35,40 @@ class LoveV(Service):
     def retrieveRecord(self, page = 1):
         # https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review,primary-study&hide_excluded=true&page=1&sort_by=year&show_summary=true
         # url = 'https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review,primary-study&hide_excluded=true&page=' + str(page) + '&sort_by=year&show_summary=true'
-        # url = "https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references"
-        url = f"https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review&hide_excluded=true&page={page}&sort_by=year&show_summary=true"
+        url = "https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references"
+        # url = f"https://api.iloveevidence.com/v2.1/loves/5e6fdb9669c00e4ac072701d/references?metadata_ids=5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc&classification_filter=systematic-review&hide_excluded=true&page={page}&size={self.pageSize}&sort_by=year&show_summary=true&year_from_filter=2011"
         print(url)
         """
             Work on payload
         """
-        # payload = {
-        #     "sort_by": "year",
-        #     "metadata_ids": [
-        #         "5e7fce7e3d05156b5f5e032a,603b9fe03d05151f35cf13dc"
-        #     ],
-        #     # "query": "(5 AND 17)",
-        #     "classification_filter": "systematic-review",
-        #     "page": page,
-        #     "size": 10
-        # }
+        payload = {
+            "sort_by": "year",
+            "metadata_ids": [
+                "603b9fe03d05151f35cf13dc"
+            ],
+            "query": "",
+            "page": page,
+            "size": self.pageSize,
+            "classification_filter": "systematic-review",
+            "year_from_filter": 2011
+        }
+        
         record_details_data = ApiRequest('json', url, headers=self.auth_headers)
-        rec = record_details_data.fetch_records() #.send_data(payload)
+        rec = record_details_data.send_data(payload)
         data = rec.get('data')
+        
+        # record_details_data = ApiRequest('json', url, headers=self.auth_headers)
+        # rec = record_details_data.fetch_records() #.send_data(payload)
+        # data = rec.get('data')
         return data
     
     """
         We are following the structure as described on EMBASE Server.
     """
 
-    def executeRetrieveData(self, batch_size=10, save_interval=200, max_records=0):
+    def executeRetrieveData(self, batch_size=10, save_interval=10, max_records=0):
         # 10 is the number of record per page
-        max_records = 10 * save_interval
+        max_records = self.pageSize * save_interval
         # Save DataFrame to a CSV file
         file_path = 'Data/L-OVE/Batches/'
         file_path_processed = 'Data/L-OVE/Batches/Processed/'
