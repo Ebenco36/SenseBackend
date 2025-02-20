@@ -16,7 +16,7 @@ services:
       - sense-networks
 
   frontend:
-    build: ../../Downloads/SenseFrontend
+    build: ../../Desktop/SenseFrontend
     container_name: SenseFrontend
     ports:
       - "8081:80" # Expose frontend on localhost:8081

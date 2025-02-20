@@ -15,7 +15,8 @@ results/
 /Medline
 /"L-OVE"
 Data/
-
+.sense/
+.DS_Store
 # Byte-compiled / optimized Python files
 __pycache__/
 *.py[cod]

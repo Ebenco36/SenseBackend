@@ -1,10 +1,12 @@
+import random
+import string
 import time
 import requests
 from io import BytesIO
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from src.Commands.SeleniumPool import PDFDownloader
-from src.Utils.Helpers import clean_special_characters
+from src.Utils.Helpers import clean_special_characters, get_contents
 from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import (
     GeneralPDFWebScraper,
 )
@@ -78,7 +80,14 @@ class CochranePDFWebScraper(GeneralPDFWebScraper):
         except requests.exceptions.RequestException as e:
             print(f"Error fetching PDF URLs: {e}")
             return []
-
+        
+    def generate_random_email(self, domain="gmail.com"):
+        """Generates a random email address for Unpaywall API access."""
+        local_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+        email = f"{local_part}@{domain}"
+        print(f"Generated email: {email}")
+        return email
+    
     def convert_cochrane_pdf_to_full_text(self, pdf_url):
         """Convert a Cochrane PDF URL to its full-text HTML URL."""
         if "/pdf/" in pdf_url:

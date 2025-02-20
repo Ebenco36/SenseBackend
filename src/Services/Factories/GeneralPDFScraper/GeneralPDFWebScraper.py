@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from src.Commands.SeleniumPool import PDFDownloader
 from src.Utils.Helpers import (
     get_final_url,
     get_final_redirected_url,
@@ -283,7 +284,7 @@ class GeneralPDFWebScraper:
         # Fetch PDF URLs dynamically
         pdf_urls = (
             self.fetch_pdf_urls()
-            if hasattr(self, "fetch_pdf_urls")
+            if (hasattr(self, "fetch_pdf_urls") and "cochrane" not in self.url)
             else self.fetch_pdf_urls_2()
         )
 
@@ -303,4 +304,6 @@ class GeneralPDFWebScraper:
             #     return self.fetch_text_from_html(manual_url=pdf_urls[0])
             # else:
                 # General fallback to HTML content
+            if "cochrane" in self.url:
+                return self.fetch_text_from_html_for_cochrane()
             return self.fetch_text_from_html()

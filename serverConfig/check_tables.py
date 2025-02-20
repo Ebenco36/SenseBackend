@@ -19,17 +19,17 @@ def execute_task(table_name):
     
     if table_name == "all_db":
         print("Unify all the databases...")
-        # os.system(f"python3 {parent_dir}/src/Commands/UnifyCSV.py")
+        os.system(f"python {parent_dir}/src/Commands/UnifyCSV.py")
         print("Seeding Unified to the database...")
-        # os.system(f"python3 {parent_dir}/src/Commands/dynamic_table.py {parent_dir}/Data/output/unified_output.csv all_db --primary 'verification_id'")
+        os.system(f"python {parent_dir}/src/Commands/dynamic_table.py {parent_dir}/Data/output/unified_output.csv all_db --primary 'verification_id'")
 
     elif table_name == "region_country":
         print("Extracting country from data...")
-        # os.system(f"python3 {parent_dir}/src/Commands/CountryRegionManager.py")
+        os.system(f"python {parent_dir}/src/Commands/CountryRegionManager.py")
 
     elif table_name == "sense_config":
         print("Database general settings...")
-        # os.system(f"python3 {parent_dir}/src/Commands/GeneralConfig.py")
+        os.system(f"python {parent_dir}/src/Commands/GeneralConfig.py")
 
 def main():
     if not DATABASE_URL:
