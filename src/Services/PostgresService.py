@@ -6,6 +6,8 @@ import math
 import os
 import pandas as pd
 import altair as alt
+from vega_datasets import data
+from iso3166 import countries as iso_countries
 
 class QueryHelper:
     """Helper class for building SQL queries and parameters."""
@@ -180,15 +182,17 @@ class PostgresService:
             raise ValueError("Data to update cannot be empty.")
 
         set_clause = ", ".join(f"{self.quote_identifier(k)} = :{k}" for k in data.keys())
-        query = f"UPDATE {self._table} SET {set_clause} WHERE id = :record_id"
+        if set_clause and set_clause != "":
+            query = f"UPDATE {self._table} SET {set_clause} WHERE id = :record_id"
 
-        try:
-            with self.engine.connect() as conn:
-                conn.execute(text(query), {**data, "record_id": record_id})
-            return True
-        except SQLAlchemyError as e:
-            print(f"Error updating record: {e}")
+            try:
+                with self.engine.connect() as conn:
+                    conn.execute(text(query), {**data, "record_id": record_id})
+                return True
+            except SQLAlchemyError as e:
+                print(f"Error updating record: {e}")
             return False
+        return False
 
     def delete_record(self, record_id):
         """
@@ -610,7 +614,77 @@ class PostgresService:
         except Exception as e:
             print(f"Error: {e}")
             return []
-        
+
+    def create_country_choropleth(self, df_country, color_scheme='blues'):
+        """
+        Generate a choropleth world map using Altair based on country-level record counts.
+
+        Parameters:
+        - df_country: DataFrame with columns ['Country', 'record_count']
+        - color_scheme: Altair color scheme for the map (default: 'blues')
+
+        Returns:
+        - Altair Chart object
+        """
+        # Clean unknown country labels
+        df_country['Country'] = df_country['Country'].replace('[]', 'Unknown')
+        df_country.to_csv("testing_country.csv")
+        # Convert country names to ISO numeric codes (for matching map IDs)
+        def get_iso_code(name):
+            try:
+                return iso_countries.get(name).numeric
+            except:
+                return None
+
+        df_country['id'] = df_country['Country'].apply(get_iso_code)
+        df_country = df_country.dropna(subset=['id']).copy()
+        df_country['id'] = df_country['id'].astype(int)
+
+        # Load TopoJSON world map
+        countries = alt.topo_feature(data.world_110m.url, 'countries')
+
+        # Create choropleth map
+        world_map = (
+            alt.Chart(countries)
+            .mark_geoshape()
+            .encode(
+                color=alt.Color(
+                    'record_count:Q',
+                    title='Total Records',
+                    # scale=alt.Scale(scheme=color_scheme)
+                    scale=alt.Scale(
+                        domain=[0, df_country['record_count'].max()],
+                        range=['#d3d3d3', '#08306b']  # light grey → dark blue
+                    )
+                ),
+                tooltip=[
+                    alt.Tooltip('Country:N', title='Country'),
+                    alt.Tooltip('record_count:Q', title='Total Records')
+                ]
+            )
+            .transform_lookup(
+                lookup='id',
+                from_=alt.LookupData(df_country, 'id', ['Country', 'record_count'])
+            )
+            .transform_calculate(
+                record_count="datum.record_count !== null ? datum.record_count : 0"
+            )
+            .properties(
+                width=800,
+                height=400,
+                title='Records by Country (Map)'
+            )
+            .project(
+                type='naturalEarth1',
+                scale=180,
+                center=[0, 20],  # Shift map center (longitude, latitude)
+                translate=[400, 200],
+                # clipExtent=[[0, 0], [800, 350]]  # [x0, y0], [x1, y1] – crops lower part
+            )
+        )
+
+        return world_map
+   
     def generate_chart(self, data):
         df_year_source = pd.DataFrame(data['year_source'])
         df_country = pd.DataFrame(data['country'])
@@ -685,6 +759,8 @@ class PostgresService:
             ).interactive()
         )
 
+        country_map = self.create_country_choropleth(df_country, color_scheme='blues')
+        
         # Journal bar chart
         chart_journal = (
             alt.Chart(df_journal)
@@ -739,6 +815,7 @@ class PostgresService:
         return {
             "year_source": chart_year_source.to_dict(), 
             "country": chart_country.to_dict(), 
+            "country_map": country_map.to_dict(),
             "journal": chart_journal.to_dict(), 
             "source": chart_source.to_dict()
         }
@@ -773,8 +850,7 @@ class PostgresService:
                     SELECT "Country", COUNT(*) as record_count
                     FROM all_db
                     GROUP BY "Country"
-                    ORDER BY record_count DESC
-                    LIMIT 3;
+                    ORDER BY record_count DESC;
                 """,
                 "journal": """
                     SELECT "Journal", COUNT(*) as record_count

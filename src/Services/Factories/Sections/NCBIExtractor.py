@@ -1,9 +1,12 @@
+from bs4 import BeautifulSoup
 from src.Services.Factories.Sections.BaseArticleExtractor import BaseArticleExtractor
 from src.Services.Factories.Sections.PrismaImageScraper import PrismaImageScraper
 import re
 
 class NCBIExtractor(BaseArticleExtractor):
     def _extract_sections(self):
+        # 🆕 Remove inline section numbering like "3.1 Study..."
+        self.soup = BeautifulSoup(self.remove_section_numbering_from_html(str(self.soup)), "html.parser")
         """Extract sections for articles hosted on NCBI."""
         # Extract the title and ensure it's added to sections_dict
         self._extract_title()
@@ -177,7 +180,8 @@ class NCBIExtractor(BaseArticleExtractor):
                 main_content.append(self.sections_dict[section])
 
         if main_content:
-            self.sections_dict["main_content"] = "===== Main_Content =====\n" + "\n\n".join(main_content)
+            cleaned = "\n\n".join(main_content)
+            self.sections_dict["main_content"] = "===== Main_Content =====\n" + cleaned
 
     def _extract_tables(self):
         """Extract all tables from the document and store them separately."""

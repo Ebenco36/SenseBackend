@@ -7,7 +7,8 @@ from io import BytesIO
 class BaseArticleExtractor:
     def __init__(self, soup=None, url=None, pdf_content=None, text_content=None):
         self.url = url
-        self.soup = soup
+        self.soup = self.remove_heading_numbering_from_html(soup)
+        
         self.pdf_content = pdf_content
         self.doc = None
         self.sections_dict = {}
@@ -15,6 +16,29 @@ class BaseArticleExtractor:
         self.text_content = text_content
         self._fetch_and_parse()
         
+    def remove_heading_numbering_from_html(self, soup):
+        """
+        Removes leading numbering (e.g., "1. ", "a)", "(2)") from HTML blocks that resemble headings or list items,
+        without affecting true numerical values like "1.4", "3.5%", etc.
+        """
+        if soup:
+            # remove superscript
+            for sup in soup.find_all("sup"):
+                sup.decompose()
+
+            # Regex to catch numbering *only at the start* of a text block
+            numbering_pattern = re.compile(
+                r'^\s*(?:\(?[ivxIVX]{1,5}\)?|[a-zA-Z]{1,2}|\(?\d{1,2}\)?)[:\.\)]\s+(?=[A-Z])'
+            )
+
+            for element in soup.find_all(string=True):
+                if element.parent.name in ['p', 'li', 'div', 'span', 'td']:
+                    original = element.strip()
+                    if numbering_pattern.match(original):
+                        cleaned = numbering_pattern.sub('', original)
+                        element.replace_with(cleaned)
+
+            return soup
 
     def _fetch_and_parse(self):
         """Fetch and parse content based on whether it's a PDF or an HTML page."""
@@ -38,6 +62,7 @@ class BaseArticleExtractor:
                 response = requests.get(self.url, headers=headers, timeout=10)
                 response.raise_for_status()
                 self.soup = BeautifulSoup(response.content, 'html.parser')
+                
             except requests.RequestException as e:
                 print(f"Error fetching HTML content: {e}")
 
@@ -128,3 +153,37 @@ class BaseArticleExtractor:
     def get_references(self):
         """Retrieve the References section from the main body."""
         return self.get_section("References")
+    
+
+    def remove_section_numbering_from_html(self, html: str) -> str:
+        """
+        Removes section-style numbering (e.g., '3.1 Study') from the beginning of paragraph-like elements in HTML.
+        Leaves real numeric values (like 1.4, 3.2%) untouched.
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        section_pattern = re.compile(r'^\s*\d+(\.\d+)*[\.\)]?\s+(?=[A-Z])')
+
+        for element in soup.find_all(string=True):
+            if element.parent.name in ['p', 'div', 'span', 'li', 'td']:
+                original = element.strip()
+                if section_pattern.match(original):
+                    cleaned = section_pattern.sub('', original)
+                    element.replace_with(cleaned)
+
+        return str(soup)
+
+    def remove_all_section_numbering_from_text(self, text: str) -> str:
+        """
+        Removes section-like numbering patterns such as '2.1 Title', '3.2.1 Heading'
+        from any part of the document (even inline), as long as followed by a capital letter.
+        Real numeric values (e.g., 1.4 mg) are preserved.
+        """
+        if not isinstance(text, str):
+            raise TypeError(f"Expected string in remove_all_section_numbering_from_text, got {type(text).__name__}")
+        # Match patterns like 1., 2.1, 3.4.5, 1), 2.3), (1.2), etc., followed by a capital letter
+        pattern = re.compile(
+            r'\b(?:\(?\d+(?:\.\d+){0,2}\)?[\.\)]?)\s+(?=[A-Z])'
+        )
+        return pattern.sub('', text)
+    
+    

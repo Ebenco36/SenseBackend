@@ -34,18 +34,18 @@ class PrismaImageScraper:
             list: List of URLs of PRISMA images, or an empty list if none are found.
         """
         found_images = set()
+        if self.soup:
+            # Search for PRISMA-related images
+            for keyword in self.prisma_keywords:
+                matching_elements = self.soup.find_all(string=re.compile(keyword, re.IGNORECASE))
+                for element in matching_elements:
+                    found_images.update(self._search_nearby_images(element))
 
-        # Search for PRISMA-related images
-        for keyword in self.prisma_keywords:
-            matching_elements = self.soup.find_all(string=re.compile(keyword, re.IGNORECASE))
-            for element in matching_elements:
-                found_images.update(self._search_nearby_images(element))
+            # If no PRISMA-related images found, try extracting all images
+            if not found_images:
+                found_images = self._extract_all_images()
 
-        # If no PRISMA-related images found, try extracting all images
-        if not found_images:
-            found_images = self._extract_all_images()
-
-        return list(found_images)
+            return list(found_images)
 
     def _search_nearby_images(self, element):
         """
@@ -218,7 +218,7 @@ class PrismaImageScraper:
                 return "No Image found"
 
         except Exception as e:
-            return f"Error during OCR extraction: {str(e)}"
+            return f"Error during OCR extraction"
 
     @staticmethod
     def prioritize_images(image_urls):

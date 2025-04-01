@@ -371,6 +371,12 @@ def is_sciencedirect_url(url):
     # Check if the scheme is 'https' and the netloc (host) is 'www.sciencedirect.com'
     return parsed_url.scheme == "https" and parsed_url.netloc == "www.sciencedirect.com"
 
+def is_tandfonline_url(url):
+    # Parse the URL
+    parsed_url = urlparse(url)
+
+    # Check if the scheme is 'https' and the netloc (host) is 'www.sciencedirect.com'
+    return parsed_url.scheme == "https" and parsed_url.netloc == "www.tandfonline.com"
 
 def xml_to_text(xml_content):
     # Parse the XML content
@@ -1367,12 +1373,14 @@ from bs4 import BeautifulSoup
 def html_to_plain_text_selenium(url, headless=True):
     options = Options()
     if headless:
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
         options.add_argument("--disable-gpu")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
     )
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
     # Initialize WebDriver
     service = Service(ChromeDriverManager().install())
@@ -1382,31 +1390,53 @@ def html_to_plain_text_selenium(url, headless=True):
     try:
         # Navigate to the webpage
         driver.get(url)
-        # Wait for the page to load completely (adjust timeout as needed)
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        # Give time for JS to fully load
+        time.sleep(5)
+
+        # Wait for any major content area to show up
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "div.Abstracts, div[class*='abstract'], section, body")
+            )
         )
-        # Scroll to the bottom to load dynamic content (if applicable)
+
+        # Scroll down to trigger lazy loading
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(5)  # Give time for JavaScript to load content
-        
-        # Fetch the full page HTML content
+        time.sleep(5)
+
+        # Grab full page source after JS has rendered
         page_html = driver.page_source
-        # Parse the HTML using BeautifulSoup
         soup = BeautifulSoup(page_html, "html.parser")
+
+
+        # Try to extract from ScienceDirect's known structure
+        if is_sciencedirect_url(url):
+            content_tags = soup.select("div.Abstracts, div[class*='abstract'], article, section")
+            # 🔽 Save the extracted raw content to file for inspection
+            # with open("sciencedirect_content.html", "w", encoding="utf-8") as f:
+            #     f.write("\n\n".join(str(tag) for tag in content_tags))
+
+            soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+        elif is_tandfonline_url(url):
+            content_tags = soup.find("div", class_="hlFld-Fulltext")
+            # with open("tandfonline_content.html", "w", encoding="utf-8") as f:
+            #     f.write("\n\n".join(str(tag) for tag in content_tags))
+            soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
 
         # Extract content using ArticleExtractorFactory
         obj_extractor = ArticleExtractorFactory.get_extractor(soup=soup, url=url)
         if obj_extractor is not None:
             if "main_content" in obj_extractor.get_available_sections():
                 plain_text = obj_extractor.get_section("main_content")
-                with open("running_away.html", 'w', encoding='utf-8') as file:
-                    file.write(plain_text)
+                # with open("running_away.html", 'w', encoding='utf-8') as file:
+                #     file.write(plain_text)
             else:
                 print("⚠️ Warning: 'main_content' section not found.")
         else:
             print("❌ Error: obj_extractor is None.")
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print(f"❌ Error in html_to_plain_text_selenium: {e}")
         return plain_text
 
@@ -1711,7 +1741,7 @@ def get_contents(url):
         parsed_url = urlparse(url)
         hostname = parsed_url.netloc
         if "sciencedirect.com" in hostname:
-            return html_to_plain_text_selenium(url, headless=False)
+            return html_to_plain_text_selenium(url, headless=True)
         else:
             extractor = DocumentExtractor()
             soup = None
@@ -1727,10 +1757,134 @@ def get_contents(url):
                 return html_to_plain_text_selenium(url, headless=False)
 
         obj_extractor = ArticleExtractorFactory.get_extractor(soup=soup, url=url)
-        print(obj_extractor.get_available_sections())
+        # print(obj_extractor.get_available_sections())
         if "main_content" in obj_extractor.get_available_sections():
             return obj_extractor.get_section("main_content")
         return soup.get_text()
     except requests.exceptions.RequestException as e:
         print(f"Error fetching HTML content: {e}. But we are trying a different method.")
         return html_to_plain_text_selenium(url, headless=False)
+
+from bs4 import BeautifulSoup
+import re
+import unicodedata
+
+def clean_references(
+    input_data,
+    remove_table_refs=True,
+    remove_citations=True,
+    remove_links=True,
+    remove_section_numbering=True,
+    remove_boilerplate=True,
+    return_type="text"  # or "soup"
+):
+    """
+    Cleans plain text or HTML soup by removing:
+    - Table/figure/image references
+    - Citation references like [1], (2,3), refs 4,5
+    - Section numbering like 1.2 Title
+    - Hyperlinks and markdown links
+    - Boilerplate content (e.g. "Downloaded from ClinicalKey")
+
+    Args:
+        input_data (str or BeautifulSoup)
+        return_type: "text" (default) or "soup" if input is soup
+
+    Returns:
+        str or BeautifulSoup
+    """
+
+    # Normalization
+    if isinstance(input_data, str):
+        input_data = unicodedata.normalize("NFKC", input_data)
+
+    # Compile regex patterns
+    patterns = []
+    if remove_table_refs:
+        patterns += [
+            r'\b(see|refer to)?\s*(table|fig(?:ure)?|fig\.?|image)\s*\d+[a-zA-Z]?\b',
+            r'\b(tables|figures|images)\s*\d+([-–]\d+)?\b',
+        ]
+    if remove_citations:
+        patterns += [
+            r'\[\d+(?:\s*,\s*\d+)*\]',
+            r'\(\d+(?:\s*,\s*\d+)*\)',
+            r'\b(?:ref(?:s)?|references|studies)\s*\d+(?:\s*,\s*\d+)*'
+        ]
+    if remove_links:
+        patterns += [
+            r'https?://\S+',
+            r'www\.\S+',
+            r'\[.*?\]\(.*?\)',  # markdown-style links
+        ]
+
+    combined_pattern = re.compile('|'.join(patterns), re.IGNORECASE)
+
+    section_numbering_pattern = re.compile(
+        r'^\s*((\(?[0-9]+(\.[0-9]+)*[\)\.:])|([IVXLC]+[\)\.:])|([A-Za-z][\)\.:]))\s*[-–—]?\s*',
+        re.IGNORECASE
+    )
+
+    boilerplate_pattern = re.compile(
+        r'(downloaded from|clinicalkey|elsevier|all rights reserved|for personal use only|copyright)',
+        re.IGNORECASE
+    )
+
+    # === Plain text cleanup ===
+    if isinstance(input_data, str):
+        lines = input_data.splitlines()
+        cleaned_lines = []
+
+        for line in lines:
+            original_line = line.strip()
+            if not original_line:
+                continue
+
+            if remove_boilerplate and boilerplate_pattern.search(original_line):
+                continue
+
+            if remove_section_numbering:
+                line = section_numbering_pattern.sub('', original_line)
+            else:
+                line = original_line
+
+            if patterns:
+                line = combined_pattern.sub('', line)
+
+            line = re.sub(r'\s{2,}', ' ', line).strip()
+            if line:
+                cleaned_lines.append(line)
+
+        return '\n'.join(cleaned_lines)
+
+    # === BeautifulSoup cleanup ===
+    elif isinstance(input_data, BeautifulSoup):
+        soup = input_data
+
+        for tag in soup.find_all(string=True):
+            if tag.parent.name in ["style", "script", "head", "title", "meta"]:
+                continue
+
+            text = unicodedata.normalize("NFKC", tag).strip()
+
+            if remove_boilerplate and boilerplate_pattern.search(text):
+                tag.extract()
+                continue
+
+            if remove_section_numbering:
+                text = section_numbering_pattern.sub('', text)
+
+            if patterns:
+                text = combined_pattern.sub('', text)
+
+            text = re.sub(r'\s{2,}', ' ', text).strip()
+            tag.replace_with(text)
+
+        if remove_links:
+            for a in soup.find_all("a"):
+                a.unwrap()
+
+        return soup if return_type == "soup" else soup.get_text(separator=" ", strip=True)
+
+    else:
+        raise ValueError("input_data must be a string or BeautifulSoup object")

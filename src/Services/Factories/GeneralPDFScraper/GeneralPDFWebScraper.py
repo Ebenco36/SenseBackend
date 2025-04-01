@@ -288,10 +288,6 @@ class GeneralPDFWebScraper:
             else self.fetch_pdf_urls_2()
         )
 
-        # Handle ScienceDirect URLs
-        # if "sciencedirect" in pdf_urls[0]:
-        #     cookies_file = "cookies.json"
-        #     return fetch_all_content_for_linked(pdf_urls[0], cookies_file)
         if pdf_urls and len(pdf_urls) > 0 and "valueinhealthjournal" in pdf_urls[0]:
             downloader = PDFDownloader()
             downloaded_file_path = downloader.download_pdf(pdf_urls[0])
@@ -299,11 +295,6 @@ class GeneralPDFWebScraper:
                 pdf_content = downloader.read_pdf_binary(downloaded_file_path)
                 return clean_special_characters(pdf_content)
         else:
-            # We are not sure of the kind of pdf we could get..
-            # if pdf_urls and pdf_urls[0]:
-            #     return self.fetch_text_from_html(manual_url=pdf_urls[0])
-            # else:
-                # General fallback to HTML content
             if "cochrane" in self.url:
                 return self.fetch_text_from_html_for_cochrane()
             return self.fetch_text_from_html()

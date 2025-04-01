@@ -79,12 +79,15 @@ searchRegEx ={
     "topic": {
         "eff": {
            "eff": [
-                ("effectiveness", "eff"), ("impact of", "eff"), 
-                ("effectiveness of", "eff"), ("efficacy", "eff"), 
-                ("VE", "eff"), ("CI", "eff"), ("RR", "eff"), ("OR", "eff"), ("odds ratios", "eff"), 
-                ("odds ratio (OR)", "eff"), ("odds ratios (ORs)", "eff"), ("IRR", "eff"),
-                ("relative risks(RR)", "eff"), ("relative risks", "eff"),
-                ("efficacy rate", "eff"), ("effectiveness rate", "eff"), ("vaccine efficacy", "eff")
+                ("effectiveness", "eff"), ("impact of", "eff"), ("effectiveness of", "eff"), ("efficacy", "eff"),
+                ("VE", "eff"), ("CI", "eff"), ("RR", "eff"), ("OR", "eff"), ("RD", "eff"), ("rate difference", "eff"),
+                ("odds ratios", "eff"), ("odds ratio (OR)", "eff"), ("odds ratios (ORs)", "eff"),
+                ("IRR", "eff"), ("relative risks(RR)", "eff"), ("relative risks", "eff"),
+                ("efficacy rate", "eff"), ("effectiveness rate", "eff"), ("vaccine efficacy", "eff"),
+                ("hazard ratio", "eff"), ("HR", "eff"), ("risk ratio", "eff"), ("rate ratio", "eff"),
+                ("adjusted", "eff"), ("propensity score", "eff"),
+                ("did not effectively", "eff"), ("no effect", "eff"), ("not effective", "eff"),
+                ("pooled", "eff")
             ]
         },
         "safety": {
@@ -168,57 +171,6 @@ searchRegEx ={
                 ("cancer related mortality", "dea"), ("on overall and cancer mortality", "dea")
             ],
         }
-    },
-    "reviews": {
-        "review": {
-            "rev": [
-                ("systematic review", "rev"), ("Literature Review", "rev"), ("review", "rev"), 
-                ("Meta-Analysis", "rev"), ("Critical Review", "rev"), ("Peer Review", "rev"), 
-                ("Book Review", "rev"), ("Editorial Review", "rev"), ("Review Article", "rev")
-            ]
-        }
-    },
-    "studies": {
-        "studie__no": {
-            "sty": [
-                ("study", "sty"), ("studies", "sty"),
-                ("RCT", "rct"),
-                ('randomized controlled trial', "rct"),
-                ('randomised controlled trial', "rct"),
-                ('randomized trial', "rct"),
-                ('randomised trial', "rct"),
-                ('clinical trial', "rct"),
-                ("double-blind study", "rct"), 
-                ("placebo-controlled", "rct"),
-                ("randomised comparative", "rct"),
-                ("NRSI", "nrsi"), 
-                ("non-randomized studies of interventions", "nrsi"),
-                ("observational studies", "nrsi"), 
-                ("quasi-experimental", "nrsi"), 
-                ("non-randomized controlled study", "nrsi"),
-                ("non-randomised studies", "nrsi"),
-                ("natural experiment", "nrsi"),
-                ("test-negative designs", "nrsi"),
-                ("cross-sectional", "nrsi"), 
-                ("cross sectional", "nrsi"),
-                ("controlled clinical", "nrsi"), 
-                ("cohort study", "nrsi"), 
-                ("cohort-study", "nrsi"), 
-                ("prospective study", "nrsi"), 
-                ("retrospective study", "nrsi"), 
-                ("longitudinal study", "nrsi"),
-                ("case-control study", "nrsi"),
-                ("pre-post studies", "nrsi"),
-                ("interrupted time series", "nrsi"),
-                ("case reports", "nrsi"),
-                ("case series", "nrsi"),
-                ("mixed methods", "mmtd"),
-                ("mixed-methods", "mmtd"),
-                ("convergent design", "mmtd"), 
-                ("explanatory sequential design", "mmtd"),
-                ("qualitative study", "quanti"),
-            ]
-        },
     },
     "intervention": {
         "vpd": {
@@ -396,6 +348,75 @@ searchRegEx ={
             "biva": [
                 ("bivalent", "biva"), ("2vHPV", "2vHPV")
             ],
+        },
+    },
+    "reviews": {
+        "review": {
+            "rev": [
+                ("systematic review", "rev"), ("Literature Review", "rev"), ("review", "rev"), 
+                ("Meta-Analysis", "rev"), ("Critical Review", "rev"), ("Peer Review", "rev"), 
+                ("Book Review", "rev"), ("Editorial Review", "rev"), ("Review Article", "rev")
+            ]
+        }
+    },
+    "studies": {
+        "studie__no": {
+            "sty": [
+                # === Study Inclusion Signals ===
+                ("met inclusion criteria", "sty"),
+                ("met eligibility criteria", "sty"),
+                ("met the inclusion criteria", "sty"),
+                ("met the eligibility criteria", "sty"),
+                ("were included", "sty"),
+                ("were deemed relevant", "sty"),
+                ("were considered eligible", "sty"),
+                ("qualified for quality assessment", "sty"),
+                ("yielding data from", "sty"),
+                ("leaving a total of", "sty"),
+                ("included in the review", "sty"),
+                ("included in the meta-analysis", "sty"),
+                ("included in the analysis", "sty"),
+                ("included in the qualitative synthesis", "sty"),
+                ("selected for inclusion", "sty"),
+                ("assessed for eligibility", "sty"),
+                ("assessed with", "sty"),
+                ("records from", "sty"),
+                ("study", "sty"), 
+                ("studies", "sty"),
+
+                # === RCTs ===
+                ("RCT", "rct"), ("RCTs", "rct"),
+                ("randomized trial", "rct"), ("randomised trial", "rct"),
+                ("randomized controlled trial", "rct"), ("randomised controlled trial", "rct"),
+                ("clinical trial", "rct"), ("controlled clinical trial", "rct"),
+                ("double-blind study", "rct"), ("placebo-controlled", "rct"),
+                ("randomised comparative", "rct"), ("multicenter trial", "rct"),
+
+                # === NRSI ===
+                ("observational study", "nrsi"), ("observational studies", "nrsi"),
+                ("non-randomized study", "nrsi"), ("non-randomized studies", "nrsi"),
+                ("non-randomised study", "nrsi"), ("non-randomised studies", "nrsi"),
+                ("case-control study", "nrsi"), ("case-control studies", "nrsi"),
+                ("cohort study", "nrsi"), ("cohort studies", "nrsi"),
+                ("test-negative design", "nrsi"), ("test-negative studies", "nrsi"),
+                ("quasi-experimental study", "nrsi"),
+                ("retrospective study", "nrsi"),
+                ("prospective study", "nrsi"),
+                ("cross-sectional study", "nrsi"),
+                ("interrupted time series", "nrsi"),
+                ("pre-post study", "nrsi"),
+                ("case series", "nrsi"),
+                ("case report", "nrsi"),
+
+                # === Mixed Methods ===
+                ("mixed methods", "mmtd"), ("mixed-methods", "mmtd"),
+                ("convergent design", "mmtd"),
+                ("explanatory sequential design", "mmtd"),
+
+                # === Qualitative ===
+                ("qualitative study", "quanti"), ("qualitative studies", "quanti"),
+                ("interviews", "quanti"), ("focus group", "quanti"), ("focus groups", "quanti"),
+            ]
         },
     },
     "gender": {

@@ -10,6 +10,8 @@ from tqdm import tqdm  # Import tqdm for a progress bar
 class CochraneUniversalExtractor(BaseArticleExtractor):
 
     def _extract_sections(self):
+        # 🆕 Remove inline section numbering like "3.1 Study..."
+        self.soup = BeautifulSoup(self.remove_section_numbering_from_html(str(self.soup)), "html.parser")
         """Extract all key sections from Cochrane articles."""
         self._extract_title()
         self._extract_publication_date()
@@ -209,8 +211,9 @@ class CochraneUniversalExtractor(BaseArticleExtractor):
                 main_content.append(self.sections_dict[section])
 
         if main_content:
+            cleaned = "\n\n".join(main_content)
             self.sections_dict["main_content"] = (
-                "===== Main_Content =====\n" + "\n\n".join(main_content)
+                "===== Main_Content =====\n" + cleaned
             )
 
     def get_extracted_text(self):

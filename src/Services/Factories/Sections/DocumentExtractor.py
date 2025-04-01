@@ -7,6 +7,8 @@ import docx  # For Word documents
 from urllib.parse import urlparse
 import cloudscraper
 
+from src.Utils.Helpers import is_sciencedirect_url, is_tandfonline_url
+
 class DocumentExtractor:
     def __init__(self):
         self.headers = {
@@ -115,7 +117,17 @@ class DocumentExtractor:
                 return None, status_code
 
             if "text/html" in content_type:
-                return self.extract_plain_text_from_html(content), status_code
+                soup, status_code = self.extract_plain_text_from_html(content), status_code
+
+                if is_sciencedirect_url(source) and soup:
+                    content_tags = soup.select("div.Abstracts, div[class*='abstract'], article, section")
+                    soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+                elif is_tandfonline_url(source) and soup:
+                    content_tags = soup.select("div.hlFld-Fulltext")
+                    with open("tandfonline_content.html", "w", encoding="utf-8") as f:
+                        f.write("\n\n".join(str(tag) for tag in content_tags))
+                    soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+                return soup, status_code
             elif "application/pdf" in content_type:
                 return self.extract_plain_text_from_pdf(content), status_code
             elif "application/vnd.openxmlformats-officedocument.wordprocessingml.document" in content_type:

@@ -1,3 +1,6 @@
+from src.Services.Factories.Sections.PlosExtractor import PlosExtractor
+from src.Services.Factories.Sections.TandfonlineExtractor import TandfonlineExtractor
+from src.Services.Factories.Sections.ScienceDirectExtractor import ScienceDirectExtractor
 from src.Services.Factories.Sections.NCBIExtractor import NCBIExtractor
 from src.Services.Factories.Sections.BMJExtractor import BMJExtractor
 from src.Services.Factories.Sections.UniversalExtractor import UniversalExtractor
@@ -19,6 +22,13 @@ class ArticleExtractorFactory:
             return CochraneUniversalExtractor(soup=soup, url=url)
         elif (url and "journals.sagepub.com" in url):
             return SagePubExtractor(soup=soup, url=url)
+        elif (url and "sciencedirect.com" in url):
+            return ScienceDirectExtractor(soup=soup, url=url)
+        elif (url and "www.tandfonline.com" in url):
+            return TandfonlineExtractor(soup=soup, url=url)
+        elif (url and "journals.plos.org" in url):
+            print(url)
+            return PlosExtractor(soup=soup, url=url)
         elif pdf_content or (url and ArticleExtractorFactory.is_pdf_url(url)):
             return PDFUniversalExtractor(pdf_content=pdf_content, url=url)
         elif text_content:

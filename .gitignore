@@ -76,3 +76,20 @@ test.csv
 
 test_data.json
 error_log.csv
+
+# for models
+models
+models3
+models4
+models7
+
+HPV_training_set_HHL_AP_complete.csv
+Influenza-in-the-ED.pdf
+NotFound-on-Medline-using-our-Query.csv
+chrome_profile/
+influenza_sections.json
+influenza_sections.md
+prisma_counts.json
+test2_complete.csv
+testing_country.csv
+trainings/

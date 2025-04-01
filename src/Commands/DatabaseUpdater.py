@@ -125,11 +125,15 @@ class DatabaseUpdater:
                     # Flatten row_data in case of nested structures
                     flat_row_data = self.flatten_dict(row_data)
                     # print("Row data to update:", flat_row_data)
-                    session.execute(
-                        self.table.update()
-                        .where(self.table.c[db_id_column] == record_id)
-                        .values(**flat_row_data)
-                    )
+                    if not flat_row_data:
+                        print(f"Skipping update for record ID {record_id}: No columns to update.")
+                    else:
+                        # Proceed only if there are values to update
+                        session.execute(
+                            self.table.update()
+                            .where(self.table.c[db_id_column] == record_id)
+                            .values(**flat_row_data)
+                        )
                     print(f"Updated record with {db_id_column} = {record_id}")
 
                 session.commit()

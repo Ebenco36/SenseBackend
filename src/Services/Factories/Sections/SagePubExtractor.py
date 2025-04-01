@@ -9,6 +9,8 @@ from io import BytesIO
 class SagePubExtractor(BaseArticleExtractor):
     def _extract_sections(self):
         """Extract sections for SagePub articles."""
+        # 🆕 Remove inline section numbering like "3.1 Study..."
+        self.soup = BeautifulSoup(self.remove_section_numbering_from_html(str(self.soup)), "html.parser")
         self._extract_title()
         self._extract_abstract()
         self._extract_introduction()
@@ -319,5 +321,6 @@ class SagePubExtractor(BaseArticleExtractor):
                 main_content.append(self.sections_dict[section])
 
         if main_content:
-            self.sections_dict["main_content"] = "===== Main_Content =====\n" + "\n\n".join(main_content)
+            cleaned = "\n\n".join(main_content)
+            self.sections_dict["main_content"] = "===== Main_Content =====\n" + cleaned
             

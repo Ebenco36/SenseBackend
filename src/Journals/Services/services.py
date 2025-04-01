@@ -202,6 +202,63 @@ class JSONService:
 
                 # Execute the query
                 records = self.db_service.execute()
+                
+                # Full list of fields to extract
+                fields_to_extract = [
+                    "topic__HASH__acceptance__HASH__kaa", "topic__HASH__adm__HASH__adm",
+                    "topic__HASH__coverage__HASH__cov", "topic__HASH__eco__HASH__eco",
+                    "topic__HASH__ethical__issues__HASH__eth", "topic__HASH__modeling__HASH__mod",
+                    "topic__HASH__risk__factor__HASH__rf", "topic__HASH__safety__HASH__saf",
+                    "intervention__HASH__vaccine__options__HASH__adjuvants", "intervention__HASH__vaccine__options__HASH__biva",
+                    "intervention__HASH__vaccine__options__HASH__live", "intervention__HASH__vaccine__options__HASH__quad",
+                    "intervention__HASH__vpd__HASH__diph", "intervention__HASH__vpd__HASH__hb",
+                    "intervention__HASH__vpd__HASH__hiv", "intervention__HASH__vpd__HASH__hpv",
+                    "intervention__HASH__vpd__HASH__infl", "intervention__HASH__vpd__HASH__meas",
+                    "intervention__HASH__vpd__HASH__meni", "intervention__HASH__vpd__HASH__tetanus",
+                    "popu__HASH__age__group__HASH__ado_10__17", "popu__HASH__age__group__HASH__adu_18__64",
+                    "popu__HASH__age__group__HASH__chi_2__9", "popu__HASH__age__group__HASH__eld_65__10000",
+                    "popu__HASH__age__group__HASH__nb_0__1", "popu__HASH__immune__status__HASH__hty",
+                    "popu__HASH__specific__group__HASH__hcw", "popu__HASH__specific__group__HASH__pcg",
+                    "popu__HASH__specific__group__HASH__pw"
+                ]
+
+                # Dynamically categorize fields into two groups
+                group_1_fields = [field for field in fields_to_extract if field.startswith("intervention__HASH__vpd__HASH") or field.startswith("topic__HASH__coverage__HASH")]
+                group_2_fields = [field for field in fields_to_extract if field not in group_1_fields]
+
+                for record in records:
+                    if not record:
+                        continue  
+
+                    extracted_group_1_values = []
+                    extracted_group_2_values = []
+
+                    # Extract values for Group 1
+                    for field in group_1_fields:
+                        if field in record and record[field]:
+                            values = [
+                                str(v).split(":")[-1].strip()
+                                for v in str(record[field]).split(",")
+                                if ":" in str(v)
+                            ]
+                            extracted_group_1_values.extend(values)
+
+                    # Extract values for Group 2
+                    for field in group_2_fields:
+                        if field in record and record[field]:
+                            values = [
+                                str(v).split(":")[-1].strip()
+                                for v in str(record[field]).split(",")
+                                if ":" in str(v)
+                            ]
+                            extracted_group_2_values.extend(values)
+
+                    extracted_group_1_values = list(filter(None, set(extracted_group_1_values)))
+                    extracted_group_2_values = list(filter(None, set(extracted_group_2_values)))
+
+                    # Add new fields
+                    record["research_notes"] = ", ".join(extracted_group_1_values)  # Notes for Group 1
+                    record["notes"] = ", ".join(extracted_group_2_values)  # Notes for Group 2
 
                 # Handle COUNT query for pagination
                 total_records = None
