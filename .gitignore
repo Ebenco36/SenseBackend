@@ -93,3 +93,5 @@ prisma_counts.json
 test2_complete.csv
 testing_country.csv
 trainings/
+.venv
+*/DS_Store
