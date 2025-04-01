@@ -3,6 +3,7 @@ import os
 sys.path.append(os.getcwd())
 import pandas as pd
 from typing import List, Dict
+from datetime import datetime
 
 class CSVUnifier:
     def __init__(self, csv_sources: Dict[str, str], common_columns: List[str] = None, rename_maps: Dict[str, Dict[str, str]] = None):
@@ -30,7 +31,9 @@ class CSVUnifier:
                 
                 # Add a source column with the specified source name
                 df['Source'] = source_name
-                
+                df['created_at'] = datetime.now().isoformat()
+                df['updated_at'] = None
+
                 # Check if 'Id' column exists, otherwise create one
                 if 'Id' not in df.columns and 'id' not in df.columns:
                     df['Id'] = [f"{source_name}_{i+1}" for i in range(len(df))]
@@ -183,7 +186,7 @@ suffix = ".csv"
 latest_file = get_latest_file(directory, prefix, suffix)
      
 csv_sources = {
-    "Data/Cochrane/cochrane_combined_output.csv": "Cochrane",
+    "Data/Cochrane/cochrane_combined_output_enriched.csv": "Cochrane",
     "Data/MedlineData/medline_results.csv": "Medline",
     f"{latest_file}": "OVID",
     "Data/L-OVE/LOVE.csv": "LOVE"
@@ -192,7 +195,7 @@ csv_sources = {
 common_columns = ['Id', 'Title', 'Authors', 'DOI']
 
 rename_maps = {
-    "Data/Cochrane/cochrane_combined_output.csv": {
+    "Data/Cochrane/cochrane_combined_output_enriched.csv": {
         "cdIdentifier": "verification_id",
         "title": "Title",
         "doi_link": "DOI",

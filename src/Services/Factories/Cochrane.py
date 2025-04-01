@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 from app import db, app
 from bs4 import BeautifulSoup
+from src.Commands.DOIEnricher import DOIEnricher
 from src.Services.Service import Service
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -358,3 +359,10 @@ class Cochrane(Service):
         # Save the combined DataFrame to a CSV file
         combined_df.to_csv(output_filename, index=False)
         print(f"Combined CSV file saved as '{output_filename}'")
+
+        print("Starting enrichment for the combined file (Cochrane)...")
+        output_file = "Data/Cochrane/cochrane_combined_output_enriched.csv"
+        input_file = "Data/Cochrane/cochrane_combined_output_enriched.csv"
+        enricher = DOIEnricher(input_file)
+        enricher.run(output_file=output_file, key="doi")
+        print("Done with enrich (Cochrane)...")

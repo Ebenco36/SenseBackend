@@ -3,6 +3,7 @@ import re
 import json
 import pandas as pd
 from glob import glob
+from src.Commands.DOIEnricher import DOIEnricher
 from src.Services.Service import Service
 from src.Request.ApiRequest import ApiRequest
 from src.Utils.Helpers import (
@@ -130,6 +131,11 @@ class LoveV(Service):
         print("All records saved successfully. Now merging files into one csv")
         merge_files_by_pattern("Data/L-OVE/Batches", "batch_*", "Data/L-OVE/LOVE.csv")
         print("Done merging the csv files.")
+
+        print("Starting enrichment for the combined file (LOVE-DB)...")
+        enricher = DOIEnricher("Data/L-OVE/LOVE.csv")
+        enricher.run(output_file="Data/L-OVE/LOVE_enriched.csv", key="doi")
+        print("Done with enrich (LOVE-DB)...")
         
         return self
     
@@ -188,8 +194,26 @@ def merge_files_by_pattern(directory_path, pattern, output_file_path):
         df = pd.read_csv(file_path)
         merged_df = pd.concat([merged_df, df], ignore_index=True)
 
+    # Apply the filters
+    filtered_df = merged_df[
+        (merged_df['classification'] == 'systematic-review') &
+        (merged_df['year'] >= 2011) &
+        (merged_df['doi'].notna()) &
+        (merged_df['doi'].str.strip() != "")
+    ]
+
+    original_count = len(merged_df)
+
+    # Compute number of records removed
+    removed_count = original_count - len(filtered_df)
+
+    # Print the summary
+    print(f"Original count: {original_count}")
+    print(f"Filtered count: {len(filtered_df)}")
+    print(f"Records removed: {removed_count}")
+
     # Save the merged DataFrame to the specified output file
-    merged_df.to_csv(output_file_path, index=False)
+    filtered_df.to_csv(output_file_path, index=False)
 
     print(f"Matching files in '{directory_path}' have been merged into '{output_file_path}'.")
 
@@ -227,7 +251,6 @@ def furtherProcessiLoveValid(dir, CSV_FILE, file_modified_name ):
         
 def furtherProcessiLove(dir, CSV_FILE, file_modified_name ):
     # check if file already exist to avoid start all over again.
-    # dir = "./results/"
     create_directory_if_not_exists(dir)
     # CSV_FILE = 'LOVEDB.csv'
     if check_file_existence(dir, CSV_FILE):
@@ -249,9 +272,6 @@ def furtherProcessiLove(dir, CSV_FILE, file_modified_name ):
     else:
         # itemInfo_itemIdList_doi
         df = pd.read_csv(dir+CSV_FILE)
-        # df = df.head(4)
-        # print(df['itemInfo_itemIdList_doi'])
-        # df['full_text'] = df['itemInfo_itemIdList_doi'].apply(lambda row: getContent("", row))
         result = df['doi'].apply(lambda row: getDOI(row))
         # Create a new DataFrame with the results
         result_df = pd.DataFrame(result.tolist(), columns=['full_text_URL', 'full_text_content_type'])

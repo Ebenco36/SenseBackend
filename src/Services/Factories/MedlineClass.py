@@ -3,7 +3,9 @@ import pandas as pd
 from io import StringIO
 import time
 import requests
-from tqdm import tqdm  # Progress bar library
+from tqdm import tqdm
+
+from src.Commands.DOIEnricher import DOIEnricher  # Progress bar library
 
 class MedlineClass:
     def __init__(self):
@@ -27,7 +29,7 @@ class MedlineClass:
             print("Empty query. Skipping.")
             return False
         if len(query.strip()) < 3:  # Avoid single characters or very short queries
-            print(f"Query '{query}' is too short. Skipping.")
+            print(f"Query is too short. Skipping.")
             return False
         return True
 
@@ -60,10 +62,10 @@ class MedlineClass:
                 retstart += retmax
                 time.sleep(0.5)  # To avoid exceeding rate limits
             except Exception as e:
-                print(f"Error during search with query '{query}': {e}")
+                print(f"Error during search with query : {e}")
                 break
 
-        print(f"Total IDs retrieved for query '{query}': {len(all_ids)}")
+        print(f"Total IDs retrieved for query: {len(all_ids)}")
         return all_ids
 
     def fetch_details(self, id_list):
@@ -142,6 +144,12 @@ class MedlineClass:
         if 'pmid' in df.columns:
             df.drop_duplicates(subset=['pmid'], inplace=True)
 
+        if 'publication_type' in df.columns:
+            df['publication_type'] = df['publication_type'].astype(str)
+            df = df[
+                df['publication_type'].str.contains("Systematic Review|Meta-Analysis", case=False, na=False)
+            ]
+
         return df
 
     def generate_random_email(self, domain="gmail.com"):
@@ -191,12 +199,12 @@ class MedlineClass:
             id_list = self.search_medline(query)
 
             if not id_list:
-                print(f"No results found for query: {query}")
+                print(f"No results found for query.")
                 continue
 
-            print(f"Found {len(id_list)} articles for query: {query}")
+            print(f"Found {len(id_list)} articles for query")
             records = self.fetch_details(id_list)
-                
+            print(records)
             # Convert each Medline record to a dictionary
             print("📝 Processing records...")
             for record in tqdm(records, desc="🛠 Processing", unit="record"):
@@ -232,6 +240,11 @@ class MedlineClass:
             output_path = "Data/MedlineData/medline_results.csv"
             df.to_csv(output_path, index=False)
             print(f"Data saved to {output_path}")
+            # not needed since we have language
+            # print("Starting enrichment for the combined file (Medline Pubmed)...")
+            # enricher = DOIEnricher("Data/MedlineData/medline_results.csv")
+            # enricher.run(key="doi")
+            # print("Done with enrich (Medline Pubmed)...")
         else:
             print("No data to save.")
 

@@ -6,6 +6,7 @@ from src.Services.PostgresService import PostgresService
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 import pycountry_convert as pc
+from sqlalchemy import inspect, text
 
 
 class CountryRegionManager:
@@ -161,6 +162,35 @@ class CountryRegionManager:
         ).values(region=region)
         conn.execute(update_query)
 
+
+    def sync_regions_to_all_db(self):
+        conn = self.engine.connect()
+
+        # ✅ 1. Ensure 'region' column exists in all_db
+        inspector = inspect(self.engine)
+        columns = [col["name"] for col in inspector.get_columns("all_db")]
+
+        if "region" not in columns:
+            print("Adding 'region' column to all_db...")
+            conn.execute(text('ALTER TABLE all_db ADD COLUMN "region" TEXT'))
+
+        # ✅ 2. Get all unique countries
+        countries = self.db_service.get_unique_items_from_column("all_db", "Country")
+
+        # ✅ 3. Get mapping from country to region
+        country_to_region = self.get_regions_for_countries(countries)
+
+        # ✅ 4. Update all_db with corresponding region
+        for country, region in country_to_region.items():
+            update_query = text("""
+                UPDATE all_db
+                SET region = :region
+                WHERE "Country" = :country
+            """)
+            conn.execute(update_query, {"region": region, "country": country})
+
+        print("✅ Region column populated in all_db.")
+
     def _fetch_region(self, country_name):
         """
         Fetch the region of a country using pycountry_convert, with support for alternate names.
@@ -192,6 +222,7 @@ class CountryRegionManager:
 
         # Retrieve all regions in one call
         regions = self.get_regions_for_countries(countries)
+        self.sync_regions_to_all_db()
         
         return regions
 

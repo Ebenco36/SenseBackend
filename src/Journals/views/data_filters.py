@@ -29,7 +29,7 @@ class FilterAPI(Resource):
             data = {
                 "tag_filters": response.get("data", {}),
                 "others": {
-                    "Review Language": sorted(
+                    "Language": sorted(
                         set(
                             languages + [ 
                                 "Arabic", "Bosnian", "Bulgarian", "Chinese", "Croatian", "Czech", 
@@ -48,7 +48,7 @@ class FilterAPI(Resource):
                             ]
                         )
                     ),
-                    "Region": sorted(
+                    "region": sorted(
                         set(regions + [
                                 "Americas", "Europe", "Africa", "Asia", 
                                 "North America", "South America",
@@ -56,7 +56,7 @@ class FilterAPI(Resource):
                             ]
                         )
                     ),
-                    "publication Year": sorted(
+                    "Year": sorted(
                         set(
                             [int(float(year)) for year in years] + [
                                 2025, 2024, 2023, 2022, 2021, 2020, 

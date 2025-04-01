@@ -7,6 +7,7 @@ from app import db, app
 from datetime import datetime
 from bs4 import BeautifulSoup
 from urllib.parse import urlencode
+from src.Commands.DOIEnricher import DOIEnricher
 from src.Services.Service import Service
 from urllib.parse import urlparse, parse_qs, urlencode
 
@@ -342,3 +343,9 @@ class OvidJournalDataFetcher(Service):
             # Save the merged DataFrame to a single CSV file
             merged_df.to_csv(merged_filename, index=False, encoding="utf-8")
             print(f"All CSV files merged into {merged_filename}")
+
+            # not needed since we have language
+            # print("Starting enrichment for the combined file (OVID DB)...")
+            # enricher = DOIEnricher(merged_filename)
+            # enricher.run(key="DOI")
+            # print("Done with enrich (OVID DB)...")

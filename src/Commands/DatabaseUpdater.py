@@ -7,6 +7,7 @@ from app import db, app
 import sys
 import os
 import traceback
+from datetime import datetime
 
 sys.path.append(os.getcwd())
 
@@ -121,6 +122,10 @@ class DatabaseUpdater:
                         for col in df.columns
                         if col != id_column and self.sanitize_column_name(col) in self.table.columns
                     }
+
+                    # ✅ Set updated_at timestamp
+                    if "updated_at" in self.table.columns:
+                        row_data["updated_at"] = datetime.utcnow()
 
                     # Flatten row_data in case of nested structures
                     flat_row_data = self.flatten_dict(row_data)

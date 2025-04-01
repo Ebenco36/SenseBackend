@@ -245,14 +245,25 @@ class PostgresService:
         return self
 
     def likeWhere(self, column, value, linkage="AND"):
-        """Add a LIKE clause."""
-        column = self.quote_identifier(column)
-        if linkage == "AND":
-            self._where_clauses.append(f"{column} LIKE :{column}")
+        """Add a LIKE clause, casting numeric columns like 'Year' to text if needed."""
+        quoted_column = self.quote_identifier(column)
+
+        # Detect columns that need casting
+        cast_to_text = column.lower() in {"year", "record_id", "id"}  # Add more if needed
+
+        if cast_to_text:
+            clause = f'CAST({quoted_column} AS TEXT) LIKE :{column}_additional'
         else:
-            self._where_clauses[-1] = f"({self._where_clauses[-1]} OR {column} LIKE :{column})"
-        self._params[column] = f"%{value}%"
+            clause = f'{quoted_column} LIKE :{column}_additional'
+
+        if linkage == "AND":
+            self._where_clauses.append(clause)
+        else:
+            self._where_clauses[-1] = f"({self._where_clauses[-1]} OR {clause})"
+
+        self._params[f"{column}_additional"] = f"%{value}%"
         return self
+
 
     def inWhere(self, column, values):
         """Add an IN condition."""
@@ -670,8 +681,8 @@ class PostgresService:
                 record_count="datum.record_count !== null ? datum.record_count : 0"
             )
             .properties(
-                width=800,
-                height=400,
+                width="container",
+                height=500,
                 title='Records by Country (Map)'
             )
             .project(
