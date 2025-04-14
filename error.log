@@ -1,0 +1,55 @@
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 24, in post
+    return ApiResponse.error(message="No file provided", status=400)
+TypeError: ApiResponse.error() got an unexpected keyword argument 'status'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 24, in post
+TypeError: ApiResponse.error() got an unexpected keyword argument 'status'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 24, in post
+TypeError: ApiResponse.error() got an unexpected keyword argument 'status'

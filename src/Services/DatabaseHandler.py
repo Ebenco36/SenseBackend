@@ -1,4 +1,3 @@
-from app import db, app
 import numpy as np
 
 class DatabaseHandler:
@@ -9,6 +8,7 @@ class DatabaseHandler:
         """
         Fetches papers using the predefined query.
         """
+        from app import db, app
         with app.app_context():
             conn = db.engine.raw_connection()
             cursor = conn.cursor()
@@ -22,6 +22,7 @@ class DatabaseHandler:
         """
         Fetches papers using the predefined query and maps data to column names.
         """
+        from app import db, app
         with app.app_context():
             # Establish a raw database connection
             conn = db.engine.raw_connection()
@@ -70,7 +71,7 @@ class DatabaseHandler:
             elif isinstance(params, (list, tuple)):
                 return tuple(int(v) if isinstance(v, np.integer) else v for v in params)
             return params
-
+        from app import db, app
         with app.app_context():
             conn = db.engine.raw_connection()
             cursor = conn.cursor()
@@ -89,3 +90,39 @@ class DatabaseHandler:
             finally:
                 cursor.close()
                 conn.close()
+
+    def fetch_existing_dois(self):
+        """
+        Fetches all existing DOIs from the database.
+        :return: A list of DOIs.
+        """
+        query = "SELECT DOI FROM all_db"
+        results = self.execute_query(query)
+        return [row[0] for row in results]
+
+    def insert_records(self, records):
+        """
+        Inserts new records into the database.
+        :param records: A pandas DataFrame containing the records to insert.
+        """
+        query = """
+        INSERT INTO all_db (Authors, Year, Title, DOI, Open_Access, Abstract, Id, Source, Language, Country, Database, Journal)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        values = records.to_records(index=False).tolist()
+        self.execute_query(query, params=values)
+
+    def fetch_new_records(self, dois):
+        """
+        Fetches records from the database based on a list of DOIs.
+        :param dois: A list of DOIs to fetch.
+        :return: A list of records as dictionaries.
+        """
+        query = f"""
+        SELECT Authors, Year, Title, DOI, Open_Access, Abstract, Id, Source, Language, Country, Database, Journal
+        FROM all_db
+        WHERE DOI IN ({','.join(['%s'] * len(dois))})
+        """
+        results = self.execute_query(query, params=dois)
+        column_names = ["Authors", "Year", "Title", "DOI", "Open_Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal"]
+        return [dict(zip(column_names, row)) for row in results]

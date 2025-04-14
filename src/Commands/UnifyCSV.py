@@ -189,7 +189,7 @@ csv_sources = {
     "Data/Cochrane/cochrane_combined_output_enriched.csv": "Cochrane",
     "Data/MedlineData/medline_results.csv": "Medline",
     f"{latest_file}": "OVID",
-    "Data/L-OVE/LOVE.csv": "LOVE"
+    "Data/L-OVE/LOVE_enriched.csv": "LOVE"
 }
 
 common_columns = ['Id', 'Title', 'Authors', 'DOI']
@@ -229,7 +229,7 @@ rename_maps = {
         "DateDelivered": "Date",
         "PublicationAccessionNumber": "verification_id"
     },
-    "Data/L-OVE/LOVE.csv": {
+    "Data/L-OVE/LOVE_enriched.csv": {
         "id": "verification_id",
         "authors": "Authors",
         "classification": "Classification",

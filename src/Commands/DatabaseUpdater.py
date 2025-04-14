@@ -3,7 +3,6 @@ import pandas as pd
 from sqlalchemy import MetaData, Table, String, Integer, Float, Boolean, DateTime, text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import ProgrammingError
-from app import db, app
 import sys
 import os
 import traceback
@@ -19,6 +18,7 @@ class DatabaseUpdater:
         :param table_name: Name of the table to update
         :param column_mapping: Optional dictionary to map DataFrame columns to database table columns, e.g., {'Id': 'primary_id'}
         """
+        from app import db, app
         with app.app_context():
             self.table_name = table_name
             self.engine = db.engine

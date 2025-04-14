@@ -31,11 +31,15 @@ class FilterAPI(Resource):
                 "others": {
                     "Language": sorted(
                         set(
-                            languages + [ 
-                                "Arabic", "Bosnian", "Bulgarian", "Chinese", "Croatian", "Czech", 
-                                "Danish", "Dutch", "English", "French", "German", "Greek", "Hebrew"
-                                "Italian", "Japanese", "Korean", "Norwegian", "Persian", "Polish"
-                                "Portuguese", "Russian", "Spanish", "Turkish"
+                            # languages + [ 
+                            #     "Arabic", "Bosnian", "Bulgarian", "Chinese", "Croatian", "Czech", 
+                            #     "Danish", "Dutch", "English", "French", "German", "Greek", "Hebrew"
+                            #     "Italian", "Japanese", "Korean", "Norwegian", "Persian", "Polish"
+                            #     "Portuguese", "Russian", "Spanish", "Turkish"
+                            # ]
+                            [ 
+                                "English"
+                                
                             ]
                         )
                     ),  #  +
@@ -66,12 +70,11 @@ class FilterAPI(Resource):
                         ),
                         reverse=True,
                     ),  # ,
-                    "Amster 2 Overall Rating": [
+                    "AMSTAR 2 Rating": [
                         "High",
                         "Moderate",
                         "Low",
-                        "Critically Low",
-                        "Not Applicable",
+                        "Critically Low"
                     ],
                 },
             }

@@ -6,6 +6,7 @@ import math
 import os
 import pandas as pd
 import altair as alt
+import math
 from vega_datasets import data
 from iso3166 import countries as iso_countries
 
@@ -682,7 +683,7 @@ class PostgresService:
             )
             .properties(
                 width="container",
-                height=500,
+                height=450,
                 title='Records by Country (Map)'
             )
             .project(
@@ -706,7 +707,9 @@ class PostgresService:
 
         colorblind_palette = "tableau20"  # Alternative: "viridis", "set2"
         okabe_ito_colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#0072B2", "#D55E00", "#CC79A7"]
-
+        # Compute dynamic y-axis max
+        grouped_max = df_year_source.groupby(['Year'])['record_count'].sum().max()
+        y_max = math.ceil(grouped_max)
         source_color_mapping = {
             "LOVE": "#a6cee3", 
             "OVID": "#1f78b4", 
@@ -725,7 +728,11 @@ class PostgresService:
             .mark_bar()
             .encode(
                 x=alt.X('Year:O', title='Year', axis=alt.Axis(labelAngle=-45)),
-                y=alt.Y('sum(record_count):Q', title='Total Records'),
+                y=alt.Y(
+                    'sum(record_count):Q', 
+                    axis=alt.Axis(title='Total Records', tickMinStep=1, values=list(range(0, y_max + 1))),
+                    scale=alt.Scale(domain=[0, y_max])
+                ),
                 color=alt.Color(
                     'Source:N', 
                     legend=alt.Legend(orient="bottom", direction="horizontal"), 
@@ -741,7 +748,7 @@ class PostgresService:
                     alt.Tooltip('sum(record_count):Q', title='Total Records')
                 ]
             )
-            .properties(width="container", height=400, title='Records Over Time by Source')
+            .properties(width="container", height=500, title='Cummulative Records Over Time by Source')
             .configure(autosize="fit")
             .interactive()
         )

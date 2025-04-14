@@ -3,6 +3,7 @@ import json
 import spacy
 import pycountry
 import pandas as pd
+from datetime import date
 from word2number import w2n
 from typing import List, Tuple, Dict
 from dateutil.parser import parse
@@ -11,6 +12,7 @@ from src.Services.Factories.Sections.SectionExtractor import SectionExtractor
 from src.Utils.Helpers import clean_references
 from transformers import pipeline, AutoModelForQuestionAnswering, AutoTokenizer
 from typing import Optional, List, Dict
+from src.Commands.Amstar2 import Amstar2
 
 class Tagging:
     def __init__(self, document, model_path: str = "./models/tinyroberta"):
@@ -221,7 +223,6 @@ class Tagging:
                         self.result_columns[column_name] = self.extract_population(term_list)
                     elif category == "lit_search_dates" and subcategory == "dates":
                         self.result_columns[column_name] = self.extract_last_literature_search_dates()
-                        self.result_columns[column_name + "_ml"] = self.extract_last_literature_search_dates_ml()
                     elif category == 'open_acc' and subcategory == "opn_access":
                         self.result_columns[column_name] = self.is_open_access(term_list)
                     elif (category == 'study_country' and subcategory == "countries"):
@@ -245,9 +246,13 @@ class Tagging:
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
         self.result_columns["review_type"] = self.extract_review_type()
-        self.result_columns["newly_added_study_extract"] = self.get_study_counts()
         self.result_columns["funding_other_bias"] = self.extract_bias_and_funding_info()
         self.result_columns["extract_study_counts"] = self.extract_study_counts(self.get_combined_text(["main_content"]))
+
+        ################# Merge Dict Together ######################
+        amstars_integration = self.amstar2_integration()
+        # self.result_columns = {**self.result_columns, **amstars_integration}
+        self.result_columns.update(amstars_integration)
         # print(self.clean_result(self.result_columns))
         return self.clean_result(self.result_columns)
 
@@ -369,42 +374,6 @@ class Tagging:
         # Get the latest date (based on parsed datetime) and return its original string
         latest_date = max(parsed_dates, key=lambda x: x[0])
         return latest_date[1]
-
-    def extract_last_literature_search_dates_ml(self) -> List[str]:
-        """
-        Uses spaCy to extract date entities from context around literature search phrases.
-        Returns a list of matching date strings.
-        """
-        text = self.get_combined_text(["main_content"])
-        nlp = self.load_effect_extraction_model()
-
-        search_keywords = [
-            "last literature search",
-            "literature search",
-            "searched until",
-            "searched up to",
-            "search was conducted",
-            "we searched",
-            "database search",
-            "search conducted on",
-            "search performed in",
-            "we searched from",
-            "search date",
-            "search updated"
-        ]
-
-        doc = nlp(text)
-        found_dates = set()
-
-        for sent in doc.sents:
-            sent_text_lower = sent.text.lower()
-            if any(keyword in sent_text_lower for keyword in search_keywords):
-                for ent in sent.ents:
-                    if ent.label_ == "DATE":
-                        found_dates.add(ent.text.strip())
-
-        max_date = self.get_max_date(sorted(set(found_dates)))
-        return max_date
 
     def extract_last_literature_search_dates(self):
         """
@@ -1322,12 +1291,7 @@ class Tagging:
         return self.ask_question(context, ["What is the main topic of the article title?"])
 
     def extract_database_names(self, text: str) -> list:
-        # Known databases with common aliases
-        database_list = [
-            "PubMed", "MEDLINE", "Embase", "Web of Science", "Scopus", "CINAHL", 
-            "Cochrane", "CENTRAL", "PubMed Central", "LILACS", "Google Scholar", 
-            "ProQuest", "EBSCO", "Ovid", "PsycINFO", "AMED", "ClinicalTrials.gov"
-        ]
+        # Known common aliases
         aliases = {
             "MEDLINE": ["MEDLINE via Ovid", "MEDLINE/PubMed"],
             "CENTRAL": ["Cochrane Central Register of Controlled Trials"],
@@ -1421,43 +1385,6 @@ class Tagging:
             "What review methodology was used in the study?"
         ]
         return self.ask_question(context, QUESTIONS)
-    
-
-    def get_study_counts(self):
-        """
-        Returns:
-            Tuple of (pattern_counts, qa_counts) dictionaries
-        """
-        text = self.document
-        # Get pattern counts
-        pattern_counts = defaultdict(int)
-        used_positions = set()
-        
-        for category, config in self.study_config.items():
-            for pattern in config["patterns"]:
-                for match in re.finditer(pattern, text, re.IGNORECASE):
-                    start, end = match.span()
-                    if not any(p in used_positions for p in range(start, end)):
-                        pattern_counts[category] += 1
-                        used_positions.update(range(start, end))
-        
-        # Get QA counts
-        qa_counts = {}
-        for category, config in self.study_config.items():
-            max_count = 0
-            for question in config["questions"]:
-                try:
-                    result = self.qa_pipeline(question=question, context=text)
-                    if result['score'] > 0.7:  # High confidence threshold
-                        numbers = re.findall(r'\b\d+\b', result['answer'])
-                        if numbers:
-                            max_count = max(max_count, int(numbers[0]))
-                except Exception:
-                    continue
-            qa_counts[category] = max_count if max_count > 0 else 0
-        
-        return json.dumps({"Pattern_count": dict(pattern_counts), "QA_count": qa_counts})
-    
 
     def extract_bias_and_funding_info(self):
         """
@@ -1496,3 +1423,13 @@ class Tagging:
                 results[key] = None
 
         return json.dumps(results)
+    
+    def amstar2_integration(self):
+        today = date.today()
+        date_str = today.strftime("%Y-%m-%d")
+        context = self.document
+        checker = Amstar2(review_date=date_str)
+        results = checker.evaluate_all(context)
+        summary = checker.amstar_label_and_flaws(results)
+        update_dict = checker.prepare_amstar_update_dict(results, summary)
+        return update_dict
