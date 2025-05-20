@@ -53,3 +53,255 @@ Traceback (most recent call last):
     resp = meth(*args, **kwargs)
   File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 24, in post
 TypeError: ApiResponse.error() got an unexpected keyword argument 'status'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 607, in _connect
+    for res in socket.getaddrinfo(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 127, in reconnect_on_error
+    yield
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 929, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 758, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 1109, in get_connection
+    connection.connect()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 607, in _connect
+    for res in socket.getaddrinfo(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/base.py", line 798, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 169, in consume_from
+    return self.start(task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 384, in ensure
+    return retry_over_time(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/commands/core.py", line 2016, in mget
+    return self.execute_command("MGET", *args, **options)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 1109, in get_connection
+    connection.connect()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 29, in post
+    task = process_uploaded_file_task.apply_async(args=[temp_file_path, output_file_path])
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/task.py", line 594, in apply_async
+    return app.send_task(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/base.py", line 796, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 607, in _connect
+    for res in socket.getaddrinfo(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 127, in reconnect_on_error
+    yield
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 929, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 758, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 1109, in get_connection
+    connection.connect()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 607, in _connect
+    for res in socket.getaddrinfo(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/base.py", line 798, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 169, in consume_from
+    return self.start(task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 384, in ensure
+    return retry_over_time(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/backends/redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/commands/core.py", line 2016, in mget
+    return self.execute_command("MGET", *args, **options)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 1109, in get_connection
+    connection.connect()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/redis/connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/src/Journals/views/paper_processor_api.py", line 29, in post
+    task = process_uploaded_file_task.apply_async(args=[temp_file_path, output_file_path])
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/task.py", line 594, in apply_async
+    return app.send_task(
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/celery/app/base.py", line 796, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/kombu/connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 8 connecting to sense_redis:6379. nodename nor servname provided, or not known.
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+TypeError: TaskStatusAPI.get() missing 1 required positional argument: 'task_id'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask/views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+  File "/Users/AwotoroE-Dev/Desktop/SenseBackend/.sense/lib/python3.10/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+TypeError: TaskStatusAPI.get() missing 1 required positional argument: 'task_id'

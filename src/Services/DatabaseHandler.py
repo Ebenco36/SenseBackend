@@ -1,5 +1,5 @@
 import numpy as np
-
+import pandas as pd
 class DatabaseHandler:
     def __init__(self, query=None):
         self.query = query
@@ -54,12 +54,13 @@ class DatabaseHandler:
         """
         self.query = new_query
         
-    def execute_query(self, query, params=None):
+    def execute_query(self, query, params=None, use_executemany=False):
         """
         Executes a general-purpose SQL query with optional parameters.
 
         :param query: SQL query string
-        :param params: Optional parameters for the query (dictionary or tuple)
+        :param params: Optional parameters for the query (list of tuples for executemany or a single tuple for execute)
+        :param use_executemany: Whether to use executemany for batch inserts
         :return: Fetched results for SELECT queries, otherwise None
         """
         def convert_params(params):
@@ -69,8 +70,12 @@ class DatabaseHandler:
             if isinstance(params, dict):
                 return {k: (int(v) if isinstance(v, np.integer) else v) for k, v in params.items()}
             elif isinstance(params, (list, tuple)):
-                return tuple(int(v) if isinstance(v, np.integer) else v for v in params)
+                return [
+                    tuple(None if pd.isna(v) else (int(v) if isinstance(v, np.integer) else v) for v in row)
+                    for row in params
+                ] if isinstance(params, list) else tuple(None if pd.isna(v) else v for v in params)
             return params
+
         from app import db, app
         with app.app_context():
             conn = db.engine.raw_connection()
@@ -78,14 +83,25 @@ class DatabaseHandler:
             try:
                 # Convert params before executing query
                 sanitized_params = convert_params(params)
-                cursor.execute(query, sanitized_params or ())
+                # print(f"Sanitized Params: {sanitized_params}")
+                # print(f"Query: {query}")
+
+                if use_executemany:
+                    cursor.executemany(query, sanitized_params or [])
+                else:
+                    cursor.execute(query, sanitized_params or ())
+
                 if query.strip().lower().startswith("select"):
                     results = cursor.fetchall()
                     return results
                 else:
                     conn.commit()  # Commit for non-SELECT queries
             except Exception as e:
+                import traceback
+                traceback.print_exc()
                 print(f"Error executing query: {e}")
+                # print(f"Query: {query}")
+                # print(f"Params: {params}")
                 conn.rollback()  # Rollback in case of an error
             finally:
                 cursor.close()
@@ -98,6 +114,7 @@ class DatabaseHandler:
         """
         query = "SELECT DOI FROM all_db"
         results = self.execute_query(query)
+        print(f"Fetched {len(results)} existing DOIs from the database.")
         return [row[0] for row in results]
 
     def insert_records(self, records):
@@ -106,11 +123,32 @@ class DatabaseHandler:
         :param records: A pandas DataFrame containing the records to insert.
         """
         query = """
-        INSERT INTO all_db (Authors, Year, Title, DOI, Open_Access, Abstract, Id, Source, Language, Country, Database, Journal)
+        INSERT INTO all_db ("Authors", "Year", "Title", "DOI", "Open Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal")
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-        values = records.to_records(index=False).tolist()
-        self.execute_query(query, params=values)
+        # Ensure the DataFrame has the correct columns
+        required_columns = ["Authors", "Year", "Title", "DOI", "Open Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal"]
+        if not all(col in records.columns for col in required_columns):
+            raise ValueError(f"Missing required columns in records DataFrame. Expected columns: {required_columns}")
+
+        # Replace NaN values with None
+        records = records.where(pd.notnull(records), None)
+
+        # Convert the DataFrame to a list of tuples
+        values = records[required_columns].to_records(index=False).tolist()
+
+        # Ensure the number of placeholders matches the number of columns
+        if len(values[0]) != query.count("%s"):
+            raise ValueError("Number of placeholders in the query does not match the number of columns in the records.")
+
+        # Replace any remaining NaN values in the tuples with None
+        sanitized_values = [
+            tuple(None if pd.isna(value) else value for value in record)
+            for record in values
+        ]
+
+        self.execute_query(query, params=sanitized_values, use_executemany=True)
+        print(f"Inserted {len(records)} new records into the database.")
 
     def fetch_new_records(self, dois):
         """

@@ -14,10 +14,15 @@ def make_celery(app):
         broker=app.config["CELERY_BROKER_URL"] if app else "redis://redis:6379/0",
         backend=app.config["CELERY_RESULT_BACKEND"] if app else "redis://redis:6379/0",
         timezone='UTC',
-        include=["src.Jobs.tasks"]
+        include=[
+            "src.Journals.views.tasks"
+        ]
     )
-    celery.conf.beat_schedule_filename = './celery-beat/celerybeat-schedule'
-
+    # ensure the schedule directory exists
+    schedule_path = "./celery-beat/celerybeat-schedule"
+    os.makedirs(os.path.dirname(schedule_path), exist_ok=True)
+    celery.conf.beat_schedule_filename = schedule_path
+    
     if app:
         celery.conf.update(app.config)
         

@@ -103,7 +103,7 @@ class PaperProcessorPipeline:
                 db_handler.query = batch_query
                 processor = PaperProcessor(db_handler=db_handler, csv_file_path=csv_file_path)
                 data_return = processor.process_papers(db_name=db_name)
-
+                # print(data_return)
                 if data_return.empty:
                     continue
 
@@ -142,7 +142,7 @@ class PaperProcessorPipeline:
             traceback.print_exc()
             print(f"Error processing source {db_name}: {e}")
         finally:
-            db_handler.close_connection()
+            # db_handler.close_connection()
             updater.close_connection()
 
 

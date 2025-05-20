@@ -8,6 +8,7 @@ from word2number import w2n
 from typing import List, Tuple, Dict
 from dateutil.parser import parse
 from collections import defaultdict
+from src.Commands.LLM import MyExtractor
 from src.Services.Factories.Sections.SectionExtractor import SectionExtractor
 from src.Utils.Helpers import clean_references
 from transformers import pipeline, AutoModelForQuestionAnswering, AutoTokenizer
@@ -88,7 +89,7 @@ class Tagging:
             "Cambridge Core", "Nature.com", "Science Magazine", "CDC Stacks", "NIH.gov", "WHO.int",
             "WorldBank.org", "UN iLibrary", "Business Source Complete", "ABI/INFORM", "Factiva", "LexisNexis",
             "Westlaw", "HeinOnline", "Nexis Uni", "ProQuest News & Newspapers", "Academic Search Complete",
-            "Project MUSE", "Physiotherapy Evidence"
+            "Project MUSE", "Physiotherapy Evidence", "BioMED", "SIGN", "GIMBE", "NICE"
         ]
 
         # Study type patterns and questions
@@ -197,11 +198,13 @@ class Tagging:
 
     def create_columns_from_text(self, searchRegEx):
         """Main function to apply tagging based on the extensive regex structure provided."""
+        extracted_metadata = self.extract_all()
         for category, subcategories in searchRegEx.items():
             for subcategory, terms_dict in subcategories.items():
                 for term_key, term_list in terms_dict.items():
                     column_name = f"{category}#{subcategory}#{term_key}"
-                    countries, total_count = self.extract_countries_with_total_count()
+                    country_data = extracted_metadata.get("country_participant_counts", None)
+                    countries, total_count = country_data.get("per_country", []), country_data.get("total_count", 0)
                     if category == "popu" and subcategory == "age__group":
                         self.result_columns[column_name] = self.process_age_group(term_key, term_list)
                     elif category == "studies" and (subcategory == "studie__no" or subcategory == "rct"):
@@ -218,7 +221,7 @@ class Tagging:
                     elif category == "gender" and subcategory == "group":
                         self.result_columns[column_name] = self.process_sex_distribution(term_list)
                     elif category == "topic" and subcategory == "eff":
-                        self.result_columns[column_name] = self.extract_ve_related_info(term_list)
+                        self.result_columns[column_name] = extracted_metadata.get("ve_info", None)
                     elif category == "particip" and subcategory == "group":
                         self.result_columns[column_name] = self.extract_population(term_list)
                     elif category == "lit_search_dates" and subcategory == "dates":
@@ -231,23 +234,31 @@ class Tagging:
                         self.result_columns[column_name] = total_count
                     elif (category == 'title_popu' and subcategory == "title_pop"):
                         self.result_columns[column_name] = self.extract_population_from_title(term_list)
-                        title_metadata = self.extract_title_metadata()
-                        self.result_columns["location_in_title"] = title_metadata.get("location", None)
-                        self.result_columns["race_ethnicity_in_title"] = title_metadata.get("race_ethnicity", None)
-                        self.result_columns["target_population_in_title"] = title_metadata.get("target_population", None)
-                        self.result_columns["topic_in_title"] = title_metadata.get("topic", None)
-                        self.result_columns["num_databases"] = int(title_metadata.get("num_databases", 0))
-                        self.result_columns["duration_of_intervention"] = title_metadata.get("duration_of_intervention", None)
-                        self.result_columns["dosage"] = title_metadata.get("dosage", None)
-                        self.result_columns["comparator"] = title_metadata.get("comparator", None)
-
-                        # new database
-                        self.result_columns["database_list"], self.result_columns["database_count"] =  self.extract_databases()
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
-        self.result_columns["review_type"] = self.extract_review_type()
-        self.result_columns["funding_other_bias"] = self.extract_bias_and_funding_info()
-        self.result_columns["extract_study_counts"] = self.extract_study_counts(self.get_combined_text(["main_content"]))
+
+        self.result_columns["location_in_title"] = extracted_metadata.get("location_in_title", None)
+        self.result_columns["race_ethnicity_in_title"] = extracted_metadata.get("race_ethnicity_in_title", None)
+        self.result_columns["target_population_in_title"] = extracted_metadata.get("target_population_in_title", None)
+        self.result_columns["topic_in_title"] = extracted_metadata.get("topic_in_title", None)
+        self.result_columns["num_databases"] = int(extracted_metadata.get("num_databases", 0))
+        self.result_columns["duration_of_intervention"] = extracted_metadata.get("duration_of_intervention", None)
+        self.result_columns["dosage"] = extracted_metadata.get("dosage", None)
+        self.result_columns["comparator"] = extracted_metadata.get("comparator", None)
+        self.result_columns["database_list"] =  extracted_metadata.get("database_names", None)
+        self.result_columns["database_count"] =  extracted_metadata.get("num_databases", None)
+        self.result_columns["review_type"] = extracted_metadata.get("review_type", None)
+        # self.result_columns["funding_other_bias"] = extracted_metadata.get("bias_and_funding_info", None)
+
+        self.result_columns["total_studies"] =  extracted_metadata.get("total_studies", None)
+        self.result_columns["rct"] =  extracted_metadata.get("rct", None)
+        self.result_columns["nrsi"] = extracted_metadata.get("nrsi", None)
+        self.result_columns["mixed_methods"] = extracted_metadata.get("mixed_methods", None)
+        
+        self.result_columns["qualitative"] =  extracted_metadata.get("qualitative", None)
+        self.result_columns["population_count"] = extracted_metadata.get("population_count", None)
+        self.result_columns["country_mentions"] = extracted_metadata.get("country_mentions", None)
+        self.result_columns["vaccine_efficacy"] = extracted_metadata.get("ve_info", None)
 
         ################# Merge Dict Together ######################
         amstars_integration = self.amstar2_integration()
@@ -255,7 +266,6 @@ class Tagging:
         self.result_columns.update(amstars_integration)
         # print(self.clean_result(self.result_columns))
         return self.clean_result(self.result_columns)
-
 
     def load_effect_extraction_model(self):
         try:
@@ -357,27 +367,39 @@ class Tagging:
         return ", ".join(list(set(matches)))
     
     def get_max_date(self, date_strings):
+        """
+        Given a list of date strings, parse and return the original
+        string corresponding to the latest datetime.
+        """
         parsed_dates = []
         for date_str in date_strings:
-            # Clean ordinal suffixes (e.g., "st", "nd", "rd", "th")
-            cleaned_str = re.sub(r'(\d+)(st|nd|rd|th)\b', r'\1', date_str)
+            cleaned = re.sub(r"(\d+)(st|nd|rd|th)\b", r"\1", date_str)
             try:
-                # Parse with dayfirst=True to prioritize day-month order for ambiguous dates
-                dt = parse(cleaned_str, dayfirst=True, fuzzy=True)
+                dt = parse(cleaned, dayfirst=True, fuzzy=True)
                 parsed_dates.append((dt, date_str))
-            except:
-                continue  # Skip invalid/unparseable dates
-        
+            except Exception:
+                continue
         if not parsed_dates:
-            return None  # Return None if no valid dates found
-        
-        # Get the latest date (based on parsed datetime) and return its original string
-        latest_date = max(parsed_dates, key=lambda x: x[0])
-        return latest_date[1]
+            return None
+        best = max(parsed_dates, key=lambda x: x[0])[1]
+        # Normalize whitespace (remove newlines)
+        return " ".join(best.split())
 
     def extract_last_literature_search_dates(self):
         """
-        Extracts literature search dates from the given text.
+        Extracts the most recent literature search date from document text.
+
+        Supports patterns:
+          1) Explicit dates following search keywords or database mentions.
+          2) 'from inception to/until' and 'updated on' clauses.
+          3) 'between Month-Year and Month-Year' and 'between Month and Month-Year'.
+          4) Standalone 'until' prefixes.
+          5) Calendar ranges 'from Month Day, Year to Month Day, Year'.
+          6) Month-Year and Day-Month-Year formats.
+          7) Published year ranges 'published from YYYY to YYYY' or 'between YYYY and YYYY'.
+          8) Seasonal year ranges 'YYYY-YY'.
+
+        Returns the original date string of the latest date found, or None.
         """
         # Combine text from the specified sections
         document = self.get_combined_text(["abstract", "search_strategy", "methods"])
@@ -386,29 +408,133 @@ class Tagging:
         if not document or not isinstance(document, str):
             raise ValueError("The document content is empty or invalid. Please provide a valid string.")
 
-        # Define regex pattern for capturing dates
-        pattern = r"""
-            (?i)(?:(?:searched\s+from\s+inception\s+to|date\s+of\s+last\s+literature\s+search|last\s+search\s+date|
-            the\s+search\s+was\s+conducted|all\s+searches\s+were\s+conducted|systematic\s+search(?:es)?|
-            literature\s+search(?:es)?(?:\s+was|\s+were)?(?:\s+conducted|\s+performed)?|we\s+conducted|
-            up\s+to\s+our\s+last\s+search\s+on|Cochrane\s+Database\s+of\s+Systematic\s+Reviews\s+up\s+to|
-            retrievals?\s+were\s+implemented\s+by|published\s+studies\s+were\s+retrieved|search\s+strategy|
-            the\s+last\s+automatic\s+search\s+was\s+performed\s+on|last\s+search\s+was\s+conducted\s+on|published\s+from|
-            initially\s+retrieved\s+from|articles\s+were\s+also\s+identified\s+between|study\s+was\s+conducted|we\s+searched|
-            was\s+conducted\s+on|database\s+inception\s+date|database\s+inception|articles\s+published\s+from|search\s+for\s+publications\s+was\s+carried\s+out|
-            published\s+between|conducted\s+and|published\s+in\s+english\s+between|published\s+through|from\s+inception\s+until|from\s+inception\s+up\s+to|
-            conducted\s+an\s+online\s+update\s+on|last\s+performed\s+on|literature\s+were\s+searched\s+in|literature\s+up\s+to|
-            published\s+(?:before|until|up\s+to|prior\s+to)|articles?\s+published\s+(?:before|until|up\s+to|prior\s+to)))  # Keywords
-            [\s\S]*  # Match across lines (greedy)
-            (\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:,|\s)?\s+\d{4}|\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}|  # Date formats like "Jan 1, 1967", "Jan 1967", "January 1, 1967", or "January 1967"
-            \b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s*(?:\d{1,2}(?:st|nd|rd|th)?)?,?\s*(\d{4})\b)
-        """
-        matches = re.finditer(pattern, document, re.IGNORECASE | re.VERBOSE)
-        # Extract only the matched date or year
-        dates = [match.group(1).strip() for match in matches if match.group(1)]
+        date_strings = []
+        # Date components
+        month_name = r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
+        day = r"\d{1,2}"
+        year = r"\d{4}"
+        # Patterns
+        mdY = rf"{month_name}\s+{day},?\s+{year}"    # Month Day, Year
+        dMY = rf"{day}\s+{month_name}\s+{year}"       # Day Month Year
+        mY  = rf"{month_name}\s+{year}"               # Month Year
+        full_date = rf"(?:{mdY}|{dMY}|{mY})"
+
+        # 1) Explicit keywords
+        explicit_kw = (
+            r"(?:searched\s+from\s+inception\s+(?:to|until)|"
+            r"date\s+of\s+last\s+literature\s+search|"
+            r"last\s+search\s+date|"
+            r"the\s+search\s+was\s+conducted|"
+            r"all\s+searches\s+were\s+conducted|"
+            r"systematic\s+search(?:es)?|"
+            r"literature\s+search(?:es)?(?:\s+was|\s+were)?(?:\s+conducted|\s+performed)?|"
+            r"we\s+conducted|"
+            r"up\s+to\s+our\s+last\s+search\s+on|"
+            r"searched\s+PubMed|"
+            r"searched\s+EMBASE|"
+            r"Cochrane\s+Central\s+Register\s+of\s+Controlled\s+Trials|"
+            r"search\s+strategy|"
+            r"MEDLINE\s+literature\s+search|"
+            r"Global\s+Health\s+literature\s+search|"
+            r"Web\s+of\s+Science\s+search|"
+            r"SCOPUS\s+search|",
+            r"PubMed\s+search|"
+            r"EMBASE\s+search|"
+            r"OVID\s+search|"
+            r"OVID\s+MEDLINE\s+search|"
+            r"OVID\s+EMBASE\s+search|"
+            r"OVID\s+Global\s+Health\s+search|"
+            # newly added:
+            r"Cochrane\s+Database\s+of\s+Systematic\s+Reviews\s+up\s+to|"
+            r"retrievals?\s+were\s+implemented\s+by|"
+            r"published\s+studies\s+were\s+retrieved|"
+            r"the\s+last\s+automatic\s+search\s+was\s+performed\s+on|"
+            r"last\s+search\s+was\s+conducted\s+on|"
+            r"published\s+from|"
+            r"initially\s+retrieved\s+from|"
+            r"articles\s+were\s+also\s+identified\s+between|"
+            r"study\s+was\s+conducted|"
+            r"we\s+searched|"
+            r"was\s+conducted\s+on|"
+            r"database\s+inception\s+date|"
+            r"database\s+inception|"
+            r"articles\s+published\s+from|"
+            r"search\s+for\s+publications\s+was\s+carried\s+out|"
+            r"published\s+between|"
+            r"conducted\s+and|"
+            r"published\s+in\s+english\s+between|"
+            r"published\s+through|"
+            r"from\s+inception\s+up\s+to|"
+            r"conducted\s+an\s+online\s+update\s+on|"
+            r"last\s+performed\s+on|"
+            r"literature\s+were\s+searched\s+in|"
+            r"literature\s+up\s+to|"
+            r"published\s+(?:before|until|up\s+to|prior\s+to)|"
+            r"articles?\s+published\s+(?:before|until|up\s+to|prior\s+to))"
+        )
+        pattern1 = re.compile(rf"(?i){explicit_kw}[\s\S]*?({full_date})")
+        for m in pattern1.finditer(document):
+            date_strings.append(m.group(1))
+
+        # 2) 'from inception to/until' or standalone 'until'
+        pattern2 = re.compile(rf"(?i)(?:from\s+inception\s+(?:to|until)|until)\s+({full_date})")
+        for m in pattern2.finditer(document):
+            date_strings.append(m.group(1))
+
+        # 3) 'from inception to/until' and 'updated on'
+        pattern3 = re.compile(rf"(?i)(?:from\s+inception\s+(?:to|until)|updated\s+on)\s+({full_date})")
+        for m in pattern3.finditer(document):
+            date_strings.append(m.group(1))
+
+        # 3a) between Month-Year and Month-Year
+        pattern_between1 = re.compile(rf"(?i)between\s+({mY})\s+and\s+({mY})")
+        for m in pattern_between1.finditer(document):
+            date_strings.append(m.group(2))
+
+        # 3b) between Month and Month-Year
+        pattern_between2 = re.compile(rf"(?i)between\s+{month_name}\s+and\s+({full_date})")
+        for m in pattern_between2.finditer(document):
+            date_strings.append(m.group(1))
+
+        # 3c) between Year and Year
+        pattern_between_years = re.compile(r"(?i)between\s+(\d{4})\s+and\s+(\d{4})")
+        for m in pattern_between_years.finditer(document):
+            date_strings.append(m.group(2))
+
+        # 4) 'to <Date>' catch-all for any end date
+        pattern_to = re.compile(rf"(?i)to\s+({full_date})")
+        for m in pattern_to.finditer(document):
+            date_strings.append(m.group(1))
+
+        # 5) Calendar ranges: Month Day, Year to Month Day, Year
+        pattern3 = re.compile(rf"(?i)from\s+({mdY})\s+to\s+({mdY})")
+        for m in pattern3.finditer(document):
+            date_strings.append(m.group(2))
+
+        # 6) Month-Year ranges: Month Year to Month Year
+        pattern3b = re.compile(rf"(?i)({mY})\s+to\s+({mY})")
+        for m in pattern3b.finditer(document):
+            date_strings.append(m.group(2))
+
+        # 7) Published year ranges
+        pattern4 = re.compile(
+            rf"(?i)published\s+(?:from\s+({year})\s+to\s+({year})|between\s+({year})\s+and\s+({year}))"
+        )
+        for m in pattern4.finditer(document):
+            end_year = m.group(2) or m.group(4)
+            if end_year:
+                date_strings.append(end_year)
+
+        # 8) Seasonal year ranges 'YYYY-YY'
+        pattern5 = re.compile(rf"\b({year})[–-](\d{{2}})\b")
+        for m in pattern5.finditer(document):
+            century_val = (int(m.group(1)) // 100) * 100
+            date_strings.append(str(century_val + int(m.group(2))))
+
+        unique = sorted(set(date_strings))
         # Deduplicate and sort the dates
-        max_date = self.get_max_date(sorted(set(dates)))
-        return max_date if max_date else self.extract_last_search_date()
+        max_date = self.get_max_date(unique)
+        return max_date
     
     def extract_population(self, tag_lists):
         """
@@ -1214,215 +1340,17 @@ class Tagging:
                 continue
         return None
 
-    def extract_last_search_date(self) -> Optional[str]:
-        context = self.get_combined_text(["main_content"])
-        QUESTIONS = [
-            "When was the last literature search conducted?",
-            "Until what date were studies retrieved?",
-            "What was the final search date?"
-        ]
-        date_pattern = re.compile(r"\b([A-Z][a-z]+)\s+\d{4}\b")
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                match = date_pattern.search(answer["answer"])
-                if match:
-                    return match.group(0)
-            except:
-                continue
-        return None
-
-    def extract_population_count(self) -> Optional[int]:
-        context = self.document
-        QUESTIONS = [
-            "What is the total number of participants?",
-            "How many people were included in the study?",
-            "What is the population size?"
-        ]
-        answer = self.ask_question(context, QUESTIONS)
-        if answer:
-            match = re.search(r'\d+', answer)
-            if match:
-                return int(match.group(0))
-        return None
-
-    def extract_country_mentions(self) -> List[str]:
-        context = self.get_combined_text(["results"])
-        QUESTIONS = [
-            "Which countries were included in the study?",
-            "What countries were mentioned in the paper?",
-            "Which nations were studied?"
-        ]
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                countries = re.findall(r'[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*', answer['answer'])
-                return list(set(countries))
-            except:
-                continue
-        return []
-
-    def extract_ve_info(self) -> List[str]:
-        context = self.get_combined_text(["abstract", "methods", "results"])
-        QUESTIONS = [
-            "What is the reported vaccine effectiveness?",
-            "What is the efficacy of the vaccine?",
-            "What are the confidence intervals for vaccine effectiveness?"
-        ]
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                if re.search(r'(\d{1,3}%|\(.*?CI.*?)', answer["answer"]):
-                    return [answer["answer"]]
-            except:
-                continue
-        return []
-
-    def extract_location_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["Which country is mentioned in the title?"])
-
-    def extract_race_ethnicity_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What race or ethnicity is mentioned in the title?"])
-
-    def extract_target_population_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What population is targeted in the title?"])
-
-    def extract_topic_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What is the main topic of the article title?"])
-
-    def extract_database_names(self, text: str) -> list:
-        # Known common aliases
-        aliases = {
-            "MEDLINE": ["MEDLINE via Ovid", "MEDLINE/PubMed"],
-            "CENTRAL": ["Cochrane Central Register of Controlled Trials"],
-            "Cochrane": ["Cochrane Library"],
-            "PubMed": ["PubMed Central"],
-            "PsycINFO": ["Psychological Abstracts"]
-        }
-
-        # Normalize alias map: reverse mapping from alias to canonical name
-        alias_map = {alias: canonical for canonical, alias_list in aliases.items() for alias in alias_list}
-        all_variants = set(self.database_list + list(alias_map.keys()))
-
-        # Regex: match whole words or phrase boundaries (e.g., "PubMed", "Cochrane Library")
-        pattern = re.compile(r'\b(?:' + '|'.join(re.escape(db) for db in all_variants) + r')\b', re.IGNORECASE)
-
-        matches = pattern.findall(text)
-        matched_databases = set()
-
-        for match in matches:
-            # Normalize via alias mapping if needed
-            canonical = alias_map.get(match, match)
-            # Title-case everything for consistency
-            matched_databases.add(canonical.title())
-
-        return sorted(matched_databases)
-
-    def extract_num_databases(self, context: str) -> Optional[int]:
-        QUESTIONS = [
-            "How many databases were searched?",
-            "What is the total number of databases included in the literature search?",
-            "How many electronic sources were searched?"
-        ]
-        answer = self.ask_question(context, QUESTIONS)
-        if answer:
-            match = re.search(r"\d+", answer)
-            if match:
-                return int(match.group(0))
-        fallback = self.extract_database_names(context)
-        print(fallback)
-        return len(fallback) if fallback else 0
-
-    def extract_duration_of_intervention(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What was the duration of the intervention?"])
-
-    def extract_dosage(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What was the dosage used in the intervention?"])
-
-    def extract_comparator(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What comparator was used in the study?"])
-
-    def extract_country_participant_counts(self) -> Dict[str, Optional[str]]:
-        """
-        Uses a QA model to estimate country-wise participant counts and total.
-        """
-        context = self.document
-        question = "How many participants were included from each country?"
-        try:
-            answer = self.qa_pipeline(question=question, context=context)
-            if not answer or not answer["answer"]:
-                return {"country_counts": None, "total_count": 0}
-            
-            # Match known country names in the answer
-            text = answer["answer"]
-            country_names = {country.name for country in pycountry.countries}
-            country_counts = {}
-
-            # Match patterns like CountryName(Number)
-            matches = re.findall(r"([A-Z][a-zA-Z ]+)\s*\((\d+)\)", text)
-            for country, count in matches:
-                country = country.strip()
-                if country in country_names:
-                    country_counts[country] = country_counts.get(country, 0) + int(count)
-
-            formatted = ", ".join(f"{k}({v})" for k, v in country_counts.items())
-            total = sum(country_counts.values())
-
-            return formatted or None, total or 0
-        except Exception:
-            return None, 0
+    def extract_all(self):
+        title = self.get_combined_text(["title"])
+        abstract = self.get_combined_text(["abstract"])
+        methods = self.get_combined_text(["methods"])
+        results = self.get_combined_text(["results"])
+        main_content = self.get_combined_text(["main_content"])
+        document = main_content
+        extractor = MyExtractor(self.qa_pipeline, self.database_list, score_threshold=0.1)
+        data = extractor.extract_all(title=title, abstract=abstract, methods=methods, results=results, document=document, main_content=main_content)
+        return data
     
-
-    def extract_review_type(self) -> Optional[str]:
-        """
-        Identifies the type of review the paper describes, e.g., systematic, scoping, narrative, etc.
-        """
-        context = self.document
-        QUESTIONS = [
-            "What type of review is this paper?",
-            "What kind of review was conducted?",
-            "Is this a systematic review, meta-analysis, or another type of review?",
-            "What review methodology was used in the study?"
-        ]
-        return self.ask_question(context, QUESTIONS)
-
-    def extract_bias_and_funding_info(self):
-        """
-        Extracts risk of bias assessment, bias interpretation consideration,
-        and funding disclosure using question answering.
-        Returns a dictionary of these elements.
-        """
-        qa_questions = {
-            "risk_of_bias_assessed": [
-                "Was the risk of bias in individual studies assessed?",
-                "Did the authors evaluate risk of bias for the included studies?",
-                "Was any method used to assess study bias?"
-            ],
-            "bias_considered": [
-                "Was the risk of bias considered when interpreting the results?",
-                "Did the authors take bias into account when discussing the findings?",
-                "Was bias mentioned in interpretation of the study findings?"
-            ],
-            "funding_disclosed": [
-                "Did the review disclose sources of funding for the included studies?",
-                "Was funding information reported in the systematic review?",
-                "Was study funding declared in the paper?"
-                "If information does not exist say funding was not disclosed."
-            ]
-        }
-        context = self.document
-        results = {}
-
-        for key, questions in qa_questions.items():
-            answer = self.ask_question(context, questions)
-            if answer:
-                # Optional normalization
-                clean_answer = answer.strip().capitalize()
-                results[key] = clean_answer
-            else:
-                results[key] = None
-
-        return json.dumps(results)
     
     def amstar2_integration(self):
         today = date.today()

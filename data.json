@@ -1,0 +1,132 @@
+{
+  "popu#specific__group#hcw": [
+    "Physician:hcw",
+    "Surgeon:hcw",
+    "Nurse:hcw"
+  ],
+  "popu#immune__status#hty": [
+    "healthy:hty"
+  ],
+  "topic#eff#eff": [
+    "95%"
+  ],
+  "topic#risk__factor#rf": [
+    "risk:rf"
+  ],
+  "topic#acceptance#kaa": [
+    "knowledge:kaa"
+  ],
+  "topic#eco#eco": [
+    "financial:eco",
+    "cost:eco",
+    "cost-effectiveness:eco"
+  ],
+  "outcome#infection#inf": [
+    "infection:inf"
+  ],
+  "outcome#hospital#hos": [
+    "hospitalization:hos"
+  ],
+  "outcome#death#dea": [
+    "death:dea"
+  ],
+  "intervention#vpd#infl": [
+    "influenza:infl"
+  ],
+  "intervention#vaccine__options#live": [
+    "live:live"
+  ],
+  "intervention#vaccine__options#non__djuvanted": [
+    "non-adjuvanted:nonadjuvants"
+  ],
+  "intervention#vaccine__options#quad": [
+    "quadrivalent:quad"
+  ],
+  "reviews#review#rev": [
+    "review:rev",
+    "Meta-Analysis:rev",
+    "systematic review:rev"
+  ],
+  "study_types": "{\"studies\": 44, \"study\": 5800}",
+  "total_study_count": 0,
+  "total_rct_count": 0,
+  "inclusions_exclusions": "{\"total_studies\": 2010, \"screened\": 2010, \"included\": 2010}",
+  "total_nrsi_count": 0,
+  "total_mmtd_count": 0,
+  "total_quanti_count": 0,
+  "gender#group#sex": [
+    {
+      "men": 1,
+      "other": 1,
+      "women": 1,
+      "unknown": 1,
+      "boy": 1,
+      "divers": 1
+    }
+  ],
+  "particip#group#members": [
+    {
+      "indicator": "study participants",
+      "populations": 5800,
+      "type_of_participant": null,
+      "context": "five seasons The analysis included 5800 study participants  who were in the community"
+    }
+  ],
+  "lit_search_dates#dates#dates": "2015",
+  "open_acc#opn_access#op_ac": "oa: oa",
+  "study_country#countries#countries": null,
+  "study_country#study_count#count": 0,
+  "title_popu#title_pop#title": "physician, Nurse, Surgeon",
+  "location_in_title": null,
+  "race_ethnicity_in_title": null,
+  "target_population_in_title": "nearly all citizens in the US and most parts of Canada",
+  "topic_in_title": "influenza complications",
+  "num_databases": 3,
+  "duration_of_intervention": "3-year",
+  "dosage": "trivalent",
+  "comparator": "Neuraminidase inhibition titers",
+  "database_list": [
+    "Clinicaltrials.Gov",
+    "Embase",
+    "Medline"
+  ],
+  "database_count": 3,
+  "review_type": "meta-analysis",
+  "total_studies": 5800,
+  "rct": null,
+  "nrsi": null,
+  "mixed_methods": null,
+  "qualitative": null,
+  "population_count": 5800,
+  "country_mentions": [
+    "Canada"
+  ],
+  "vaccine_efficacy": [
+    "95%"
+  ],
+  "item_1_pico_components_present": "Yes",
+  "item_2_protocol_prospero": "NO",
+  "item_3_explanation_on_the_selection_of_the_study_desig_995507ff": "Yes",
+  "item_4_comprehensive_literatue_search_strategy": "No",
+  "item_4_details": "{\"Did the authors search at least 2 databases?\": \"Yes\", \"Did the authors provide keyword and/or search strategy?\": \"Yes\", \"Did they mention any restrictions at the study selection or eligibility screening, if available?\": \"No\", \"Did they search the reference lists/ bibliographies of included studies?\": \"No\", \"Did they search trial/study registries?\": \"No\", \"Did they include / consult content experts in the field\": \"No\", \"Did they conduct search within 24 months of completion of the review?\": \"No\"}",
+  "item_6_duplicate_data_extraction": "No",
+  "item_7_list_of_excluded_studies_with_justification": "Yes",
+  "item_8_description_of_included_studies_in_adequate_detail": "Yes",
+  "item_9_satisfactory_technique_for_rob_rct_nrsi": "No",
+  "item_11_use_of_appropriate_methods_for_statistical_com_118f54e1": "No",
+  "item_13_risk_of_bias_considered": "Yes",
+  "item_15_publication_bias_investigation": "YES",
+  "amstar_label": "Critically Low",
+  "amstar_flaws": [
+    "# Item 11 - Use of Appropriate Methods for Statistical Combination of Results",
+    "# Item 4 - Comprehensive Literatue Search strategy",
+    "# Item 9 - Satisfactory Technique for RoB (RCT + NRSI)",
+    "# Item 2 - Protocol / PROSPERO",
+    "* Item 6 - Duplicate Data Extraction"
+  ]
+}
+
+27 October 2011
+
+2014
+

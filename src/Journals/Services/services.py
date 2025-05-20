@@ -135,7 +135,22 @@ class JSONService:
             return {"success": True, "data": service.get()}
         except Exception as e:
             return {"error": str(e)}
-
+    def extract_group_values(self, record: dict, fields: list[str]) -> list[str]:
+        """
+        From `record`, look in each of the given `fields`, split on commas,
+        pull out text after the last colon in each value, strip whitespace,
+        and return a deduplicated list of non-empty strings.
+        """
+        vals = []
+        for field in fields:
+            raw = record.get(field)
+            if not raw:
+                continue
+            parts = [p for p in str(raw).split(",") if ":" in p]
+            vals.extend(p.split(":")[-1].strip() for p in parts)
+        # Dedupe and drop empty strings
+        return [v for v in set(vals) if v]
+    
     def read_with_raw_input(
             self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False
         ):
@@ -230,32 +245,13 @@ class JSONService:
                     if not record:
                         continue  
 
-                    extracted_group_1_values = []
-                    extracted_group_2_values = []
-
-                    # Extract values for Group 1
-                    for field in group_1_fields:
-                        if field in record and record[field]:
-                            values = [
-                                str(v).split(":")[-1].strip()
-                                for v in str(record[field]).split(",")
-                                if ":" in str(v)
-                            ]
-                            extracted_group_1_values.extend(values)
-
-                    # Extract values for Group 2
-                    for field in group_2_fields:
-                        if field in record and record[field]:
-                            values = [
-                                str(v).split(":")[-1].strip()
-                                for v in str(record[field]).split(",")
-                                if ":" in str(v)
-                            ]
-                            extracted_group_2_values.extend(values)
+                    # Use the helper for both groups
+                    extracted_group_1_values = self.extract_group_values(record, group_1_fields)
+                    extracted_group_2_values = self.extract_group_values(record, group_2_fields)
 
                     extracted_group_1_values = list(filter(None, set(extracted_group_1_values)))
                     extracted_group_2_values = list(filter(None, set(extracted_group_2_values)))
-
+                    # print(extracted_group_2_values)
                     # Add new fields
                     record["research_notes"] = ", ".join(extracted_group_1_values)  # Notes for Group 1
                     record["notes"] = ", ".join(extracted_group_2_values)  # Notes for Group 2

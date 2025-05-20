@@ -114,3 +114,24 @@ Testing
 
 python ./src/Commands/dynamic_table.py ./enriched_output.csv  all_db --primary 'unique_id'
 docker compose --env-file .env -f docker-compose.yml up -d
+
+export FLASK_APP=app:create_app
+export CELERY_APP=celery:make_celery
+
+
+export CELERY_APP=celery_app:celery
+celery -A celery_app:celery worker --beat --loglevel=info
+
+celery -A celery_app:celery worker --beat \
+    --pool=threads \
+    --concurrency=4 \
+    --loglevel=info
+
+celery -A celery_app:celery worker \
+    --pool=solo \
+    --loglevel=info
+
+prod
+celery -A app:create_app beat --loglevel=info
+celery -A app:create_app worker --loglevel=info
+

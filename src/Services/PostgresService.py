@@ -17,69 +17,81 @@ class QueryHelper:
     def build_query(raw_input, table, order_by=None, pagination=None, additional_conditions=None):
         """
         Build a SQL query string and its parameters based on raw input and additional conditions.
-
-        :param raw_input: Dictionary where keys are column names and values are lists of terms.
-        :param table: Table name for the query.
-        :param order_by: Tuple (column, direction) for ordering.
-        :param pagination: Dictionary with `page` and `page_size`.
-        :param additional_conditions: List of dictionaries specifying conditions and types.
-        :return: A tuple of (query string, parameters dictionary).
+        This version makes all string comparisons case-insensitive by wrapping columns and parameters in LOWER().
         """
         where_clauses = []
         params = {}
 
         # Construct WHERE clauses for raw_input
         for column, values in raw_input.items():
+            col_expr = f"LOWER(\"{column}\")"
             if len(values) > 1:
-                # Prepare IN clause
-                placeholders = ", ".join([f":{column}_in_{i}" for i in range(len(values))])
-                where_clauses.append(f'"{column}" IN ({placeholders})')
+                # Prepare IN clause with case-insensitive matching
+                placeholders = []
                 for i, value in enumerate(values):
-                    params[f"{column}_in_{i}"] = value
+                    key = f"{column}_in_{i}"
+                    placeholders.append(f":{key}")
+                    params[key] = value.lower() if isinstance(value, str) else value
+                where_clauses.append(f"{col_expr} IN ({', '.join(placeholders)})")
             else:
-                # Prepare simple WHERE clause
-                where_clauses.append(f'"{column}" = :{column}')
-                params[column] = values[0]
-        
+                key = column
+                params[key] = values[0].lower() if isinstance(values[0], str) else values[0]
+                where_clauses.append(f"{col_expr} = :{key}")
+
         # Add additional_conditions to WHERE clauses
         if additional_conditions:
             for condition in additional_conditions:
                 column = condition["column"]
                 value = condition["value"]
-                condition_type = condition.get("type", "where").lower()  # Default to "where"
+                condition_type = condition.get("type", "where").lower()
+                col_expr = f"LOWER(\"{column}\")"
 
                 if condition_type == "where":
-                    where_clauses.append(f'"{column}" = :{column}_additional')
-                    params[f"{column}_additional"] = value
+                    key = f"{column}_additional"
+                    params[key] = value.lower() if isinstance(value, str) else value
+                    where_clauses.append(f"{col_expr} = :{key}")
+
                 elif condition_type == "orwhere":
+                    key = f"{column}_additional"
+                    params[key] = value.lower() if isinstance(value, str) else value
+                    clause = f"{col_expr} = :{key}"
                     if where_clauses:
-                        where_clauses[-1] = f'({where_clauses[-1]} OR "{column}" = :{column}_additional)'
+                        where_clauses[-1] = f"({where_clauses[-1]} OR {clause})"
                     else:
-                        where_clauses.append(f'"{column}" = :{column}_additional')
-                    params[f"{column}_additional"] = value
+                        where_clauses.append(clause)
+
                 elif condition_type == "likewhere":
-                    where_clauses.append(f'"{column}" LIKE :{column}_additional')
-                    params[f"{column}_additional"] = f"%{value}%"
+                    key = f"{column}_additional"
+                    params[key] = f"%{value.lower()}%" if isinstance(value, str) else value
+                    where_clauses.append(f"{col_expr} LIKE :{key}")
+
                 elif condition_type == "notwhere":
-                    where_clauses.append(f'"{column}" != :{column}_additional')
-                    params[f"{column}_additional"] = value
+                    key = f"{column}_additional"
+                    params[key] = value.lower() if isinstance(value, str) else value
+                    where_clauses.append(f"{col_expr} != :{key}")
+
                 elif condition_type == "betweenwhere":
                     start, end = value
-                    where_clauses.append(f'"{column}" BETWEEN :{column}_start AND :{column}_end')
-                    params[f"{column}_start"] = start
-                    params[f"{column}_end"] = end
+                    key_start = f"{column}_start"
+                    key_end = f"{column}_end"
+                    params[key_start] = start
+                    params[key_end] = end
+                    where_clauses.append(f"\"{column}\" BETWEEN :{key_start} AND :{key_end}")
+
                 elif condition_type == "orlikewhere":
+                    key = f"{column}_additional"
+                    params[key] = f"%{value.lower()}%" if isinstance(value, str) else value
+                    clause = f"{col_expr} LIKE :{key}"
                     if where_clauses:
-                        where_clauses[-1] = f'({where_clauses[-1]} OR "{column}" LIKE :{column}_additional)'
+                        where_clauses[-1] = f"({where_clauses[-1]} OR {clause})"
                     else:
-                        where_clauses.append(f'"{column}" LIKE :{column}_additional')
-                    params[f"{column}_additional"] = f"%{value}%"
+                        where_clauses.append(clause)
 
         # Start building the query
         query = f'SELECT * FROM "{table}"'
         if where_clauses:
             query += f" WHERE {' AND '.join(where_clauses)}"
-        
+
         # Add ORDER BY
         if order_by:
             query += f' ORDER BY "{order_by[0]}" {order_by[1].upper()}'
@@ -88,9 +100,11 @@ class QueryHelper:
         if pagination:
             page = pagination.get("page", 1)
             page_size = pagination.get("page_size", 10)
-            query += f" LIMIT {page_size} OFFSET {(page - 1) * page_size}"
+            offset = (page - 1) * page_size
+            query += f" LIMIT {page_size} OFFSET {offset}"
 
         return query, params
+
 
     @staticmethod
     def build_count_query(raw_input, table, additional_conditions=None):
@@ -446,6 +460,8 @@ class PostgresService:
                 result = conn.execute(text(query), self._params)
                 return [dict(row) for row in result]
         except SQLAlchemyError as e:
+            import traceback
+            traceback.print_exc()
             print(f"Error executing query: {e}")
             return []
 
@@ -539,6 +555,8 @@ class PostgresService:
                 result = conn.execute(text(query), params or {})
                 return [dict(row) for row in result]
         except SQLAlchemyError as e:
+            import traceback
+            traceback.print_exc()
             print(f"Error executing query: {e}")
             return {"error": str(e)}
 

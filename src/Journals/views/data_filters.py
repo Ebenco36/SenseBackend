@@ -102,6 +102,42 @@ class FetchRecordAPI(Resource):
             query_params = {"table": "all_db", "id": id}
             # Process the request using the service layer
             response = json_service.search_by_id(query_params)
+            if response.get("success") is True and response.get("data") is not None:
+                # Process the response data
+                record = response["data"]
+                # Full list of fields to extract
+                fields_to_extract = [
+                    "topic__HASH__acceptance__HASH__kaa", "topic__HASH__adm__HASH__adm",
+                    "topic__HASH__coverage__HASH__cov", "topic__HASH__eco__HASH__eco",
+                    "topic__HASH__ethical__issues__HASH__eth", "topic__HASH__modeling__HASH__mod",
+                    "topic__HASH__risk__factor__HASH__rf", "topic__HASH__safety__HASH__saf",
+                    "intervention__HASH__vaccine__options__HASH__adjuvants", "intervention__HASH__vaccine__options__HASH__biva",
+                    "intervention__HASH__vaccine__options__HASH__live", "intervention__HASH__vaccine__options__HASH__quad",
+                    "intervention__HASH__vpd__HASH__diph", "intervention__HASH__vpd__HASH__hb",
+                    "intervention__HASH__vpd__HASH__hiv", "intervention__HASH__vpd__HASH__hpv",
+                    "intervention__HASH__vpd__HASH__infl", "intervention__HASH__vpd__HASH__meas",
+                    "intervention__HASH__vpd__HASH__meni", "intervention__HASH__vpd__HASH__tetanus",
+                    "popu__HASH__age__group__HASH__ado_10__17", "popu__HASH__age__group__HASH__adu_18__64",
+                    "popu__HASH__age__group__HASH__chi_2__9", "popu__HASH__age__group__HASH__eld_65__10000",
+                    "popu__HASH__age__group__HASH__nb_0__1", "popu__HASH__immune__status__HASH__hty",
+                    "popu__HASH__specific__group__HASH__hcw", "popu__HASH__specific__group__HASH__pcg",
+                    "popu__HASH__specific__group__HASH__pw"
+                ]
+                # Dynamically categorize fields into two groups
+                group_1_fields = [field for field in fields_to_extract if field.startswith("intervention__HASH__vpd__HASH") or field.startswith("topic__HASH__coverage__HASH")]
+                group_2_fields = [field for field in fields_to_extract if field not in group_1_fields]
+                # Use the helper for both groups
+                extracted_group_1_values = json_service.extract_group_values(record, group_1_fields)
+                extracted_group_2_values = json_service.extract_group_values(record, group_2_fields)
+
+                extracted_group_1_values = list(filter(None, set(extracted_group_1_values)))
+                extracted_group_2_values = list(filter(None, set(extracted_group_2_values)))
+                # print(extracted_group_2_values)
+                # Add new fields
+                record["research_notes"] = ", ".join(extracted_group_1_values)  # Notes for Group 1
+                record["notes"] = ", ".join(extracted_group_2_values)  # Notes for Group 2
+            # update data in response
+            response["data"] = record
             # Check for success in the response
             if "success" in response:
                 return ApiResponse.success(
@@ -218,6 +254,30 @@ class ProcessUserSelectionAPI(Resource):
 
         # Convert data to a DataFrame for export
         df = pd.DataFrame(data)
+        df = df[[
+            "Authors",
+            "Title",
+            "Authors",
+            "DOI",
+            "doi_url",
+            "Source",
+            "Year",
+            "Language",
+            "Country",
+            "region",
+            "open_acc__HASH__opn_access__HASH__op_ac",
+            "Abstract",
+            "lit_search_dates__HASH__dates__HASH__dates", "num_databases", "database_list",
+            "dosage", "comparator", "topic__HASH__eff__HASH__eff",
+            "amstar_label", "amstar_flaws", "research_notes", "notes"
+        ]]
+
+        # 2. Rename columns via a dict
+        df = df.rename(columns={
+            "open_acc__HASH__opn_access__HASH__op_ac": "Open_Access",
+            "lit_search_dates__HASH__dates__HASH__dates": "Search Dates",
+            "topic__HASH__eff__HASH__eff": "Effectiveness & Efficacy"
+        })
 
         # Handle CSV export
         if export_format == "csv":

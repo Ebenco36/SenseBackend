@@ -95,3 +95,4 @@ testing_country.csv
 trainings/
 .venv
 */DS_Store
+.env
