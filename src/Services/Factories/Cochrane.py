@@ -271,14 +271,14 @@ class Cochrane(Service):
 
             records.append(
                 {
-                    "cdIdentifier": cd_identifier,
+                    "cd_identifier": cd_identifier,
                     "title": title,
                     "doi_link": doi_link,
                     "doi": doi,
                     "pdf_url": pdf_url,
-                    "modifiedDate": modified_date,
-                    "resultType": result_type,
-                    "resultStage": result_stage,
+                    "modified_date": modified_date,
+                    "result_type": result_type,
+                    "result_stage": result_stage,
                     "authors": author_list,
                     "abstract": abstract,
                     "year": get_other_fields.get("year", ""),

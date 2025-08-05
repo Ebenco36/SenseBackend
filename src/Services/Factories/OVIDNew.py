@@ -172,13 +172,13 @@ class OvidJournalDataFetcher(Service):
             # Title and Link
             title_tag = record.select_one(".titles-title h5 a")
             if title_tag:
-                data["Title"] = title_tag.text.strip()
-                data["TitleLink"] = title_tag.get("href", "")
+                data["title"] = title_tag.text.strip()
+                data["title_link"] = title_tag.get("href", "")
 
             # Authors
             authors_tag = record.select_one(".article-authors")
             if authors_tag:
-                data["Authors"] = " ".join(authors_tag.text.split())  # Normalize whitespace
+                data["authors"] = " ".join(authors_tag.text.split())  # Normalize whitespace
 
             # Source Information (Split into Database, Journal name, and Other info)
             source_tag = record.select_one(".titles-dbsegment")  # Database
@@ -198,113 +198,113 @@ class OvidJournalDataFetcher(Service):
                     other_info = None
 
                 # Add extracted fields to the data dictionary
-                data["Database"] = database
-                data["Journal"] = journal_name
-                data["OtherInfo"] = other_info
+                data["database"] = database
+                data["journal"] = journal_name
+                data["other_info"] = other_info
 
             # Publication Type
             pub_type_tag = record.select_one(".article-pubtype")
             if pub_type_tag:
-                data["PublicationType"] = pub_type_tag.text.strip().strip("[]")
+                data["publication_type"] = pub_type_tag.text.strip().strip("[]")
 
             
             pub_accession_number_tag = record.select_one(".article-ui")
             if pub_accession_number_tag:
-                data["PublicationAccessionNumber"] = pub_accession_number_tag.get_text(strip=True).replace("AN:", "").replace("UI:", "")
+                data["publication_accession_number"] = pub_accession_number_tag.get_text(strip=True).replace("AN:", "").replace("UI:", "")
                 
                 
             # Abstract
             abstract_tag = record.select_one(".titles-ab")
             if abstract_tag:
-                data["Abstract"] = " ".join(abstract_tag.text.split())  # Normalize whitespace
+                data["abstract"] = " ".join(abstract_tag.text.split())  # Normalize whitespace
 
             # DOI
             doi_tag = record.select_one('.titles-other:has(span:contains("DOI")) a')
             if doi_tag:
-                data["DOI"] = doi_tag.get("href", "")
+                data["doi"] = doi_tag.get("href", "")
 
             # Correspondence Email
             correspondence_email_tag = record.select_one('.titles-other:has(span:contains("Correspondence Address")) a')
             if correspondence_email_tag:
-                data["CorrespondenceEmail"] = correspondence_email_tag.get("data-cfemail", "")
+                data["correspondence_email"] = correspondence_email_tag.get("data-cfemail", "")
 
             # Correspondence Address
             correspondence_address_tag = record.select_one('.titles-other:has(span:contains("Correspondence Address"))')
             if correspondence_address_tag:
                 address_text = correspondence_address_tag.text.replace("Correspondence Address", "").strip()
-                data["CorrespondenceAddress"] = " ".join(address_text.split())
+                data["correspondence_address"] = " ".join(address_text.split())
 
             # Institution
             institution_tag = record.select_one('.titles-other:has(span:contains("Institution"))')
             if institution_tag:
                 institution_text = institution_tag.text.replace("Institution", "").strip()
-                data["Institution"] = " ".join(institution_text.split())
+                data["institution"] = " ".join(institution_text.split())
 
             # Country of Publication
             country_tag = record.select_one('.titles-other:has(span:contains("Country of Publication"))')
             if country_tag:
                 country_text = country_tag.text.replace("Country of Publication", "").strip()
-                data["Country"] = country_text
+                data["country"] = country_text
 
             # Publisher
             publisher_tag = record.select_one('.titles-other:has(span:contains("Publisher"))')
             if publisher_tag:
                 publisher_text = publisher_tag.text.replace("Publisher", "").strip()
-                data["Publisher"] = publisher_text
+                data["publisher"] = publisher_text
 
             # Journal Abbreviation
             journal_abbrev_tag = record.select_one('.titles-other:has(span:contains("Journal Abbreviation"))')
             if journal_abbrev_tag:
                 abbrev_text = journal_abbrev_tag.text.replace("Journal Abbreviation", "").strip()
-                data["JournalAbbreviation"] = abbrev_text
+                data["journal_abbreviation"] = abbrev_text
 
             # URL
             url_tag = record.select_one('.titles-other:has(span:contains("URL")) a')
             if url_tag:
-                data["URL"] = url_tag.get("href", "")
+                data["url"] = url_tag.get("href", "")
 
             # Emtree Headings
             emtree_tag = record.select_one('.titles-other:has(span:contains("Emtree Heading"))')
             if emtree_tag:
                 emtree_text = emtree_tag.text.replace("Emtree Heading", "").strip()
-                data["EmtreeHeadings"] = emtree_text
+                data["emtree_headings"] = emtree_text
 
             # Number of References
             references_tag = record.select_one('.titles-other:has(span:contains("Number of References"))')
             if references_tag:
                 references_text = references_tag.text.replace("Number of References", "").strip()
-                data["NumberOfReferences"] = references_text
+                data["number_of_references"] = references_text
 
             # Language
             language_tag = record.select_one('.titles-other:has(span:contains("Language")):not(:has(span:contains("Summary Language")))')
             if language_tag:
                 language_text = language_tag.text.replace("Language", "").strip()
-                data["Language"] = language_text
+                data["language"] = language_text
 
             
             # Update Date (e.g., '202448' -> '2024-12-02')
             update_date_tag = soup.select_one('.titles-other:has(span:contains("Update Date"))')
             if update_date_tag:
                 raw_update_date = update_date_tag.text.replace("Update Date", "").strip()
-                data["UpdateDate"] = convert_to_date(raw_update_date, "%Y%U")  # Week-based date format
+                data["update_date"] = convert_to_date(raw_update_date, "%Y%U")  # Week-based date format
 
             # Date Delivered (e.g., '20241122' -> '2024-11-22')
             delivered_date_tag = soup.select_one('.titles-other:has(span:contains("Date Delivered"))')
             if delivered_date_tag:
                 raw_delivered_date = delivered_date_tag.text.replace("Date Delivered", "").strip()
-                data["DateDelivered"] = convert_to_date(raw_delivered_date, "%Y%m%d")
+                data["date_delivered"] = convert_to_date(raw_delivered_date, "%Y%m%d")
 
             # Date Created (e.g., '20241122' -> '2024-11-22')
             created_date_tag = soup.select_one('.titles-other:has(span:contains("Date Created"))')
             if created_date_tag:
                 raw_created_date = created_date_tag.text.replace("Date Created", "").strip()
-                data["DateCreated"] = convert_to_date(raw_created_date, "%Y%m%d")
+                data["date_created"] = convert_to_date(raw_created_date, "%Y%m%d")
                 
             # Year of Publication
             year_tag = record.select_one('.titles-other:has(span:contains("Year of Publication"))')
             if year_tag:
                 year_text = year_tag.text.replace("Year of Publication", "").strip()
-                data["Year"] = year_text
+                data["year"] = year_text
 
             # Append to the list of records
             records.append(data)
@@ -313,11 +313,11 @@ class OvidJournalDataFetcher(Service):
 
     def _save_to_csv(self, journals, filename):
         headers = [
-            "Title", "TitleLink", "Authors", "Database", 
-            "Journal", "OtherInfo",  "PublicationType", "PublicationAccessionNumber", "Abstract", "URL", "DOI",
-            "CorrespondenceEmail", "CorrespondenceAddress", "Institution", "Country",
-            "Publisher", "JournalAbbreviation", "EmtreeHeadings", "NumberOfReferences", 
-            "Language", "DateCreated", "UpdateDate", "DateDelivered", "Year"
+            "title", "title_link", "authors", "database", 
+            "journal", "other_info",  "publication_type", "publication_accession_number", 
+            "abstract", "url", "doi", "correspondence_email", "correspondence_address", 
+            "institution", "country", "publisher", "journal_abbreviation", "emtree_headings", 
+            "number_of_references", "language", "date_created", "update_date", "date_delivered", "year"
         ]
 
         # Write data to CSV

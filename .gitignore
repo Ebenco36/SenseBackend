@@ -95,3 +95,14 @@ testing_country.csv
 trainings/
 .venv
 */DS_Store
+
+
+data.json
+e019206.full.pdf
+extraction_results.csv
+loke-et-al-2017-the-uptake-of-human-papillomavirus-vaccination-and-its-associated-factors-among-adolescents-a.pdf
+model.ipynb
+nihms-1635551.pdf
+systematic_review_templates.csv
+systematic_review_vocab.csv
+pico_ner_model_results/

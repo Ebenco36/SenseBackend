@@ -25,6 +25,7 @@ class RecordsAPI(Resource):
                 return ApiResponse.error(message="Invalid payload: Missing or malformed JSON", status_code=400)
 
             response = json_service.create(payload)
+            print(response)
             if response.get("success"):
                 return ApiResponse.success(
                     message=response.get("message", "Record created successfully"), 
@@ -58,7 +59,7 @@ class RecordsAPI(Resource):
 
             # Call the service layer to handle the logic
             response = json_service.read(payload)
-
+            print(response)
             # Use ApiResponse to format the response
             if "success" in response:
                 return ApiResponse.success(data=response.get("data", {}), message="Operation successful", status_code=200)

@@ -1,29 +1,29 @@
 services:
-  sense_app:
-    container_name: sense_project
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "${FLASK_RUN_PORT}:8081"
-    depends_on:
-      - sense_postgres
-    env_file:
-      - .env
-    volumes:
-      - sense-app:/app/data
-    networks:
-      - sense-networks
+  # sense_app:
+  #   container_name: sense_project
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "${FLASK_RUN_PORT}:8081"
+  #   depends_on:
+  #     - sense_postgres
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - sense-app:/app/data
+  #   networks:
+  #     - sense-networks
 
-  frontend:
-    build: ../../Desktop/SenseFrontend
-    container_name: SenseFrontend
-    ports:
-      - "8081:80" # Expose frontend on localhost:8081
-    networks:
-      - sense-networks
-    environment:
-      - REACT_APP_BACKEND_URL=http://localhost:${FLASK_RUN_PORT} # Use Docker service name
+  # frontend:
+  #   build: ../../Desktop/SenseFrontend
+  #   container_name: SenseFrontend
+  #   ports:
+  #     - "8081:80" # Expose frontend on localhost:8081
+  #   networks:
+  #     - sense-networks
+  #   environment:
+  #     - REACT_APP_BACKEND_URL=http://localhost:${FLASK_RUN_PORT} # Use Docker service name
 
 
   sense_postgres:

@@ -92,8 +92,10 @@ python ./src/Commands/dynamic_table.py ./Data/MedlineData/medline_results.csv  m
 python ./src/Commands/UnifyCSV.py
 python ./src/Commands/DOIEnricher.py
 python ./src/Commands/dynamic_table.py ./HPV_training_set_HHL_AP_complete.csv  rough_db --primary 'Id'
-python ./src/Commands/dynamic_table.py ./test2_complete.csv  all_db --primary 'Id'
-python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db --primary 'verification_id'
+
+
+python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db
+
 python ./src/Commands/CountryRegionManager.py
 example: python script.py data.csv my_table --primary id_column1 id_column2 --fallback fallback_column1 fallback_column2
 Tagging pipeline for all papers

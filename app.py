@@ -7,7 +7,7 @@ from flask_mail import Mail
 from flask_cors import CORS
 from flask_admin import Admin
 from dotenv import load_dotenv
-from src import RouteInitialization
+from src.core.route_initializer import RouteInitialization
 from utils.errors import BadRequestException
 from logging.handlers import RotatingFileHandler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore

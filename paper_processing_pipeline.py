@@ -12,7 +12,7 @@ class PaperProcessingPipeline:
     def __init__(self):
         self.db_queries = {
             "Ovid": {
-                "query": 'SELECT upper("DOI") FROM ovid_db WHERE primary_id IN (1, 2, 3, 4, 5)',
+                "query": 'SELECT upper("doi") FROM ovid_db WHERE primary_id IN (1, 2, 3, 4, 5)',
                 "csv_file_path": 'Data/output/ovid_papers_tags'
             },
             "Cochrane": {
@@ -24,7 +24,7 @@ class PaperProcessingPipeline:
                 "csv_file_path": 'Data/output/love_papers_tags'
             },
             "Medline": {
-                "query": 'SELECT upper("DOI") FROM medline_db WHERE primary_id IN (1, 2)',
+                "query": 'SELECT upper("doi") FROM medline_db WHERE primary_id IN (1, 2)',
                 "csv_file_path": 'Data/output/medline_papers_tags'
             }
         }

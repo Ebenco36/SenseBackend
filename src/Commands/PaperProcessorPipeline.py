@@ -103,20 +103,20 @@ class PaperProcessorPipeline:
                 db_handler.query = batch_query
                 processor = PaperProcessor(db_handler=db_handler, csv_file_path=csv_file_path)
                 data_return = processor.process_papers(db_name=db_name)
-
+                # print(data_return)
                 if data_return.empty:
                     continue
 
                 # Mark retry rows
-                data_return["is_retry"] = data_return["Id"].isin(failed_ids)
-                retry_ids = set(data_return[data_return["is_retry"]]["Id"])
-                new_ids = set(data_return[~data_return["is_retry"]]["Id"])
+                data_return["is_retry"] = data_return["id"].isin(failed_ids)
+                retry_ids = set(data_return[data_return["is_retry"]]["id"])
+                new_ids = set(data_return[~data_return["is_retry"]]["id"])
 
                 retry_success = set()
                 failed_this_batch = set()
 
                 try:
-                    updater.update_columns_for_existing_records(data_return.drop(columns="is_retry"), id_column='Id')
+                    updater.update_columns_for_existing_records(data_return.drop(columns="is_retry"), id_column='id')
                     retry_success = retry_ids
                 except Exception as err:
                     print(f"Partial failure during update: {err}")
@@ -142,7 +142,7 @@ class PaperProcessorPipeline:
             traceback.print_exc()
             print(f"Error processing source {db_name}: {e}")
         finally:
-            db_handler.close_connection()
+            # db_handler.close_connection()
             updater.close_connection()
 
 

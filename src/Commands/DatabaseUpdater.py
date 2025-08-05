@@ -16,7 +16,7 @@ class DatabaseUpdater:
         Initializes the DatabaseUpdater with the target table name and optional column mapping.
 
         :param table_name: Name of the table to update
-        :param column_mapping: Optional dictionary to map DataFrame columns to database table columns, e.g., {'Id': 'primary_id'}
+        :param column_mapping: Optional dictionary to map DataFrame columns to database table columns, e.g., {'id': 'primary_id'}
         """
         from app import db, app
         with app.app_context():

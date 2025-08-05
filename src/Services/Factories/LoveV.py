@@ -133,9 +133,9 @@ class LoveV(Service):
         print("Done merging the csv files.")
 
         print("Starting enrichment for the combined file (LOVE-DB)...")
-        enricher = DOIEnricher("Data/L-OVE/LOVE.csv")
-        enricher.run(output_file="Data/L-OVE/LOVE_enriched.csv", key="doi")
-        print("Done with enrich (LOVE-DB)...")
+        # enricher = DOIEnricher("Data/L-OVE/LOVE.csv")
+        # enricher.run(output_file="Data/L-OVE/LOVE_enriched.csv", key="doi")
+        # print("Done with enrich (LOVE-DB)...")
         
         return self
     

@@ -1,500 +1,570 @@
 import json
+import logging
 from collections import defaultdict
 from sqlalchemy.exc import SQLAlchemyError
+# Assuming these local imports are correct for your project structure
 from src.Commands.regexp import searchRegEx
 from src.Utils.Helpers import preprocess_languages
-from src.Services.PostgresService import PostgresService, QueryHelper
+from src.Services.PostgresService import PostgresService
+from src.Services.ChartService import ChartService
 from src.Journals.Services.APIResponseNormalizer import APIResponseNormalizer
+
+
 class JSONService:
     """Service for interacting with the database using JSON payloads for CRUD operations."""
 
     def __init__(self):
         self.db_service = PostgresService()
-        
-    def create(self, payload):
+        self.chart_service = ChartService()
+
+    def _build_from_payload(self, payload):
         """
-        Create a new record in the specified table.
-        Example Payload:
-        {
-            "table": "my_table",
-            "data": {"name": "John Doe", "status": "active"}
-        }
+        Builds a query from a standard JSON payload with full optimization and
+        robust, case-insensitive column validation.
+        """
+        table_name = payload.get("table")
+        if not table_name:
+            raise ValueError("Table name is required")
+
+        # Initialize the builder and cache the table's schema for validation
+        builder = self.db_service.table(table_name)
+        valid_columns_lower = builder._table_columns_lower
+
+        # 1. Handle Columns (Silently skips non-existent ones)
+        if cols_to_select := payload.get("columns"):
+            final_cols = [
+                col for col in cols_to_select
+                if col == '*' or col.lower() in valid_columns_lower
+            ]
+            if final_cols:
+                builder.select(*final_cols)
+
+        # 2. Handle Filters (Groups conditions and skips non-existent columns)
+        filters = payload.get("filters", [])
+        if filters:
+            grouped_wheres = defaultdict(list)
+            grouped_likes = defaultdict(list)
+            other_conditions = []
+
+            # First, categorize all filters, skipping any with invalid columns
+            for f in filters:
+                column = f.get("column")
+                # For multi-column filters, all columns must be valid
+                if columns := f.get("columns"):
+                    if not all(c.lower() in valid_columns_lower for c in columns):
+                        logging.warning(
+                            f"Filter skipped: One or more columns in {columns} do not exist.")
+                        continue
+                elif not column or column.lower() not in valid_columns_lower:
+                    logging.warning(
+                        f"Filter skipped: Column '{column}' does not exist.")
+                    continue
+
+                filter_type = f.get("type", "where").lower()
+                if filter_type in ["where", "inwhere"]:
+                    grouped_wheres[column].append(f.get("value"))
+                elif filter_type == "likewhere":
+                    grouped_likes[column].append(f.get("value"))
+                else:
+                    other_conditions.append(f)
+
+            # Apply grouped 'where'/'inwhere' conditions as efficient IN clauses
+            for column, values in grouped_wheres.items():
+                flat_values = [v for v_list in values for v in (
+                    v_list if isinstance(v_list, list) else [v_list])]
+                unique_values = list(set(flat_values))
+                if len(unique_values) > 1:
+                    builder.in_where(column, unique_values)
+                elif unique_values:
+                    builder.where(column, unique_values[0])
+
+            # Apply grouped 'likewhere' conditions as efficient OR LIKE (...) clauses
+            for column, values in grouped_likes.items():
+                unique_values = list(set(values))
+                if len(unique_values) > 1:
+                    builder.or_like_group(column, unique_values)
+                elif unique_values:
+                    builder.like(column, unique_values[0])
+
+            # Apply all other, non-groupable conditions
+            for f in other_conditions:
+                op_map = {
+                    "orwhere": builder.or_where,
+                    "notwhere": lambda col, val: builder.where(col, val, operator="!="),
+                    "betweenwhere": builder.between,
+                    "orlikewhere": lambda col, val: builder.like(col, val, conjunction="OR"),
+                    "multi_column_like": builder.or_like_multi_column,
+                }
+                filter_type = f.get("type").lower()
+                if filter_type in op_map:
+                    if filter_type == "multi_column_like":
+                        op_map[filter_type](f["columns"], f["value"])
+                    elif filter_type == "betweenwhere":
+                        op_map[filter_type](
+                            f["column"], f["value"][0], f["value"][1])
+                    else:
+                        op_map[filter_type](f["column"], f["value"])
+
+        # 3. Handle Group By (Case-insensitive check)
+        if groups := payload.get("group_by"):
+            valid_groups = [col for col in groups if col.lower()
+                            in valid_columns_lower]
+            if valid_groups:
+                builder.group_by(*valid_groups)
+
+        # 4. Handle Aggregations
+        for agg in payload.get("aggregations", []):
+            col = agg.get("column")
+            if col != '*' and (not col or col.lower() not in valid_columns_lower):
+                logging.warning(
+                    f"Aggregation skipped: Column '{col}' does not exist.")
+                continue
+            builder.add_aggregation(agg["func"], col, agg.get("alias"))
+
+        # 5. Handle Order By (Case-insensitive check)
+        if order := payload.get("order_by"):
+            col = order.get("column")
+            if col and col.lower() in valid_columns_lower:
+                builder.order_by(col, order.get("direction", "ASC"))
+
+        # 6. Handle Pagination
+        if page_info := payload.get("pagination"):
+            builder.paginate(page_info["page"], page_info["page_size"])
+
+        return builder
+
+    def get_all_filter_options(self, include=None):
+        """
+        Generates and returns the complete, structured set of all available
+        filter options for the UI.
         """
         try:
-            table_name = payload.get("table")
-            data = payload.get("data")
-            if not table_name or not data:
-                return {"error": "Table name and data are required"}
+            # Get all raw data from the database
+            all_columns = self.get_columns_from_table({"table": "all_db"})
+            tag_filter_data = self.process_columns_with_hash(
+                all_columns, searchRegEx)
+            regions, countries, languages, years = self.get_other_filters()
 
-            success = self.db_service.table(table_name).add_record(data)
-            return {"success": success, "message": "Record created successfully"} if success else {"error": "Failed to create record"}
+            # Assemble the final, structured data object
+            countries_manual = [
+                "Kyrgyztan", "Bangladesh", "Indonesia", "Italy", "Venezuela", "Oman", "Czech Republic",
+                "Sweden", "United Kingdom", "Uganda", "Ireland", "Germany", "Singapore", "Canada",
+                "Finland", "Portugal", "South Korea", "Colombia", "Saudi Arabia", "Argentina", "Cuba",
+                "England", "Slovenia", "Greece", "Egypt", "Puerto Rico", "Iran, Islamic Republic of",
+                "India", "Iran", "Chile", "France", "Estonia", "Vietnam", "Slovakia", "Israel",
+                "South Africa", "Peru", "Kenya", "Ghana", "Malaysia", "Hong Kong", "Japan", "Denmark",
+                "Bosnia and Herzegovina", "Philippines", "United States", "Turkey", "Nigeria",
+                "Switzerland", "New Zealand", "Hungary", "China", "Norway", "Qatar",
+                "Scotland", "Pakistan", "Russian Federation", "Netherlands", "Romania", "Brazil",
+                "Austria", "Australia", "Serbia", "Ethiopia", "Russia (Federation)", "Bulgaria",
+                "Spain", "Croatia", "Libyan Arab Jamahiriya", "Tunisia", "United Arab Emirates",
+                "North Macedonia", "Belgium", "Korea (South)", "Mexico", "Nepal", "Tanzania",
+                "Poland", "Lebanon", "Taiwan (Republic of China)", "Thailand", "Czechia"
+            ]
+            # This is the same logic from your FilterAPI
+            data = {
+                "tag_filters": tag_filter_data.get("data", {}),
+                "others": {
+                    "Language": sorted(set(languages + ["English"])),
+                    "Country": sorted(set(countries + countries_manual)),
+                    "Region": sorted(set(regions + ["Americas", "Europe", "Africa"])),
+                    "Year": sorted(set([int(float(y)) for y in years] + [2025, 2024, 2023]), reverse=True),
+                    "AMSTAR 2 Rating": ["High", "Moderate", "Low", "Critically Low"],
+                },
+            }
+            # Step 2: If no specific filters are requested, return everything.
+            if not include:
+                return {"success": True, "data": data}
+
+            # Step 3: If specific filters are requested, build a new filtered response.
+            include_set = {item.lower() for item in include}
+            filtered_data = {}
+            
+            # Check both 'others' and 'tag_filters' for matches
+            all_categories = {**data.get("others", {}), **data.get("tag_filters", {})}          
+            for key, value in all_categories.items():
+                if key.lower() in include_set:
+                    filtered_data[key] = value
+
+            return {"success": True, "data": filtered_data}
+        except Exception as e:
+            return {"error": str(e)}
+
+    ##################################### START OF TAG COUNT ################################
+
+    def get_contextual_filter_counts(self, payload):
+        """
+        Calculates the count of records for each filter category based on the
+        currently active filters in the payload.
+        """
+        try:
+            # Step 1: Get the complete filter configuration.
+            all_filters_response = self.get_all_filter_options()
+            if not all_filters_response.get("success"):
+                return all_filters_response  # Propagate any errors
+            all_filters_config = all_filters_response.get("data", {})
+
+            # Step 2: Create a simple mapping of display names to database columns.
+            filter_categories = self._generate_filter_category_mappings(
+                all_filters_config)
+
+            # Step 3: Get the base query for the user's current search filters.
+            builder = self._build_from_payload(payload)
+            base_query_info = builder.show_sql()
+            base_query_sql = base_query_info['query']
+            base_query_params = base_query_info['params']
+
+            # Isolate the WHERE clause from the base query.
+            where_clause = ""
+            if ' WHERE ' in base_query_sql:
+                # Extract everything from WHERE to the end, then remove ordering/pagination.
+                where_clause = " WHERE " + \
+                    base_query_sql.split(" WHERE ", 1)[1]
+                where_clause = where_clause.split(
+                    " ORDER BY ")[0].split(" LIMIT ")[0]
+
+            # Step 4: Build the final aggregation query.
+            count_subqueries = []
+            for display_name, db_column in filter_categories.items():
+                if db_column.lower() in builder._table_columns_lower:
+
+                    # This is the subquery being built
+                    subquery = f"""
+                        SELECT
+                            '{display_name}' as category,
+                            CAST("{db_column}" AS TEXT) as value, -- ✅ FIX IS HERE
+                            COUNT(*) as count
+                        FROM base_results
+                        WHERE "{db_column}" IS NOT NULL
+                        GROUP BY "{db_column}"
+                    """
+                    count_subqueries.append(subquery)
+
+            if not count_subqueries:
+                # Return empty if no valid categories to count
+                return {"success": True, "data": {}}
+
+            # The final query uses a Common Table Expression (CTE) for efficiency.
+            final_sql = f"""
+                WITH base_results AS (
+                    SELECT * FROM {builder._table}
+                    {where_clause}
+                )
+                {' UNION ALL '.join(count_subqueries)};
+            """
+
+            # Step 5: Execute the query and format the results.
+            raw_counts = self.db_service.execute_raw_query(
+                final_sql, base_query_params)
+
+            # Convert the flat list of counts into a nested dictionary.
+            formatted_counts = defaultdict(list)
+            for row in raw_counts:
+                formatted_counts[row['category']].append({
+                    "value": row['value'],
+                    "count": row['count']
+                })
+
+            return {"success": True, "data": dict(formatted_counts)}
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return {"error": str(e)}
+
+    def _generate_filter_category_mappings(self, all_filters_config):
+        """
+        Helper function to dynamically create a mapping of display names
+        to database columns from the full filter configuration object.
+        """
+        category_mappings = {}
+
+        # Process simple categories like 'Year', 'Country' from the 'others' key.
+        if 'others' in all_filters_config:
+            for category_name in all_filters_config['others']:
+                # For simple filters, the display name and column name are the same.
+                category_mappings[category_name] = category_name.lower()
+
+        # Process complex, nested 'tag_filters'.
+        if 'tag_filters' in all_filters_config:
+            for top_level_key, subgroups in all_filters_config['tag_filters'].items():
+                for subgroup_key, items in subgroups.items():
+                    for item_key, details in items.items():
+                        # The display name from the config becomes the key.
+                        display_name = details.get('display', item_key)
+                        # The database column is constructed from the keys.
+                        column_name = f"{top_level_key}__HASH__{subgroup_key}__HASH__{item_key}"
+                        category_mappings[display_name] = column_name.lower()
+
+        return category_mappings
+
+    ##################################### END OF TAG COUNT ################################
+
+    # --- CRUD Methods ---
+
+    def create(self, payload):
+        try:
+            table_name, data = payload.get("table"), payload.get("data")
+            if not table_name or not data:
+                return {"error": "Table and data are required"}
+            # This correctly delegates the work
+            self.db_service.table(table_name).add_record(data)
+            return {"success": True, "message": "Record created successfully"}
         except Exception as e:
             return {"error": str(e)}
 
     def search_by_id(self, payload):
-        """
-        Search for a single record by its ID.
-        Example Payload:
-        {
-            "table": "my_table",
-            "id": 123
-        }
-        """
         try:
-            table_name = payload.get("table")
-            record_id = payload.get("id")
-            
+            table_name, record_id = payload.get("table"), payload.get("id")
             if not table_name or not record_id:
-                return {"error": "Table name and ID are required"}
-
-            # Construct the query with the correct placeholder syntax for psycopg2
-            query = f'SELECT * FROM "{table_name}" WHERE "primary_id" = '+ str(record_id) +' LIMIT 1'
-
-            # Execute the query using the db_service
-            record = self.db_service.execute_raw_query(query)
-
-            if record and len(record) > 0:
-                return {"success": True, "data": record[0]}
-            else:
-                return {"success": False, "message": "Record not found"}
-        except SQLAlchemyError as e:
-            return {"error": f"Database error: {str(e)}"}
+                return {"error": "Table and ID are required"}
+            record = self.db_service.table(table_name).where(
+                "primary_id", record_id).first()
+            return {"success": True, "data": record} if record else {"success": False, "message": "Record not found"}
         except Exception as e:
-            return {"error": f"An unexpected error occurred: {str(e)}"}
-        
-    def read(self, payload):
+            print(e)
+            return {"error": str(e)}
+
+    def search_by_ids(self, id_list, table="all_db"):
         """
-        Read records from the specified table with filters, pagination, column selection, GROUP BY, and aggregations.
-        Example Payload:
-        {
-            "table": "my_table",
-            "columns": ["id", "name"],
-            "filters": [{"type": "where", "column": "status", "value": "active"}],
-            "group_by": ["column1", "column2"],
-            "aggregations": [
-                {"func": "COUNT", "column": "*", "alias": "record_count"},
-                {"func": "AVG", "column": "price", "alias": "avg_price"}
-            ],
-            "order_by": {"column": "id", "direction": "ASC"},
-            "pagination": {"page": 1, "page_size": 10}
-        }
+        Retrieves a list of records based on a list of primary IDs.
         """
         try:
-            table_name = payload.get("table")
-            if not table_name:
-                return {"error": "Table name is required"}
+            if not isinstance(id_list, list) or not id_list:
+                return {"success": True, "data": []}
 
-            service = self.db_service.table(table_name)
+            # Use the builder's 'in_where' for an efficient query
+            records = self.db_service.table(
+                table).in_where("primary_id", id_list).get()
 
-            # Handle column selection
-            columns = payload.get("columns", [])
-            if columns:
-                service = service.select(*columns)
-
-            # Handle filters
-            filters = payload.get("filters", [])
-            for filter_obj in filters:
-                filter_type = filter_obj["type"]
-                column = filter_obj["column"]
-                value = filter_obj["value"]
-                if filter_type == "where":
-                    service = service.where(column, value)
-                elif filter_type == "orWhere":
-                    service = service.orWhere(column, value)
-                elif filter_type == "likeWhere":
-                    service = service.likeWhere(column, value)
-                elif filter_type == "inWhere":
-                    service = service.inWhere(column, value)
-                elif filter_type == "betweenWhere":
-                    service = service.betweenWhere(column, value[0], value[1])
-
-            # Handle GROUP BY
-            group_by = payload.get("group_by", [])
-            if group_by:
-                service = service.groupBy(*group_by)
-
-            # Handle aggregations
-            aggregations = payload.get("aggregations", [])
-            for agg in aggregations:
-                func = agg["func"]
-                column = agg["column"]
-                alias = agg.get("alias")
-                service = service.add_aggregation(func, column, alias)
-
-            # Handle order by
-            order_by = payload.get("order_by", {})
-            if order_by:
-                service = service.orderBy(order_by["column"], order_by.get("direction", "ASC"))
-
-            # Handle pagination
-            pagination = payload.get("pagination", {})
-            if pagination:
-                service = service.paginate(pagination.get("page", 1), pagination.get("page_size", 10))
-
-            # Execute query and return results
-            return {"success": True, "data": service.get()}
+            return {"success": True, "data": records}
         except Exception as e:
             return {"error": str(e)}
 
-    def read_with_raw_input(
-            self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False
-        ):
-            """
-            Read records using raw input data with support for additional conditions.
-
-            :param raw_input: Dictionary where keys are column names and values are lists of terms.
-            :param table: Table name.
-            :param columns: List of columns to select or '*' for all columns.
-            :param pagination: Dictionary with `page` and `page_size`.
-            :param order_by: Tuple with column name and direction.
-            :param additional_conditions: List of dictionaries specifying conditions and types.
-            :param return_sql: Boolean indicating if the generated SQL query should be returned.
-            :return: Dictionary with results or error message, optionally includes the SQL query.
-            """
-            try:
-                # Default raw_input to an empty dictionary if None
-                raw_input = raw_input or {}
-
-                # Validate and build the query
-                query, params = QueryHelper.build_query(
-                    raw_input, table, order_by=order_by, pagination=pagination, additional_conditions=additional_conditions
-                )
-
-                # If return_sql is True, return the query string
-                if return_sql:
-                    formatted_query = query
-                    for key, value in params.items():
-                        placeholder = f":{key}"
-                        if isinstance(value, str):
-                            value = f"'{value}'"  # Add quotes for string values
-                        formatted_query = formatted_query.replace(placeholder, str(value))
-                    return {"success": True, "sql": formatted_query}
-
-                # Pass the query and params to PostgresService
-                self.db_service._table = table
-
-                # Handle column selection
-                if columns == "*":
-                    self.db_service._columns = "*"
-                elif isinstance(columns, list) and columns:
-                    valid_columns = [col for col in columns if isinstance(col, str) and col.isidentifier()]
-                    if not valid_columns:
-                        raise ValueError("Invalid columns provided for selection.")
-                    self.db_service.select(*valid_columns)
-                else:
-                    raise ValueError("Columns must be '*' or a list of valid column names.")
-
-                # Handle where clauses
-                if " WHERE " in query:
-                    where_clause_part = query.split(" WHERE ", 1)[1].split(" ORDER BY ", 1)[0]
-                    self.db_service._where_clauses = where_clause_part.split(" AND ")
-                else:
-                    self.db_service._where_clauses = []
-
-                self.db_service._params = params
-
-                # Handle pagination
-                if pagination:
-                    page = pagination.get("page", 1)
-                    page_size = pagination.get("page_size", 10)
-                    self.db_service._limit = page_size
-                    self.db_service._offset = (page - 1) * page_size
-
-                # Execute the query
-                records = self.db_service.execute()
-                
-                # Full list of fields to extract
-                fields_to_extract = [
-                    "topic__HASH__acceptance__HASH__kaa", "topic__HASH__adm__HASH__adm",
-                    "topic__HASH__coverage__HASH__cov", "topic__HASH__eco__HASH__eco",
-                    "topic__HASH__ethical__issues__HASH__eth", "topic__HASH__modeling__HASH__mod",
-                    "topic__HASH__risk__factor__HASH__rf", "topic__HASH__safety__HASH__saf",
-                    "intervention__HASH__vaccine__options__HASH__adjuvants", "intervention__HASH__vaccine__options__HASH__biva",
-                    "intervention__HASH__vaccine__options__HASH__live", "intervention__HASH__vaccine__options__HASH__quad",
-                    "intervention__HASH__vpd__HASH__diph", "intervention__HASH__vpd__HASH__hb",
-                    "intervention__HASH__vpd__HASH__hiv", "intervention__HASH__vpd__HASH__hpv",
-                    "intervention__HASH__vpd__HASH__infl", "intervention__HASH__vpd__HASH__meas",
-                    "intervention__HASH__vpd__HASH__meni", "intervention__HASH__vpd__HASH__tetanus",
-                    "popu__HASH__age__group__HASH__ado_10__17", "popu__HASH__age__group__HASH__adu_18__64",
-                    "popu__HASH__age__group__HASH__chi_2__9", "popu__HASH__age__group__HASH__eld_65__10000",
-                    "popu__HASH__age__group__HASH__nb_0__1", "popu__HASH__immune__status__HASH__hty",
-                    "popu__HASH__specific__group__HASH__hcw", "popu__HASH__specific__group__HASH__pcg",
-                    "popu__HASH__specific__group__HASH__pw"
-                ]
-
-                # Dynamically categorize fields into two groups
-                group_1_fields = [field for field in fields_to_extract if field.startswith("intervention__HASH__vpd__HASH") or field.startswith("topic__HASH__coverage__HASH")]
-                group_2_fields = [field for field in fields_to_extract if field not in group_1_fields]
-
-                for record in records:
-                    if not record:
-                        continue  
-
-                    extracted_group_1_values = []
-                    extracted_group_2_values = []
-
-                    # Extract values for Group 1
-                    for field in group_1_fields:
-                        if field in record and record[field]:
-                            values = [
-                                str(v).split(":")[-1].strip()
-                                for v in str(record[field]).split(",")
-                                if ":" in str(v)
-                            ]
-                            extracted_group_1_values.extend(values)
-
-                    # Extract values for Group 2
-                    for field in group_2_fields:
-                        if field in record and record[field]:
-                            values = [
-                                str(v).split(":")[-1].strip()
-                                for v in str(record[field]).split(",")
-                                if ":" in str(v)
-                            ]
-                            extracted_group_2_values.extend(values)
-
-                    extracted_group_1_values = list(filter(None, set(extracted_group_1_values)))
-                    extracted_group_2_values = list(filter(None, set(extracted_group_2_values)))
-
-                    # Add new fields
-                    record["research_notes"] = ", ".join(extracted_group_1_values)  # Notes for Group 1
-                    record["notes"] = ", ".join(extracted_group_2_values)  # Notes for Group 2
-
-                # Handle COUNT query for pagination
-                total_records = None
-                if pagination:
-                    count_query, count_params = QueryHelper.build_count_query(
-                        raw_input, table, additional_conditions=additional_conditions
-                    )
-                    if " WHERE " in count_query:
-                        count_where_clause = count_query.split(" WHERE ", 1)[1]
-                        self.db_service._where_clauses = count_where_clause.split(" AND ")
-                    else:
-                        self.db_service._where_clauses = []
-                    self.db_service._params = count_params
-
-                    total_records = self.db_service.get_total_records()
-                    total_pages = -(-total_records // pagination["page_size"])  # Ceil division
-
-                    return {
-                        "success": True,
-                        "data": records,
-                        "pagination": {
-                            "total_records": total_records,
-                            "total_pages": total_pages,
-                            "current_page": pagination["page"],
-                            "page_size": pagination["page_size"]
-                        }
-                    }
-
-                return {"success": True, "data": records}
-            except Exception as e:
-                import traceback
-                traceback.print_exc()
-                return {"error": str(e)}
+    def read(self, payload):
+        try:
+            builder = self._build_from_payload(payload)
+            return {"success": True, "data": builder.get()}
+        except Exception as e:
+            return {"error": str(e)}
 
     def update(self, payload):
-        """
-        Update an existing record in the specified table.
-        Example Payload:
-        {
-            "table": "my_table",
-            "record_id": 1,
-            "data": {"status": "inactive"}
-        }
-        """
         try:
-            table_name = payload.get("table")
-            record_id = payload.get("record_id")
-            data = payload.get("data")
-            if not table_name or not record_id or not data:
-                return {"error": "Table name, record ID, and data are required"}
-
-            success = self.db_service.table(table_name).update_record(record_id, data)
-            return {"success": success, "message": "Record updated successfully"} if success else {"error": "Failed to update record"}
+            table, record_id, data = payload.get(
+                "table"), payload.get("record_id"), payload.get("data")
+            if not all([table, record_id, data]):
+                return {"error": "Table, record ID, and data are required"}
+            self.db_service.table(table).update_record(record_id, data)
+            return {"success": True, "message": "Record updated successfully"}
         except Exception as e:
             return {"error": str(e)}
 
     def delete(self, payload):
-        """
-        Delete a record from the specified table.
-        Example Payload:
-        {
-            "table": "my_table",
-            "record_id": 1
-        }
-        """
         try:
-            table_name = payload.get("table")
-            record_id = payload.get("record_id")
-            if not table_name or not record_id:
-                return {"error": "Table name and record ID are required"}
-
-            success = self.db_service.table(table_name).delete_record(record_id)
-            return {"success": success, "message": "Record deleted successfully"} if success else {"error": "Failed to delete record"}
+            table, record_id = payload.get("table"), payload.get("record_id")
+            if not all([table, record_id]):
+                return {"error": "Table and record ID are required"}
+            self.db_service.table(table).delete_record(record_id)
+            return {"success": True, "message": "Record deleted successfully"}
         except Exception as e:
             return {"error": str(e)}
 
+    def read_with_raw_input(self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False):
+        """
+        Builds a query from various arguments by converting them into a standard payload,
+        then executes the query and performs all necessary post-processing.
+        """
+        try:
+            # 1. Assemble the standard payload from the method's arguments.
+            payload = {
+                "table": table,
+                "filters": []
+            }
+            if columns != "*":
+                payload["columns"] = columns
+            if pagination:
+                payload["pagination"] = pagination
+            if order_by:
+                payload["order_by"] = {
+                    "column": order_by[0], "direction": order_by[1]}
+
+            # 2. Convert the `raw_input` dict into the standard filter format.
+            for col, vals in (raw_input or {}).items():
+                if len(vals) > 1:
+                    payload["filters"].append(
+                        {"type": "inwhere", "column": col, "value": vals})
+                else:
+                    payload["filters"].append(
+                        {"type": "where", "column": col, "value": vals[0]})
+
+            # 3. Add any other conditions to the filters list.
+            if additional_conditions:
+                payload["filters"].extend(additional_conditions)
+
+            # 4. Use the single, central helper to build the query.
+            builder = self._build_from_payload(payload)
+
+            # 5. Handle the option to return the SQL query for debugging.
+            # print(builder.show_sql())
+            if return_sql:
+                return {"success": True, "sql": builder.show_sql()}
+
+            # 6. Execute the query.
+            result = builder.get()
+            # Handles both paginated and non-paginated results.
+            records = result.get('records', result)
+
+            # 7. Perform post-processing to create the notes fields.
+            fields_to_extract = [
+                "topic__HASH__acceptance__HASH__kaa", "topic__HASH__adm__HASH__adm", "topic__HASH__coverage__HASH__cov", "topic__HASH__eco__HASH__eco",
+                "topic__HASH__ethical__issues__HASH__eth", "topic__HASH__modeling__HASH__mod", "topic__HASH__risk__factor__HASH__rf", "topic__HASH__safety__HASH__saf",
+                "intervention__HASH__vaccine__options__HASH__adjuvants", "intervention__HASH__vaccine__options__HASH__biva", "intervention__HASH__vaccine__options__HASH__live",
+                "intervention__HASH__vaccine__options__HASH__quad", "intervention__HASH__vpd__HASH__diph", "intervention__HASH__vpd__HASH__hb", "intervention__HASH__vpd__HASH__hiv",
+                "intervention__HASH__vpd__HASH__hpv", "intervention__HASH__vpd__HASH__infl", "intervention__HASH__vpd__HASH__meas", "intervention__HASH__vpd__HASH__meni",
+                "intervention__HASH__vpd__HASH__tetanus", "popu__HASH__age__group__HASH__ado_10__17", "popu__HASH__age__group__HASH__adu_18__64",
+                "popu__HASH__age__group__HASH__chi_2__9", "popu__HASH__age__group__HASH__eld_65__10000", "popu__HASH__age__group__HASH__nb_0__1", "popu__HASH__immune__status__HASH__hty",
+                "popu__HASH__specific__group__HASH__hcw", "popu__HASH__specific__group__HASH__pcg", "popu__HASH__specific__group__HASH__pw"
+            ]
+            group_1_fields = [f for f in fields_to_extract if f.startswith(
+                "intervention__HASH__vpd__HASH") or f.startswith("topic__HASH__coverage__HASH")]
+            group_2_fields = [
+                f for f in fields_to_extract if f not in group_1_fields]
+
+            for record in records:
+                if not record:
+                    continue
+
+                def extract_values(fields):
+                    values = []
+                    for field in fields:
+                        if field in record and record[field]:
+                            # Ensure value is treated as a string before splitting
+                            values.extend([str(v).split(
+                                ":")[-1].strip() for v in str(record[field]).split(",") if ":" in str(v)])
+                    return list(filter(None, set(values)))
+
+                record["research_notes"] = ", ".join(
+                    extract_values(group_1_fields))
+                record["notes"] = ", ".join(extract_values(group_2_fields))
+
+            # 8. Return the final, processed data.
+            return {"success": True, "data": result}
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return {"error": str(e)}
+
+    # --- Utility and Business Logic Methods ---
     def show_sql(self, payload):
-        """
-        Build and return the SQL query string without executing it.
-        Example Payload:
-        {
-            "table": "my_table",
-            "columns": ["id", "name"],
-            "filters": [{"type": "where", "column": "status", "value": "active"}],
-            "order_by": {"column": "id", "direction": "ASC"},
-            "pagination": {"page": 1, "page_size": 10}
-        }
-        """
         try:
-            table_name = payload.get("table")
-            if not table_name:
-                return {"error": "Table name is required"}
-
-            service = self.db_service.from_json(payload)
-
-            # Generate and return the SQL query as a string
-            sql_query = service.build_query()
-            params = service._params  # Access the query parameters
-
-            # Replace placeholders with actual values
-            for key, value in params.items():
-                placeholder = f":{key}"
-                if isinstance(value, str):
-                    value = f"'{value}'"  # Add quotes for strings
-                sql_query = sql_query.replace(placeholder, str(value))
-
-            return {"success": True, "query": sql_query}
+            builder = self._build_from_payload(payload)
+            return {"success": True, "query": builder.show_sql()}
         except Exception as e:
             return {"error": str(e)}
-        
+
     def get_columns_from_table(self, payload):
-        """
-        Fetch and return the columns for a specified table.
-        
-        Example Payload:
-        {
-            "table": "my_table"
-        }
-        """
         table_name = payload.get("table")
         if not table_name:
             return {"error": "Table name is required"}
-        
-        columns = self.db_service.get_column_names(table_name)
-        if "error" in columns:
-            return columns 
-        
-        return columns
-    
+        return self.db_service.get_column_names(table_name)
+
     def process_columns_with_hash(self, filtered_columns, searchRegEx):
-        """
-        Processes a list of columns containing '__HASH__' into a structured dictionary,
-        integrating synonyms and additional context from searchRegEx.
-
-        :param filtered_columns: List of column names containing '__HASH__'.
-        :param searchRegEx: Dictionary with predefined synonyms for certain categories, subgroups, and values.
-        :return: Structured dictionary of categories, subgroups, and values.
-        """
-        # Initialize a nested dictionary to structure the data
+        # This method contains business logic and remains unchanged internally.
         structured_data = defaultdict(lambda: defaultdict(dict))
-
-        # Process the list of columns
         for column in filtered_columns:
-            # Split the column using "__HASH__"
             parts = column.split("__HASH__")
             if len(parts) == 3:
                 category, subgroup, value = parts
-
-                # Check for corrections in the regex data
                 corrected_value = value
                 if category in searchRegEx and subgroup in searchRegEx[category]:
                     for key in searchRegEx[category][subgroup]:
-                        # Correct the value if a close match exists in searchRegEx
                         if key.lower().startswith(value.lower()):
                             corrected_value = key
                             break
-
-                # Fetch synonyms from searchRegEx if available
                 synonyms = []
                 if category in searchRegEx and subgroup in searchRegEx[category]:
-                    tuple_vals = searchRegEx[category][subgroup].get(corrected_value, [])
-                    synonyms = [f"{item[0]}:{item[1]}" for item in tuple_vals if isinstance(item, tuple) and len(item) == 2]
-                    
-
-                # Ensure display value is included in synonyms
+                    tuple_vals = searchRegEx[category][subgroup].get(
+                        corrected_value, [])
+                    synonyms = [f"{item[0]}:{item[1]}" for item in tuple_vals if isinstance(
+                        item, tuple) and len(item) == 2]
                 if corrected_value not in synonyms:
                     synonyms.append(corrected_value)
-
-                # Initialize with display, synonyms, and additional details
                 structured_data[category][subgroup][corrected_value] = {
-                    "display": corrected_value,  # Corrected display name
-                    "synonyms": synonyms,  # Include display value if not already in synonyms
-                    "additional_context": None  # Placeholder for additional metadata
+                    "display": corrected_value,
+                    "synonyms": synonyms,
+                    "additional_context": None
                 }
-        
         data = {key: dict(value) for key, value in structured_data.items()}
-        # Normalize the response
         normalizer = APIResponseNormalizer()
         normalized_response = normalizer.normalize_response(data)
-        # print(normalized_response)
-        # Convert to a standard dictionary for output
         return {"success": True, "data": normalized_response}
-    
+
     def map_user_selection_to_column(self, user_selections):
-        """
-        Maps a user's selection to the corresponding column name for database search.
-
-        :param user_selection: The term or keyword selected by the user (e.g., "efficacy").
-        :param structured_data: The structured dictionary containing mappings of display values and synonyms.
-        :return: The original column name from filtered_columns or None if no match is found.
-        """
+        # This orchestrator method remains unchanged internally.
         filtered_columns = self.get_columns_from_table({"table": "all_db"})
-        structured_data = self.process_columns_with_hash(filtered_columns, searchRegEx).get("data", {})
-        
+        structured_data = self.process_columns_with_hash(
+            filtered_columns, searchRegEx).get("data", {})
         result = {}
-
         for user_selection in user_selections:
             user_selection_lower = user_selection.lower()
             matched = False
-
-            # Iterate through the structured data to find the matching value
             for category, subgroups in structured_data.items():
                 for subgroup, values in subgroups.items():
                     for value, details in values.items():
-                        # Check if the user input matches the display or any synonym
                         if user_selection_lower == details["display"].lower() or user_selection_lower in [syn.lower() for syn in details["synonyms"]]:
-                            # Construct the column name from category, subgroup, and value
-                            constructed_column = f"{category}__HASH__{subgroup}__HASH__{value}"
-
-                            # Truncate the constructed column name to 63 characters if needed
-                            if len(constructed_column) > 63:
-                                constructed_column = constructed_column[:63]
-
-                            # Validate that the constructed column exists in the filtered_columns
+                            constructed_column = f"{category}__HASH__{subgroup}__HASH__{value}"[
+                                :63]
                             if constructed_column in filtered_columns:
-                                # Add the user_selection to the corresponding constructed_column key in the result dictionary
                                 if constructed_column not in result:
                                     result[constructed_column] = []
-                                result[constructed_column].append(user_selection)
+                                result[constructed_column].append(
+                                    user_selection)
                                 matched = True
                                 break
-
                     if matched:
                         break
                 if matched:
                     break
-
         return {"success": True, "data": result}
-    
+
     def get_summary_statistics(self):
-        return self.db_service.get_summary_statistics()
-    
+        # Assumes get_summary_statistics is part of your PostgresService
+        # If not, you would build the queries here using the builder.
+        if hasattr(self.chart_service, 'get_summary_statistics'):
+            return self.chart_service.get_summary_statistics()
+        return {"error": "get_summary_statistics not implemented in service"}
+
     def get_other_filters(self):
-        table_name = "region_country"
-        unique_region_items = self.db_service.get_unique_items_from_column(table_name, "region")
-        unique_country_items = self.db_service.get_unique_items_from_column(table_name, "country")
-        unique_languages_items = preprocess_languages(self.db_service.get_unique_items_from_column("all_db", "Language"))
-        unique_year_items = self.db_service.get_unique_items_from_column("all_db", "Year")
-        return unique_region_items, unique_country_items, unique_languages_items, unique_year_items
+        """
+        Fetches distinct values for filter dropdowns, removing any None/NULL values
+        and gracefully handling cases where a table might not exist.
+        """
+        unique_region, unique_country = [], []  # Default to empty lists
+
+        try:
+            # Attempt to get data from the 'region_country' table
+            regions_raw = self.db_service.get_unique_items_from_column(
+                "region_country", "region")
+            countries_raw = self.db_service.get_unique_items_from_column(
+                "region_country", "country")
+            # Filter out None values
+            unique_region = [r for r in regions_raw if r is not None]
+            unique_country = [c for c in countries_raw if c is not None]
+        except Exception as e:
+            # If an error occurs (e.g., table not found), log it and continue
+            logging.warning(f"Could not fetch region/country filters: {e}")
+            # unique_region and unique_country will remain as empty lists
+
+        # These calls will run regardless of the try block's success
+        languages_raw = self.db_service.get_unique_items_from_column(
+            "all_db", "language")
+        years_raw = self.db_service.get_unique_items_from_column(
+            "all_db", "year")
+
+        # Filter out None and perform any additional processing
+        unique_languages = [lang for lang in languages_raw if lang is not None]
+        unique_year = [y for y in years_raw if y is not None]
+        processed_languages = preprocess_languages(unique_languages)
+        # print(unique_region, unique_country, processed_languages, unique_year)
+        return unique_region, unique_country, processed_languages, unique_year

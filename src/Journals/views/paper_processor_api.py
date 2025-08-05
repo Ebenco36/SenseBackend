@@ -12,7 +12,7 @@ class PaperProcessorAPI(Resource):
         # Initialize the pipeline and database handler
         self.pipeline = PaperProcessorPipeline(
             table_name='all_db',
-            column_mapping={'Id': 'primary_id'}
+            column_mapping={'id': 'primary_id'}
         )
         self.db_handler = DatabaseHandler()
 
@@ -40,8 +40,8 @@ class PaperProcessorAPI(Resource):
 
             # Validate the CSV structure
             required_columns = [
-                "Authors", "Year", "Title", "DOI", "Open Access", "Abstract",
-                "Id", "Source", "Language", "Country", "Database", "Journal"
+                "authors", "year", "title", "doi", "open_access", "abstract",
+                "id", "source", "language", "country", "database", "journal"
             ]
             missing_columns = [col for col in required_columns if col not in data.columns]
             if missing_columns:

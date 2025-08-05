@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import spacy
@@ -8,18 +9,21 @@ from word2number import w2n
 from typing import List, Tuple, Dict
 from dateutil.parser import parse
 from collections import defaultdict
+from src.Commands.NERInference import NERTester, run_ner_inference
 from src.Services.Factories.Sections.SectionExtractor import SectionExtractor
 from src.Utils.Helpers import clean_references
 from transformers import pipeline, AutoModelForQuestionAnswering, AutoTokenizer
 from typing import Optional, List, Dict
+from src.Commands.regexp import searchRegEx
 from src.Commands.Amstar2 import Amstar2
+
 
 class Tagging:
     def __init__(self, document, model_path: str = "./models/tinyroberta"):
         self.document = clean_references(document)
         self.sections = SectionExtractor(self.document)
         self.result_columns = defaultdict(list)
-        # init 
+        # init
         self.countries = [
             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria",
             "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
@@ -51,7 +55,7 @@ class Tagging:
             "Southeast Asia", "East Asia", "South Asia", "Central Asia", "Western Europe", "Eastern Europe", "Latin America",
             "Caribbean", "Pacific Islands"
         ]
-        
+
         self.keywords = [
             "effectiveness", "impact of", "effectiveness of", "efficacy", "VE", "CI", "RR", "OR", "odds ratios",
             "odds ratio OR", "odds ratios ORs", "IRR", "relative risksRR", "relative risks", "efficacy rate",
@@ -91,111 +95,15 @@ class Tagging:
             "Project MUSE", "Physiotherapy Evidence"
         ]
 
-        # Study type patterns and questions
-        self.study_config = {
-            "rct": {
-                "patterns": [
-                    r"\bRCTs?\b",
-                    r"\brandomi[sz]ed controlled trials?\b",
-                    r"\bclinical trials?\b",
-                    r"\bdouble-blind studies?\b"
-                ],
-                "questions": [
-                    "How many randomized controlled trials were included?",
-                    "Number of RCTs in this review?"
-                ]
-            },
-            "nrsi": {
-                "patterns": [
-                    r"\bobservational studies?\b",
-                    r"\bcohort studies?\b",
-                    r"\bcase-control studies?\b",
-                    r"\bcross-sectional studies?\b"
-                ],
-                "questions": [
-                    "How many observational studies were included?",
-                    "Number of non-randomized studies?"
-                ]
-            },
-            "quanti": {
-                "patterns": [
-                    r"\bqualitative studies?\b",
-                    r"\bfocus groups?\b"
-                ],
-                "questions": [
-                    "How many qualitative studies were included?",
-                    "Number of focus group studies?"
-                ]
-            },
-            "mmtd": {
-                "patterns": [
-                    r"\bmixed methods?\b"
-                ],
-                "questions": [
-                    "How many mixed methods studies were included?"
-                ]
-            }
-        }
-
-        self.qa_pipeline = pipeline(
-            "question-answering",
-            model=AutoModelForQuestionAnswering.from_pretrained(model_path),
-            tokenizer=AutoTokenizer.from_pretrained(model_path)
-        )
-
-        self.QUESTION_TEMPLATES = {
-            "total_studies": [
-                "How many records were identified?",
-                "What is the total number of articles retrieved?",
-                "How many search results were found?",
-                "How many publications were located from databases?",
-                "What was the total yield from the initial search?",
-                "How many potentially relevant records?"
-            ],
-            "duplicates": [
-                "How many duplicates were removed?",
-                "How many duplicate records were excluded?",
-                "How many duplicate entries were found?",
-                "What number of records were removed as duplicates?",
-                "How many were eliminated due to duplication?"
-            ],
-            "screened": [
-                "How many records were screened?",
-                "How many articles underwent screening?",
-                "How many titles and abstracts were reviewed?",
-                "What number of documents were screened?",
-                "How many records were reviewed for relevance?"
-            ],
-            "eligible": [
-                "How many were assessed for eligibility?",
-                "How many full-text articles were reviewed?",
-                "How many met the eligibility criteria?",
-                "How many were considered eligible?",
-                "How many full texts were retrieved for assessment?"
-            ],
-            "excluded": [
-                "How many studies were excluded?",
-                "How many articles did not meet criteria?",
-                "How many were not eligible?",
-                "How many were removed after full-text review?",
-                "What number of studies were excluded from review?"
-            ],
-            "included": [
-                "How many studies were included in the final analysis?",
-                "How many were included in the review?",
-                "How many studies were selected for inclusion?",
-                "How many studies were deemed relevant?"
-            ]
-        }
-
-    def get_combined_text(self, sections:List):
-        contents = " ".join(self.sections.get(section, "") for section in sections).strip()
+    def get_combined_text(self, sections: List):
+        contents = " ".join(self.sections.get(section, "")
+                            for section in sections).strip()
         if contents and contents != "":
             return contents
         else:
             return self.document
 
-    def create_columns_from_text(self, searchRegEx):
+    def create_columns_from_text(self):
         """Main function to apply tagging based on the extensive regex structure provided."""
         for category, subcategories in searchRegEx.items():
             for subcategory, terms_dict in subcategories.items():
@@ -203,82 +111,90 @@ class Tagging:
                     column_name = f"{category}#{subcategory}#{term_key}"
                     countries, total_count = self.extract_countries_with_total_count()
                     if category == "popu" and subcategory == "age__group":
-                        self.result_columns[column_name] = self.process_age_group(term_key, term_list)
+                        self.result_columns[column_name] = self.process_age_group(
+                            term_key, term_list)
                     elif category == "studies" and (subcategory == "studie__no" or subcategory == "rct"):
-                        self.result_columns[column_name], total_study_count, total_rct_count, raw_rct_counts, total_nrsi_count, total_mmtd_count, total_quanti_count, fixed_counts = self.process_study_count(term_list)
-                        self.result_columns["study_types"] = self.extract_study_types(term_list)
+                        self.result_columns[column_name], total_study_count, total_rct_count, raw_rct_counts, total_nrsi_count, total_mmtd_count, total_quanti_count = self.process_study_count(
+                            term_list)
+                        self.result_columns["study_types"] = self.extract_study_types(
+                            term_list)
                         self.result_columns["total_study_count"] = total_study_count
                         self.result_columns["total_rct_count"] = total_rct_count
                         self.result_columns["RCT_counts"] = raw_rct_counts
-                        self.result_columns["inclusions_exclusions"] = fixed_counts
-                        
+
                         self.result_columns["total_nrsi_count"] = total_nrsi_count
                         self.result_columns["total_mmtd_count"] = total_mmtd_count
                         self.result_columns["total_quanti_count"] = total_quanti_count
                     elif category == "gender" and subcategory == "group":
-                        self.result_columns[column_name] = self.process_sex_distribution(term_list)
+                        pass
                     elif category == "topic" and subcategory == "eff":
-                        self.result_columns[column_name] = self.extract_ve_related_info(term_list)
+                        self.result_columns[column_name] = self.extract_ve_related_info(
+                            term_list)
                     elif category == "particip" and subcategory == "group":
-                        self.result_columns[column_name] = self.extract_population(term_list)
+                        self.result_columns[column_name] = self.extract_population(
+                            term_list)
                     elif category == "lit_search_dates" and subcategory == "dates":
-                        self.result_columns[column_name] = self.extract_last_literature_search_dates()
+                        self.result_columns[column_name] = self.extract_last_literature_search_dates(
+                        )
                     elif category == 'open_acc' and subcategory == "opn_access":
-                        self.result_columns[column_name] = self.is_open_access(term_list)
+                        self.result_columns[column_name] = self.is_open_access(
+                            term_list)
                     elif (category == 'study_country' and subcategory == "countries"):
                         self.result_columns[column_name] = countries
                     elif (category == 'study_country' and subcategory == "study_count"):
                         self.result_columns[column_name] = total_count
                     elif (category == 'title_popu' and subcategory == "title_pop"):
-                        self.result_columns[column_name] = self.extract_population_from_title(term_list)
+                        self.result_columns[column_name] = self.extract_population_from_title(
+                            term_list)
                         title_metadata = self.extract_title_metadata()
-                        self.result_columns["location_in_title"] = title_metadata.get("location", None)
-                        self.result_columns["race_ethnicity_in_title"] = title_metadata.get("race_ethnicity", None)
-                        self.result_columns["target_population_in_title"] = title_metadata.get("target_population", None)
-                        self.result_columns["topic_in_title"] = title_metadata.get("topic", None)
-                        self.result_columns["num_databases"] = int(title_metadata.get("num_databases", 0))
-                        self.result_columns["duration_of_intervention"] = title_metadata.get("duration_of_intervention", None)
-                        self.result_columns["dosage"] = title_metadata.get("dosage", None)
-                        self.result_columns["comparator"] = title_metadata.get("comparator", None)
-
+                        self.result_columns["location_in_title"] = title_metadata.get(
+                            "location", None)
+                        self.result_columns["race_ethnicity_in_title"] = title_metadata.get(
+                            "race_ethnicity", None)
+                        self.result_columns["target_population_in_title"] = title_metadata.get(
+                            "target_population", None)
+                        self.result_columns["topic_in_title"] = title_metadata.get(
+                            "topic", None)
+                        self.result_columns["num_databases"] = int(
+                            title_metadata.get("num_databases", 0))
+                        self.result_columns["duration_of_intervention"] = title_metadata.get(
+                            "duration_of_intervention", None)
+                        self.result_columns["dosage"] = title_metadata.get(
+                            "dosage", None)
+                        self.result_columns["comparator"] = title_metadata.get(
+                            "comparator", None)
                         # new database
-                        self.result_columns["database_list"], self.result_columns["database_count"] =  self.extract_databases()
+                        self.result_columns["database_list"], self.result_columns["database_count"] = self.extract_databases()
+                        
+                        self.result_columns["bert_integration"] = self.pubmed_bert_integration(self.document)
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
-        self.result_columns["review_type"] = self.extract_review_type()
-        self.result_columns["funding_other_bias"] = self.extract_bias_and_funding_info()
-        self.result_columns["extract_study_counts"] = self.extract_study_counts(self.get_combined_text(["main_content"]))
-
         ################# Merge Dict Together ######################
-        amstars_integration = self.amstar2_integration()
-        # self.result_columns = {**self.result_columns, **amstars_integration}
-        self.result_columns.update(amstars_integration)
-        # print(self.clean_result(self.result_columns))
+        # amstars_integration = self.amstar2_integration()
+        # # self.result_columns = {**self.result_columns, **amstars_integration}
+        # self.result_columns.update(amstars_integration)
+        # # print(self.clean_result(self.result_columns))
         return self.clean_result(self.result_columns)
 
-
-    def load_effect_extraction_model(self):
-        try:
-            return spacy.load("en_core_sci_lg")
-        except:
-            return spacy.load("en_core_web_sm")
-    
     def extract_num_databases_old(self, text):
-        match = re.search(r'(\d+)\s+(?:databases|sources|electronic databases|data sources)', text, re.IGNORECASE)
+        match = re.search(
+            r'(\d+)\s+(?:databases|sources|electronic databases|data sources)', text, re.IGNORECASE)
         return int(match.group(1)) if match else 0
-    
+
     def extract_duration_of_intervention_old(self, text):
-        match = re.search(r'duration of (\d+\s*(?:weeks|months|years))', text, re.IGNORECASE)
+        match = re.search(
+            r'duration of (\d+\s*(?:weeks|months|years))', text, re.IGNORECASE)
         return match.group(1) if match else ""
-    
+
     def extract_dosage_old(self, text):
-        match = re.search(r'(\d+\s*(?:mg|ml|g|mcg|IU))\s+(?:dose|doses|dosage)', text, re.IGNORECASE)
+        match = re.search(
+            r'(\d+\s*(?:mg|ml|g|mcg|IU))\s+(?:dose|doses|dosage)', text, re.IGNORECASE)
         return match.group(1) if match else ""
-    
+
     def extract_comparator_old(self, text):
         match = re.search(r'compared to ([A-Za-z ,-]+)', text, re.IGNORECASE)
         return match.group(1) if match else ""
-    
+
     def extract_number(self, text: str) -> int:
         # Try digit-based match first
         digit_match = re.search(r"\b\d+\b", text)
@@ -291,63 +207,59 @@ class Tagging:
             return w2n.word_to_num(word_text)
         except Exception:
             return 0
-        
-    def extract_study_counts(self, context: str):
-        results = {}
 
-        for label, questions in self.QUESTION_TEMPLATES.items():
-            for question in questions:
-                try:
-                    answer = self.qa_pipeline(question=question, context=context)
-                    number = self.extract_number(answer['answer'])
-                    if number:
-                        results[label] = number
-                        break
-                except Exception:
-                    continue
-
-        return json.dumps(results)
-        
     def extract_title_metadata(self):
         text = self.get_combined_text(["title"])
         text2 = self.get_combined_text(["abstract", "results", "methods"])
         # Extract location (country)
-        location = next((place for place in self.countries + self.regions if re.search(rf'\b{re.escape(place)}\b', text, re.IGNORECASE)), "")
-        
+        location = next((place for place in self.countries + self.regions if re.search(
+            rf'\b{re.escape(place)}\b', text, re.IGNORECASE)), "")
+
         # Extract race/ethnicity (captures multiple matches)
-        race_ethnicity_matches = re.findall(r'\b(Black|White|Hispanic|Hispanic/Latino|Latino|Asian|Indigenous|Native American|Pacific Islander|Mixed race|Other)\b', text, re.IGNORECASE)
-        race_ethnicity = list(set(race_ethnicity_matches)) if race_ethnicity_matches else ""
-        
+        race_ethnicity_matches = re.findall(
+            r'\b(Black|White|Hispanic|Hispanic/Latino|Latino|Asian|Indigenous|Native American|Pacific Islander|Mixed race|Other)\b', text, re.IGNORECASE)
+        race_ethnicity = list(set(race_ethnicity_matches)
+                              ) if race_ethnicity_matches else ""
+
         # Extract target population (captures multiple groups)
         target_population_matches = re.findall(
             r'(?:people with|targeting|focused on|population of|participants were|among) ([A-Za-z0-9\- ]+)', text, re.IGNORECASE)
-        
+
         predefined_groups = [
             "pregnant women", "adolescents", "elderly", "children", "infants", "newborns", "patients with cancer",
             "diabetics", "immunocompromised individuals", "smokers", "non-smokers", "obese patients"
         ]
-        predefined_population_matches = [group for group in predefined_groups if re.search(rf'\b{group}\b', text, re.IGNORECASE)]
-        
-        target_population = list(set(target_population_matches + predefined_population_matches)) if target_population_matches or predefined_population_matches else ""
-        
+        predefined_population_matches = [group for group in predefined_groups if re.search(
+            rf'\b{group}\b', text, re.IGNORECASE)]
+
+        target_population = list(set(target_population_matches + predefined_population_matches)
+                                 ) if target_population_matches or predefined_population_matches else ""
+
         # Extract topic (handles multiple topics)
-        topic_matches = [keyword for keyword in self.keywords if re.search(rf'\b{re.escape(keyword)}\b', text, re.IGNORECASE)]
+        topic_matches = [keyword for keyword in self.keywords if re.search(
+            rf'\b{re.escape(keyword)}\b', text, re.IGNORECASE)]
         topic = list(set(topic_matches)) if topic_matches else ""
         num_db = self.extract_num_databases_old(text2)
         duration_inter = self.extract_duration_of_intervention_old(text2)
         dosage = self.extract_dosage_old(text2)
         comparator = self.extract_comparator_old(text2)
         return {
-            'location': location if location else self.extract_location_in_title(text),
-            'race_ethnicity': race_ethnicity if race_ethnicity else self.extract_race_ethnicity_in_title(text),
-            'target_population': target_population if target_population else self.extract_target_population_in_title(text),
-            'topic': topic if topic else self.extract_topic_in_title(text),
-            'num_databases': num_db if num_db else self.extract_num_databases(text2),
-            'duration_of_intervention': duration_inter if duration_inter else self.extract_duration_of_intervention(text2),
-            'dosage': dosage if dosage else self.extract_dosage(text2),
-            'comparator': comparator if comparator else self.extract_comparator(text2)
+            # if location else self.extract_location_in_title(text),
+            'location': location,
+            # if race_ethnicity else self.extract_race_ethnicity_in_title(text),
+            'race_ethnicity': race_ethnicity,
+            # if target_population else self.extract_target_population_in_title(text),
+            'target_population': target_population,
+            'topic': topic,  # if topic else self.extract_topic_in_title(text),
+            # if num_db else self.extract_num_databases(text2),
+            'num_databases': num_db,
+            # if duration_inter else self.extract_duration_of_intervention(text2),
+            'duration_of_intervention': duration_inter,
+            'dosage': dosage,  # if dosage else self.extract_dosage(text2),
+            # if comparator else self.extract_comparator(text2)
+            'comparator': comparator,
         }
-    
+
     def extract_population_from_title(self, term_lists):
         document = self.get_combined_text(["title"])
         # Create a regex pattern for keyword search (case-insensitive)
@@ -355,7 +267,7 @@ class Tagging:
         regex = re.compile(pattern, re.IGNORECASE)
         matches = regex.findall(document)
         return ", ".join(list(set(matches)))
-    
+
     def get_max_date(self, date_strings):
         parsed_dates = []
         for date_str in date_strings:
@@ -367,10 +279,10 @@ class Tagging:
                 parsed_dates.append((dt, date_str))
             except:
                 continue  # Skip invalid/unparseable dates
-        
+
         if not parsed_dates:
             return None  # Return None if no valid dates found
-        
+
         # Get the latest date (based on parsed datetime) and return its original string
         latest_date = max(parsed_dates, key=lambda x: x[0])
         return latest_date[1]
@@ -380,11 +292,13 @@ class Tagging:
         Extracts literature search dates from the given text.
         """
         # Combine text from the specified sections
-        document = self.get_combined_text(["abstract", "search_strategy", "methods"])
+        document = self.get_combined_text(
+            ["abstract", "search_strategy", "methods"])
         # with open("text.txt", 'w', encoding='utf-8') as file:
         #     file.write(self.get_combined_text(["search_strategy"]))
         if not document or not isinstance(document, str):
-            raise ValueError("The document content is empty or invalid. Please provide a valid string.")
+            raise ValueError(
+                "The document content is empty or invalid. Please provide a valid string.")
 
         # Define regex pattern for capturing dates
         pattern = r"""
@@ -408,8 +322,8 @@ class Tagging:
         dates = [match.group(1).strip() for match in matches if match.group(1)]
         # Deduplicate and sort the dates
         max_date = self.get_max_date(sorted(set(dates)))
-        return max_date if max_date else self.extract_last_search_date()
-    
+        return max_date  # if max_date else self.extract_last_search_date()
+
     def extract_population(self, tag_lists):
         """
         Extracts population data comprehensively from a given text.
@@ -426,7 +340,8 @@ class Tagging:
         """
         results = []
         seen = set()  # To store unique (indicator, populations) tuples
-        document = self.document # self.get_combined_text(["abstract", "methods", "results"])
+        # self.get_combined_text(["abstract", "methods", "results"])
+        document = self.document
         # Regex to match patterns where numbers come before participant-related keywords
         pattern = re.compile(
             rf"(\d[\d,]*)\s+({'|'.join(map(re.escape, [term for term, _ in tag_lists]))})\s*(?:\(([^)]+)\))?",
@@ -449,18 +364,21 @@ class Tagging:
 
             # Get the last 5 words before the match
             before_words = re.findall(r'\b\w+\b', before_context)
-            before_context_words = " ".join(before_words[-5:])  # Get the last 5 words
+            before_context_words = " ".join(
+                before_words[-5:])  # Get the last 5 words
 
             # Get the next 5 words after the match
             after_words = re.findall(r'\b\w+\b', after_context)
-            after_context_words = " ".join(after_words[:5])  # Get the next 5 words
+            after_context_words = " ".join(
+                after_words[:5])  # Get the next 5 words
 
             # Combine before and after context
-            context = f"{before_context_words} {match.group(0)} {after_context_words}".strip()
+            context = f"{before_context_words} {match.group(0)} {after_context_words}".strip(
+            )
 
             # Create a unique key for the current match
             unique_key = (indicator.lower(), numbers)
-            
+
             # Add to results only if unique
             if unique_key not in seen:
                 seen.add(unique_key)
@@ -470,7 +388,7 @@ class Tagging:
                     "type_of_participant": type_of_participant,
                     "context": context
                 })
-        
+
         return results
 
     def parse_participant_types(self, participant_type_str):
@@ -484,7 +402,8 @@ class Tagging:
             dict: Parsed subgroup details.
         """
         subgroups = {}
-        pattern = re.compile(r"([a-zA-Z\s\-]+)\s*=\s*(\d+)", flags=re.IGNORECASE)
+        pattern = re.compile(
+            r"([a-zA-Z\s\-]+)\s*=\s*(\d+)", flags=re.IGNORECASE)
         matches = pattern.findall(participant_type_str)
 
         for match in matches:
@@ -500,14 +419,17 @@ class Tagging:
         text_terms = []
         document = self.get_combined_text(["abstract", "methods", "results"])
         potential_age_ranges = self.find_potential_age_ranges()
-        found_age_ranges = self.age_range_search_algorithm(potential_age_ranges)
-        
+        found_age_ranges = self.age_range_search_algorithm(
+            potential_age_ranges)
+
         # Extract age range values from the key and find overlapping ranges
         age_values = list(map(int, re.findall(r'\d+', age_range_key)))
-        overlapping_ranges = self.find_overlapping_groups(age_values, found_age_ranges)
+        overlapping_ranges = self.find_overlapping_groups(
+            age_values, found_age_ranges)
 
         # Append each unique overlapping range as a list (avoid duplicates)
-        unique_ranges = {tuple(range_item) for range_item in overlapping_ranges}
+        unique_ranges = {tuple(range_item)
+                         for range_item in overlapping_ranges}
         age_matches.extend([list(rng) for rng in unique_ranges])
 
         # Add age range label text (formatted) as a single entry, if any ranges were found
@@ -522,7 +444,7 @@ class Tagging:
         # Append all unique text terms as a single list at the end of `age_matches`
         if text_terms:
             age_matches.append(list(set(text_terms)))
-        
+
         return age_matches
 
     def extract_aggregated_relevant_study_counts(self, document: str, inclusion_terms: list[str]) -> list[int]:
@@ -530,7 +452,8 @@ class Tagging:
         Extracts counts from multiple related clauses *only when contextually related to studies*.
         """
         relevant_counts = []
-        study_context = re.compile(r"(stud(?:y|ies)|trial|RCT|record|cohort|case[-\s]?control)", re.IGNORECASE)
+        study_context = re.compile(
+            r"(stud(?:y|ies)|trial|RCT|record|cohort|case[-\s]?control)", re.IGNORECASE)
         sentences = re.split(r'(?<=[\.\?!])\s+', document)
 
         for sent in sentences:
@@ -543,113 +466,6 @@ class Tagging:
                     relevant_counts.append(int(m))
 
         return relevant_counts
-
-    ##########################################################################################################
-    ########################### Pretrained Model Starts Here. Please Note ####################################
-    ##########################################################################################################
-    def extract_inclusion_exclusion_counts(self, context: str) -> dict:
-        results = {}
-
-        for label, questions in self.QUESTION_TEMPLATES.items():
-            for question in questions:
-                try:
-                    answer = self.qa_pipeline(question=question, context=context)
-                    if answer and any(char.isdigit() for char in answer['answer']):
-                        # Clean to get just the number
-                        number_match = re.search(r'\d+', answer['answer'])
-                        if number_match:
-                            results[label] = int(number_match.group(0))
-                            break
-                except Exception as e:
-                    continue
-
-        return json.dumps(results)
-
-    def extract_inclusion_exclusion_countsss(self, text):
-        """
-        Extracts study flow numbers from text using spaCy NLP, based on presence of keywords around numerical values.
-        Returns a dictionary with estimated values for key steps like identified, screened, included, etc.
-        """
-        nlp = self.load_effect_extraction_model()
-
-        KEYWORDS = {
-            "total_studies": [
-                "identified", "retrieved", "found", "yielded", "obtained", "available",
-                "initial", "returned", "sourced", "located", "recorded", "records identified",
-                "search results", "hits", "articles found", "publications retrieved",
-                "citations identified", "initial search", "database search", "from databases",
-                "via search", "through search", "search yielded", "total number of records"
-            ],
-            "duplicates": [
-                "duplicate", "duplicates", "removed", "excluded as duplicates",
-                "eliminated", "filtered out", "after removing", "after deduplication",
-                "deduplicated", "de-duplicated", "duplicates removed", "duplicate records",
-                "removal of duplicates", "duplicate citations", "duplicate entries"
-            ],
-            "screened": [
-                "screened", "reviewed", "screening", "underwent screening",
-                "screened for eligibility", "abstract screening", "title screening",
-                "records screened", "articles screened", "documents screened",
-                "titles and abstracts reviewed", "initial screening", "screened by title",
-                "screening process", "titles/abstracts screened"
-            ],
-            "eligible": [
-                "eligible", "assessed for eligibility", "met eligibility criteria",
-                "retrieved for full-text review", "reviewed", "full-text assessed",
-                "fulltext", "included for eligibility", "potentially eligible",
-                "considered eligible", "qualified for full-text review",
-                "full texts reviewed", "eligibility assessment", "full-text retrieved",
-                "screened full texts", "full articles reviewed"
-            ],
-            "excluded": [
-                "excluded", "removed", "not eligible", "did not meet criteria",
-                "excluded from review", "not included", "excluded based on criteria",
-                "excluded after full-text review", "excluded articles", "excluded studies",
-                "exclusion criteria", "full-text exclusions", "studies not included",
-                "ineligible", "reasons for exclusion", "excluded records", "were not eligible"
-            ],
-            "included": [
-                "included", "selected", "included in review", "included in analysis",
-                "retained", "remained for inclusion", "underwent extraction",
-                "were deemed relevant", "studies included", "final inclusion", "included in final synthesis",
-                "considered in review", "synthesized", "studies retained", "eligible and included",
-                "included for analysis", "included for synthesis", "final selection"
-            ]
-        }
-
-        def to_number(text):
-            try:
-                return int(text)
-            except ValueError:
-                try:
-                    return w2n.word_to_num(text.lower())
-                except:
-                    return None
-
-        doc = nlp(text)
-        fields = {}
-
-        for sent in doc.sents:
-            sent_tokens = [t.text for t in sent]
-
-            # Try detecting number words (up to 4 tokens long)
-            for i in range(len(sent_tokens)):
-                for j in range(i + 1, min(i + 5, len(sent_tokens))):
-                    span_text = " ".join(sent_tokens[i:j])
-                    num_value = to_number(span_text)
-                    if num_value is not None:
-                        # Look around span for context
-                        window_start = max(0, i - 5)
-                        window_end = min(len(sent_tokens), j + 5)
-                        context = " ".join(sent_tokens[window_start:window_end]).lower()
-
-                        for field, keywords in KEYWORDS.items():
-                            if any(kw in context for kw in keywords):
-                                if field not in fields:
-                                    fields[field] = num_value
-                                break
-                        break  # Skip overlapping spans after match
-        return json.dumps(fields)
 
     def process_study_count(self, term_list):
         """
@@ -674,9 +490,6 @@ class Tagging:
         for phrase, replacement in replacements.items():
             pattern = re.compile(re.escape(phrase), flags=re.IGNORECASE)
             document = pattern.sub(replacement, document)
-
-        # Extract fixed phrase counts if any
-        fixed_counts = self.extract_inclusion_exclusion_counts(document)
 
         # Word and multiplier mappings for written numbers
         word_to_number = {
@@ -714,8 +527,10 @@ class Tagging:
 
         # Patterns to match numbers followed by category keywords
         category_pattern = "|".join(re.escape(cat) for cat in categories)
-        digit_pattern = re.compile(rf"\b(\d+)\s*({category_pattern})s?\b", re.IGNORECASE)
-        written_pattern = re.compile(rf"\b((?:\w+(?:[-\s]\w+)*))\s*({category_pattern})s?\b", re.IGNORECASE)
+        digit_pattern = re.compile(
+            rf"\b(\d+)\s*({category_pattern})s?\b", re.IGNORECASE)
+        written_pattern = re.compile(
+            rf"\b((?:\w+(?:[-\s]\w+)*))\s*({category_pattern})s?\b", re.IGNORECASE)
 
         def extract_context_around(match, window=40):
             """Returns the context before and after the match within a specified character window."""
@@ -728,7 +543,8 @@ class Tagging:
         for match in digit_pattern.finditer(document):
             count = int(match.group(1))
             cat = match.group(2).lower()
-            context_before, matched_text, context_after = extract_context_around(match)
+            context_before, matched_text, context_after = extract_context_around(
+                match)
 
             context_log.append({
                 "count": count,
@@ -745,7 +561,8 @@ class Tagging:
             phrase = match.group(1)
             cat = match.group(2).lower()
             count = parse_written_number(phrase)
-            context_before, matched_text, context_after = extract_context_around(match)
+            context_before, matched_text, context_after = extract_context_around(
+                match)
 
             context_log.append({
                 "count": count,
@@ -759,10 +576,12 @@ class Tagging:
             raw_counts[cat].add(count)
 
         # Identify relevant "study" inclusion terms
-        inclusion_terms = [term.lower() for term, category in term_list if category == "sty"]
+        inclusion_terms = [term.lower()
+                           for term, category in term_list if category == "sty"]
 
         # Use helper to extract additional context-aware study counts
-        relevant_counts = self.extract_aggregated_relevant_study_counts(document, inclusion_terms)
+        relevant_counts = self.extract_aggregated_relevant_study_counts(
+            document, inclusion_terms)
         all_study_counts = list(raw_counts["sty"].union(relevant_counts))
 
         return (
@@ -772,8 +591,7 @@ class Tagging:
             list(raw_counts["rct"]),
             sum(raw_counts["nrsi"]),
             sum(raw_counts["mmtd"]),
-            sum(raw_counts["quanti"]),
-            fixed_counts
+            sum(raw_counts["quanti"])
         )
 
     def extract_databases(self):
@@ -783,83 +601,24 @@ class Tagging:
         """
         # Comprehensive database list with common name variations
         databases = [
-            "PubMed", "MEDLINE", "Embase", "Web of Science", "Scopus", 
-            "CINAHL", "Cochrane Library", "CENTRAL", "PubMed Central", 
-            "LILACS", "Google Scholar", "ProQuest", "EBSCO", "Ovid",
-            "PsycINFO", "AMED", "ClinicalTrials.gov",
-            # General Biomedical Databases
-            "MEDLINE", "PubMed/MEDLINE", "EMBASE", "Web of Science", "Scopus", "CINAHL",
-            "Cochrane Library", "CENTRAL", "PubMed Central (PMC)", "LILACS",
-            "Google Scholar", "BIOSIS", "EBSCO", "ProQuest", "Ovid",
-
-            # Specialized Medical Databases
-            "PsycINFO", "AMED", "TOXLINE", "CANCERLIT", "HMIC",
-            "POPLINE", "Global Health", "CAB Abstracts", "AGRICOLA",
-            "GeoRef", "ASSIA", "Social Services Abstracts", "Sociological Abstracts",
-            "EconLit", "ERIC", "PAIS Index", "IBSS",
-
-            # Evidence-Based Medicine Resources
-            "UpToDate", "DynaMed", "Clinical Key", "BMJ Best Practice",
-            "Cochrane Clinical Answers", "TRIP Database", "NICE Evidence Search",
-
-            # Pharmaceutical and Drug Databases
-            "DrugBank", "PharmGKB", "RxList", "Martindale", "AHFS Drug Information",
-
-            # Genetic and Molecular Biology Databases
-            "OMIM", "GenBank", "Gene", "GEO", "UniProt",
-
-            # Clinical Trials Registries
-            "ClinicalTrials.gov", "EU Clinical Trials Register", "ISRCTN Registry",
-            "WHO ICTRP", "Australian New Zealand Clinical Trials Registry",
-
-            # Systematic Review Databases
-            "Epistemonikos", "Health Evidence", "Campbell Collaboration Library",
-            "3ie Database of Systematic Reviews",
-
-            # Grey Literature Sources
-            "OpenGrey", "GreyNet", "NTIS", "CORDIS",
-
-            # Theses and Dissertations
-            "ProQuest Dissertations & Theses Global", "EThOS", "DART-Europe",
-
-            # Conference Proceedings
-            "Conference Proceedings Citation Index", "IEEE Xplore",
-
-            # Patent Databases
-            "Google Patents", "Espacenet", "USPTO",
-
-            # Open Access Resources
-            "Directory of Open Access Journals (DOAJ)", "PLoS", "BioMed Central",
-            "arXiv", "medRxiv", "bioRxiv",
-
-            # Institutional Repositories
-            "OpenDOAR", "BASE (Bielefeld Academic Search Engine)",
-
-            # Specialized Health Databases
-            "CINAHL Complete", "MEDLINE Complete", "SocINDEX", "SPORTDiscus",
-            "PEDro", "OTseeker", "SpeechBITE", "PsycARTICLES", "PsycBOOKS",
-
-            # Additional Resources
-            "Wiley Online Library", "ScienceDirect", "SpringerLink", "JSTOR",
-            "Taylor & Francis Online", "Sage Journals", "Oxford Academic",
-            "Cambridge Core", "Nature.com", "Science Magazine",
-
-            # Government and International Organization Databases
-            "CDC Stacks", "NIH.gov", "WHO.int", "WorldBank.org", "UN iLibrary",
-
-            # Business and Management Databases
-            "Business Source Complete", "ABI/INFORM", "Factiva",
-
-            # Legal Databases
-            "LexisNexis", "Westlaw", "HeinOnline",
-
-            # News Databases
-            "Nexis Uni", "Factiva", "ProQuest News & Newspapers",
-
-            # Multidisciplinary Databases
-            "Academic Search Complete", "JSTOR", "Project MUSE"
+            "PubMed", "MEDLINE", "Embase", "Web of Science", "Scopus", "CINAHL", "Cochrane Library", "CENTRAL", "PubMed Central",
+            "LILACS", "Google Scholar", "ProQuest", "EBSCO", "Ovid", "PsycINFO", "AMED", "ClinicalTrials.gov", "MEDLINE", "PubMed/MEDLINE", 
+            "EMBASE", "Web of Science", "Scopus", "CINAHL", "Cochrane Library", "CENTRAL", "PubMed Central (PMC)", "LILACS", "Google Scholar", 
+            "BIOSIS", "EBSCO", "ProQuest", "Ovid", "PsycINFO", "AMED", "TOXLINE", "CANCERLIT", "HMIC", "POPLINE", "Global Health", "CAB Abstracts", 
+            "AGRICOLA", "GeoRef", "ASSIA", "Social Services Abstracts", "Sociological Abstracts", "EconLit", "ERIC", "PAIS Index", "IBSS",
+            "UpToDate", "DynaMed", "Clinical Key", "BMJ Best Practice", "Cochrane Clinical Answers", "TRIP Database", "NICE Evidence Search",
+            "DrugBank", "PharmGKB", "RxList", "Martindale", "AHFS Drug Information", "OMIM", "GenBank", "Gene", "GEO", "UniProt",
+            "ClinicalTrials.gov", "EU Clinical Trials Register", "ISRCTN Registry", "WHO ICTRP", "Australian New Zealand Clinical Trials Registry",
+            "Epistemonikos", "Health Evidence", "Campbell Collaboration Library", "3ie Database of Systematic Reviews", "OpenGrey", "GreyNet", "NTIS", "CORDIS",
+            "ProQuest Dissertations & Theses Global", "EThOS", "DART-Europe", "Conference Proceedings Citation Index", "IEEE Xplore",
+            "Google Patents", "Espacenet", "USPTO", "Directory of Open Access Journals (DOAJ)", "PLoS", "BioMed Central", "arXiv", "medRxiv", "bioRxiv",
+            "OpenDOAR", "BASE (Bielefeld Academic Search Engine)", "CINAHL Complete", "MEDLINE Complete", "SocINDEX", "SPORTDiscus", "PEDro", "OTseeker", 
+            "SpeechBITE", "PsycARTICLES", "PsycBOOKS", "Wiley Online Library", "ScienceDirect", "SpringerLink", "JSTOR", "Taylor & Francis Online", 
+            "Sage Journals", "Oxford Academic", "Cambridge Core", "Nature.com", "Science Magazine", "CDC Stacks", "NIH.gov", "WHO.int", "WorldBank.org", 
+            "UN iLibrary", "Business Source Complete", "ABI/INFORM", "Factiva", "LexisNexis", "Westlaw", "HeinOnline", "Nexis Uni", "Factiva", 
+            "ProQuest News & Newspapers", "Academic Search Complete", "JSTOR", "Project MUSE"
         ]
-        
+
         # Common aliases and alternative spellings
         aliases = {
             "MEDLINE": ["MEDLINE via Ovid", "MEDLINE/PubMed"],
@@ -871,11 +630,11 @@ class Tagging:
 
         # Extract text from relevant sections
         text = self.get_combined_text(["abstract", "methods"])
-        
+
         # Preprocess text
         text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
         text = text.lower()  # Normalize case
-        
+
         # Context-aware trigger phrases to identify database mentions
         trigger_phrases = [
             r'\b(systematic\s+)?search(?:es)?\s+(?:were|was)?\s*(?:conducted|performed|carried\s+out)?',
@@ -889,10 +648,11 @@ class Tagging:
             r'\b(?:searches|strategies)\s+(?:included|used|involved)'
         ]
         # Combined database pattern
-        db_pattern = r'\b(' + '|'.join(re.escape(db.lower()) for db in databases) + r')\b'
-        
+        db_pattern = r'\b(' + '|'.join(re.escape(db.lower())
+                                       for db in databases) + r')\b'
+
         found_databases = set()
-        
+
         # Check if database mentions appear near trigger phrases
         for trigger in trigger_phrases:
             matches = re.finditer(trigger, text, re.IGNORECASE)
@@ -901,19 +661,19 @@ class Tagging:
                 start = max(0, match.start() - 200)
                 end = min(len(text), match.end() + 200)
                 context_window = text[start:end]
-                
+
                 # Find explicit database mentions within this context
                 found_databases.update(re.findall(db_pattern, context_window))
-                
+
                 # Resolve aliases to standard database names
                 for alias, variations in aliases.items():
                     for variation in variations:
                         if variation.lower() in context_window:
                             found_databases.add(alias.lower())
-        
+
         # Normalize capitalization and remove duplicates
         normalized_databases = {db.capitalize() for db in found_databases}
-        
+
         return sorted(normalized_databases), len(normalized_databases)
 
     def process_generic_terms(self, term_list):
@@ -925,16 +685,7 @@ class Tagging:
         return list(set(generic_matches))
 
     def extract_ve_related_info(self, keywords_list):
-        """
-        Extracts phrases related to vaccine effectiveness, efficacy, and effect measures (e.g., OR, RR, CI) 
-        from scientific text using pattern matching and NLP-based entity extraction.
-
-        Returns:
-            List of tuples: (label, matched_phrase)
-        """
         text = self.get_combined_text(["abstract", "methods", "results"])
-        # Load scientific model (SciSpaCy if available, fallback to spaCy default)
-        nlp = self.load_effect_extraction_model()
 
         # Define target terms
         effect_terms = keywords_list
@@ -942,7 +693,8 @@ class Tagging:
         keywords = [re.escape(term) for term, _ in effect_terms]
 
         pattern = re.compile(
-            r'\b(?:' + '|'.join(keywords) + r')\b(?:[^.:\n]{0,100})?(?:\d{1,3}\.?\d{0,2}%?|\(.*?\)|−?\d+\.\d+\s*–\s*−?\d+\.\d+|95% CI.*?)',
+            r'\b(?:' + '|'.join(keywords) +
+            r')\b(?:[^.:\n]{0,100})?(?:\d{1,3}\.?\d{0,2}%?|\(.*?\)|−?\d+\.\d+\s*–\s*−?\d+\.\d+|95% CI.*?)',
             flags=re.IGNORECASE
         )
 
@@ -956,17 +708,7 @@ class Tagging:
                     found.add(f"{span}:{label}")
                     break
 
-        # NLP-based supplemental matches
-        doc = nlp(text)
-        for ent in doc.ents:
-            if ent.label_.lower() in {"value", "percentage", "quantity"}:
-                window = text[max(0, ent.start_char - 60):ent.end_char + 60].lower()
-                for term, label in effect_terms:
-                    if term.lower() in window:
-                        found.add(f"{ent.text.strip()}:{label}")
-                        break
-
-        return sorted(found) + self.extract_ve_info()
+        return sorted(found)
 
     def extract_study_types(self, terms_list):
         """
@@ -975,15 +717,15 @@ class Tagging:
         """
         document = self.get_combined_text(["main_content"])
         study_terms = [item for item, _ in terms_list]
-        
+
         # Regex to match study types and their counts
         study_pattern = re.compile(
-            rf"(\d+)\s*({'|'.join(re.escape(term) for term in study_terms)})", 
+            rf"(\d+)\s*({'|'.join(re.escape(term) for term in study_terms)})",
             flags=re.IGNORECASE
         )
-        
+
         matches = study_pattern.findall(document)
-        
+
         study_types = {}
         for count, study_type in matches:
             study_type_lower = study_type.lower()
@@ -991,54 +733,8 @@ class Tagging:
                 study_types[study_type_lower] += int(count)
             else:
                 study_types[study_type_lower] = int(count)
-        
+
         return json.dumps(study_types)
-    
-    def process_sex_distribution(self, gender_terms_list: List[Tuple[str, str]]):
-        """
-        Extracts and processes sex distribution data from text using spaCy.
-        
-        Parameters:
-            text (str): The full document text.
-            gender_terms_list (List[Tuple[str, str]]): List of (raw term, normalized label) tuples.
-
-        Returns:
-            List[Dict[str, int]]: One dictionary per paragraph/group with extracted distribution.
-        """
-        text = self.get_combined_text(["main_content"])
-        nlp = self.load_effect_extraction_model()
-
-        # Normalize gender terms
-        gender_map = {term.lower(): label for term, label in gender_terms_list}
-        gender_keywords = set(gender_map.keys())
-
-        sex_distributions = []
-
-        # Split text into paragraph groups
-        groups = text.split("\n\n")
-
-        for group in groups:
-            distribution = {}
-            doc = nlp(group)
-
-            for sent in doc.sents:
-                sent_lower = sent.text.lower()
-                if any(gender in sent_lower for gender in gender_keywords):
-                    for ent in doc.ents:
-                        if ent.label_ in {"PERCENT", "CARDINAL"}:
-                            for keyword in gender_keywords:
-                                if keyword in sent_lower:
-                                    try:
-                                        val = float(ent.text.replace("%", "").strip())
-                                        label = gender_map[keyword]
-                                        if label not in distribution:
-                                            distribution[label] = int(val)
-                                    except ValueError:
-                                        continue
-            if distribution:
-                sex_distributions.append(distribution)
-
-        return sex_distributions
 
     def is_open_access(self, term_list):
         document = self.get_combined_text(["paper_type"]).lower()
@@ -1057,34 +753,38 @@ class Tagging:
 
     def age_range_search_algorithm(self, matches):
         numerical_values_and_operators = []
-        
+
         for match in matches:
-            match_values = re.findall(r'(less than|greater than|<|>|\d+)(?:-(\d+))?', match.group(), flags=re.IGNORECASE)
-            
+            match_values = re.findall(
+                r'(less than|greater than|<|>|\d+)(?:-(\d+))?', match.group(), flags=re.IGNORECASE)
+
             if match_values:
                 operator = "="  # Default operator
                 start, end = None, None
-                
+
                 # Interpret values
                 if match_values[0][0].isdigit():
                     # Direct age range like "5-10 years"
                     start = int(match_values[0][0])
-                    end = int(match_values[0][1]) if match_values[0][1] else start  # Handle cases like "5 years"
-                    
+                    # Handle cases like "5 years"
+                    end = int(match_values[0][1]
+                              ) if match_values[0][1] else start
+
                 elif match_values[0][0].lower() in ['less than', '<']:
                     if match_values[0][1]:  # Check if there is a number after "less than"
                         start, end = 0, int(match_values[0][1])
                         operator = "<"
-                        
+
                 elif match_values[0][0].lower() in ['greater than', '>']:
                     if match_values[0][1]:  # Check if there is a number after "greater than"
                         start = int(match_values[0][1]) + 1
                         end = 1000000  # Arbitrary large number to represent 'no upper limit'
                         operator = ">"
-                
+
                 # Ensure both start and end are set correctly
                 if start is not None and end is not None:
-                    numerical_values_and_operators.append([start, end, operator])
+                    numerical_values_and_operators.append(
+                        [start, end, operator])
 
         return numerical_values_and_operators
 
@@ -1166,15 +866,18 @@ class Tagging:
         country_names = {country.name for country in pycountry.countries}
 
         pattern = re.compile(
-            r"([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)\s*\(\s*(\d+)(?:,\s*\d+\.\d+%)?\s*\)"  # USA (11, 45.8%)
+            # USA (11, 45.8%)
+            r"([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)\s*\(\s*(\d+)(?:,\s*\d+\.\d+%)?\s*\)"
             r"|\b(one|two|three|four|five|six|seven|eight|nine|ten|"
             r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|"
             r"nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|\d+)"
-            r"\s*\(\d+\.\d+%\)\s*in\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)"  # five (19.2%) in Germany
+            # five (19.2%) in Germany
+            r"\s*\(\d+\.\d+%\)\s*in\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)"
             r"|\b(one|two|three|four|five|six|seven|eight|nine|ten|"
             r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|"
             r"nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|\d+)"
-            r"\s+(?:from|in)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)"  # 100 from/in Germany
+            # 100 from/in Germany
+            r"\s+(?:from|in)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)"
         )
 
         country_counts = {}
@@ -1194,235 +897,30 @@ class Tagging:
             if country and num is not None and country in country_names:
                 country_counts[country] = country_counts.get(country, 0) + num
 
-        formatted_output = ", ".join(f"{country}({count})" for country, count in country_counts.items())
+        formatted_output = ", ".join(
+            f"{country}({count})" for country, count in country_counts.items())
         total_count = sum(country_counts.values())
-        formatted_output_, total_count_ = self.extract_country_participant_counts()
-        return formatted_output if formatted_output else formatted_output_, total_count if total_count else total_count_
-    
+
+        return formatted_output, total_count
+
     def convert_dict_to_dataframe(self, data_dict):
         """Convert final results into a DataFrame for analysis or storage."""
         return pd.DataFrame([data_dict])
 
-    def ask_question(self, context: str, questions: List[str]) -> Optional[str]:
-        for question in questions:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                if answer and answer["score"] > 0.1:  # Confidence threshold
-                    if answer and answer["answer"]:
-                        return answer["answer"]
-            except Exception:
-                continue
-        return None
+    def pubmed_bert_integration(self, document):
+        MODEL_PATH = "./results/baseline/best_model"
+        if not os.path.isdir(MODEL_PATH):
+            print(f"Model path not found: {MODEL_PATH}")
+            print("Please ensure the model is trained and saved to the specified path.")
+        else:
+            print(f"Model path found: {MODEL_PATH}")
+            tester = NERTester(model_path=MODEL_PATH)
 
-    def extract_last_search_date(self) -> Optional[str]:
-        context = self.get_combined_text(["main_content"])
-        QUESTIONS = [
-            "When was the last literature search conducted?",
-            "Until what date were studies retrieved?",
-            "What was the final search date?"
-        ]
-        date_pattern = re.compile(r"\b([A-Z][a-z]+)\s+\d{4}\b")
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                match = date_pattern.search(answer["answer"])
-                if match:
-                    return match.group(0)
-            except:
-                continue
-        return None
-
-    def extract_population_count(self) -> Optional[int]:
-        context = self.document
-        QUESTIONS = [
-            "What is the total number of participants?",
-            "How many people were included in the study?",
-            "What is the population size?"
-        ]
-        answer = self.ask_question(context, QUESTIONS)
-        if answer:
-            match = re.search(r'\d+', answer)
-            if match:
-                return int(match.group(0))
-        return None
-
-    def extract_country_mentions(self) -> List[str]:
-        context = self.get_combined_text(["results"])
-        QUESTIONS = [
-            "Which countries were included in the study?",
-            "What countries were mentioned in the paper?",
-            "Which nations were studied?"
-        ]
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                countries = re.findall(r'[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*', answer['answer'])
-                return list(set(countries))
-            except:
-                continue
-        return []
-
-    def extract_ve_info(self) -> List[str]:
-        context = self.get_combined_text(["abstract", "methods", "results"])
-        QUESTIONS = [
-            "What is the reported vaccine effectiveness?",
-            "What is the efficacy of the vaccine?",
-            "What are the confidence intervals for vaccine effectiveness?"
-        ]
-        for question in QUESTIONS:
-            try:
-                answer = self.qa_pipeline(question=question, context=context)
-                if re.search(r'(\d{1,3}%|\(.*?CI.*?)', answer["answer"]):
-                    return [answer["answer"]]
-            except:
-                continue
-        return []
-
-    def extract_location_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["Which country is mentioned in the title?"])
-
-    def extract_race_ethnicity_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What race or ethnicity is mentioned in the title?"])
-
-    def extract_target_population_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What population is targeted in the title?"])
-
-    def extract_topic_in_title(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What is the main topic of the article title?"])
-
-    def extract_database_names(self, text: str) -> list:
-        # Known common aliases
-        aliases = {
-            "MEDLINE": ["MEDLINE via Ovid", "MEDLINE/PubMed"],
-            "CENTRAL": ["Cochrane Central Register of Controlled Trials"],
-            "Cochrane": ["Cochrane Library"],
-            "PubMed": ["PubMed Central"],
-            "PsycINFO": ["Psychological Abstracts"]
-        }
-
-        # Normalize alias map: reverse mapping from alias to canonical name
-        alias_map = {alias: canonical for canonical, alias_list in aliases.items() for alias in alias_list}
-        all_variants = set(self.database_list + list(alias_map.keys()))
-
-        # Regex: match whole words or phrase boundaries (e.g., "PubMed", "Cochrane Library")
-        pattern = re.compile(r'\b(?:' + '|'.join(re.escape(db) for db in all_variants) + r')\b', re.IGNORECASE)
-
-        matches = pattern.findall(text)
-        matched_databases = set()
-
-        for match in matches:
-            # Normalize via alias mapping if needed
-            canonical = alias_map.get(match, match)
-            # Title-case everything for consistency
-            matched_databases.add(canonical.title())
-
-        return sorted(matched_databases)
-
-    def extract_num_databases(self, context: str) -> Optional[int]:
-        QUESTIONS = [
-            "How many databases were searched?",
-            "What is the total number of databases included in the literature search?",
-            "How many electronic sources were searched?"
-        ]
-        answer = self.ask_question(context, QUESTIONS)
-        if answer:
-            match = re.search(r"\d+", answer)
-            if match:
-                return int(match.group(0))
-        fallback = self.extract_database_names(context)
-        print(fallback)
-        return len(fallback) if fallback else 0
-
-    def extract_duration_of_intervention(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What was the duration of the intervention?"])
-
-    def extract_dosage(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What was the dosage used in the intervention?"])
-
-    def extract_comparator(self, context: str) -> Optional[str]:
-        return self.ask_question(context, ["What comparator was used in the study?"])
-
-    def extract_country_participant_counts(self) -> Dict[str, Optional[str]]:
-        """
-        Uses a QA model to estimate country-wise participant counts and total.
-        """
-        context = self.document
-        question = "How many participants were included from each country?"
-        try:
-            answer = self.qa_pipeline(question=question, context=context)
-            if not answer or not answer["answer"]:
-                return {"country_counts": None, "total_count": 0}
-            
-            # Match known country names in the answer
-            text = answer["answer"]
-            country_names = {country.name for country in pycountry.countries}
-            country_counts = {}
-
-            # Match patterns like CountryName(Number)
-            matches = re.findall(r"([A-Z][a-zA-Z ]+)\s*\((\d+)\)", text)
-            for country, count in matches:
-                country = country.strip()
-                if country in country_names:
-                    country_counts[country] = country_counts.get(country, 0) + int(count)
-
-            formatted = ", ".join(f"{k}({v})" for k, v in country_counts.items())
-            total = sum(country_counts.values())
-
-            return formatted or None, total or 0
-        except Exception:
-            return None, 0
-    
-
-    def extract_review_type(self) -> Optional[str]:
-        """
-        Identifies the type of review the paper describes, e.g., systematic, scoping, narrative, etc.
-        """
-        context = self.document
-        QUESTIONS = [
-            "What type of review is this paper?",
-            "What kind of review was conducted?",
-            "Is this a systematic review, meta-analysis, or another type of review?",
-            "What review methodology was used in the study?"
-        ]
-        return self.ask_question(context, QUESTIONS)
-
-    def extract_bias_and_funding_info(self):
-        """
-        Extracts risk of bias assessment, bias interpretation consideration,
-        and funding disclosure using question answering.
-        Returns a dictionary of these elements.
-        """
-        qa_questions = {
-            "risk_of_bias_assessed": [
-                "Was the risk of bias in individual studies assessed?",
-                "Did the authors evaluate risk of bias for the included studies?",
-                "Was any method used to assess study bias?"
-            ],
-            "bias_considered": [
-                "Was the risk of bias considered when interpreting the results?",
-                "Did the authors take bias into account when discussing the findings?",
-                "Was bias mentioned in interpretation of the study findings?"
-            ],
-            "funding_disclosed": [
-                "Did the review disclose sources of funding for the included studies?",
-                "Was funding information reported in the systematic review?",
-                "Was study funding declared in the paper?"
-                "If information does not exist say funding was not disclosed."
-            ]
-        }
-        context = self.document
-        results = {}
-
-        for key, questions in qa_questions.items():
-            answer = self.ask_question(context, questions)
-            if answer:
-                # Optional normalization
-                clean_answer = answer.strip().capitalize()
-                results[key] = clean_answer
+            if tester.pipeline:
+                return run_ner_inference(tester, document)
             else:
-                results[key] = None
-
-        return json.dumps(results)
+                print("Failed to initialize NER pipeline. Check model files.")
+                return {}
     
     def amstar2_integration(self):
         today = date.today()
