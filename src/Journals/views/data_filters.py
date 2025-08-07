@@ -1,6 +1,9 @@
 import json
 import pandas as pd
 from io import BytesIO, StringIO
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from flask_restful import Resource
 from src.Utils.response import ApiResponse
 from src.Commands.regexp import searchRegEx
@@ -210,7 +213,7 @@ class ProcessUserSelectionAPI(Resource):
     def export_response(data, export_format):
         """
         Export the response data in the desired format.
-        :param data: The response data to export.
+        :param data: The response data to export (can be a list or a paginated dict).
         :param export_format: The desired export format (csv, excel, json).
         :return: Flask response containing the exported file.
         """
@@ -219,8 +222,19 @@ class ProcessUserSelectionAPI(Resource):
                 message="No data available to export.", status_code=400
             )
 
-        # Convert data to a DataFrame for export
-        df = pd.DataFrame(data)
+        # FIX: Intelligently extract the list of records, whether the data is paginated or not.
+        records_to_export = data
+        if isinstance(data, dict) and 'records' in data:
+            records_to_export = data['records']
+        
+        # Check again in case the records list itself is empty
+        if not records_to_export:
+            return ApiResponse.error(
+                message="No data records available to export.", status_code=400
+            )
+
+        # Convert the clean list of records to a DataFrame for export
+        df = pd.DataFrame(records_to_export)
 
         # Handle CSV export
         if export_format == "csv":
@@ -235,7 +249,8 @@ class ProcessUserSelectionAPI(Resource):
         # Handle Excel export
         elif export_format == "excel":
             excel_buffer = BytesIO()
-            with pd.ExcelWriter(excel_buffer, engine="xlsxwriter") as writer:
+            # Use the 'openpyxl' engine as 'xlsxwriter' is being deprecated for this use case
+            with pd.ExcelWriter(excel_buffer, engine="openpyxl") as writer:
                 df.to_excel(writer, index=False, sheet_name="Sheet1")
             excel_buffer.seek(0)
             return send_file(
@@ -244,10 +259,37 @@ class ProcessUserSelectionAPI(Resource):
                 as_attachment=True,
                 download_name="data.xlsx",
             )
+        elif export_format == "pdf":
+            pdf_buffer = BytesIO()
+            
+            # Create a figure and axes
+            fig, ax = plt.subplots(figsize=(11, 8)) # You can adjust the size
+            ax.axis('tight')
+            ax.axis('off')
+
+            # Create the table and add it to the axes
+            the_table = ax.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='left')
+            the_table.auto_set_font_size(False)
+            the_table.set_fontsize(8)
+            the_table.scale(1.2, 1.2) # Adjust scale to fit
+
+            # Save the figure to the buffer as a PDF
+            fig.savefig(pdf_buffer, format='pdf', bbox_inches='tight')
+            plt.close(fig) # Close the figure to free up memory
+            
+            pdf_buffer.seek(0)
+            return send_file(
+                pdf_buffer,
+                mimetype="application/pdf",
+                as_attachment=True,
+                download_name="data.pdf",
+            )
 
         # Handle JSON export
         elif export_format == "json":
-            response = make_response(json.dumps(data, indent=4))
+            # Export the clean list of records, not the whole data object
+            json_data = json.dumps(records_to_export, indent=4)
+            response = make_response(json_data)
             response.headers["Content-Disposition"] = "attachment; filename=data.json"
             response.headers["Content-Type"] = "application/json"
             return response

@@ -97,21 +97,21 @@ class CSVUnifier:
                                     unique_count += 1
 
                     except FileNotFoundError:
-                        print(f"⚠️ Warning: File not found and will be skipped: {path}")
+                        print(f"Warning: File not found and will be skipped: {path}")
                     except csv.Error as e:
-                        print(f"❌ CSV formatting error in {path}: {e}")
+                        print(f"CSV formatting error in {path}: {e}")
                     except Exception as e:
-                        print(f"❌ Unexpected error in {path}: {e}")
+                        print(f"Unexpected error in {path}: {e}")
 
             print("\n--- Process Complete ---")
-            print(f"✅ Saved {unique_count} unique records to {unique_output_path}")
+            print(f"Saved {unique_count} unique records to {unique_output_path}")
             if duplicate_count > 0:
-                print(f"ℹ️  Found and saved {duplicate_count} duplicate records to {duplicate_output_path}")
+                print(f"  Found and saved {duplicate_count} duplicate records to {duplicate_output_path}")
             else:
-                print("ℹ️  No duplicate records were found.")
+                print("No duplicate records were found.")
 
         except Exception as e:
-            print(f"❌ Critical error during file writing: {e}")
+            print(f"Critical error during file writing: {e}")
 
     @staticmethod
     def extract_column_duplicates(input_file: str, output_file: str, column_to_check: str):
@@ -143,7 +143,7 @@ class CSVUnifier:
                     writer.writerow(row)
                     count += 1
 
-        print(f"✅ Duplicated rows by '{column_to_check}' saved to {output_file} ({count} rows).")
+        print(f"Duplicated rows by '{column_to_check}' saved to {output_file} ({count} rows).")
 
 def get_latest_file(directory: str, prefix: str, suffix: str) -> str | None:
     latest_file = None
@@ -159,7 +159,7 @@ def get_latest_file(directory: str, prefix: str, suffix: str) -> str | None:
                     latest_date = file_date
                     latest_file = filename
             except ValueError:
-                print(f"⚠️ Warning: Skipped file with invalid date format: {filename}")
+                print(f"Warning: Skipped file with invalid date format: {filename}")
                 continue
     return os.path.join(directory, latest_file) if latest_file else None
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     if latest_ovid_file:
         csv_sources[latest_ovid_file] = "OVID"
     else:
-        print(f"⚠️ Warning: No OVID file found in '{ovid_dir}'. Skipping.")
+        print(f"Warning: No OVID file found in '{ovid_dir}'. Skipping.")
 
     common_columns = ['id', 'verification_id', 'title', 'authors', 'doi', 'source', 'cleaned_doi', 'created_at']
 

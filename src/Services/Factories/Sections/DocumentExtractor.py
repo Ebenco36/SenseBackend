@@ -49,7 +49,7 @@ class DocumentExtractor:
         except requests.exceptions.HTTPError as e:
             if response.status_code == 403:
                 print(
-                    "⚠️ 403 Forbidden error. Retrying with CloudScraper after a delay...")
+                    "403 Forbidden error. Retrying with CloudScraper after a delay...")
 
                 response = self.scraper.get(
                     url, headers=self.headers, timeout=10)
@@ -79,7 +79,7 @@ class DocumentExtractor:
                 script.decompose()
             return soup
         except Exception as e:
-            print(f"❌ Error extracting plain text from HTML: {e}")
+            print(f"Error extracting plain text from HTML: {e}")
             return None
 
     def extract_plain_text_from_pdf(self, pdf_content):
@@ -90,7 +90,7 @@ class DocumentExtractor:
             plain_text = parse_and_print_sections(pdf_content)
             return plain_text
         except Exception as e:
-            print(f"❌ Error extracting plain text from PDF: {e}")
+            print(f"Error extracting plain text from PDF: {e}")
             return None
 
     def extract_plain_text_from_docx(self, docx_content):
@@ -102,7 +102,7 @@ class DocumentExtractor:
             plain_text = "\n".join([para.text for para in doc.paragraphs])
             return plain_text
         except Exception as e:
-            print(f"❌ Error extracting plain text from DOCX: {e}")
+            print(f"Error extracting plain text from DOCX: {e}")
             return None
 
     def extract_content(self, source):
@@ -136,7 +136,7 @@ class DocumentExtractor:
             elif "application/vnd.openxmlformats-officedocument.wordprocessingml.document" in content_type:
                 return self.extract_plain_text_from_docx(content), status_code
             else:
-                print(f"❌ Unsupported content type: {content_type}")
+                print(f"Unsupported content type: {content_type}")
                 return None, status_code
         # Check if the source is a local file
         elif source.endswith(".pdf"):
@@ -148,5 +148,5 @@ class DocumentExtractor:
             # No status code for local files
             return self.extract_plain_text_from_docx(source), None
         else:
-            print("❌ Unsupported file type or URL.")
+            print("Unsupported file type or URL.")
             return None, None

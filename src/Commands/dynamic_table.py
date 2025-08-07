@@ -186,7 +186,7 @@ def seed_data(file_path, model):
                     continue
 
             session.commit()  # Final commit
-        logging.info(f"✅ Data seeding complete! Inserted: {inserted_count}, Updated: {updated_count}")
+        logging.info(f"Data seeding complete! Inserted: {inserted_count}, Updated: {updated_count}")
     
     if error_log:
         logging.warning('The following rows encountered errors:')

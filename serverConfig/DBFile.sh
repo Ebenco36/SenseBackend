@@ -30,9 +30,9 @@ FILES_TO_CHECK=("unified_output.csv")
 check_file() {
     local file_path="$CHECK_DIRECTORY/$1"
     if [ -f "$file_path" ]; then
-        echo "✅ File '$1' exists in directory '$CHECK_DIRECTORY'."
+        echo "File '$1' exists in directory '$CHECK_DIRECTORY'."
     else
-        echo "❌ File '$1' does not exist in directory '$CHECK_DIRECTORY'."
+        echo "File '$1' does not exist in directory '$CHECK_DIRECTORY'."
         echo "Pool data from all sources"
         python $PARENT_DIR/src/Commands/dataPool.py
     fi

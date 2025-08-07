@@ -55,7 +55,10 @@ class ChartService(PostgresService):
                     # scale=alt.Scale(scheme=color_scheme)
                     scale=alt.Scale(
                         domain=[0, df_country['record_count'].max()],
-                        range=['#d3d3d3', '#08306b']  # light grey → dark blue
+                        range=[
+                            "#bdd7e7",
+                            "#08519c"
+                        ]  # light grey → dark blue
                     )
                 ),
                 tooltip=[
@@ -73,7 +76,7 @@ class ChartService(PostgresService):
             .properties(
                 width="container",
                 height=450,
-                title='Records by Country (Map)'
+                title='Records by Country of Publication (Map)'
             )
             .project(
                 type='naturalEarth1',

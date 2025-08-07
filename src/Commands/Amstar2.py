@@ -1,14 +1,22 @@
 import re
+import torch
 import json
 import hashlib
 from datetime import datetime
 from transformers import pipeline
 
-class Amstar2:
+from src.Services.Taggers.TaggerInterface import TaggerInterface
+
+qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad", device="mps" if torch.backends.mps.is_available() else -1)
+publication_bias_qa = pipeline("question-answering", model="bert-large-uncased-whole-word-masking-finetuned-squad", device="mps" if torch.backends.mps.is_available() else -1)
+
+class amstar2(TaggerInterface):
     def __init__(self, review_date: str = "1900-01-01"):
-        self.qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad", device=-1)
-        self.publication_bias_qa = pipeline("question-answering", model="bert-large-uncased-whole-word-masking-finetuned-squad")
+
+        self.qa_pipeline = qa_pipeline
+        self.publication_bias_qa = publication_bias_qa
         self.review_date = review_date
+
 
     def contains_keywords(self, text: str, keywords: list[str]) -> bool:
         return any(re.search(keyword, text, re.IGNORECASE) for keyword in keywords)
@@ -65,10 +73,10 @@ class Amstar2:
         questions_keywords = [
             ("Did the authors search at least 2 databases?", ["MEDLINE", "EMBASE", "Cochrane"], True),
             ("Did the authors provide keyword and/or search strategy?", ["search strategy", "detailed", "umbrealla", "described", "search strategies", "grey literature", "search terms", "Influenza", "Vaccine", "Observational studies", "vaccin", "immuni", "flu", "FLUAD", "test-negative"]),
-            ("Did they mention any restrictions at the study selection or eligibility screening, if available?", ["No restrictions", "restriction on", "limited to the English language", "did not include", "no language restrictions", "did not restrict"]),
+            ("Did they mention any restrictions at the study selection or eligibility screening, if available?", ["No restrictions", "restriction on","language restrictions","restriction", "limited to the English language", "did not include", "no language restrictions", "did not restrict"]),
             ("Did they search the reference lists/ bibliographies of included studies?", ["Citations of included studies were also reviewed", "references", "cross references"]),
             ("Did they search trial/study registries?", ["the Cochrane Central Register of Controlled Trials", "CENTRAL"]),
-            ("Did they include / consult content experts in the field", ["language restrictions"]),
+            ("Did they include / consult content experts in the field", ["expert","experts"]),
         ]
         results = []
         for question, keywords, *extra in questions_keywords:
@@ -89,7 +97,24 @@ class Amstar2:
         q2 = "Does the text justify how publication bias was addressed?"
         a1 = self.publication_bias_qa(question=q1, context=text)
         a2 = self.publication_bias_qa(question=q2, context=text)
-        return "YES" if a1['score'] > 0.1 and a2['score'] > 0.1 else "NO"
+        
+        rule1_keywords = ["publication bias", "egger", "begg", "funnel plot"]
+    
+        rule2_justifications = [
+        "not able to check for publication bias",
+        "not possible to investigate publication bias",
+        "too few studies",
+        "insufficient studies",
+        "paucity of studies"
+        ]
+
+        found1 = any(k in text.lower() for k in rule1_keywords)
+        found2 = any(k in text.lower() for k in rule2_justifications)
+
+        if (a1['score'] > 0.1 or found1) and (a2['score'] > 0.1 or found2):
+            return "Yes"
+        else:
+            return "No"
 
     def evaluate_pico_components(self, text: str) -> str:
         pico_keywords = {
@@ -112,13 +137,13 @@ class Amstar2:
 
     def evaluate_item6_data_extraction_duplicate(self, text: str) -> str:
         duplicate = ["data extraction in duplicate", "extracted in duplicate", "two reviewers independently extracted", "independently extracted by two reviewers", "two authors independently extracted", "duplicate data extraction", "two observers independently extracted"]
-        consensus = ["discrepancies were resolved by consensus", "resolved by discussion", "differences were resolved by discussion", "checked by a second reviewer", "disagreements resolved by consensus", "agreement was reached", "consensus of both investigators", "achieved consensus", "≥80%", "greater than 80%", "good agreement"]
+        consensus = ["discrepancies were resolved by consensus", "consensus", "resolved by discussion", "differences were resolved by discussion", "checked by a second reviewer", "disagreements resolved by consensus", "agreement was reached", "consensus of both investigators", "achieved consensus", "≥80%", "greater than 80%", "good agreement"]
         if any(p in text.lower() for p in duplicate) or any(p in text.lower() for p in consensus):
             return "Yes"
         return "No"
 
     def evaluate_item8(self, text: str) -> str:
-        table_keywords = ["Table 1", "Characteristics and Outcomes of Included Studies", "Table of Characteristics", "Characteristics of included studies", "study characteristics", "study details"]
+        table_keywords = ["Table 1", "Characteristics and Outcomes of Included Studies", "Table of Characteristics", "Characteristics of included studies", "study characteristics", "study details", "Characteristics from included studies"]
         detailed_studies_keywords = ["detailed description", "described in detail", "individual studies", "study results", "included studies described"]
         table_found = any(re.search(keyword, text, re.IGNORECASE) for keyword in table_keywords)
         detailed_description_found = any(re.search(keyword, text, re.IGNORECASE) for keyword in detailed_studies_keywords)
@@ -187,28 +212,250 @@ class Amstar2:
         if any(term in text for term in rob_terms) and any(term in text for term in interpretation_terms):
             return "Yes"
         return "No"
+    
+    def evaluate_item5_study_selection_duplicate(self, text: str) -> str:
+        text = text.lower()
+        independent_selection_keywords = [
+            "study selection in duplicate",
+            "screened independently",
+            "independently screened",
+            "two reviewers independently screened",
+            "pairs of reviewers independently screened",
+            "independent study selection",
+            "screened by two reviewers",
+            "screened by two authors",
+            "titles and abstracts independently reviewed",
+            "two independent reviewers"
+        ]
+        sample_agreement_keywords = [
+            "good agreement",
+            "greater than 80%",
+            "≥80% agreement",
+            "agreement of >80%",
+            "good inter-rater reliability"
+        ]
 
-    def evaluate_all(self, text: str) -> dict:
+        independent_screening = any(keyword in text for keyword in independent_selection_keywords)
+        sample_agreement = any(keyword in text for keyword in sample_agreement_keywords)
+
+        if independent_screening or sample_agreement:
+            return "Yes"
+        else:
+            return "No"
+        
+    def evaluate_item10_funding_sources(self, text: str) -> str:
+        text = text.lower()
+
+        # Statements where funding information is reported alongside the included studies
+        strong_funding_patterns = [
+            r"(included studies|individual studies|trials).*(funding|funded by|source of funding|financial support)",
+            r"(funding|funded by|financial support).*(included studies|individual studies|trials)"
+        ]
+
+        # Was only general funding (e.g., authors’ own funding) reported?
+        general_funding_keywords = [
+            "this study was funded",
+            "this review was funded",
+            "funding source for the review",
+            "support for this review",
+            "funded by grant"
+        ]
+
+        # Table/Figure references
+        table_reference_keywords = [
+            "see characteristics of included studies",
+            "funding shown in table",
+            "funding reported in table",
+            "funding listed",
+            "funding in supplementary material"
+        ]
+
+        # Searches
+        found_strong = any(re.search(pat, text, re.IGNORECASE) for pat in strong_funding_patterns)
+        found_table_reference = any(kw in text for kw in table_reference_keywords)
+        found_general_funding = any(kw in text for kw in general_funding_keywords)
+
+        # Karar
+        if found_strong or found_table_reference:
+            return "Yes"
+        elif found_general_funding:
+            return "No"  # Not sufficient
+        else:
+            return "No"
+
+    def evaluate_item12(self, text: str) -> str:
+        text = text.lower()
+
+        # 1.Did they explicitly state that only low risk of bias studies were included?
+        only_low_risk_patterns = [
+            r"\bonly (low|lower) risk of bias\b",
+            r"\bonly studies with (low|lower) risk of bias\b",
+            r"\bonly (high quality|low risk) studies\b",
+            r"\bonly included studies scoring*(high|≥ ?\d+)\b",
+            r"\bstudies scoring less than \d+.*excluded\b",
+            r"\bonly studies scoring (at least|greater than|above) \d+\b"
+        ]
+        if any(re.search(pat, text) for pat in only_low_risk_patterns):
+            return "Yes"
+
+        # 2. Was the impact of risk of bias assessed through subgroup or sensitivity analysis?
+        subgroup_sensitivity_patterns = [
+            r"sensitivity analysis.*(risk of bias|bias|study quality)",
+            r"subgroup analysis.*(risk of bias|study quality|low risk)",
+            r"pooled.*(high[- ]quality|low[- ]risk).*studies",
+            r"effect.*(low[- ]quality|high[- ]bias).*studies.*(examined|analyzed|assessed)",
+            r"explored.*effect.*(bias|study quality)"
+        ]
+        if any(re.search(pat, text) for pat in subgroup_sensitivity_patterns):
+            return "Yes"
+
+        # 3. Was there an explicit comment on the impact of risk of bias (RoB)?
+        rob_impact_keywords = [
+            "bias may have influenced",
+            "interpret with caution due to bias",
+            "potential bias in included studies",
+            "limitations due to bias",
+            "methodological quality impacted",
+            "risk of bias affects results",
+            "study quality concerns",
+            "findings should be interpreted cautiously"
+        ]
+        if any(kw in text for kw in rob_impact_keywords):
+            return "Yes"
+
+        return "No"
+    
+    def evaluate_item14(self, text: str) -> str:
+        text = text.lower()
+
+        # Criterion 1: Explicit statement that there was no or low heterogeneity
+        low_heterogeneity_patterns = [
+            r"no significant heterogeneity",
+            r"no statistical heterogeneity",
+            r"heterogeneity",
+            r"heterogeneity was low"
+            r"minimal heterogeneity",
+            r"i\s*²?\s*=\s*(\d+)",  # e.g. i² = 25
+            r"i2\s*=\s*(\d+)",
+        ]
+
+        for pat in low_heterogeneity_patterns:
+            match = re.search(pat, text)
+        if match:
+            nums = re.findall(r"\d+", match.group())
+            if nums:
+                if int(nums[0]) <= 30:
+                    return "Yes"
+            return "Yes"  
+            
+
+        # Criterion 2: Was heterogeneity explained or discussed?
+        discussion_keywords = [
+            "heterogeneity was discussed",
+            "we observed substantial heterogeneity",
+            "substantial unexplained heterogeneity",
+            "possible reasons for heterogeneity",
+            "heterogeneity may be attributed to",
+            "heterogeneity may have contributed to",
+            "explaining heterogeneity",
+            "differences may explain heterogeneity",
+            "variability in results",
+            "sources of heterogeneity",
+            "heterogeneity is plausible",
+            "significant heterogeneity",
+            "likely due to heterogeneity",
+            "explored sources of heterogeneity",
+            "investigated heterogeneity",
+        ]
+
+        if any(phrase in text for phrase in discussion_keywords):
+            return "Yes"
+
+        return "No"
+    
+    def evaluate_item16(self, text: str) -> str:
+        text = text.lower()
+
+        # 1.A statement declaring no conflict of interest → Yes
+        no_conflict_phrases = [
+            "no conflict of interest",
+            "no conflicts of interest",
+            "no competing interests",
+            "declare no conflicts",
+            "nothing to disclose",
+            "no known competing financial interests",
+            "none known",
+            "authors declare no competing interests",
+            "declarations of interest: none",
+            "no personal relationships that could have appeared to influence"
+        ]
+        if any(phrase in text for phrase in no_conflict_phrases):
+            return "Yes"
+
+        # 2. There is a conflict of interest, but its management has been disclosed → Yes
+        managed_conflict_phrases = [
+            "conflicts of interest were managed",
+            "the funder had no role",
+            "the sponsor had no involvement",
+            "the funding agency had no role",
+            "the funder did not influence the study",
+            "authors were independent from the funder",
+            "authors maintained independence"
+        ]
+        if any(phrase in text for phrase in managed_conflict_phrases):
+            return "Yes"
+
+        # 3. There is a conflict of interest, but it's not stated how it was managed → No
+        conflict_present_indicators = [
+            "received funding from",
+            "employed by",
+            "sponsored by",
+            "funding was provided by",
+            "received honoraria",
+            "on advisory board",
+            "has relationships with",
+            "has received support from"
+        ]
+        if any(phrase in text for phrase in conflict_present_indicators):
+            return "No"
+
+        return "No"
+
+
+    def evaluate_all(self, text: str):
         i4_result, i4_details = self.evaluate_item4(text)
         study_types = self.determine_study_types(text)
+        item5_result = self.evaluate_item5_study_selection_duplicate(text)
         item8_result = self.evaluate_item8(text)
-        item9_result = self.evaluate_item9(text,study_types)
+        item9_result = self.evaluate_item9(text, study_types)
+        item10_result = self.evaluate_item10_funding_sources(text)
         item11_result = self.evaluate_item11(text)
+        item12_result = self.evaluate_item12(text)
         item13_result = self.evaluate_item13(text)
+        item14_result = self.evaluate_item14(text)
+        item16_result = self.evaluate_item16(text)
+
         return {
             "Item 1 - PICO Components Present": self.evaluate_pico_components(text),
             "Item 2 - Protocol / PROSPERO": self.check_prospero_registration(text),
             "Item 3 - Explanation on the Selection of the Study Design (RCT/NRSI)": self.check_if_rct_or_nrsi_present(text),
             "Item 4 - Comprehensive Literatue Search strategy": i4_result,
             "Item 4 - Details": i4_details,
+            "Item 5 - Study Selection in Duplicate": item5_result,
             "Item 6 - Duplicate Data Extraction": self.evaluate_item6_data_extraction_duplicate(text),
             "Item 7 - List of Excluded Studies with Justification": self.evaluate_prisma_and_exclusions(text),
             "Item 8 - Description of Included Studies in Adequate Detail": item8_result,
             "Item 9 - Satisfactory Technique for RoB (RCT + NRSI)": item9_result,
+            "Item 10 - Funding Sources Reported": item10_result,
             "Item 11 - Use of Appropriate Methods for Statistical Combination of Results": item11_result,
+            "Item 12 - Consideration of RoB Impact on Review Findings": item12_result,  
             "Item 13 - Risk of Bias Considered": item13_result,
+            "Item 14 - Explanation or Discussion of Heterogeneity": item14_result,
             "Item 15 - Publication Bias Investigation": self.check_publication_bias_with_qa(text),
+            "Item 16 - Conflict of Interest Disclosure": item16_result
+            
         }
+
 
     def amstar_label_and_flaws(self, results):
         critical_keys = {
@@ -224,20 +471,35 @@ class Amstar2:
         secondary_keys = {
             "Item 1 - PICO Components Present",
             "Item 3 - Explanation on the Selection of the Study Design (RCT/NRSI)",
+            "Item 5 - Study Selection in Duplicate",
             "Item 6 - Duplicate Data Extraction",
-            "Item 8 - Description of Included Studies in Adequate Detail"
+            "Item 8 - Description of Included Studies in Adequate Detail",
+            "Item 10 - Funding Sources Reported",
+            "Item 12 - Consideration of RoB Impact on Review Findings",
+            "Item 14 - Explanation or Discussion of Heterogeneity",
+            "Item 16 - Conflict of Interest Disclosure"
+            
         }
 
         flaws = []
+        met   = []
 
         critical_flaws = [key for key in critical_keys if results.get(key, "").strip().lower() == "no"]
         secondary_flaws = [key for key in secondary_keys if results.get(key, "").strip().lower() == "no"]
 
-        # Flaws listesine notasyon ekle
-        flaws.extend([f"# {f}" for f in critical_flaws])
-        flaws.extend([f"* {f}" for f in secondary_flaws])
+        # Add to flaws list
+        flaws.extend([f"{f}" for f in critical_flaws])
+        flaws.extend([f"{f}" for f in secondary_flaws])
 
-        # Yeni kurala göre label belirleme
+        for key in critical_keys:
+            if results.get(key, "").strip().lower() == "yes":
+                met.append(f"{key}")
+
+        for key in secondary_keys:
+            if results.get(key, "").strip().lower() == "yes":
+                met.append(f"{key}")
+
+        
         if len(critical_flaws) >= 2:
             label = "Critically Low"
         elif len(critical_flaws) == 1:
@@ -248,14 +510,22 @@ class Amstar2:
             else:
                 label = "High"
 
-        return label, flaws
+        return label, flaws, met
+
     
-    # ------------------- AMSTAR Class + Evaluation Functions -------------------
-    # This assumes the `amstar2` and `amstar_label_and_flaws` functions you already have
-    # (Not repeating here for brevity, but they should be present above this code block.)
+    def process(self, text: str):
+        """
+        Processes the input text and returns the AMSTAR label and flaws.
+        This method is a wrapper for evaluate_all and amstar_label_and_flaws to maintain consistency with the original interface.
+        """
+        print("Processing AMSTAR2 evaluation..." )
+        # print(text)
+        results = self.evaluate_all(text)
+        label, flaws, met = self.amstar_label_and_flaws(results)
 
-    # ------------------- Normalization for PostgreSQL Columns -------------------
-
+        result = self.prepare_amstar_update_dict(results, (label, met))
+        return result
+        
     def normalize_key_for_column(self, name: str, max_len: int = 63) -> str:
         """
         Normalize long keys to snake_case column names. Truncates and hashes if needed.
@@ -278,10 +548,37 @@ class Amstar2:
                 output[column] = value.strip() if isinstance(value, str) else value
 
         # Unpack label + flaws
-        label, flaws = summary
+        label, met = summary
         output["amstar_label"] = label
-        output["amstar_flaws"] = flaws
+        output["amstar_met"] = met
 
         return output
+    
+    # # Critical flaws control
+    # critical_flaws = [key for key in critical_keys if results.get(key, "").strip().upper() == "No"]
+    
+    # # Add "#" for critical flaws
+    # critical_flaws_with_hash = [f"#{item}" for item in critical_flaws]
+    
+    # # Secondary flaws
+    # secondary_flaws = [key for key in secondary_keys if results.get(key, "").strip().upper() == "No"]
+    
+    # # Decision tree for items
+    # if len(critical_flaws_with_hash) >= 2:
+    #     label = "Critically Low"
+    #     flaws = critical_flaws_with_hash
+    # elif len(critical_flaws_with_hash) == 1:
+    #     label = "Low"
+    #     flaws = critical_flaws_with_hash
+    # else:
+    #     if len(secondary_flaws) >= 2:
+    #         label = "Moderate"
+    #         flaws = secondary_flaws
+    #     elif len(secondary_flaws) == 1:
+    #         label = "High"
+    #         flaws = secondary_flaws
+    #     else:
+    #         label = "High"
+    #         flaws = []
 
-
+    # return {"label": label, "flaws": flaws}

@@ -105,8 +105,8 @@ class PostgresService:
     def where(self, column, value, operator="="):
         return self._add_condition(column, operator, value, "AND")
 
-    def or_where(self, column, value, operator="="):
-        return self._add_condition(column, operator, value, "OR")
+    # def or_where(self, column, value, operator="="):
+    #     return self._add_condition(column, operator, value, "OR")
 
     def like(self, column, value, conjunction="AND", case_sensitive=False):
         quoted_column = self._quote(column)
@@ -117,7 +117,11 @@ class PostgresService:
             (conjunction, f"{quoted_column} {like_operator} {placeholder}"))
         return self
 
+    def where(self, column, value, operator="=", conjunction="AND"):
+        return self._add_condition(column, operator, value, conjunction)
+
     def in_where(self, column, values, conjunction="AND"):
+        # The logic was correct, just needed to ensure the signature is consistent
         placeholders = ", ".join([self._add_param(v) for v in values])
         self._conditions.append(
             (conjunction, f"{self._quote(column)} IN ({placeholders})"))
@@ -150,6 +154,36 @@ class PostgresService:
         self._columns = agg_str if self._columns == "*" else f"{self._columns}, {agg_str}"
         return self
 
+    def or_where(self, column, value, operator="="):
+        """
+        Adds an OR condition to the query.
+        """
+        return self._add_condition(column, operator, value, "OR")
+
+    def where_group(self, conditions, conjunction="AND"):
+        """
+        Adds a group of conditions with a specified conjunction (AND/OR).
+        """
+        if not conditions:
+            return self
+
+        group_conditions = " AND ".join(conditions)
+        self._conditions.append((conjunction, f"({group_conditions})"))
+        return self
+
+    def where_group_start(self, conjunction="AND"):
+        # Skip the conjunction if None or it's the first condition
+        if conjunction is None or not self._conditions:
+            self._conditions.append(("", "("))
+        else:
+            self._conditions.append((conjunction, "("))
+        return self
+
+    def where_group_end(self):
+        """Adds a closing parenthesis to end a condition group."""
+        self._conditions.append(("", ")"))
+        return self
+
     def _build_query(self, is_count=False):
         """Builds the final query string, now with validation for DISTINCT/ORDER BY conflicts."""
 
@@ -161,10 +195,13 @@ class PostgresService:
         query = [f"SELECT {cols} FROM {self._table}"]
 
         if self._conditions:
-            query.append(f"WHERE {self._conditions[0][1]}")
+            conj, clause = self._conditions[0]
+            query.append(f"WHERE {clause}")
+
             for i in range(1, len(self._conditions)):
-                query.append(
-                    f"{self._conditions[i][0]} {self._conditions[i][1]}")
+                conj, clause = self._conditions[i]
+                conj = conj if conj else ""
+                query.append(f"{conj} {clause}")
 
         if not is_count:
             if self._group_by:
@@ -207,34 +244,14 @@ class PostgresService:
         query_str = self._build_query()
         return {"query": query_str, "params": self._params}
 
-    # # In your PostgresService class
-    # def execute_raw_query(self, query, params=None):
-    #     """
-    #     Execute a raw SQL query using a transactional block to handle commits automatically.
-    #     """
-    #     try:
-    #         # ✅ KEY FIX: `engine.begin()` automatically commits INSERTs, UPDATEs, and DELETEs.
-    #         with self.engine.begin() as conn:
-    #             result = conn.execute(text(query), params or {})
-
-    #             if result.returns_rows:
-    #                 return [dict(row) for row in result.mappings()]
-    #             else:
-    #                 # For non-SELECT statements, the transaction is handled automatically.
-    #                 return []
-
-    #     except SQLAlchemyError as e:
-    #         logging.error(f"Error executing raw query: {e}")
-    #         raise
-
     def execute_raw_query(self, query, params=None):
         try:
             statement = query if isinstance(query, Executable) else text(query)
-            
+
             with self.engine.begin() as conn:
                 result = conn.execute(statement, params or {})
                 return [dict(row) for row in result.mappings()] if result.returns_rows else []
-            
+
             # with self.engine.begin() as conn:
             #     result = conn.execute(text(query), params or {})
             #     return [dict(row) for row in result.mappings()] if result.returns_rows else []
@@ -399,22 +416,40 @@ class PostgresService:
         self._conditions.append((conjunction, group_clause))
         return self
 
+    # def get_unique_items_from_column(self, table_name, column_name):
+    #     """
+    #     Fetches a sorted list of unique items from a column, ensuring the
+    #     ORDER BY clause is valid.
+    #     """
+    #     self.table(table_name)
+    #     if column_name.lower() not in self._table_columns_lower:
+    #         # logging.warning(f"Column '{column_name}' not found in '{table_name}'. Returning empty list.")
+    #         self.reset_query()
+    #         return []
+
+    #     self._columns = f'DISTINCT {self._quote(column_name)}'
+
+    #     # that is being selected with DISTINCT.
+    #     query = self._build_query() + \
+    #         f' ORDER BY {self._quote(column_name)} ASC'
+
+    #     results = self.execute_raw_query(query, self._params)
+    #     self.reset_query()
+    #     return [row[column_name] for row in results]
+
     def get_unique_items_from_column(self, table_name, column_name):
         """
         Fetches a sorted list of unique items from a column, ensuring the
-        ORDER BY clause is valid.
+        ORDER BY clause is valid and applied only once.
         """
         self.table(table_name)
         if column_name.lower() not in self._table_columns_lower:
-            # logging.warning(f"Column '{column_name}' not found in '{table_name}'. Returning empty list.")
             self.reset_query()
             return []
 
         self._columns = f'DISTINCT {self._quote(column_name)}'
-
-        # that is being selected with DISTINCT.
-        query = self._build_query() + \
-            f' ORDER BY {self._quote(column_name)} ASC'
+        self.order_by(column_name, "ASC")
+        query = self._build_query()
 
         results = self.execute_raw_query(query, self._params)
         self.reset_query()

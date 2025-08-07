@@ -6,6 +6,8 @@ import ast
 import pandas as pd
 import requests
 from itertools import chain
+
+from src.Services.Taggers import TaggerInterface
 sys.path.append(os.getcwd())
 from bs4 import BeautifulSoup
 from flask import request, jsonify
@@ -22,12 +24,14 @@ from src.Services.Factories.scrapers.OVIDPDFWebScraper import OVIDPDFWebScraper
 class PaperProcessor:
     DOI_PREFIX = "https://dx.doi.org/"
 
-    def __init__(self, db_handler, csv_file_path, server_headers=None):
+    def __init__(self, db_handler, csv_file_path, server_headers=None, tagger: TaggerInterface=None):
         self.db_handler = db_handler
         self.tag_columns = set()
         self.csv_file_path = csv_file_path
         self.server_headers = server_headers
         self.scrapers = {}
+        self.tagger = tagger
+
         self.data = []
 
     def process_papers(self, db_name=None):
@@ -43,7 +47,7 @@ class PaperProcessor:
                 
                 self.data.append(tags)
         self._save_data_to_csv()
-        print(pd.DataFrame(self.data))
+        # print(pd.DataFrame(self.data))
         return pd.DataFrame(self.data)
 
     @staticmethod
@@ -141,8 +145,7 @@ class PaperProcessor:
 
     def _apply_tagging(self, text, doi_url, paper_id, doi):
         """Applies tagging to the text content and structures the results."""
-        tagger = Tagging(text)
-        tags = tagger.create_columns_from_text()
+        tags = self.tagger.process(text)
         tags["id"] = paper_id
         tags["doi"] = doi
         tags["doi_url"] = doi_url
@@ -156,14 +159,18 @@ class PaperProcessor:
         for key, value in tags.items():
             if isinstance(value, list):
                 # Select only the last list if multiple lists exist
-                if isinstance(value[-1], list):
+                # Also check if the list is not empty to avoid an IndexError
+                if value and isinstance(value[-1], list):
                     value = value[-1]  # Take the last list for processing
                 
                 # Convert the selected list to a comma-separated string
-                tags[key] = ", ".join(map(str, value)) if isinstance(value, list) else str(value)
+                tags[key] = ", ".join(map(str, value))
 
             elif isinstance(value, str):
                 tags[key] = value.strip()  # Remove unnecessary whitespace
+   
+            elif value is not None:
+                tags[key] = str(value)
             
         return tags
 

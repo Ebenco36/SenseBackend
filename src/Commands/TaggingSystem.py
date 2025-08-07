@@ -9,20 +9,18 @@ from word2number import w2n
 from typing import List, Tuple, Dict
 from dateutil.parser import parse
 from collections import defaultdict
-from src.Commands.NERInference import NERTester, run_ner_inference
+from src.Commands.NERInference import NERTester
 from src.Services.Factories.Sections.SectionExtractor import SectionExtractor
+from src.Services.Taggers.TaggerInterface import TaggerInterface
 from src.Utils.Helpers import clean_references
 from transformers import pipeline, AutoModelForQuestionAnswering, AutoTokenizer
 from typing import Optional, List, Dict
 from src.Commands.regexp import searchRegEx
-from src.Commands.Amstar2 import Amstar2
+# from src.Commands.Amstar2 import Amstar2
 
 
-class Tagging:
-    def __init__(self, document, model_path: str = "./models/tinyroberta"):
-        self.document = clean_references(document)
-        self.sections = SectionExtractor(self.document)
-        self.result_columns = defaultdict(list)
+class Tagging(TaggerInterface):
+    def __init__(self):
         # init
         self.countries = [
             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria",
@@ -94,7 +92,12 @@ class Tagging:
             "Westlaw", "HeinOnline", "Nexis Uni", "ProQuest News & Newspapers", "Academic Search Complete",
             "Project MUSE", "Physiotherapy Evidence"
         ]
-
+    def process(self, text):
+        self.document = clean_references(text)
+        self.sections = SectionExtractor(self.document)
+        self.result_columns = defaultdict(list)
+        return self.create_columns_from_text()
+    
     def get_combined_text(self, sections: List):
         contents = " ".join(self.sections.get(section, "")
                             for section in sections).strip()
@@ -166,7 +169,7 @@ class Tagging:
                         # new database
                         self.result_columns["database_list"], self.result_columns["database_count"] = self.extract_databases()
                         
-                        self.result_columns["bert_integration"] = self.pubmed_bert_integration(self.document)
+                        # self.result_columns["bert_integration"] = self.pubmed_bert_integration(self.document)
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
         ################# Merge Dict Together ######################
@@ -917,17 +920,17 @@ class Tagging:
             tester = NERTester(model_path=MODEL_PATH)
 
             if tester.pipeline:
-                return run_ner_inference(tester, document)
+                return tester.run_ner_inference(document)
             else:
                 print("Failed to initialize NER pipeline. Check model files.")
                 return {}
     
-    def amstar2_integration(self):
-        today = date.today()
-        date_str = today.strftime("%Y-%m-%d")
-        context = self.document
-        checker = Amstar2(review_date=date_str)
-        results = checker.evaluate_all(context)
-        summary = checker.amstar_label_and_flaws(results)
-        update_dict = checker.prepare_amstar_update_dict(results, summary)
-        return update_dict
+    # def amstar2_integration(self):
+    #     today = date.today()
+    #     date_str = today.strftime("%Y-%m-%d")
+    #     context = self.document
+    #     checker = Amstar2(review_date=date_str)
+    #     results = checker.evaluate_all(context)
+    #     summary = checker.amstar_label_and_flaws(results)
+    #     update_dict = checker.prepare_amstar_update_dict(results, summary)
+    #     return update_dict

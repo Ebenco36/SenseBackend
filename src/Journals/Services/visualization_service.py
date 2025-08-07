@@ -62,7 +62,7 @@ class VisualizationService:
             where_clauses = []
             params = {}
 
-            # ✅ FIX: Use lowercase "year" column
+            #  Use lowercase "year" column
             if start_year is not None:
                 where_clauses.append('"year" >= :start_year')
                 params['start_year'] = start_year

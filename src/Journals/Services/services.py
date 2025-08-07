@@ -16,122 +16,274 @@ class JSONService:
     def __init__(self):
         self.db_service = PostgresService()
         self.chart_service = ChartService()
+        self.fields_to_extract = [
+            "topic__hash__acceptance__hash__kaa", "topic__hash__adm__hash__adm", "topic__hash__coverage__hash__cov", "topic__hash__eco__hash__eco",
+            "topic__hash__ethical__issues__hash__eth", "topic__hash__modeling__hash__mod", "topic__hash__risk__factor__hash__rf", "topic__hash__safety__hash__saf",
+            "intervention__hash__vaccine__options__hash__adjuvants", "intervention__hash__vaccine__options__hash__biva", "intervention__hash__vaccine__options__hash__live",
+            "intervention__hash__vaccine__options__hash__quad", "intervention__hash__vpd__hash__diph", "intervention__hash__vpd__hash__hb", "intervention__hash__vpd__hash__hiv",
+            "intervention__hash__vpd__hash__hpv", "intervention__hash__vpd__hash__infl", "intervention__hash__vpd__hash__meas", "intervention__hash__vpd__hash__meni",
+            "intervention__hash__vpd__hash__tetanus", "popu__hash__age__group__hash__ado_10__17", "popu__hash__age__group__hash__adu_18__64",
+            "popu__hash__age__group__hash__chi_2__9", "popu__hash__age__group__hash__eld_65__10000", "popu__hash__age__group__hash__nb_0__1", "popu__hash__immune__status__hash__hty",
+            "popu__hash__specific__group__hash__hcw", "popu__hash__specific__group__hash__pcg", "popu__hash__specific__group__hash__pw"
+        ]
 
     def _build_from_payload(self, payload):
         """
-        Builds a query from a standard JSON payload with full optimization and
-        robust, case-insensitive column validation.
+        Builds a query where filters in the same group (by hash prefix) are OR-ed,
+        and different groups are AND-ed together.
         """
         table_name = payload.get("table")
         if not table_name:
             raise ValueError("Table name is required")
 
-        # Initialize the builder and cache the table's schema for validation
         builder = self.db_service.table(table_name)
         valid_columns_lower = builder._table_columns_lower
 
-        # 1. Handle Columns (Silently skips non-existent ones)
+        # 1. SELECT clause
         if cols_to_select := payload.get("columns"):
             final_cols = [
-                col for col in cols_to_select
-                if col == '*' or col.lower() in valid_columns_lower
+                col for col in cols_to_select if col == '*' or col.lower() in valid_columns_lower
             ]
             if final_cols:
                 builder.select(*final_cols)
 
-        # 2. Handle Filters (Groups conditions and skips non-existent columns)
+        # 2. FILTERS
         filters = payload.get("filters", [])
         if filters:
-            grouped_wheres = defaultdict(list)
-            grouped_likes = defaultdict(list)
-            other_conditions = []
+            def extract_group_key(colname):
+                """
+                Group all topic__hash__... together, same for intervention__hash__, etc.
+                """
+                parts = colname.lower().split("__hash__")
+                if len(parts) >= 2:
+                    return parts[0] + "__hash__"  # only use first prefix
+                return colname.lower()
+            # def extract_group_key(colname):
+            #     """
+            #     Example:
+            #     - 'topic__hash__converge' => 'topic__hash__'
+            #     - 'popu__hash__age__group__hash__ado' => 'popu__hash__age__group__hash__'
+            #     - 'year' => 'year'
+            #     """
+            #     parts = colname.lower().split("__hash__")
+            #     if len(parts) > 1:
+            #         return "__hash__".join(parts[:-1]) + "__hash__"
+            #     return colname.lower()
 
-            # First, categorize all filters, skipping any with invalid columns
+            grouped_filters = defaultdict(list)
+
             for f in filters:
-                column = f.get("column")
-                # For multi-column filters, all columns must be valid
-                if columns := f.get("columns"):
-                    if not all(c.lower() in valid_columns_lower for c in columns):
-                        logging.warning(
-                            f"Filter skipped: One or more columns in {columns} do not exist.")
-                        continue
-                elif not column or column.lower() not in valid_columns_lower:
+                column = f.get("column") or (f.get("columns")[
+                    0] if f.get("columns") else None)
+                if not column:
+                    logging.warning(f"Filter skipped: Missing column in {f}")
+                    continue
+                if column.lower() not in valid_columns_lower and not all(
+                    c.lower() in valid_columns_lower for c in f.get("columns", [])
+                ):
                     logging.warning(
-                        f"Filter skipped: Column '{column}' does not exist.")
+                        f"Filter skipped: Invalid column '{column}'")
                     continue
 
-                filter_type = f.get("type", "where").lower()
-                if filter_type in ["where", "inwhere"]:
-                    grouped_wheres[column].append(f.get("value"))
-                elif filter_type == "likewhere":
-                    grouped_likes[column].append(f.get("value"))
-                else:
-                    other_conditions.append(f)
+                group_key = extract_group_key(column)
+                grouped_filters[group_key].append(f)
 
-            # Apply grouped 'where'/'inwhere' conditions as efficient IN clauses
-            for column, values in grouped_wheres.items():
-                flat_values = [v for v_list in values for v in (
-                    v_list if isinstance(v_list, list) else [v_list])]
-                unique_values = list(set(flat_values))
-                if len(unique_values) > 1:
-                    builder.in_where(column, unique_values)
-                elif unique_values:
-                    builder.where(column, unique_values[0])
+            # Apply: OR within group, AND across groups
+            for i, (group_key, group_filters) in enumerate(grouped_filters.items()):
+                builder.where_group_start(conjunction="AND" if i > 0 else None)
 
-            # Apply grouped 'likewhere' conditions as efficient OR LIKE (...) clauses
-            for column, values in grouped_likes.items():
-                unique_values = list(set(values))
-                if len(unique_values) > 1:
-                    builder.or_like_group(column, unique_values)
-                elif unique_values:
-                    builder.like(column, unique_values[0])
+                for j, f in enumerate(group_filters):
+                    column = f.get("column")
+                    columns = f.get("columns")
+                    value = f.get("value")
+                    filter_type = f.get("type", "where").lower()
+                    conj = None if j == 0 else "OR"
 
-            # Apply all other, non-groupable conditions
-            for f in other_conditions:
-                op_map = {
-                    "orwhere": builder.or_where,
-                    "notwhere": lambda col, val: builder.where(col, val, operator="!="),
-                    "betweenwhere": builder.between,
-                    "orlikewhere": lambda col, val: builder.like(col, val, conjunction="OR"),
-                    "multi_column_like": builder.or_like_multi_column,
-                }
-                filter_type = f.get("type").lower()
-                if filter_type in op_map:
-                    if filter_type == "multi_column_like":
-                        op_map[filter_type](f["columns"], f["value"])
+                    if filter_type == "where":
+                        builder.where(column, value, conjunction=conj)
+                    elif filter_type == "inwhere":
+                        builder.in_where(column, value, conjunction=conj)
+                    elif filter_type == "likewhere":
+                        builder.like(column, value, conjunction=conj)
                     elif filter_type == "betweenwhere":
-                        op_map[filter_type](
-                            f["column"], f["value"][0], f["value"][1])
+                        builder.between(
+                            column, value[0], value[1], conjunction=conj)
+                    elif filter_type == "multi_column_like":
+                        builder.or_like_multi_column(
+                            columns, value, conjunction=conj)
                     else:
-                        op_map[filter_type](f["column"], f["value"])
+                        logging.warning(
+                            f"Unsupported filter type: {filter_type}")
 
-        # 3. Handle Group By (Case-insensitive check)
+                builder.where_group_end()
+
+        # 3. GROUP BY
         if groups := payload.get("group_by"):
             valid_groups = [col for col in groups if col.lower()
                             in valid_columns_lower]
             if valid_groups:
                 builder.group_by(*valid_groups)
 
-        # 4. Handle Aggregations
+        # 4. Aggregations
         for agg in payload.get("aggregations", []):
             col = agg.get("column")
             if col != '*' and (not col or col.lower() not in valid_columns_lower):
                 logging.warning(
-                    f"Aggregation skipped: Column '{col}' does not exist.")
+                    f"Aggregation skipped: Column '{col}' not valid.")
                 continue
             builder.add_aggregation(agg["func"], col, agg.get("alias"))
 
-        # 5. Handle Order By (Case-insensitive check)
+        # 5. ORDER BY
         if order := payload.get("order_by"):
             col = order.get("column")
             if col and col.lower() in valid_columns_lower:
                 builder.order_by(col, order.get("direction", "ASC"))
 
-        # 6. Handle Pagination
+        # 6. Pagination
         if page_info := payload.get("pagination"):
             builder.paginate(page_info["page"], page_info["page_size"])
 
         return builder
+
+    # def _build_from_payload(self, payload):
+    #     """
+    #     Builds a query from a standard JSON payload with full optimization and
+    #     robust, case-insensitive column validation.
+    #     """
+    #     table_name = payload.get("table")
+    #     if not table_name:
+    #         raise ValueError("Table name is required")
+
+    #     # Initialize the builder and cache the table's schema for validation
+    #     builder = self.db_service.table(table_name)
+    #     valid_columns_lower = builder._table_columns_lower
+
+    #     # 1. Handle Columns (Silently skips non-existent ones)
+    #     if cols_to_select := payload.get("columns"):
+    #         final_cols = [
+    #             col for col in cols_to_select
+    #             if col == '*' or col.lower() in valid_columns_lower
+    #         ]
+    #         if final_cols:
+    #             builder.select(*final_cols)
+
+    #     # 2. Handle Filters (Groups conditions and skips non-existent columns)
+    #     filters = payload.get("filters", [])
+    #     if filters:
+
+    #         # MODIFICATION START: Read the operator and prepare to manage conjunctions
+    #         operator = payload.get('filter_operator', 'AND').upper()
+    #         is_first_condition = True
+
+    #         def get_conjunction():
+    #             nonlocal is_first_condition
+    #             if is_first_condition:
+    #                 is_first_condition = False
+    #                 # The very first WHERE clause always starts with AND (or nothing)
+    #                 return "AND"
+    #             return operator
+    #         # MODIFICATION END
+
+    #         grouped_wheres = defaultdict(list)
+    #         grouped_likes = defaultdict(list)
+    #         other_conditions = []
+
+    #         # First, categorize all filters, skipping any with invalid columns
+    #         for f in filters:
+    #             column = f.get("column")
+    #             # For multi-column filters, all columns must be valid
+    #             if columns := f.get("columns"):
+    #                 if not all(c.lower() in valid_columns_lower for c in columns):
+    #                     logging.warning(
+    #                         f"Filter skipped: One or more columns in {columns} do not exist.")
+    #                     continue
+    #             elif not column or column.lower() not in valid_columns_lower:
+    #                 logging.warning(
+    #                     f"Filter skipped: Column '{column}' does not exist.")
+    #                 continue
+
+    #             filter_type = f.get("type", "where").lower()
+    #             if filter_type in ["where", "inwhere"]:
+    #                 grouped_wheres[column].append(f.get("value"))
+    #             elif filter_type == "likewhere":
+    #                 grouped_likes[column].append(f.get("value"))
+    #             else:
+    #                 other_conditions.append(f)
+
+    #         # Apply grouped 'where'/'inwhere' conditions as efficient IN clauses
+    #         for column, values in grouped_wheres.items():
+    #             flat_values = [v for v_list in values for v in (
+    #                 v_list if isinstance(v_list, list) else [v_list])]
+    #             unique_values = list(set(flat_values))
+    #             conjunction = get_conjunction()
+    #             if len(unique_values) > 1:
+    #                 builder.in_where(column, unique_values,
+    #                                  conjunction=conjunction)
+    #             elif unique_values:
+    #                 builder.where(
+    #                     column, unique_values[0], conjunction=conjunction)
+
+    #         # Apply grouped 'likewhere' conditions as efficient OR LIKE (...) clauses
+    #         for column, values in grouped_likes.items():
+    #             unique_values = list(set(values))
+    #             conjunction = get_conjunction()
+    #             if len(unique_values) > 1:
+    #                 builder.or_like_group(
+    #                     column, unique_values, conjunction=conjunction)
+    #             elif unique_values:
+    #                 builder.like(
+    #                     column, unique_values[0], conjunction=conjunction)
+
+    #         # Apply all other, non-groupable conditions
+    #         for f in other_conditions:
+    #             op_map = {
+    #                 "orwhere": builder.or_where,
+    #                 "notwhere": lambda col, val: builder.where(col, val, operator="!="),
+    #                 "betweenwhere": builder.between,
+    #                 "orlikewhere": lambda col, val: builder.like(col, val, conjunction="OR"),
+    #                 "multi_column_like": builder.or_like_multi_column,
+    #             }
+    #             filter_type = f.get("type").lower()
+    #             if filter_type in op_map:
+    #                 conjunction = get_conjunction()
+
+    #                 if filter_type == "multi_column_like":
+    #                     op_map[filter_type](
+    #                         f["columns"], f["value"], conjunction=conjunction)
+    #                 elif filter_type == "betweenwhere":
+    #                     op_map[filter_type](
+    #                         f["column"], f["value"][0], f["value"][1], conjunction=conjunction)
+    #                 else:
+    #                     op_map[filter_type](
+    #                         f["column"], f["value"], conjunction=conjunction)
+
+    #     # 3. Handle Group By (Case-insensitive check)
+    #     if groups := payload.get("group_by"):
+    #         valid_groups = [col for col in groups if col.lower()
+    #                         in valid_columns_lower]
+    #         if valid_groups:
+    #             builder.group_by(*valid_groups)
+
+    #     # 4. Handle Aggregations
+    #     for agg in payload.get("aggregations", []):
+    #         col = agg.get("column")
+    #         if col != '*' and (not col or col.lower() not in valid_columns_lower):
+    #             logging.warning(
+    #                 f"Aggregation skipped: Column '{col}' does not exist.")
+    #             continue
+    #         builder.add_aggregation(agg["func"], col, agg.get("alias"))
+
+    #     # 5. Handle Order By (Case-insensitive check)
+    #     if order := payload.get("order_by"):
+    #         col = order.get("column")
+    #         if col and col.lower() in valid_columns_lower:
+    #             builder.order_by(col, order.get("direction", "ASC"))
+
+    #     # 6. Handle Pagination
+    #     if page_info := payload.get("pagination"):
+    #         builder.paginate(page_info["page"], page_info["page_size"])
+
+    #     return builder
 
     def get_all_filter_options(self, include=None):
         """
@@ -179,9 +331,10 @@ class JSONService:
             # Step 3: If specific filters are requested, build a new filtered response.
             include_set = {item.lower() for item in include}
             filtered_data = {}
-            
+
             # Check both 'others' and 'tag_filters' for matches
-            all_categories = {**data.get("others", {}), **data.get("tag_filters", {})}          
+            all_categories = {
+                **data.get("others", {}), **data.get("tag_filters", {})}
             for key, value in all_categories.items():
                 if key.lower() in include_set:
                     filtered_data[key] = value
@@ -293,7 +446,7 @@ class JSONService:
                         # The display name from the config becomes the key.
                         display_name = details.get('display', item_key)
                         # The database column is constructed from the keys.
-                        column_name = f"{top_level_key}__HASH__{subgroup_key}__HASH__{item_key}"
+                        column_name = f"{top_level_key}__hash__{subgroup_key}__hash__{item_key}"
                         category_mappings[display_name] = column_name.lower()
 
         return category_mappings
@@ -313,6 +466,43 @@ class JSONService:
         except Exception as e:
             return {"error": str(e)}
 
+    def _post_process_records(self, records):
+        """
+        A centralized helper to add the 'notes' and 'research_notes' fields
+        to a list of record dictionaries.
+        """
+        group_1_fields = [f for f in self.fields_to_extract if f.startswith(
+            "intervention__hash__vpd__hash") or f.startswith("topic__hash__coverage__hash")]
+        group_2_fields = [
+            f for f in self.fields_to_extract if f not in group_1_fields]
+        topic_fields = [
+            f for f in self.fields_to_extract if f.startswith("topic__hash__")]
+        if not records:
+            return []
+
+        # The logic is the same, but now it's in one reusable place
+        for record in records:
+            if not record:
+                continue
+
+            def extract_values(fields):
+                values = []
+                for field in fields:
+                    if field in record and record[field]:
+                        # Ensure value is treated as a string before splitting
+                        values.extend([str(v).split(":")[-1].strip()
+                                      for v in str(record[field]).split(",") if ":" in str(v)])
+                return list(filter(None, set(values)))
+
+            # Use the class-level constants
+            record["research_notes"] = ", ".join(
+                extract_values(group_1_fields))
+            record["notes"] = ", ".join(extract_values(group_2_fields))
+            record["topic_notes"] = ", ".join(extract_values(
+                topic_fields))  # Using the topic fields as well
+
+        return records
+
     def search_by_id(self, payload):
         try:
             table_name, record_id = payload.get("table"), payload.get("id")
@@ -320,6 +510,10 @@ class JSONService:
                 return {"error": "Table and ID are required"}
             record = self.db_service.table(table_name).where(
                 "primary_id", record_id).first()
+            if record:
+                record = self._post_process_records([record])[0]
+            else:
+                return {"success": False, "message": "Record not found"}
             return {"success": True, "data": record} if record else {"success": False, "message": "Record not found"}
         except Exception as e:
             print(e)
@@ -336,7 +530,10 @@ class JSONService:
             # Use the builder's 'in_where' for an efficient query
             records = self.db_service.table(
                 table).in_where("primary_id", id_list).get()
-
+            if records:
+                records = self._post_process_records(records)
+            else:
+                return {"success": True, "data": []}
             return {"success": True, "data": records}
         except Exception as e:
             return {"error": str(e)}
@@ -369,93 +566,176 @@ class JSONService:
         except Exception as e:
             return {"error": str(e)}
 
-    def read_with_raw_input(self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False):
+    # def read_with_raw_input(self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False):
+    #     """
+    #     Builds a query from various arguments by converting them into a standard payload,
+    #     then executes the query and performs all necessary post-processing.
+    #     """
+    #     try:
+    #         # 1. Assemble the standard payload from the method's arguments.
+    #         payload = {
+    #             "table": table,
+    #             "filters": []
+    #         }
+    #         if columns != "*":
+    #             payload["columns"] = columns
+    #         if pagination:
+    #             payload["pagination"] = pagination
+    #         if order_by:
+    #             payload["order_by"] = {
+    #                 "column": order_by[0], "direction": order_by[1]}
+
+    #         # 2. Convert the `raw_input` dict into the standard filter format.
+    #         for col, vals in (raw_input or {}).items():
+    #             if len(vals) > 1:
+    #                 payload["filters"].append(
+    #                     {"type": "inwhere", "column": col, "value": vals})
+    #             else:
+    #                 payload["filters"].append(
+    #                     {"type": "where", "column": col, "value": vals[0]})
+    #         print("Payload for read_with_raw_input:")
+    #         print(payload)
+    #         # 3. Add any other conditions to the filters list.
+    #         if additional_conditions:
+    #             payload["filters"].extend(additional_conditions)
+
+    #         # 4. Use the single, central helper to build the query.
+    #         builder = self._build_from_payload(payload)
+
+    #         # 5. Handle the option to return the SQL query for debugging.
+    #         # print(builder.show_sql())
+    #         if return_sql:
+    #             return {"success": True, "sql": builder.show_sql()}
+
+    #         # 6. Execute the query.
+    #         result = builder.get()
+    #         # Handles both paginated and non-paginated results.
+    #         records = result.get('records', result)
+
+    #         # 7. Perform post-processing to create the notes fields.
+    #         fields_to_extract = [
+    #             "topic__hash__acceptance__hash__kaa", "topic__hash__adm__hash__adm", "topic__hash__coverage__hash__cov", "topic__hash__eco__hash__eco",
+    #             "topic__hash__ethical__issues__hash__eth", "topic__hash__modeling__hash__mod", "topic__hash__risk__factor__hash__rf", "topic__hash__safety__hash__saf",
+    #             "intervention__hash__vaccine__options__hash__adjuvants", "intervention__hash__vaccine__options__hash__biva", "intervention__hash__vaccine__options__hash__live",
+    #             "intervention__hash__vaccine__options__hash__quad", "intervention__hash__vpd__hash__diph", "intervention__hash__vpd__hash__hb", "intervention__hash__vpd__hash__hiv",
+    #             "intervention__hash__vpd__hash__hpv", "intervention__hash__vpd__hash__infl", "intervention__hash__vpd__hash__meas", "intervention__hash__vpd__hash__meni",
+    #             "intervention__hash__vpd__hash__tetanus", "popu__hash__age__group__hash__ado_10__17", "popu__hash__age__group__hash__adu_18__64",
+    #             "popu__hash__age__group__hash__chi_2__9", "popu__hash__age__group__hash__eld_65__10000", "popu__hash__age__group__hash__nb_0__1", "popu__hash__immune__status__hash__hty",
+    #             "popu__hash__specific__group__hash__hcw", "popu__hash__specific__group__hash__pcg", "popu__hash__specific__group__hash__pw"
+    #         ]
+    #         group_1_fields = [f for f in fields_to_extract if f.startswith(
+    #             "intervention__hash__vpd__hash") or f.startswith("topic__hash__coverage__hash")]
+    #         group_2_fields = [
+    #             f for f in fields_to_extract if f not in group_1_fields]
+
+    #         for record in records:
+    #             if not record:
+    #                 continue
+
+    #             def extract_values(fields):
+    #                 values = []
+    #                 for field in fields:
+    #                     if field in record and record[field]:
+    #                         # Ensure value is treated as a string before splitting
+    #                         values.extend([str(v).split(
+    #                             ":")[-1].strip() for v in str(record[field]).split(",") if ":" in str(v)])
+    #                 return list(filter(None, set(values)))
+
+    #             record["research_notes"] = ", ".join(
+    #                 extract_values(group_1_fields))
+    #             record["notes"] = ", ".join(extract_values(group_2_fields))
+
+    #         # 8. Return the final, processed data.
+    #         return {"success": True, "data": result}
+
+    #     except Exception as e:
+    #         import traceback
+    #         traceback.print_exc()
+    #         return {"error": str(e)}
+
+    def read_with_raw_input(self, raw_input=None, table="all_db", columns="*", pagination=None, order_by=None, additional_conditions=None, return_sql=False, logical_operator="OR"):
         """
-        Builds a query from various arguments by converting them into a standard payload,
-        then executes the query and performs all necessary post-processing.
+        A robust, multi-mode function that builds a simple payload for the query builder.
+        It supports multiple input formats and controls the logical operator.
         """
         try:
-            # 1. Assemble the standard payload from the method's arguments.
-            payload = {
-                "table": table,
-                "filters": []
-            }
-            if columns != "*":
-                payload["columns"] = columns
-            if pagination:
-                payload["pagination"] = pagination
-            if order_by:
-                payload["order_by"] = {
-                    "column": order_by[0], "direction": order_by[1]}
+            payload = {}
 
-            # 2. Convert the `raw_input` dict into the standard filter format.
-            for col, vals in (raw_input or {}).items():
-                if len(vals) > 1:
-                    payload["filters"].append(
-                        {"type": "inwhere", "column": col, "value": vals})
-                else:
-                    payload["filters"].append(
-                        {"type": "where", "column": col, "value": vals[0]})
+            # Mode 1: The input is the full, structured payload. Use it directly.
+            if isinstance(raw_input, dict) and 'table' in raw_input and 'filters' in raw_input:
+                payload = raw_input
 
-            # 3. Add any other conditions to the filters list.
+            # Mode 2: The input is a filter definition (dict or list). Build the payload.
+            else:
+                payload = {"table": table}  # Simpler payload
+                if columns != "*":
+                    payload["columns"] = columns
+                if pagination:
+                    payload["pagination"] = pagination
+                if order_by:
+                    payload["order_by"] = {
+                        "column": order_by[0], "direction": order_by[1]}
+
+                raw_filters = []
+                if isinstance(raw_input, dict):  # Legacy dict format
+                    for col, vals in (raw_input or {}).items():
+                        if not vals:
+                            continue
+                        raw_filters.append({"type": "inwhere" if len(
+                            vals) > 1 else "where", "column": col, "value": vals if len(vals) > 1 else vals[0]})
+                elif isinstance(raw_input, list):  # Powerful list format
+                    operator_map = {'=': 'where', '!=': 'notwhere', 'IN': 'inwhere', 'NOT IN': 'notinwhere', 'LIKE': 'likewhere',
+                                    '>': 'greater', '<': 'less', '>=': 'greaterequal', '<=': 'lessequal', 'IS NOT NULL': 'isnotnull'}
+                    for f in raw_input:
+                        column_name = f.get('column')
+                        if not column_name:
+                            logging.warning(
+                                f"Malformed filter skipped (missing 'column' key): {f}")
+                            continue
+                        op = f.get('op', '=').upper()
+                        internal_type = operator_map.get(op)
+                        if not internal_type:
+                            raise ValueError(f"Unsupported operator: {op}")
+                        raw_filters.append(
+                            {"type": internal_type, "column": column_name, "value": f.get('value')})
+
+                if raw_filters:
+                    payload["filters"] = raw_filters
+                    # Add the operator key to the payload if it's not the default AND
+                    if logical_operator.upper() == "OR":
+                        payload["filter_operator"] = "OR"
+
             if additional_conditions:
-                payload["filters"].extend(additional_conditions)
+                payload.setdefault('filters', []).extend(additional_conditions)
 
-            # 4. Use the single, central helper to build the query.
             builder = self._build_from_payload(payload)
-
-            # 5. Handle the option to return the SQL query for debugging.
-            # print(builder.show_sql())
+            print("Payload for read_with_raw_input:")
+            print(builder.show_sql())
             if return_sql:
                 return {"success": True, "sql": builder.show_sql()}
 
-            # 6. Execute the query.
             result = builder.get()
-            # Handles both paginated and non-paginated results.
-            records = result.get('records', result)
+            records = result.get('records', result) if isinstance(
+                result, dict) else result
 
-            # 7. Perform post-processing to create the notes fields.
-            fields_to_extract = [
-                "topic__HASH__acceptance__HASH__kaa", "topic__HASH__adm__HASH__adm", "topic__HASH__coverage__HASH__cov", "topic__HASH__eco__HASH__eco",
-                "topic__HASH__ethical__issues__HASH__eth", "topic__HASH__modeling__HASH__mod", "topic__HASH__risk__factor__HASH__rf", "topic__HASH__safety__HASH__saf",
-                "intervention__HASH__vaccine__options__HASH__adjuvants", "intervention__HASH__vaccine__options__HASH__biva", "intervention__HASH__vaccine__options__HASH__live",
-                "intervention__HASH__vaccine__options__HASH__quad", "intervention__HASH__vpd__HASH__diph", "intervention__HASH__vpd__HASH__hb", "intervention__HASH__vpd__HASH__hiv",
-                "intervention__HASH__vpd__HASH__hpv", "intervention__HASH__vpd__HASH__infl", "intervention__HASH__vpd__HASH__meas", "intervention__HASH__vpd__HASH__meni",
-                "intervention__HASH__vpd__HASH__tetanus", "popu__HASH__age__group__HASH__ado_10__17", "popu__HASH__age__group__HASH__adu_18__64",
-                "popu__HASH__age__group__HASH__chi_2__9", "popu__HASH__age__group__HASH__eld_65__10000", "popu__HASH__age__group__HASH__nb_0__1", "popu__HASH__immune__status__HASH__hty",
-                "popu__HASH__specific__group__HASH__hcw", "popu__HASH__specific__group__HASH__pcg", "popu__HASH__specific__group__HASH__pw"
-            ]
-            group_1_fields = [f for f in fields_to_extract if f.startswith(
-                "intervention__HASH__vpd__HASH") or f.startswith("topic__HASH__coverage__HASH")]
-            group_2_fields = [
-                f for f in fields_to_extract if f not in group_1_fields]
+            # --- Post-Processing Logic (remains unchanged) ---
+            if not records:
+                return {"success": True, "data": result}
 
-            for record in records:
-                if not record:
-                    continue
+            if isinstance(records, list):
+                records = self._post_process_records(records)
+            elif isinstance(records, dict) and 'records' in records:
+                records['records'] = self._post_process_records(
+                    records['records'])
 
-                def extract_values(fields):
-                    values = []
-                    for field in fields:
-                        if field in record and record[field]:
-                            # Ensure value is treated as a string before splitting
-                            values.extend([str(v).split(
-                                ":")[-1].strip() for v in str(record[field]).split(",") if ":" in str(v)])
-                    return list(filter(None, set(values)))
-
-                record["research_notes"] = ", ".join(
-                    extract_values(group_1_fields))
-                record["notes"] = ", ".join(extract_values(group_2_fields))
-
-            # 8. Return the final, processed data.
             return {"success": True, "data": result}
-
         except Exception as e:
             import traceback
             traceback.print_exc()
             return {"error": str(e)}
 
     # --- Utility and Business Logic Methods ---
+
     def show_sql(self, payload):
         try:
             builder = self._build_from_payload(payload)
@@ -473,7 +753,7 @@ class JSONService:
         # This method contains business logic and remains unchanged internally.
         structured_data = defaultdict(lambda: defaultdict(dict))
         for column in filtered_columns:
-            parts = column.split("__HASH__")
+            parts = column.split("__hash__")
             if len(parts) == 3:
                 category, subgroup, value = parts
                 corrected_value = value
@@ -513,7 +793,7 @@ class JSONService:
                 for subgroup, values in subgroups.items():
                     for value, details in values.items():
                         if user_selection_lower == details["display"].lower() or user_selection_lower in [syn.lower() for syn in details["synonyms"]]:
-                            constructed_column = f"{category}__HASH__{subgroup}__HASH__{value}"[
+                            constructed_column = f"{category}__hash__{subgroup}__hash__{value}"[
                                 :63]
                             if constructed_column in filtered_columns:
                                 if constructed_column not in result:

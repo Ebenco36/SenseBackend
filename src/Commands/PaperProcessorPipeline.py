@@ -1,6 +1,8 @@
 import sys
 import os
 import traceback
+
+from src.Services.Taggers.TaggerInterface import TaggerInterface
 sys.path.append(os.getcwd())
 from concurrent.futures import ThreadPoolExecutor
 from src.Services.DatabaseHandler import DatabaseHandler
@@ -56,8 +58,8 @@ class PaperProcessorPipeline:
         failed_ids.difference_update(retry_success_ids)
         failed_ids.update(new_failed_ids)
 
-        processed_str = ",".join(map(str, sorted(processed_ids)))
-        failed_str = ",".join(map(str, sorted(failed_ids)))
+        processed_str = ",".join(map(str, sorted(map(int, processed_ids))))
+        failed_str = ",".join(map(str, sorted(map(int, failed_ids))))
 
         query = f"""
         INSERT INTO {self.tracker_table} 
@@ -74,7 +76,7 @@ class PaperProcessorPipeline:
         """
         db_handler.execute_query(query, (source_name, processed_str, failed_str, last_id, status))
 
-    def process_source_in_batches(self, query, csv_file_path, db_name, batch_size=100):
+    def process_source_in_batches(self, query, csv_file_path, db_name, batch_size=100, tagger: TaggerInterface=None):
         """
         Dynamically processes all missing primary_ids (including skipped ones).
         """
@@ -101,7 +103,7 @@ class PaperProcessorPipeline:
                 batch_query = f"{query} AND primary_id IN ({placeholders})"
 
                 db_handler.query = batch_query
-                processor = PaperProcessor(db_handler=db_handler, csv_file_path=csv_file_path)
+                processor = PaperProcessor(db_handler=db_handler, csv_file_path=csv_file_path, tagger=tagger)
                 data_return = processor.process_papers(db_name=db_name)
                 # print(data_return)
                 if data_return.empty:
@@ -116,7 +118,10 @@ class PaperProcessorPipeline:
                 failed_this_batch = set()
 
                 try:
-                    updater.update_columns_for_existing_records(data_return.drop(columns="is_retry"), id_column='id')
+                    # Use an iterator to get the first key without creating a new list
+                    key = next(iter(self.column_mapping.keys())) if self.column_mapping else 'id'
+                    # The rest of your code WHERE GAN
+                    updater.update_columns_for_existing_records(data_return.drop(columns="is_retry"), id_column=key)
                     retry_success = retry_ids
                 except Exception as err:
                     print(f"Partial failure during update: {err}")

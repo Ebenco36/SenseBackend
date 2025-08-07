@@ -5,7 +5,7 @@ import os
 sys.path.append(os.getcwd())
 
 from src.Commands.TaggingSystem import TaggingSystem
-from src.Services.GeneralPDFWebScraper import GeneralPDFWebScraper
+# from src.Services.Factories.scrapers import GeneralPDFWebScraper
 from src.Commands.PaperProcessor import PaperProcessor
 
 class PaperProcessingPipeline:
