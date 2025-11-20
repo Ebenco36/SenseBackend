@@ -12,6 +12,7 @@ from src.Services.ApplicationService import ApplicationService
 from src.Services.DBservices.SafeRegistryInit import initialize_registry_safely
 from src.Utils.filter_structure import FILTER_STRUCTURE
 from src.core.route_initializer import RouteInitialization
+from src.middlewares.record_processor_middleware import RecordProcessorMiddleware
 from utils.errors import BadRequestException
 from logging.handlers import RotatingFileHandler
 from utils.http import bad_request, not_found, not_allowed, internal_error
@@ -100,6 +101,7 @@ def create_app():
         except Exception as e:
             logger.error(f"❌ Database creation error: {str(e)}", exc_info=True)
     
+    RecordProcessorMiddleware(app)
     with app.app_context():
         try:
             logger.info("Starting registry initialization...")

@@ -284,4 +284,4 @@ class MedlineClass:
         # Save
         out_path = os.path.join(self.output_dir, "medline_results.csv")
         df.to_csv(out_path, index=False)
-        print(f"✅ Saved {len(df)} records to {out_path}")
+        print(f"Saved {len(df)} records to {out_path}")

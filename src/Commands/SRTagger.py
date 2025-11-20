@@ -4,16 +4,16 @@ PRODUCTION-READY SYSTEMATIC REVIEW TAGGING PIPELINE
 Complete end-to-end automated data extraction system
 
 Features:
-✅ AI-powered extraction (SPECTER2, BERT NER, QA models)
-✅ Rule-based validation (RegEx, context checking)
-✅ Hybrid approach (AI + rules for maximum accuracy)
-✅ AMSTAR-2 quality assessment
-✅ 50+ data fields extraction
-✅ Batch processing support
-✅ Error handling & logging
-✅ Database integration ready
-✅ Export to JSON/CSV/Excel
-✅ Production-grade architecture
+ AI-powered extraction (SPECTER2, BERT NER, QA models)
+ Rule-based validation (RegEx, context checking)
+ Hybrid approach (AI + rules for maximum accuracy)
+ AMSTAR-2 quality assessment
+ 50+ data fields extraction
+ Batch processing support
+ Error handling & logging
+ Database integration ready
+ Export to JSON/CSV/Excel
+ Production-grade architecture
 
 Author: Systematic Review Automation Team
 Version: 2.0
@@ -540,7 +540,7 @@ class AIExtractor:
                     model=Config.QA_MODEL_NAME,
                     tokenizer=Config.QA_MODEL_NAME
                 )
-                logger.info("✅ QA model loaded")
+                logger.info(" QA model loaded")
             except Exception as e:
                 logger.warning(f"Failed to load QA model: {e}")
         
@@ -548,7 +548,7 @@ class AIExtractor:
             try:
                 logger.info("Loading embedder...")
                 self.embedder = SentenceTransformer(Config.EMBEDDER_NAME)
-                logger.info("✅ Embedder loaded")
+                logger.info(" Embedder loaded")
             except Exception as e:
                 logger.warning(f"Failed to load embedder: {e}")
         
@@ -610,7 +610,7 @@ class SRTagger:
                 logger.warning("AI extractor failed to initialize. Using rule-based only.")
                 self.use_ai = False
         
-        logger.info(f"✅ SR Tagger initialized (AI: {self.use_ai})")
+        logger.info(f" SR Tagger initialized (AI: {self.use_ai})")
     
     def tag(self, text: str, title: str = "", primary_id: Optional[int] = None) -> ExtractionResult:
         """
@@ -665,7 +665,7 @@ class SRTagger:
             # Calculate confidence
             result.extraction_confidence = self._calculate_confidence(result)
             
-            logger.info(f"✅ Extraction complete (confidence: {result.extraction_confidence:.2f})")
+            logger.info(f" Extraction complete (confidence: {result.extraction_confidence:.2f})")
             
         except Exception as e:
             logger.error(f"Extraction error: {e}")
@@ -756,7 +756,7 @@ class SRTagger:
             )
             results.append(result)
         
-        logger.info(f"✅ Batch tagging complete: {len(results)} papers processed")
+        logger.info(f" Batch tagging complete: {len(results)} papers processed")
         return results
     
     def export_to_json(self, results: List[ExtractionResult], output_file: str):
@@ -764,19 +764,19 @@ class SRTagger:
         data = [r.to_dict() for r in results]
         with open(output_file, 'w') as f:
             json.dump(data, f, indent=2)
-        logger.info(f"✅ Exported to JSON: {output_file}")
+        logger.info(f" Exported to JSON: {output_file}")
     
     def export_to_csv(self, results: List[ExtractionResult], output_file: str):
         """Export results to CSV"""
         df = pd.DataFrame([r.to_dict() for r in results])
         df.to_csv(output_file, index=False)
-        logger.info(f"✅ Exported to CSV: {output_file}")
+        logger.info(f" Exported to CSV: {output_file}")
     
     def export_to_excel(self, results: List[ExtractionResult], output_file: str):
         """Export results to Excel"""
         df = pd.DataFrame([r.to_dict() for r in results])
         df.to_excel(output_file, index=False, engine='openpyxl')
-        logger.info(f"✅ Exported to Excel: {output_file}")
+        logger.info(f" Exported to Excel: {output_file}")
 
 
 # ============================================================================

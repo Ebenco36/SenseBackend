@@ -49,7 +49,7 @@ FILTER_STRUCTURE = {
             "vaccine__options": {
                 "column": "vaccine_options",
                 "adjuvants": {
-                    "column": "vaccine_options",
+                    "column": "intervention__hash__vaccine__options__hash__adjuvants",
                     "additional_context": "None",
                     "display": "adjuvants",
                     "synonyms": ["adjuvants:adjuvants", "adjuvants"]

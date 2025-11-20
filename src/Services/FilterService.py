@@ -268,7 +268,7 @@ class FilterService:
                             sorted_values = sorted(list(extracted))
                             others[display_name] = {
                                 "column": column_name,
-                                "values": sorted_values
+                                "values": list(set(sorted_values))
                             }
                         continue
                     
@@ -293,9 +293,10 @@ class FilterService:
                     
                     if extracted:
                         sorted_values = self._sort_values(list(extracted), display_name)
+                        # print(list(set(sorted_values)))
                         others[display_name] = {
                             "column": column_name,
-                            "values": sorted_values
+                            "values": list(set(sorted_values))
                         }
                         self.logger.info(f"{display_name}: {len(sorted_values)} values extracted")
                     else:
@@ -322,7 +323,7 @@ class FilterService:
                     # Merge DB values with manual extras
                     existing_values = set(others[filter_name].get("values", []))
                     merged = existing_values.union(manual_values)
-                    others[filter_name]["values"] = self._sort_values(list(merged), filter_name)
+                    others[filter_name]["values"] = list(set(self._sort_values(list(merged), filter_name)))
                     if manual_column:
                         others[filter_name]["column"] = manual_column
                     self.logger.info(
@@ -333,7 +334,7 @@ class FilterService:
                     # Only manual/default values for this filter
                     others[filter_name] = {
                         "column": manual_column,
-                        "values": self._sort_values(list(manual_values), filter_name)
+                        "values": list(set(self._sort_values(list(manual_values), filter_name)))
                     }
                     self.logger.info(f"Using default values only for {filter_name}")
             

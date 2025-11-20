@@ -4,6 +4,7 @@ Filter Resources - Using ApplicationService
 
 from flask_restful import Resource
 from flask import current_app
+from src.Services.DBservices.RecordProcessor import RecordProcessor
 from src.Utils.response import ApiResponse
 import logging
 
@@ -53,9 +54,9 @@ class FiltersTreeResource(Resource):
 
 """
 filter_resource.py - Enhanced with nested OR condition support
-✅ Handles nested logic groups (OR within AND)
-✅ Recursive filter application
-✅ Multi-field OR search compatible
+Handles nested logic groups (OR within AND)
+Recursive filter application
+Multi-field OR search compatible
 """
 
 from flask import request, send_file
@@ -84,6 +85,7 @@ class FilterSearchResource(Resource):
     def __init__(self):
         """Initialize with no external dependencies."""
         self.logger = logger
+        self.record_processor = RecordProcessor() 
     
     def post(self):
         """Search records with filtering, pagination, sorting."""
@@ -146,6 +148,10 @@ class FilterSearchResource(Resource):
             records = query.all()
             serialized_records = [self._serialize_record(r) for r in records]
             
+            serialized_records = self.record_processor.add_artificial_columns(
+                serialized_records
+            )
+            
             # Pagination info
             total_pages = (total_records + page_size - 1) // page_size
             
@@ -198,7 +204,7 @@ class FilterSearchResource(Resource):
         logic: str = 'AND'
     ):
         """
-        ✅ ENHANCED: Apply filters with recursive nested OR/AND support.
+        ENHANCED: Apply filters with recursive nested OR/AND support.
         
         Handles structures like:
         {
@@ -418,7 +424,7 @@ class FilterSearchResource(Resource):
                     search.get('logic', 'AND')
                 )
             
-            for filter_col in ['country', 'language', 'year', 'amstar_label']:
+            for filter_col in ['country', 'language', 'year', 'amstar_label', 'intervention__hash__vaccine__options__hash__adjuvants']:
                 if hasattr(model_class, filter_col):
                     column = getattr(model_class, filter_col)
                     count_query = db.session.query(

@@ -1313,7 +1313,7 @@ def get_final_url(url):
                     # No Location header, stop here
                     break
                 
-                # ✅ FIX: Use urljoin to handle both absolute and relative paths
+                # Use urljoin to handle both absolute and relative paths
                 url = urljoin(url, new_location)
                 # print(f"Redirected to: {url}")
             else:

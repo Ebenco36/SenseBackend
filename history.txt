@@ -101,6 +101,7 @@ python ./src/Commands/dynamic_table.py ./Data/output/test_hpv_data.csv  all_db
 100 samples
 python ./src/Commands/dynamic_table.py ./Data/100_samples.csv  all_db
 
+python ./src/Commands/dynamic_table.py ./Data/all_db_with_tagging.csv  all_db
 
 
 python ./src/Commands/CountryRegionManager.py

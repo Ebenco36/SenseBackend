@@ -22,7 +22,7 @@ class DatabaseUpdater:
         self.Session = sessionmaker(bind=self.engine)
         self.column_mapping = column_mapping or {}
 
-    # ✅ NEW HELPER: A dedicated function to refresh the schema from the database.
+    # NEW HELPER: A dedicated function to refresh the schema from the database.
     def _refresh_metadata(self):
         """Clears and reloads the table metadata from the database."""
         self.metadata.clear()
@@ -40,7 +40,7 @@ class DatabaseUpdater:
     def sanitize_column_name(self, column_name):
         return column_name.replace("#", "__hash__")
 
-    # ✅ CHANGED: This function now refreshes the metadata if it changes the schema.
+    # CHANGED: This function now refreshes the metadata if it changes the schema.
     def ensure_columns_exist(self, columns):
         """
         Ensures columns exist and refreshes the in-memory schema if new
@@ -88,7 +88,7 @@ class DatabaseUpdater:
             else: items.append((new_key, str(v)))
         return dict(items)
 
-    # ✅ CHANGED: The main update function is now corrected.
+    # CHANGED: The main update function is now corrected.
     def update_columns_for_existing_records(self, df, id_column):
         """
         Creates columns if they don't exist and then updates values without skipping.

@@ -1,7 +1,7 @@
 """
 Table Reflector - Dynamically create models from existing database tables
 PRODUCTION VERSION: Proper caching, logging, error handling
-✅ UPDATED: Preserves exact table names, simpler approach
+UPDATED: Preserves exact table names, simpler approach
 """
 
 from typing import Dict, Any, List, Optional, Type
@@ -16,11 +16,11 @@ class TableReflector:
     Reflect existing database tables and generate SQLAlchemy models dynamically.
     
     Features:
-    - ✅ Exact table names preserved (all_db → all_db, NOT AllDb)
-    - ✅ Proper caching to prevent duplicate model creation
-    - ✅ Comprehensive logging
-    - ✅ Full error handling
-    - ✅ Model introspection
+    - Exact table names preserved (all_db → all_db, NOT AllDb)
+    - Proper caching to prevent duplicate model creation
+    - Comprehensive logging
+    - Full error handling
+    - Model introspection
     """
     
     def __init__(self, db_instance):
@@ -39,7 +39,7 @@ class TableReflector:
             self.metadata = MetaData()
             self._reflected_models: Dict[str, Type] = {}
             
-            logger.info("✅ TableReflector initialized successfully")
+            logger.info("TableReflector initialized successfully")
         
         except Exception as e:
             logger.error(f"❌ TableReflector initialization failed: {str(e)}", exc_info=True)
@@ -71,8 +71,8 @@ class TableReflector:
         """
         Reflect a table from database and create a SQLAlchemy model.
         
-        ✅ USES EXACT TABLE NAME (no CamelCase conversion)
-        ✅ CRITICAL: Uses cache to prevent duplicate model creation
+        USES EXACT TABLE NAME (no CamelCase conversion)
+        CRITICAL: Uses cache to prevent duplicate model creation
         
         Args:
             table_name: Name of the table to reflect
@@ -81,7 +81,7 @@ class TableReflector:
             SQLAlchemy model class with exact table name
         """
         try:
-            # ✅ CHECK CACHE FIRST
+            # CHECK CACHE FIRST
             if table_name in self._reflected_models:
                 logger.debug(f"Using cached model for table: {table_name}")
                 return self._reflected_models[table_name]
@@ -96,13 +96,13 @@ class TableReflector:
             if table_name not in tables:
                 raise ValueError(f"Table '{table_name}' does not exist in database")
             
-            # ✅ Create model using simple approach
+            # Create model using simple approach
             model_class = self._create_model(table_name)
             
-            # ✅ Store in cache immediately with exact table name as key
+            # Store in cache immediately with exact table name as key
             self._reflected_models[table_name] = model_class
             
-            logger.info(f"✅ Reflected and cached model: {model_class.__name__} -> {table_name}")
+            logger.info(f"Reflected and cached model: {model_class.__name__} -> {table_name}")
             return model_class
         
         except ValueError as e:
@@ -116,7 +116,7 @@ class TableReflector:
         """
         Create a SQLAlchemy model by reflecting a single table.
         
-        ✅ Uses exact table name as class name (all_db → all_db)
+        Uses exact table name as class name (all_db → all_db)
         
         Args:
             table_name: Table name to reflect
@@ -138,7 +138,7 @@ class TableReflector:
                 extend_existing=True
             )
             
-            # ✅ Create a dynamic model class with exact table name
+            # Create a dynamic model class with exact table name
             class_dict = {
                 '__tablename__': table_name,
                 '__table__': table,

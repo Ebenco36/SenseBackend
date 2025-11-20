@@ -107,7 +107,7 @@ def initialize_registry_safely(app, table_names: List[str] = None) -> Dict[str, 
                 
                 registry.reflect(table_name)
                 reflected_count += 1
-                logger.info(f"✅ Reflected table: {table_name}")
+                logger.info(f"Reflected table: {table_name}")
             
             except Exception as e:
                 message = f"Failed to reflect '{table_name}': {str(e)}"

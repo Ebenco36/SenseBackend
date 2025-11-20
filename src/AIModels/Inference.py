@@ -266,8 +266,8 @@ class SRPredictor:
 
         # Queries
         self.queries = {
-            "studies": "How many studies were included?",
-            "articles": "How many articles were included in the review?",
+            "studies": "How many studies or reviews were included?",
+            "articles": "How many articles or studies or reviews were included in the review?",
             "date":    "What is the last literature search date?",
             "country": "Give country counts or sample sizes by country.",
             "designs": "List and count study designs in the included studies.",

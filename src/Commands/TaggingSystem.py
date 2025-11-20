@@ -140,8 +140,8 @@ class Tagging(TaggerInterface):
                         self.result_columns["total_cross_sectional_count"] = 0 if "cross_sectional" not in study_info else study_info["cross_sectional"]
                         self.result_columns["total_case_control_count"] = 0 if "case_control" not in study_info else study_info["case_control"]
                         self.result_columns["total_cohort_count"] = 0 if "cohort" not in study_info else study_info["cohort"]
-                    elif category == "topic" and subcategory == "eff":
-                        self.result_columns[column_name] = extracted_metadata.get("ve_info", None)
+                    # elif category == "topic" and subcategory == "eff":
+                    #     self.result_columns[column_name] = extracted_metadata.get("ve_info", None)
                     elif category == "particip" and subcategory == "group":
                         self.result_columns[column_name] = self.extract_population(term_list)
                         
@@ -185,10 +185,10 @@ class Tagging(TaggerInterface):
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
         ################# Merge Dict Together ######################
-        amstars_integration = self.amstar2_integration()
-        # self.result_columns = {**self.result_columns, **amstars_integration}
-        self.result_columns.update(amstars_integration)
-        # print(self.clean_result(self.result_columns))
+        # amstars_integration = self.amstar2_integration()
+        # # self.result_columns = {**self.result_columns, **amstars_integration}
+        # self.result_columns.update(amstars_integration)
+        # # print(self.clean_result(self.result_columns))
         return self.clean_result(self.result_columns)
 
     def extract_num_databases_old(self, text):
@@ -1055,10 +1055,10 @@ class Tagging(TaggerInterface):
                 print("Failed to initialize NER pipeline. Check model files.")
                 return {}
     
-    def amstar2_integration(self):
+    def amstar2_integration(self, text_data: str = None):
         today = date.today()
         date_str = today.strftime("%Y-%m-%d")
-        context = self.document
+        context = text_data if text_data else self.document
         checker = amstar2(review_date=date_str)
         results = checker.evaluate_all(context)
         summary = checker.amstar_label_and_flaws(results)

@@ -52,7 +52,7 @@ class ModelRegistry:
         self.db = db_instance
         self.reflector = TableReflector(db_instance)
         
-        # ✅ PUBLIC attributes (not private)
+        #  PUBLIC attributes (not private)
         self.models: Dict[str, Type] = {}  # Map class_name -> model
         self._table_map: Dict[str, str] = {}  # Map table_name -> class_name
         self._repositories: Dict[str, Any] = {}  # Cache repositories
@@ -74,7 +74,7 @@ class ModelRegistry:
             self.models[class_name] = model_class
             self._table_map[table] = class_name
             
-            logger.info(f"✅ Registered model: {class_name} -> {table}")
+            logger.info(f" Registered model: {class_name} -> {table}")
         
         except Exception as e:
             logger.error(f"Failed to register model: {str(e)}", exc_info=True)
@@ -99,7 +99,7 @@ class ModelRegistry:
             self.models[class_name] = model_class
             self._table_map[table_name] = class_name
             
-            logger.info(f"✅ Reflected model: {class_name} -> {table_name}")
+            logger.info(f" Reflected model: {class_name} -> {table_name}")
             return model_class
         
         except Exception as e:

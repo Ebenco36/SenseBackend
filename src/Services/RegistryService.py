@@ -34,7 +34,7 @@ class RegistryService(BaseService):
         """
         Initialize registry safely without crashing
         
-        ✅ CRITICAL: Don't reflect tables - they're already reflected!
+        Don't reflect tables - they're already reflected!
         """
         
         try:
@@ -56,7 +56,7 @@ class RegistryService(BaseService):
                 for table_name in tables:
                     if registry.table_exists(table_name):
                         verified_count += 1
-                        self.log_info(f"✅ Verified: {table_name}")
+                        self.log_info(f"Verified: {table_name}")
                     else:
                         missing.append(table_name)
                         self.log_warning(f"Table not found: {table_name}")

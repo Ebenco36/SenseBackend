@@ -126,7 +126,7 @@ class ContactFormResource(Resource):
             
             # Log successful submission
             logging.info(
-                f"✅ Contact form submitted - "
+                f" Contact form submitted - "
                 f"Name: {name}, Email: {email}, Subject: {subject}"
             )
             
@@ -136,7 +136,7 @@ class ContactFormResource(Resource):
             }, 200
             
         except Exception as e:
-            logging.error(f"❌ Contact form error: {str(e)}", exc_info=True)
+            logging.error(f" Contact form error: {str(e)}", exc_info=True)
             return {
                 "success": False,
                 "error": "Failed to send message. Please try again later."
