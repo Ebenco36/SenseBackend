@@ -11,7 +11,7 @@ class ScienceDirectExtractor(BaseArticleExtractor):
         self._extract_title()
         self._extract_abstract()
         self._extract_all_sections()
-        self._extract_references()
+        # self._extract_references()
         self._extract_keywords()
         self._extract_prisma_images()
         self._combine_main_content()

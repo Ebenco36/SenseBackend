@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from src.Commands.SeleniumPool import PDFDownloader
 from src.Utils.Helpers import clean_special_characters, get_contents
-from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import (
+from src.Services.Factories.scrapers.GeneralPDFWebScraper import (
     GeneralPDFWebScraper,
 )
 from src.Services.Factories.Sections.ArticleExtractorFactory import (
@@ -98,7 +98,5 @@ class CochranePDFWebScraper(GeneralPDFWebScraper):
         self.session.headers.update({"Accept-Encoding": "utf-8"})
         self.url = self.convert_cochrane_pdf_to_full_text(self.url)
         """Fetches and extracts HTML text specifically for Cochrane."""
-        # response = self.session.get(self.url)
-        # response.raise_for_status()
         return get_contents(self.url)
         

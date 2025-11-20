@@ -29,7 +29,7 @@ class CochraneUniversalExtractor(BaseArticleExtractor):
         self._extract_section("results", ["results", "summaryOfFindings"])
         self._extract_section("discussion", ["discussion"])
         self._extract_section("conclusion", ["conclusions"])
-        self._extract_images()
+        # self._extract_images()
         self._extract_tables()
         self._combine_main_content()
 

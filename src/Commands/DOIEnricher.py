@@ -34,7 +34,7 @@ class DOIEnricher:
         except requests.exceptions.RequestException as e:
             print(f"Error fetching metadata for DOI {doi}: {e}")
             self.not_found_dois.append(doi)
-            return {"Journal": None, "Publisher": None, "Publication_Year": None, "Publication_Date": None, "Language": None, "Abstract": None, "Country": None, "Citation_Count": None, "Keywords": None}
+            return {"journal": None, "publisher": None, "publication_year": None, "publication_date": None, "language": None, "abstract": None, "country": None, "citation_Count": None, "keywords": None}
     
     def extract_source(self, doi_url):
         """Extract the source from the DOI URL by taking the host without '.com' or other TLDs."""
@@ -42,7 +42,7 @@ class DOIEnricher:
         source = parsed_url.split('.')[-2] if parsed_url else None
         return source
     
-    def enrich_data(self, key="DOI"):
+    def enrich_data(self, key="doi"):
         """Fetch metadata for each DOI and enrich the dataframe."""
         enriched_data = []
         

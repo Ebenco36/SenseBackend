@@ -6,43 +6,48 @@ import ast
 import pandas as pd
 import requests
 from itertools import chain
+
+from src.Services.Taggers import TaggerInterface
 sys.path.append(os.getcwd())
 from bs4 import BeautifulSoup
 from flask import request, jsonify
 from src.Commands.regexp import searchRegEx
 from src.Commands.TaggingSystem import Tagging
 from src.Utils.Helpers import contains_http_or_https
-from src.Services.Factories.GeneralPDFScraper.CochranePDFWebScraper import CochranePDFWebScraper
-from src.Services.Factories.GeneralPDFScraper.LOVEPDFWebScraper import LOVEPDFWebScraper
-from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
-from src.Services.Factories.GeneralPDFScraper.MedlinePDFWebScraper import MedlinePDFWebScraper
-from src.Services.Factories.GeneralPDFScraper.OVIDPDFWebScraper import OVIDPDFWebScraper
+from src.Services.Factories.scrapers.CochranePDFWebScraper import CochranePDFWebScraper
+from src.Services.Factories.scrapers.LOVEPDFWebScraper import LOVEPDFWebScraper
+from src.Services.Factories.scrapers.GeneralPDFWebScraper import GeneralPDFWebScraper
+from src.Services.Factories.scrapers.MedlinePDFWebScraper import MedlinePDFWebScraper
+from src.Services.Factories.scrapers.OVIDPDFWebScraper import OVIDPDFWebScraper
 # from src.Commands.TaggingSystemFunctionBased import TaggingSystemFunctionBased
 
 class PaperProcessor:
     DOI_PREFIX = "https://dx.doi.org/"
 
-    def __init__(self, db_handler, csv_file_path, server_headers=None):
+    def __init__(self, db_handler, csv_file_path, server_headers=None, tagger: TaggerInterface=None):
         self.db_handler = db_handler
         self.tag_columns = set()
         self.csv_file_path = csv_file_path
         self.server_headers = server_headers
         self.scrapers = {}
+        self.tagger = tagger
+
         self.data = []
 
     def process_papers(self, db_name=None):
         """Processes all papers and saves the extracted data to CSV files."""
         papers = self.db_handler.fetch_papers_with_column_names()
-        self.tag_columns.update(["Id", "doi", "doi_url"])
+        # print(papers)
+        self.tag_columns.update(["id", "doi", "doi_url"])
         for paper in papers:
-            db_name = db_name if (db_name and db_name != "all") else paper.get("Source", "Cochrane")
+            db_name = db_name if (db_name and db_name != "all") else paper.get("source", "Cochrane")
             text, doi_url, paper_id, doi = self._process_single_paper(paper, db_name)
             if text:
                 tags = self._apply_tagging(text, doi_url, paper_id, doi)
                 
                 self.data.append(tags)
         self._save_data_to_csv()
-        
+        # print(pd.DataFrame(self.data))
         return pd.DataFrame(self.data)
 
     @staticmethod
@@ -68,9 +73,9 @@ class PaperProcessor:
         """Processes a single paper by scraping and tagging its content."""
         
         paper_id = paper.get("primary_id", None)
-        doi = paper.get("DOI", None)
+        doi = paper.get("doi", None)
         doi_link = paper.get("doi_url", None)
-        source = paper.get("Source", None)
+        source = paper.get("source", None)
         doi_url = self._construct_doi_url(doi, doi_link, db_name)
         scraper = self._select_scraper(doi_url, db_name)
         
@@ -118,7 +123,7 @@ class PaperProcessor:
 
 
     def format_doi(self, doi):
-        if (self.DOI_PREFIX in doi.lower() or contains_http_or_https(doi)):
+        if (doi and self.DOI_PREFIX in doi.lower() or contains_http_or_https(doi)):
             return doi
         else:
             return self.DOI_PREFIX + doi
@@ -140,9 +145,8 @@ class PaperProcessor:
 
     def _apply_tagging(self, text, doi_url, paper_id, doi):
         """Applies tagging to the text content and structures the results."""
-        tagger = Tagging(text)
-        tags = tagger.create_columns_from_text(searchRegEx)
-        tags["Id"] = paper_id
+        tags = self.tagger.process(text)
+        tags["id"] = paper_id
         tags["doi"] = doi
         tags["doi_url"] = doi_url
         # Flatten complex data types
@@ -155,14 +159,18 @@ class PaperProcessor:
         for key, value in tags.items():
             if isinstance(value, list):
                 # Select only the last list if multiple lists exist
-                if isinstance(value[-1], list):
+                # Also check if the list is not empty to avoid an IndexError
+                if value and isinstance(value[-1], list):
                     value = value[-1]  # Take the last list for processing
                 
                 # Convert the selected list to a comma-separated string
-                tags[key] = ", ".join(map(str, value)) if isinstance(value, list) else str(value)
+                tags[key] = ", ".join(map(str, value))
 
             elif isinstance(value, str):
                 tags[key] = value.strip()  # Remove unnecessary whitespace
+   
+            elif value is not None:
+                tags[key] = str(value)
             
         return tags
 

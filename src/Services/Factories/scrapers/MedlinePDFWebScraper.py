@@ -7,7 +7,7 @@ from urllib.parse import urljoin, urlparse
 from src.Commands.SeleniumPool import PDFDownloader
 from charset_normalizer import detect
 from src.Utils.Helpers import extract_pdf_links, clean_special_characters
-from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
+from src.Services.Factories.scrapers.GeneralPDFWebScraper import GeneralPDFWebScraper
 import PyPDF2
 
 class MedlinePDFWebScraper(GeneralPDFWebScraper):

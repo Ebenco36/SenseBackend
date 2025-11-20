@@ -8,7 +8,7 @@ class PlosExtractor(BaseArticleExtractor):
         # self._extract_abstract()
         self._extract_image_content()
         self._extract_body_sections()
-        self._extract_references()
+        # self._extract_references()
         self._combine_main_content()
 
     def _extract_title(self):

@@ -32,7 +32,7 @@ class PDFUniversalExtractor(BaseArticleExtractor):
             "results": r"\bresults?\b|\bfindings\b|\banalysis\b",
             "discussion": r"\bdiscussion\b|\binterpretation\b",
             "conclusion": r"\bconclusion\b|\bsummary\b|\bclosing remarks\b",
-            "references": r"\breferences\b|\bbibliography\b"
+            # "references": r"\breferences\b|\bbibliography\b"
         }
 
         full_text = self._extract_pdf_text()

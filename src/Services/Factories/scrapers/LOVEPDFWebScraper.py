@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from src.Commands.SeleniumPool import PDFDownloader
 from src.Utils.Helpers import clean_special_characters
-from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
+from src.Services.Factories.scrapers.GeneralPDFWebScraper import GeneralPDFWebScraper
 import PyPDF2
 
 class LOVEPDFWebScraper(GeneralPDFWebScraper):

@@ -92,14 +92,24 @@ python ./src/Commands/dynamic_table.py ./Data/MedlineData/medline_results.csv  m
 python ./src/Commands/UnifyCSV.py
 python ./src/Commands/DOIEnricher.py
 python ./src/Commands/dynamic_table.py ./HPV_training_set_HHL_AP_complete.csv  rough_db --primary 'Id'
-python ./src/Commands/dynamic_table.py ./test2_complete.csv  all_db --primary 'Id'
-python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db --primary 'verification_id'
+
+
+python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db
+python ./src/Commands/dynamic_table.py ./Data/output/data-hpv-influenza.csv  all_db
+python ./src/Commands/dynamic_table.py ./Data/output/test_hpv_data.csv  all_db
+
+100 samples
+python ./src/Commands/dynamic_table.py ./Data/100_samples.csv  all_db
+
+
+
 python ./src/Commands/CountryRegionManager.py
 example: python script.py data.csv my_table --primary id_column1 id_column2 --fallback fallback_column1 fallback_column2
 Tagging pipeline for all papers
 =====================================================
 python .src/Commands/PaperProcessorPipeline.py
 
+28376
 
 
 # Install Airflow (replace `constraints_url` with the correct version from Airflow's website)
@@ -115,6 +125,7 @@ Testing
 python ./src/Commands/dynamic_table.py ./enriched_output.csv  all_db --primary 'unique_id'
 docker compose --env-file .env -f docker-compose.yml up -d
 
+<<<<<<< HEAD
 export FLASK_APP=app:create_app
 export CELERY_APP=celery:make_celery
 
@@ -135,3 +146,12 @@ prod
 celery -A app:create_app beat --loglevel=info
 celery -A app:create_app worker --loglevel=info
 
+=======
+
+
+conda init --reverse $SHELL`
+
+conda config --set auto_activate_base false
+
+!python -m src.Services.Factories.NITAGSystem
+>>>>>>> latest-branch

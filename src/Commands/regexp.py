@@ -350,68 +350,21 @@ searchRegEx ={
             ],
         },
     },
-    "reviews": {
-        "review": {
-            "rev": [
-                ("systematic review", "rev"), ("Literature Review", "rev"), ("review", "rev"), 
-                ("Meta-Analysis", "rev"), ("Critical Review", "rev"), ("Peer Review", "rev"), 
-                ("Book Review", "rev"), ("Editorial Review", "rev"), ("Review Article", "rev")
-            ]
-        }
-    },
     "studies": {
         "studie__no": {
             "sty": [
                 # === Study Inclusion Signals ===
                 ("met inclusion criteria", "sty"),
                 ("met eligibility criteria", "sty"),
-                ("met the inclusion criteria", "sty"),
-                ("met the eligibility criteria", "sty"),
-                ("were included", "sty"),
-                ("were deemed relevant", "sty"),
-                ("were considered eligible", "sty"),
-                ("qualified for quality assessment", "sty"),
-                ("yielding data from", "sty"),
-                ("leaving a total of", "sty"),
-                ("included in the review", "sty"),
-                ("included in the meta-analysis", "sty"),
-                ("included in the analysis", "sty"),
-                ("included in the qualitative synthesis", "sty"),
-                ("selected for inclusion", "sty"),
-                ("assessed for eligibility", "sty"),
-                ("assessed with", "sty"),
-                ("records from", "sty"),
-                ("study", "sty"), 
-                ("studies", "sty"),
 
                 # === RCTs ===
                 ("RCT", "rct"), ("RCTs", "rct"),
-                ("randomized trial", "rct"), ("randomised trial", "rct"),
-                ("randomized controlled trial", "rct"), ("randomised controlled trial", "rct"),
-                ("clinical trial", "rct"), ("controlled clinical trial", "rct"),
-                ("double-blind study", "rct"), ("placebo-controlled", "rct"),
-                ("randomised comparative", "rct"), ("multicenter trial", "rct"),
 
                 # === NRSI ===
                 ("observational study", "nrsi"), ("observational studies", "nrsi"),
-                ("non-randomized study", "nrsi"), ("non-randomized studies", "nrsi"),
-                ("non-randomised study", "nrsi"), ("non-randomised studies", "nrsi"),
-                ("case-control study", "nrsi"), ("case-control studies", "nrsi"),
-                ("cohort study", "nrsi"), ("cohort studies", "nrsi"),
-                ("test-negative design", "nrsi"), ("test-negative studies", "nrsi"),
-                ("quasi-experimental study", "nrsi"),
-                ("retrospective study", "nrsi"),
-                ("prospective study", "nrsi"),
-                ("cross-sectional study", "nrsi"),
-                ("interrupted time series", "nrsi"),
-                ("pre-post study", "nrsi"),
-                ("case series", "nrsi"),
-                ("case report", "nrsi"),
 
                 # === Mixed Methods ===
                 ("mixed methods", "mmtd"), ("mixed-methods", "mmtd"),
-                ("convergent design", "mmtd"),
-                ("explanatory sequential design", "mmtd"),
 
                 # === Qualitative ===
                 ("qualitative study", "quanti"), ("qualitative studies", "quanti"),
@@ -449,31 +402,15 @@ searchRegEx ={
             ]
         }
     },
-    "open_acc": {
-        "opn_access": {
-            "op_ac": [
-                ("open access", "oa"), 
-                ("oa", "oa"), 
-                ("free access", "oa"), 
-                ("gold open access", "oa"), 
-                ("creative commons", "oa"),
-                ("open research", "oa"), 
-                ("fully open", "oa"), 
-                ("free full text", "oa"), 
-                ("oa license", "oa"), 
-                ("unrestricted access", "oa")
-            ]
-        }
-    },
     "study_country": {
         "countries": {
             "countries": [
             ]
         }, 
-        "study_count": {
-            "count": [
-            ]
-        }
+        # "study_count": {
+        #     "count": [
+        #     ]
+        # }
     },
     "title_popu": {
         "title_pop": {

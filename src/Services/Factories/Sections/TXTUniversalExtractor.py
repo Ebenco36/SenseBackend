@@ -20,7 +20,7 @@ class TXTUniversalExtractor(BaseArticleExtractor):
             "results": r"\bresults?\b|\bfindings\b|\banalysis\b",
             "discussion": r"\bdiscussion\b|\binterpretation\b",
             "conclusion": r"\bconclusion\b|\bsummary\b|\bclosing remarks\b",
-            "references": r"\breferences\b|\bbibliography\b",
+            # "references": r"\breferences\b|\bbibliography\b",
             "tables": r"\btable\b",
             "figures": r"\bfigure\b",
         }

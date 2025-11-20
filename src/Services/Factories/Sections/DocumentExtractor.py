@@ -7,7 +7,9 @@ import docx  # For Word documents
 from urllib.parse import urlparse
 import cloudscraper
 
+from src.Services.Factories.Sections.PDFSectionParser import parse_and_print_sections
 from src.Utils.Helpers import is_sciencedirect_url, is_tandfonline_url
+
 
 class DocumentExtractor:
     def __init__(self):
@@ -18,13 +20,12 @@ class DocumentExtractor:
         }
         self.scraper = cloudscraper.create_scraper(
             browser={
-                'browser': 'chrome', 
-                'platform': 'windows', 
+                'browser': 'chrome',
+                'platform': 'windows',
                 'mobile': False
             }
         )  # Bypasses Cloudflare
         self.session = requests.Session()
-        
 
     def _get_random_user_agent(self):
         user_agents = [
@@ -34,7 +35,7 @@ class DocumentExtractor:
             "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1"
         ]
         return random.choice(user_agents)
-    
+
     def fetch_content(self, url):
         """
         Fetch content from a URL using requests.
@@ -47,17 +48,20 @@ class DocumentExtractor:
             return response.content, response.headers.get("Content-Type"), response.status_code
         except requests.exceptions.HTTPError as e:
             if response.status_code == 403:
-                print("⚠️ 403 Forbidden error. Retrying with CloudScraper after a delay...")
+                print(
+                    "403 Forbidden error. Retrying with CloudScraper after a delay...")
 
-                response = self.scraper.get(url, headers=self.headers, timeout=10)
+                response = self.scraper.get(
+                    url, headers=self.headers, timeout=10)
                 print(response.status_code)
                 if not response.status_code in [200, 201]:
                     # Introduce a random delay to avoid bot detection
                     print("Retrying in 15 secs...")
-                    delay = random.uniform(5, 15)  # Random delay between 5-15 seconds
+                    # Random delay between 5-15 seconds
+                    delay = random.uniform(5, 15)
                     time.sleep(delay)
                     response = self.scraper.get(url, headers=self.headers)
-                    
+
                 response.raise_for_status()
                 return response.content, response.headers.get("Content-Type"), response.status_code
 
@@ -75,7 +79,7 @@ class DocumentExtractor:
                 script.decompose()
             return soup
         except Exception as e:
-            print(f"❌ Error extracting plain text from HTML: {e}")
+            print(f"Error extracting plain text from HTML: {e}")
             return None
 
     def extract_plain_text_from_pdf(self, pdf_content):
@@ -83,13 +87,10 @@ class DocumentExtractor:
         Extract plain text from a PDF file using PyMuPDF.
         """
         try:
-            doc = fitz.open(stream=pdf_content, filetype="pdf")
-            plain_text = ""
-            for page in doc:
-                plain_text += page.get_text()
+            plain_text = parse_and_print_sections(pdf_content)
             return plain_text
         except Exception as e:
-            print(f"❌ Error extracting plain text from PDF: {e}")
+            print(f"Error extracting plain text from PDF: {e}")
             return None
 
     def extract_plain_text_from_docx(self, docx_content):
@@ -101,7 +102,7 @@ class DocumentExtractor:
             plain_text = "\n".join([para.text for para in doc.paragraphs])
             return plain_text
         except Exception as e:
-            print(f"❌ Error extracting plain text from DOCX: {e}")
+            print(f"Error extracting plain text from DOCX: {e}")
             return None
 
     def extract_content(self, source):
@@ -117,31 +118,35 @@ class DocumentExtractor:
                 return None, status_code
 
             if "text/html" in content_type:
-                soup, status_code = self.extract_plain_text_from_html(content), status_code
+                soup, status_code = self.extract_plain_text_from_html(
+                    content), status_code
 
                 if is_sciencedirect_url(source) and soup:
-                    content_tags = soup.select("div.Abstracts, div[class*='abstract'], article, section")
-                    soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+                    content_tags = soup.select(
+                        "div.Abstracts, div[class*='abstract'], article, section")
+                    soup = BeautifulSoup("\n".join(str(tag)
+                                         for tag in content_tags), "html.parser")
                 elif is_tandfonline_url(source) and soup:
                     content_tags = soup.select("div.hlFld-Fulltext")
-                    with open("tandfonline_content.html", "w", encoding="utf-8") as f:
-                        f.write("\n\n".join(str(tag) for tag in content_tags))
-                    soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+                    soup = BeautifulSoup("\n".join(str(tag)
+                                         for tag in content_tags), "html.parser")
                 return soup, status_code
             elif "application/pdf" in content_type:
                 return self.extract_plain_text_from_pdf(content), status_code
             elif "application/vnd.openxmlformats-officedocument.wordprocessingml.document" in content_type:
                 return self.extract_plain_text_from_docx(content), status_code
             else:
-                print(f"❌ Unsupported content type: {content_type}")
+                print(f"Unsupported content type: {content_type}")
                 return None, status_code
         # Check if the source is a local file
         elif source.endswith(".pdf"):
             with open(source, "rb") as f:
                 pdf_content = f.read()
-            return self.extract_plain_text_from_pdf(pdf_content), None  # No status code for local files
+            # No status code for local files
+            return self.extract_plain_text_from_pdf(pdf_content), None
         elif source.endswith(".docx"):
-            return self.extract_plain_text_from_docx(source), None  # No status code for local files
+            # No status code for local files
+            return self.extract_plain_text_from_docx(source), None
         else:
-            print("❌ Unsupported file type or URL.")
+            print("Unsupported file type or URL.")
             return None, None

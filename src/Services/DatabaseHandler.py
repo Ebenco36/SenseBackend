@@ -123,11 +123,11 @@ class DatabaseHandler:
         :param records: A pandas DataFrame containing the records to insert.
         """
         query = """
-        INSERT INTO all_db ("Authors", "Year", "Title", "DOI", "Open Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal")
+        INSERT INTO all_db ("authors", "year", "title", "doi", "open_access", "abstract", "id", "source", "language", "country", "database", "journal")
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         # Ensure the DataFrame has the correct columns
-        required_columns = ["Authors", "Year", "Title", "DOI", "Open Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal"]
+        required_columns = ["authors", "year", "title", "doi", "open_access", "abstract", "id", "source", "language", "country", "database", "journal"]
         if not all(col in records.columns for col in required_columns):
             raise ValueError(f"Missing required columns in records DataFrame. Expected columns: {required_columns}")
 
@@ -157,10 +157,10 @@ class DatabaseHandler:
         :return: A list of records as dictionaries.
         """
         query = f"""
-        SELECT Authors, Year, Title, DOI, Open_Access, Abstract, Id, Source, Language, Country, Database, Journal
+        SELECT authors, year, title, doi, open_access, abstract, id, source, language, country, database, journal
         FROM all_db
-        WHERE DOI IN ({','.join(['%s'] * len(dois))})
+        WHERE doi IN ({','.join(['%s'] * len(dois))})
         """
         results = self.execute_query(query, params=dois)
-        column_names = ["Authors", "Year", "Title", "DOI", "Open_Access", "Abstract", "Id", "Source", "Language", "Country", "Database", "Journal"]
+        column_names = ["authors", "year", "title", "doi", "open_access", "abstract", "id", "source", "language", "country", "database", "journal"]
         return [dict(zip(column_names, row)) for row in results]

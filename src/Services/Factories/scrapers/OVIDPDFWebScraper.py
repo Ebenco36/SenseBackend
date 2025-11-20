@@ -9,7 +9,7 @@ from src.Utils.Helpers import (
     extract_pdf_links, clean_special_characters, 
     fetch_all_content_for_linked
 )
-from src.Services.Factories.GeneralPDFScraper.GeneralPDFWebScraper import GeneralPDFWebScraper
+from src.Services.Factories.scrapers.GeneralPDFWebScraper import GeneralPDFWebScraper
 import PyPDF2
 
 class OVIDPDFWebScraper(GeneralPDFWebScraper):

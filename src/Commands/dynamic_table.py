@@ -3,226 +3,239 @@ import os
 sys.path.append(os.getcwd())
 import csv
 import argparse
-from sqlalchemy import create_engine, Column, Integer, BigInteger, String, Float, Text, inspect, MetaData
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import logging
+from sqlalchemy import create_engine, Column, Integer, BigInteger, String, Float, Text, inspect, MetaData, Table, text
+from sqlalchemy.orm import sessionmaker, declarative_base
 from app import db, app
-csv.field_size_limit(10**10)
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+csv.field_size_limit(10**7)
 Base = declarative_base()
 
 def parse_csv(file_path):
     """Parse the CSV file and return columns and rows."""
-    with open(file_path, 'r') as file:
-        reader = csv.DictReader(file)
-        columns = reader.fieldnames
-        rows = list(reader)
-        return columns, rows
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            columns = reader.fieldnames
+            rows = list(reader)
+            if not rows:
+                raise ValueError("CSV file is empty or could not be read.")
+            return columns, rows
+    except Exception as e:
+        logging.error(f"Failed to parse CSV file at {file_path}: {e}")
+        sys.exit(1)
 
-def infer_column_type(value, max_length=255):
-    """Infer SQLAlchemy column type based on the value and handle length."""
-    if value.isdigit():
-        return BigInteger
+def infer_column_type(value):
+    """Infer SQLAlchemy column type based on a sample value."""
+    if value is None or value == '':
+        return Text()
+    try:
+        num = int(value)
+        if -2147483648 <= num <= 2147483647:
+            return Integer()
+        else:
+            return BigInteger()
+    except (ValueError, TypeError):
+        pass
     try:
         float(value)
-        return Float
-    except ValueError:
+        return Float()
+    except (ValueError, TypeError):
         pass
-    if len(value) > max_length:
-        return Text()
     return Text()
 
-def update_table_schema(engine, table_name, columns):
-    """Update the table schema by adding new columns if necessary or create the table if it does not exist."""
-    metadata = MetaData(bind=engine)
+def ensure_table_exists(engine, table_name, columns, sample_rows):
+    """Ensure the table exists; if not, create it with the provided columns."""
     inspector = inspect(engine)
-    
-    if table_name in inspector.get_table_names():
-        print(f"Table '{table_name}' exists. Updating schema...")
-        existing_columns = set(col['name'] for col in inspector.get_columns(table_name))
-        new_columns = set(columns)
-        
-        columns_to_add = new_columns - existing_columns
-        if columns_to_add:
-            with engine.connect() as conn:
-                for column in columns_to_add:
-                    column_type = infer_column_type("")
-                    alter_command = f"ALTER TABLE {table_name} ADD COLUMN {column} {column_type.__visit_name__}"
-                    conn.execute(alter_command)
-                    print(f"Added column {column} to {table_name}")
+    metadata = MetaData(bind=engine)
+    metadata.reflect()
+
+    if not inspector.has_table(table_name):
+        logging.info(f"Table '{table_name}' does not exist. It will be created.")
+        table_columns = [
+            Column('primary_id', Integer, primary_key=True, autoincrement=True)
+        ]
+        sample_row = sample_rows[0] if sample_rows else {}
+
+        for column in columns:
+            sample_value = sample_row.get(column, "")
+            if column == 'verification_id':
+                column_type = Text()
+            else:
+                column_type = infer_column_type(sample_value)
+            table_columns.append(Column(column, column_type))
+
+        table = Table(table_name, metadata, *table_columns)
+        metadata.create_all(tables=[table])
+        logging.info(f"Table '{table_name}' created with initial columns.")
     else:
-        print(f"Table '{table_name}' does not exist. Creating table...")
-        Base.metadata.create_all(engine)
+        logging.info(f"Table '{table_name}' already exists.")
+
+def update_table_schema(engine, table_name, columns, sample_rows):
+    """Ensure the table has all required columns; add missing columns."""
+    inspector = inspect(engine)
+    existing_columns = {col['name'] for col in inspector.get_columns(table_name)}
+    columns_to_add = set(columns) - existing_columns
+
+    if columns_to_add:
+        with engine.connect() as connection:
+            with connection.begin():
+                for column in columns_to_add:
+                    sample_value = sample_rows[0].get(column, "")
+                    if column == 'verification_id':
+                        sql_type = 'TEXT'
+                    else:
+                        column_type = infer_column_type(sample_value)
+                        sql_type = column_type.compile(engine.dialect)
+                    alter_command = text(f'ALTER TABLE "{table_name}" ADD COLUMN "{column}" {sql_type}')
+                    connection.execute(alter_command)
+                    logging.info(f"Added column '{column}' to '{table_name}'")
+
+
+YEAR_COLUMN = "year"  # change this if your column is named differently
+
+def is_row_from_2011_up(row):
+    """Return True only if the row's year is >= 2011."""
+    raw = (row.get(YEAR_COLUMN) or "").strip()
+    if not raw:
+        return False  # no year → reject
+
+    try:
+        # handle things like "2012.0"
+        year = int(float(raw))
+        return year >= 2011
+    except ValueError:
+        # invalid year → reject
+        return False
+
+DOI_COLUMNS = ["doi", "cleaned_doi"]  # which fields count as "having a DOI"
+def has_valid_doi(row):
+    """Return True if row contains at least one non-empty DOI field."""
+    for col in DOI_COLUMNS:
+        val = (row.get(col) or "").strip()
+        if val != "":
+            return True
+    return False
 
 def create_dynamic_model(columns, table_name, sample_rows):
-    """Dynamically create or update a SQLAlchemy model based on CSV columns."""
-    attrs = {'__tablename__': table_name}
-    attrs['primary_id'] = Column(Integer, primary_key=True, autoincrement=True)
-
-    max_length = 255
+    """Dynamically create a SQLAlchemy model based on CSV columns."""
+    attrs = {
+        '__tablename__': table_name,
+        'primary_id': Column(Integer, primary_key=True, autoincrement=True)
+    }
+    sample_row = sample_rows[0] if sample_rows else {}
     for column in columns:
-        sample_value = sample_rows[0].get(column, "")
-        column_type = infer_column_type(sample_value, max_length)
+        sample_value = sample_row.get(column, "")
+        if column == 'verification_id':
+            column_type = Text()
+        else:
+            column_type = infer_column_type(sample_value)
         attrs[column] = Column(column_type)
 
-    additional_columns = {
-        "intervention_vaccinePredictableDisease_tags": Text,
-    }
-    attrs.update(additional_columns)
-
-    model = type('DynamicModel', (Base,), attrs)
+    model = type(table_name, (Base,), attrs)
 
     with app.app_context():
         engine = db.engine
-        update_table_schema(engine, table_name, columns)
+        # Ensure table exists first
+        ensure_table_exists(engine, table_name, columns, sample_rows)
+        # Then ALTER for any missing columns
+        update_table_schema(engine, table_name, columns, sample_rows)
 
     return model
 
 def clean_data_for_insertion(row, model):
-    """Clean data before insertion to handle type mismatches."""
+    """Clean data before insertion to match the model's column types."""
     cleaned_data = {}
     for column, value in row.items():
         if column not in model.__table__.columns:
             continue
         column_type = model.__table__.columns[column].type
-        if isinstance(column_type, Integer):
-            cleaned_data[column] = int(value) if value.isdigit() else None
-        elif isinstance(column_type, Float):
-            try:
-                cleaned_data[column] = float(value)
-            except ValueError:
-                print("there is a problem with " + column + " Value: " + value)
+        try:
+            if value == '':
                 cleaned_data[column] = None
-        else:
-            cleaned_data[column] = value
+            elif isinstance(column_type, (Integer, BigInteger)):
+                cleaned_data[column] = int(float(value))
+            elif isinstance(column_type, Float):
+                cleaned_data[column] = float(value)
+            else:
+                cleaned_data[column] = value
+        except (ValueError, TypeError):
+            logging.warning(f"Could not convert value '{value}' for column '{column}'. Inserting NULL.")
+            cleaned_data[column] = None
     return cleaned_data
 
-
-def check_existing_record_and_update(session, model, row, primary_columns):
-    """Check if a record exists based on primary columns and update if new data exists."""
-    filters = {col: row.get(col) for col in primary_columns if col in row and row.get(col) is not None}
-    if not filters:
-        return False  # Skip rows without valid primary column values.
-
-    existing_record = session.query(model).filter_by(**filters).first()
-
-    if existing_record:
-        # Compare and update only if there's new data.
-        updated = False
-        for key, value in row.items():
-            if key in model.__table__.columns and getattr(existing_record, key) != value:
-                setattr(existing_record, key, value)
-                updated = True
-        if updated:
-            session.add(existing_record)  # Mark as updated
-        return True  # Record exists and was updated
-    else:
-        return False
-
-def seed_data(file_path, model, primary_columns):
-    """Seed the database with data from the CSV file, updating or adding records as needed."""
-    error_log = []
+def seed_data(file_path, model):
+    """
+    Seeds the database, updating records if they exist (checked by verification_id,
+    then DOI), or inserting them if they are new.
+    """
+    error_log, updated_count, inserted_count = [], 0, 0
     with app.app_context():
         Session = sessionmaker(bind=db.engine)
         session = Session()
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
-            for row in reader:
+            for i, row in enumerate(reader, 1):
+                # 🚫 Skip rows not from 2011 onwards
+                if not is_row_from_2011_up(row):
+                    continue
+                # Skip if DOI is missing
+                if not has_valid_doi(row):
+                    continue
                 try:
                     cleaned_row = clean_data_for_insertion(row, model)
-                    if not check_existing_record_and_update(session, model, cleaned_row, primary_columns):
-                        # Add a new record if it doesn't exist.
+
+                    existing_record = None
+                    verification_id = cleaned_row.get('verification_id')
+                    cleaned_doi = cleaned_row.get('cleaned_doi')
+                    doi = cleaned_row.get('doi')
+
+                    if verification_id and verification_id != '':
+                        existing_record = session.query(model).filter_by(verification_id=verification_id).first()
+                    if cleaned_doi and cleaned_doi != '':
+                        existing_record = session.query(model).filter_by(cleaned_doi=cleaned_doi).first()
+                    elif doi and doi != '':
+                        existing_record = session.query(model).filter_by(doi=doi).first()
+
+                    if existing_record:
+                        for key, value in cleaned_row.items():
+                            setattr(existing_record, key, value)
+                        updated_count += 1
+                    else:
                         record = model(**cleaned_row)
                         session.add(record)
+                        inserted_count += 1
+
+                    if i % 1000 == 0:
+                        session.commit()
+                        logging.info(f"Processed {i} rows...")
+
                 except Exception as e:
-                    error_log.append({'row': row, 'error': str(e)})
+                    session.rollback()
+                    error_log.append({'row': i, 'data': row, 'error': str(e)})
                     continue
-            session.commit()
-        print('Data seeded successfully!')
 
+            session.commit()  # Final commit
+        logging.info(f"Data seeding complete! Inserted: {inserted_count}, Updated: {updated_count}")
+    
     if error_log:
-        print('The following rows encountered errors:')
+        logging.warning('The following rows encountered errors:')
         for error in error_log:
-            print(f"Row: {error['row']} - Error: {error['error']}")
-        with open('error_log.csv', 'w', newline='') as csvfile:
-            fieldnames = ['row', 'error']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for error in error_log:
-                writer.writerow({'row': error['row'], 'error': error['error']})
-                
-# OLD IMPLEMENTATION HERE                
-# def check_existing_record(session, model, row, primary_columns, fallback_columns):
-#     """Check if a record already exists based on primary and fallback columns."""
-#     filters = [getattr(model, col) == row.get(col) for col in primary_columns if col in row and row.get(col)]
-#     fallback_filters = [getattr(model, col) == row.get(col) for col in fallback_columns if col in row and row.get(col)]
-#     if filters:
-#         existing_record = session.query(model).filter(*filters).first()
-#         if existing_record:
-#             return existing_record
-    
-#     if fallback_filters:
-#         existing_record = session.query(model).filter(*fallback_filters).first()
-#         if existing_record:
-#             return existing_record
-    
-#     return None
-
-# def seed_data(file_path, model, primary_columns, fallback_columns):
-#     """Seed the database with data from the CSV file and log errors."""
-#     error_log = []
-#     with app.app_context():
-#         Session = sessionmaker(bind=db.engine)
-#         session = Session()
-#         with open(file_path, 'r') as file:
-#             reader = csv.DictReader(file)
-#             for row in reader:
-#                 try:
-#                     cleaned_row = clean_data_for_insertion(row, model)
-#                     existing_record = check_existing_record(session, model, cleaned_row, primary_columns, fallback_columns)
-                    
-#                     if existing_record:
-#                         for key, value in cleaned_row.items():
-#                             setattr(existing_record, key, value)
-#                     else:
-#                         record = model(**cleaned_row)
-#                         session.add(record)
-                    
-#                 except Exception as e:
-#                     error_log.append({'row': row, 'error': str(e)})
-#                     continue
-#             session.commit()
-#         print('Data seeded successfully!')
-    
-#     if error_log:
-#         print('The following rows were not inserted:')
-#         for error in error_log:
-#             print(f"Row: {error['row']} - Error: {error['error']}")
-#         with open('error_log.csv', 'w', newline='') as csvfile:
-#             fieldnames = ['row', 'error']
-#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#             writer.writeheader()
-#             for error in error_log:
-#                 writer.writerow({'row': error['row'], 'error': error['error']})
+            logging.warning(f"Row: {error['row']} - Error: {error['error']}")
 
 def main():
-    """Main function to create and seed a dynamic table from a CSV file."""
-    parser = argparse.ArgumentParser(description="Create and seed a dynamic table from a CSV file.")
+    parser = argparse.ArgumentParser(description="Create/update and seed a table from a CSV file.")
     parser.add_argument('csv_file', type=str, help='Path to the CSV file.')
-    parser.add_argument('table_name', type=str, help='Name of the table to be created.')
-    parser.add_argument('--primary', nargs='*', default=[], help='Primary columns to use for validation (to avoid duplicates).')
-    parser.add_argument('--fallback', nargs='*', default=[], help='Fallback columns to use if primary columns are empty or missing.')
+    parser.add_argument('table_name', type=str, help='Name of the database table.')
     args = parser.parse_args()
 
-    file_path = args.csv_file
-    table_name = args.table_name
-    primary_columns = args.primary
-    fallback_columns = args.fallback
-
-    columns, rows = parse_csv(file_path)
-    model = create_dynamic_model(columns, table_name, rows)
-    # seed_data(file_path, model, primary_columns, fallback_columns)
-    seed_data(file_path, model, primary_columns)
+    logging.info(f"Starting process for file '{args.csv_file}' into table '{args.table_name}'.")
+    columns, rows = parse_csv(args.csv_file)
+    model = create_dynamic_model(columns, args.table_name, rows)
+    seed_data(args.csv_file, model)
+    logging.info("Process finished successfully.")
 
 if __name__ == '__main__':
     main()

@@ -13,12 +13,11 @@ from bs4 import BeautifulSoup
 from pandas import json_normalize
 import xml.etree.ElementTree as ET
 from src.Utils.Reexpr import searchRegEx
-
 # from PyPDF2 import PdfReader, PdfFileReader, errors
 from pypdf import PdfReader, PdfReader, errors
 from src.Utils.data import population_acronyms
 from src.Utils.Reexpr import pattern_dict_regex
-from urllib.parse import urlparse, parse_qs, urlencode
+from urllib.parse import urlparse, parse_qs, urlencode, urljoin
 from src.Utils.ResolvedReturn import ourColumns, preprocessResolvedData
 from src.Services.Factories.Sections.ArticleExtractorFactory import (
     ArticleExtractorFactory,
@@ -1269,24 +1268,66 @@ def is_complete_url(url):
     return bool(parsed.scheme and parsed.netloc)
 
 
-def get_final_url(url):
-    try:
-        while True:
-            # Make a GET request without following redirects
-            response = requests.get(url, allow_redirects=False)
-            # Check if the response status code indicates a redirect
-            if response.status_code in (301, 302, 303, 307, 308):
-                # Update the URL to the new location
-                url = response.headers.get("Location")
-            else:
-                # No more redirects, return the final URL
-                if is_complete_url(url):
-                    return url
-                return guess_host(url)
-    except requests.exceptions.RequestException as e:
-        print(f"An error occurred: {e}")
-        return guess_host(url)
+# def get_final_url(url):
+#     try:
+#         while True:
+#             # Make a GET request without following redirects
+#             response = requests.get(url, allow_redirects=False)
+#             # Check if the response status code indicates a redirect
+#             if response.status_code in (301, 302, 303, 307, 308):
+#                 # Update the URL to the new location
+#                 url = response.headers.get("Location")
+#                 print(f"Redirected to: {url}")
+#             else:
+#                 # No more redirects, return the final URL
+#                 if is_complete_url(url):
+#                     return url
+#                 return guess_host(url)
+#     except requests.exceptions.RequestException as e:
+#         print(f"An error occurred: {e}")
+#         return guess_host(url)
 
+def get_final_url(url):
+    """
+    Follows all redirects from a starting URL to find the final destination,
+    correctly handling both absolute and relative redirect paths.
+    """
+    # Use a set to detect redirect loops
+    visited_urls = set()
+    
+    try:
+        while url not in visited_urls:
+            visited_urls.add(url)
+            
+            # Use a more comprehensive check for a valid starting URL
+            if not urlparse(url).scheme or not urlparse(url).netloc:
+                #  print(f"An error occurred: Invalid URL '{url}': No scheme or host supplied.")
+                 return url # Return the invalid URL for upstream handling
+
+            response = requests.get(url, allow_redirects=False, timeout=10)
+
+            # Check for redirect status codes
+            if response.status_code in (301, 302, 303, 307, 308):
+                new_location = response.headers.get("Location")
+                if not new_location:
+                    # No Location header, stop here
+                    break
+                
+                # ✅ FIX: Use urljoin to handle both absolute and relative paths
+                url = urljoin(url, new_location)
+                # print(f"Redirected to: {url}")
+            else:
+                # Not a redirect, we are at the final URL
+                return url
+        
+        # If we break the loop (e.g., due to a redirect loop)
+        print(f"Redirect loop detected or final URL reached: {url}")
+        return url
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred during request: {e}")
+        return url 
+    
 
 def guess_host(relative_path):
     common_hosts = [
@@ -1371,6 +1412,11 @@ from bs4 import BeautifulSoup
 
 
 def html_to_plain_text_selenium(url, headless=True):
+    
+    if not url or not isinstance(url, str) or not url.startswith(('http://', 'https://')):
+        print(f"Error: Invalid or malformed URL received: '{url}'. Skipping.")
+        return ""
+    
     options = Options()
     if headless:
         options.add_argument("--headless=new")
@@ -1417,11 +1463,13 @@ def html_to_plain_text_selenium(url, headless=True):
             #     f.write("\n\n".join(str(tag) for tag in content_tags))
 
             soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+
         elif is_tandfonline_url(url):
+            # content_tags = soup.find("div", class_="hlFld-Fulltext")
+            # soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
             content_tags = soup.find("div", class_="hlFld-Fulltext")
-            # with open("tandfonline_content.html", "w", encoding="utf-8") as f:
-            #     f.write("\n\n".join(str(tag) for tag in content_tags))
-            soup = BeautifulSoup("\n".join(str(tag) for tag in content_tags), "html.parser")
+            if content_tags:
+                soup = BeautifulSoup(str(content_tags), "html.parser")
 
         # Extract content using ArticleExtractorFactory
         obj_extractor = ArticleExtractorFactory.get_extractor(soup=soup, url=url)
@@ -1431,13 +1479,13 @@ def html_to_plain_text_selenium(url, headless=True):
                 # with open("running_away.html", 'w', encoding='utf-8') as file:
                 #     file.write(plain_text)
             else:
-                print("⚠️ Warning: 'main_content' section not found.")
+                print("Warning: 'main_content' section not found.")
         else:
-            print("❌ Error: obj_extractor is None.")
+            print("Error: obj_extractor is None.")
     except Exception as e:
         import traceback
         traceback.print_exc()
-        print(f"❌ Error in html_to_plain_text_selenium: {e}")
+        print(f"Error in html_to_plain_text_selenium: {e}")
         return plain_text
 
     finally:
@@ -1705,14 +1753,14 @@ def process_prisma_images(soup, url):
     prisma_image_urls = scraper.fetch_prisma_image_urls()
 
     if not prisma_image_urls:
-        print("\n❌ No PRISMA images found.")
+        print("\nNo PRISMA images found.")
         return None
 
     # 🔹 STEP 1: Prioritize the best-quality PRISMA image
     prioritized_images = PrismaImageScraper.prioritize_images(prisma_image_urls)
 
     if not prioritized_images:
-        print("\n❌ No suitable PRISMA images found after prioritization.")
+        print("\nNo suitable PRISMA images found after prioritization.")
         return None
 
     for img_url in prioritized_images:
@@ -1729,7 +1777,7 @@ def process_prisma_images(soup, url):
         else:
             return extracted_text
 
-    print("\n❌ No valid PRISMA text extracted.")
+    print("\nNo valid PRISMA text extracted.")
     return None
 
 
@@ -1739,6 +1787,7 @@ from src.Services.Factories.Sections.DocumentExtractor import DocumentExtractor
 def get_contents(url):
     try:
         parsed_url = urlparse(url)
+        print(f"Processing URL: {url}")
         hostname = parsed_url.netloc
         if "sciencedirect.com" in hostname:
             return html_to_plain_text_selenium(url, headless=True)
@@ -1833,29 +1882,30 @@ def clean_references(
     # === Plain text cleanup ===
     if isinstance(input_data, str):
         lines = input_data.splitlines()
-        cleaned_lines = []
+        return '\n'.join(lines)
+        # cleaned_lines = []
 
-        for line in lines:
-            original_line = line.strip()
-            if not original_line:
-                continue
+        # for line in lines:
+        #     original_line = line.strip()
+        #     if not original_line:
+        #         continue
 
-            if remove_boilerplate and boilerplate_pattern.search(original_line):
-                continue
+        #     if remove_boilerplate and boilerplate_pattern.search(original_line):
+        #         continue
 
-            if remove_section_numbering:
-                line = section_numbering_pattern.sub('', original_line)
-            else:
-                line = original_line
+        #     if remove_section_numbering:
+        #         line = section_numbering_pattern.sub('', original_line)
+        #     else:
+        #         line = original_line
 
-            if patterns:
-                line = combined_pattern.sub('', line)
+        #     if patterns:
+        #         line = combined_pattern.sub('', line)
 
-            line = re.sub(r'\s{2,}', ' ', line).strip()
-            if line:
-                cleaned_lines.append(line)
+        #     line = re.sub(r'\s{2,}', ' ', line).strip()
+        #     if line:
+        #         cleaned_lines.append(line)
 
-        return '\n'.join(cleaned_lines)
+        # return '\n'.join(cleaned_lines)
 
     # === BeautifulSoup cleanup ===
     elif isinstance(input_data, BeautifulSoup):

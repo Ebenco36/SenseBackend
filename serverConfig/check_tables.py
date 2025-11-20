@@ -33,7 +33,7 @@ def execute_task(table_name):
 
 def main():
     if not DATABASE_URL:
-        print("❌ Error: DATABASE_URL not set in environment variables.")
+        print("Error: DATABASE_URL not set in environment variables.")
         sys.exit(1)
 
     try:
@@ -43,9 +43,9 @@ def main():
 
         for table in tables:
             if check_table_exists(table, cursor):
-                print(f"✅ Table {table} exists. Running specific commands...")
+                print(f"Table {table} exists. Running specific commands...")
             else:
-                print(f"❌ Table {table} does not exist. Running fallback operations...")
+                print(f"Table {table} does not exist. Running fallback operations...")
                 execute_task(table)
 
         # Close connection
@@ -53,7 +53,7 @@ def main():
         conn.close()
 
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

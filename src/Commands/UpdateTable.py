@@ -120,7 +120,7 @@ class PostgreSQLUpdater:
 
 #     try:
 #         updater.connect()
-#         updater.update_table(df, id_column='Id', table_name='your_table')
+#         updater.update_table(df, id_column='id', table_name='your_table')
 #     except Exception as e:
 #         print(f"An error occurred: {e}")
 #     finally:

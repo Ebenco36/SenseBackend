@@ -20,7 +20,7 @@ class SagePubExtractor(BaseArticleExtractor):
         self._extract_conclusions()
         self.extract_image_text()
         self.extract_tables_with_titles()
-        self._extract_references()
+        # self._extract_references()
         self._extract_search_strategy()
         self._combine_main_content()
 
@@ -35,7 +35,7 @@ class SagePubExtractor(BaseArticleExtractor):
             title_text = title_tag.get_text(strip=True) if title_tag.name != 'meta' else title_tag.get('content', '').strip()
             self.sections_dict["title"] = f"===== Title =====\n" + title_text
         else:
-            print("⚠️ Warning: Title not found.")
+            print("Warning: Title not found.")
 
     def _extract_search_strategy(self):
         """Extracts the Search Strategy section from the article."""
@@ -72,9 +72,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if abstract_text:
                 self.sections_dict["abstract"] = f"===== Abstract =====\n" + abstract_text
             else:
-                print("⚠️ Warning: Abstract content found but is empty.")
+                print("Warning: Abstract content found but is empty.")
         else:
-            print("⚠️ Warning: Abstract not found.")
+            print("Warning: Abstract not found.")
             
     def _extract_introduction(self):
         """Extracts the full introduction (Background) section content from the article."""
@@ -92,9 +92,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if introduction_text:
                 self.sections_dict["introduction"] = f"===== Introduction =====\n" + introduction_text
             else:
-                print("⚠️ Warning: Introduction content found but is empty.")
+                print("Warning: Introduction content found but is empty.")
         else:
-            print("⚠️ Warning: Introduction (Background) section not found.")
+            print("Warning: Introduction (Background) section not found.")
 
     def _extract_methods(self):
         """Extracts the full Methods section, including all sub-sections, from the article."""
@@ -125,9 +125,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if methods_content:
                 self.sections_dict["methods"] = f"===== Methods =====\n" + methods_content
             else:
-                print("⚠️ Warning: Methods content found but is empty.")
+                print("Warning: Methods content found but is empty.")
         else:
-            print("⚠️ Warning: Methods section not found.")
+            print("Warning: Methods section not found.")
 
     def _extract_results(self):
         """Extracts the full Results section from the article."""
@@ -158,9 +158,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if results_content:
                 self.sections_dict["results"] = f"===== Results =====\n" + results_content
             else:
-                print("⚠️ Warning: Results content found but is empty.")
+                print("Warning: Results content found but is empty.")
         else:
-            print("⚠️ Warning: Results section not found.")
+            print("Warning: Results section not found.")
 
     def _extract_discussion(self):
         """Extracts the full Discussion section from the article."""
@@ -179,9 +179,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if discussion_content:
                 self.sections_dict["discussion"] = f"===== Discussion =====\n" + discussion_content
             else:
-                print("⚠️ Warning: Discussion content found but is empty.")
+                print("Warning: Discussion content found but is empty.")
         else:
-            print("⚠️ Warning: Discussion section not found.")
+            print("Warning: Discussion section not found.")
 
     def _extract_conclusions(self):
         """Extracts the full Conclusions section from the article."""
@@ -201,9 +201,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if conclusions_content:
                 self.sections_dict["conclusions"] = f"===== Conclusions =====\n" + conclusions_content
             else:
-                print("⚠️ Warning: Conclusions content found but is empty.")
+                print("Warning: Conclusions content found but is empty.")
         else:
-            print("⚠️ Warning: Conclusions section not found.")
+            print("Warning: Conclusions section not found.")
 
     def _extract_references(self):
         """Extracts the full References section from the article."""
@@ -221,9 +221,9 @@ class SagePubExtractor(BaseArticleExtractor):
             if references_content:
                 self.sections_dict["references"] = f"===== References =====\n" + references_content
             else:
-                print("⚠️ Warning: References content found but is empty.")
+                print("Warning: References content found but is empty.")
         else:
-            print("⚠️ Warning: References section not found.")
+            print("Warning: References section not found.")
 
     def extract_image_text(self):
         """Extracts the alt text, title, URL, and OCR text from all images in the article body section."""
@@ -266,7 +266,7 @@ class SagePubExtractor(BaseArticleExtractor):
                     
             self.sections_dict["image_text"] = f"====== ImageText ======\n" + "\n\n".join(images_content)
         else:
-            print("⚠️ Warning: Body section not found.")
+            print("Warning: Body section not found.")
         
         return images_content
 
@@ -296,7 +296,7 @@ class SagePubExtractor(BaseArticleExtractor):
                 tables_content.append(f"***** Table {idx+1} Title: {table_title} ******\n{table_text}\n")
             self.sections_dict["tables"] = f"====== Tables ======\n" + "\n\n".join(tables_content)
         else:
-            print("⚠️ Warning: Body section not found.")
+            print("Warning: Body section not found.")
         
         return tables_content
     
