@@ -96,6 +96,12 @@ python ./src/Commands/dynamic_table.py ./HPV_training_set_HHL_AP_complete.csv  r
 
 python ./src/Commands/dynamic_table.py ./Data/output/unified_output.csv  all_db
 python ./src/Commands/dynamic_table.py ./Data/output/data-hpv-influenza.csv  all_db
+python ./src/Commands/dynamic_table.py ./Data/output/test_hpv_data.csv  all_db
+
+100 samples
+python ./src/Commands/dynamic_table.py ./Data/100_samples.csv  all_db
+
+
 
 python ./src/Commands/CountryRegionManager.py
 example: python script.py data.csv my_table --primary id_column1 id_column2 --fallback fallback_column1 fallback_column2
@@ -103,6 +109,7 @@ Tagging pipeline for all papers
 =====================================================
 python .src/Commands/PaperProcessorPipeline.py
 
+28376
 
 
 # Install Airflow (replace `constraints_url` with the correct version from Airflow's website)
@@ -123,3 +130,5 @@ docker compose --env-file .env -f docker-compose.yml up -d
 conda init --reverse $SHELL`
 
 conda config --set auto_activate_base false
+
+!python -m src.Services.Factories.NITAGSystem

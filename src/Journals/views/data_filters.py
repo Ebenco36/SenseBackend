@@ -36,8 +36,10 @@ class FetchRecordAPI(Resource):
         try:
             # Default query parameters
             query_params = {"table": "all_db", "id": id}
+            print(query_params)
             # Process the request using the service layer
             response = json_service.search_by_id(query_params)
+            print(response)
             # Check for success in the response
             if "success" in response:
                 return ApiResponse.success(

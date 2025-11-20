@@ -9,6 +9,8 @@ from word2number import w2n
 from typing import List, Tuple, Dict
 from dateutil.parser import parse
 from collections import defaultdict
+from src.AIModels.Inference import SRPredictor
+from src.Commands.Amstar2 import amstar2
 from src.Commands.NERInference import NERTester
 from src.Services.Factories.Sections.SectionExtractor import SectionExtractor
 from src.Services.Taggers.TaggerInterface import TaggerInterface
@@ -93,7 +95,8 @@ class Tagging(TaggerInterface):
             "Project MUSE", "Physiotherapy Evidence"
         ]
     def process(self, text):
-        self.document = clean_references(text)
+        self.document = text # clean_references(text)
+        # print(self.document)
         self.sections = SectionExtractor(self.document)
         self.result_columns = defaultdict(list)
         return self.create_columns_from_text()
@@ -106,77 +109,86 @@ class Tagging(TaggerInterface):
         else:
             return self.document
 
+    def AI_mode_retrieval(self) -> str:
+        model_path = "sentence-transformers/all-MiniLM-L6-v2"  # or "allenai/specter2_base" or "sentence-transformers/all-MiniLM-L6-v2"
+        pred = SRPredictor(model_path=model_path, device=None, top_k=12)
+        out = pred.predict_all(self.document)
+
+        return out
+    
+    
     def create_columns_from_text(self):
         """Main function to apply tagging based on the extensive regex structure provided."""
+        out = self.AI_mode_retrieval()
         for category, subcategories in searchRegEx.items():
             for subcategory, terms_dict in subcategories.items():
                 for term_key, term_list in terms_dict.items():
                     column_name = f"{category}#{subcategory}#{term_key}"
-                    countries, total_count = self.extract_countries_with_total_count()
+                    # countries, total_count = self.extract_countries_with_total_count()
                     if category == "popu" and subcategory == "age__group":
                         self.result_columns[column_name] = self.process_age_group(
                             term_key, term_list)
                     elif category == "studies" and (subcategory == "studie__no" or subcategory == "rct"):
-                        self.result_columns[column_name], total_study_count, total_rct_count, raw_rct_counts, total_nrsi_count, total_mmtd_count, total_quanti_count = self.process_study_count(
-                            term_list)
-                        self.result_columns["study_types"] = self.extract_study_types(
-                            term_list)
-                        self.result_columns["total_study_count"] = total_study_count
-                        self.result_columns["total_rct_count"] = total_rct_count
-                        self.result_columns["RCT_counts"] = raw_rct_counts
-
-                        self.result_columns["total_nrsi_count"] = total_nrsi_count
-                        self.result_columns["total_mmtd_count"] = total_mmtd_count
-                        self.result_columns["total_quanti_count"] = total_quanti_count
-                    elif category == "gender" and subcategory == "group":
-                        pass
+                        
+                        study_info = out.get("studies", {})
+                        if study_info and isinstance(study_info, dict) and study_info['total'] == 0:
+                            study_info = out.get("articles", {})
+                        self.result_columns["total_study_count"] = 0 if "total" not in study_info else study_info["total"]
+                        self.result_columns["total_rct_count"] = 0 if "rct" not in study_info else study_info["rct"]
+                        print(self.result_columns["total_study_count"], self.result_columns["total_rct_count"])
+                        self.result_columns["total_nrsi_count"] = 0 if "nrsi" not in study_info else study_info["nrsi"]
+                        self.result_columns["total_cross_sectional_count"] = 0 if "cross_sectional" not in study_info else study_info["cross_sectional"]
+                        self.result_columns["total_case_control_count"] = 0 if "case_control" not in study_info else study_info["case_control"]
+                        self.result_columns["total_cohort_count"] = 0 if "cohort" not in study_info else study_info["cohort"]
                     elif category == "topic" and subcategory == "eff":
-                        self.result_columns[column_name] = self.extract_ve_related_info(
-                            term_list)
+                        self.result_columns[column_name] = self.extract_ve_related_info(term_list)
                     elif category == "particip" and subcategory == "group":
-                        self.result_columns[column_name] = self.extract_population(
-                            term_list)
+                        self.result_columns[column_name] = self.extract_population(term_list)
+                        
                     elif category == "lit_search_dates" and subcategory == "dates":
-                        self.result_columns[column_name] = self.extract_last_literature_search_dates(
-                        )
+                        self.result_columns[column_name] = out.get("lit_search_date", "")
+                        
                     elif category == 'open_acc' and subcategory == "opn_access":
-                        self.result_columns[column_name] = self.is_open_access(
-                            term_list)
+                        self.result_columns[column_name] = self.is_open_access(term_list)
+                        
                     elif (category == 'study_country' and subcategory == "countries"):
-                        self.result_columns[column_name] = countries
-                    elif (category == 'study_country' and subcategory == "study_count"):
-                        self.result_columns[column_name] = total_count
+                        country_study_count = out.get("countries", {})
+                        region_study_count = out.get("regions", {})
+                        # print(out)
+                        # print(region_study_count)
+                        if country_study_count and isinstance(country_study_count, dict):
+                            self.result_columns[column_name] = country_study_count.get("study_counts", {})
+                        if region_study_count and isinstance(region_study_count, dict):
+                            region_placeholder = f"{category}#{subcategory}#region"
+                            self.result_columns[region_placeholder] = region_study_count
+
+                    # elif (category == 'study_country' and subcategory == "study_count"):
+                    #     self.result_columns[column_name] = total_count
                     elif (category == 'title_popu' and subcategory == "title_pop"):
-                        self.result_columns[column_name] = self.extract_population_from_title(
-                            term_list)
+                        self.result_columns[column_name] = self.extract_population_from_title(term_list)
                         title_metadata = self.extract_title_metadata()
-                        self.result_columns["location_in_title"] = title_metadata.get(
-                            "location", None)
-                        self.result_columns["race_ethnicity_in_title"] = title_metadata.get(
-                            "race_ethnicity", None)
-                        self.result_columns["target_population_in_title"] = title_metadata.get(
-                            "target_population", None)
-                        self.result_columns["topic_in_title"] = title_metadata.get(
-                            "topic", None)
-                        self.result_columns["num_databases"] = int(
-                            title_metadata.get("num_databases", 0))
-                        self.result_columns["duration_of_intervention"] = title_metadata.get(
-                            "duration_of_intervention", None)
-                        self.result_columns["dosage"] = title_metadata.get(
-                            "dosage", None)
-                        self.result_columns["comparator"] = title_metadata.get(
-                            "comparator", None)
+                        self.result_columns["location_in_title"] = title_metadata.get("location", None)
+                        self.result_columns["race_ethnicity_in_title"] = title_metadata.get("race_ethnicity", None)
+                        self.result_columns["target_population_in_title"] = title_metadata.get("target_population", None)
+                        self.result_columns["topic_in_title"] = title_metadata.get("topic", None)
+                        
+                        database_placeholder = out.get("databases", {})
+                        treatment_placeholder = out.get("treatment", {})
+                        self.result_columns["num_databases"] = database_placeholder.get("num_databases", 0)
+                        self.result_columns["duration_of_intervention"] = treatment_placeholder.get("duration_of_intervention", None)
+                        self.result_columns["dosage"] = treatment_placeholder.get("dosage", None)
+                        self.result_columns["comparator"] = treatment_placeholder.get("comparator", None)
                         # new database
-                        self.result_columns["database_list"], self.result_columns["database_count"] = self.extract_databases()
+                        self.result_columns["database_list"], self.result_columns["database_count"] =  database_placeholder.get("num_databases", 0), ", ".join(database_placeholder.get("database_list", [])), # self.extract_databases()
                         
                         # self.result_columns["bert_integration"] = self.pubmed_bert_integration(self.document)
                     else:
                         self.result_columns[column_name] = self.process_generic_terms(term_list)
         ################# Merge Dict Together ######################
-        # amstars_integration = self.amstar2_integration()
-        # # self.result_columns = {**self.result_columns, **amstars_integration}
-        # self.result_columns.update(amstars_integration)
-        # # print(self.clean_result(self.result_columns))
+        amstars_integration = self.amstar2_integration()
+        # self.result_columns = {**self.result_columns, **amstars_integration}
+        self.result_columns.update(amstars_integration)
+        # print(self.clean_result(self.result_columns))
         return self.clean_result(self.result_columns)
 
     def extract_num_databases_old(self, text):
@@ -925,12 +937,13 @@ class Tagging(TaggerInterface):
                 print("Failed to initialize NER pipeline. Check model files.")
                 return {}
     
-    # def amstar2_integration(self):
-    #     today = date.today()
-    #     date_str = today.strftime("%Y-%m-%d")
-    #     context = self.document
-    #     checker = Amstar2(review_date=date_str)
-    #     results = checker.evaluate_all(context)
-    #     summary = checker.amstar_label_and_flaws(results)
-    #     update_dict = checker.prepare_amstar_update_dict(results, summary)
-    #     return update_dict
+    def amstar2_integration(self):
+        today = date.today()
+        date_str = today.strftime("%Y-%m-%d")
+        context = self.document
+        checker = amstar2(review_date=date_str)
+        results = checker.evaluate_all(context)
+        summary = checker.amstar_label_and_flaws(results)
+        update_dict = checker.prepare_amstar_update_dict(results, summary)
+        # print(update_dict)
+        return update_dict

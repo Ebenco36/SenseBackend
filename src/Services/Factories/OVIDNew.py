@@ -88,55 +88,93 @@ class OvidJournalDataFetcher(Service):
         rebuilt_url = f"{base_url}?{query_string}"
         return rebuilt_url
 
+    def _extract_set_id(self, params: dict, fallback="S.sh.80"):
+        """
+        Try to recover the active Ovid set id (e.g., 'S.sh.80') from common params.
+        Falls back to `fallback` if none found.
+        """
+        def _first_str(x):
+            if isinstance(x, list):
+                return x[0]
+            return x
+
+        for key in ("SELECT", "Datalist", "Get Bib Display", "WebLinkReturn", "CitManPrev"):
+            val = params.get(key)
+            if not val:
+                continue
+            val = _first_str(val)
+            # Values look like: 'Titles|G|S.sh.80|6500|25' or 'S.sh.80|6500|25' or 'S.sh.80|'
+            for token in str(val).split("|"):
+                tok = token.strip()
+                if tok.startswith("S.sh."):
+                    return tok
+        return fallback
+
+
     def fetch(self):
+        # Parse the configured URL into params + base
         params, self.base_url = self.extract_params_from_url(self.url)
+
+        # Resolve results_per_page robustly
+        rpp = params.get("results_per_page", 25)
+        if isinstance(rpp, list):
+            rpp = rpp[0]
+        try:
+            results_per_page = int(rpp)
+        except (TypeError, ValueError):
+            results_per_page = 25
+
+        # Lock the set id once and reuse everywhere
+        set_id = self._extract_set_id(params, fallback="S.sh.80")
+
         page_number = 1
-        results_per_page = int(params.get("results_per_page", [100])[0])  # Default to 100 if not provided
-
         while page_number <= self.max_pages:
-            if page_number == 1:
-                # Page 1 logic
-                start_record = 1
-                params["Get Bib Display"] = f"Titles|G|S.sh.30|{start_record}|{results_per_page}"
-            else:
-                # Page 2 and beyond logic
-                start_record = (page_number - 1) * results_per_page + 1
-                params["Get Bib Display"] = f"Titles|F|S.sh.30|{start_record}|{results_per_page}"
+            start_record = (page_number - 1) * results_per_page + 1
 
-            # Update `startRecord` and `startRecord_subfooter`
-            params["startRecord"] = str(start_record)
+            # First page uses 'G'; subsequent pages use 'F'
+            flag = "G" if page_number == 1 else "F"
+
+            # Build the *consistent* Ovid paging params
+            params["Get Bib Display"]       = f"Titles|{flag}|{set_id}|{start_record}|{results_per_page}"
+            params["startRecord"]           = str(start_record)
             params["startRecord_subfooter"] = str(start_record)
 
-            # WebLinkReturn is constant
-            params["WebLinkReturn"] = f"Titles=F|S.sh.30|1|{results_per_page}"
-            
-                  # Set filename to check if page data already exists
+            # Keep all of these aligned to the *same* set & page slice
+            params["WebLinkReturn"] = f"Titles={set_id}|{start_record}|{results_per_page}"
+            params["CitManPrev"]    = f"{set_id}|{start_record}|{results_per_page}"
+            params["Datalist"]      = f"{set_id}|{start_record}|{results_per_page}"
+            params["SELECT"]        = f"{set_id}|"
+
+            # (Optional) Make sure FORMAT/FIELDS are reasonable defaults
+            params.setdefault("FORMAT", "title")
+            params.setdefault("FIELDS", "SELECTED")
+
+            # Skip if we already saved this page
             filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
             if os.path.exists(filename):
                 print(f"Data for page {page_number} already saved as {filename}. Skipping download.")
                 page_number += 1
                 continue
-                
-            # Construct the URL
+
+            # Build URL and fetch
             url = self.rebuild_url(self.base_url, params)
             print(f"Fetching page {page_number}: {url}")
 
-            # Fetch and process the response
-            response = self.session.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
+            # Include auth headers if provided via authenticate()
+            resp = self.session.get(url, headers=getattr(self, "auth_headers", None))
+            resp.raise_for_status()
 
-            # Extract data
+            soup = BeautifulSoup(resp.text, "html.parser")
+
+            # Extract & persist
             journals = self._extract_data(soup)
             if not journals:
                 print(f"No records found on page {page_number}. Stopping.")
                 break
 
-            # Save data to CSV
-            filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
             self._save_to_csv(journals, filename)
 
-            # Check for "Next" button
+            # Detect presence of a "Next" button; stop if none
             next_button = soup.select_one('.n-mb .next-prev input.titles-nav-button[aria-label="Next"]')
             if not next_button:
                 print("No more pages available.")
@@ -144,7 +182,68 @@ class OvidJournalDataFetcher(Service):
 
             page_number += 1
 
+        # Merge all pages
         self.merge_csv_files()
+
+    # def fetch(self):
+    #     params, self.base_url = self.extract_params_from_url(self.url)
+    #     set_id = self._extract_set_id(params)
+    #     page_number = 1
+    #     results_per_page = int(params.get("results_per_page", [100])[0])  # Default to 100 if not provided
+
+    #     while page_number <= self.max_pages:
+    #         if page_number == 1:
+    #             # Page 1 logic
+    #             start_record = 1
+    #             params["Get Bib Display"] = f"Titles|G|S.sh.30|{start_record}|{results_per_page}"
+    #         else:
+    #             # Page 2 and beyond logic
+    #             start_record = (page_number - 1) * results_per_page + 1
+    #             params["Get Bib Display"] = f"Titles|F|S.sh.30|{start_record}|{results_per_page}"
+
+    #         # Update `startRecord` and `startRecord_subfooter`
+    #         params["startRecord"] = str(start_record)
+    #         params["startRecord_subfooter"] = str(start_record)
+
+    #         # WebLinkReturn is constant
+    #         params["WebLinkReturn"] = f"Titles=F|S.sh.30|1|{results_per_page}"
+            
+    #               # Set filename to check if page data already exists
+    #         filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
+    #         if os.path.exists(filename):
+    #             print(f"Data for page {page_number} already saved as {filename}. Skipping download.")
+    #             page_number += 1
+    #             continue
+                
+    #         # Construct the URL
+    #         url = self.rebuild_url(self.base_url, params)
+    #         print(f"Fetching page {page_number}: {url}")
+
+    #         # Fetch and process the response
+    #         response = self.session.get(url)
+    #         response.raise_for_status()
+    #         soup = BeautifulSoup(response.text, "html.parser")
+
+    #         # Extract data
+    #         journals = self._extract_data(soup)
+    #         print(f"Extracted {len(journals)} journals from page {page_number}.")
+    #         if not journals:
+    #             print(f"No records found on page {page_number}. Stopping.")
+    #             break
+
+    #         # Save data to CSV
+    #         filename = os.path.join(self.data_dir, f"journal_data_page_{page_number}.csv")
+    #         self._save_to_csv(journals, filename)
+
+    #         # Check for "Next" button
+    #         next_button = soup.select_one('.n-mb .next-prev input.titles-nav-button[aria-label="Next"]')
+    #         if not next_button:
+    #             print("No more pages available.")
+    #             break
+
+    #         page_number += 1
+
+    #     self.merge_csv_files()
 
     def _extract_data(self, soup):
         """
@@ -161,14 +260,15 @@ class OvidJournalDataFetcher(Service):
             """
             try:
                 return datetime.strptime(value, format).strftime("%Y-%m-%d")
-            except ValueError:
+            except ValueError as e:
+                print(f"Date conversion error: {e}")
                 return value  # Return the original value if parsing fails
         
         records = []  # List to store all extracted records
-
+        with open("soup_content.html", "w", encoding="utf-8") as f:
+            f.write(str(soup))
         for record in soup.select(".titles-row"):
             data = {}
-
             # Title and Link
             title_tag = record.select_one(".titles-title h5 a")
             if title_tag:
@@ -219,7 +319,7 @@ class OvidJournalDataFetcher(Service):
                 data["abstract"] = " ".join(abstract_tag.text.split())  # Normalize whitespace
 
             # DOI
-            doi_tag = record.select_one('.titles-other:has(span:contains("DOI")) a')
+            doi_tag = record.select_one('.titles-other:has(span:contains("Digital Object Identifier")) a')
             if doi_tag:
                 data["doi"] = doi_tag.get("href", "")
 

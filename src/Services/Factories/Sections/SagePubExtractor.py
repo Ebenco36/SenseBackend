@@ -20,7 +20,7 @@ class SagePubExtractor(BaseArticleExtractor):
         self._extract_conclusions()
         self.extract_image_text()
         self.extract_tables_with_titles()
-        self._extract_references()
+        # self._extract_references()
         self._extract_search_strategy()
         self._combine_main_content()
 

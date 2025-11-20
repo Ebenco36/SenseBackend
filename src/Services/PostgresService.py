@@ -91,7 +91,7 @@ class PostgresService:
         # FINAL FIX: If the column is 'Id' (a TEXT column) and the comparison value is an integer,
         # convert the value to a string to ensure a proper text-to-text comparison.
         processed_value = value
-        if column.lower() == 'id' and isinstance(value, int):
+        if column.lower() in ('id', 'primary_id') and isinstance(value, int):
             processed_value = str(value)
 
         placeholder = self._add_param(

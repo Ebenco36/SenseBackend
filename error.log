@@ -1,0 +1,644 @@
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1821, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 2313, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 51, in before_request
+    setup_reflected_models()  # or setup_specific_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Utils/table_reflector.py", line 18, in setup_reflected_models
+    reflected = registry.reflect_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 109, in reflect_all
+    tables = self.reflector.get_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 52, in get_tables
+    self.metadata.reflect(bind=self.db.engine)
+AttributeError: module 'database.db' has no attribute 'engine'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1821, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 2313, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 51, in before_request
+    setup_reflected_models()  # or setup_specific_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Utils/table_reflector.py", line 18, in setup_reflected_models
+    reflected = registry.reflect_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 109, in reflect_all
+    tables = self.reflector.get_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 52, in get_tables
+    self.metadata.reflect(bind=self.db.engine)
+AttributeError: module 'database.db' has no attribute 'engine'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1821, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 2313, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 51, in before_request
+    setup_reflected_models()  # or setup_specific_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Utils/table_reflector.py", line 18, in setup_reflected_models
+    reflected = registry.reflect_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 109, in reflect_all
+    tables = self.reflector.get_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 52, in get_tables
+    self.metadata.reflect(bind=self.db.engine)
+AttributeError: module 'database.db' has no attribute 'engine'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1821, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 2313, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 51, in before_request
+    setup_reflected_models()  # or setup_specific_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Utils/table_reflector.py", line 18, in setup_reflected_models
+    reflected = registry.reflect_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 109, in reflect_all
+    tables = self.reflector.get_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 52, in get_tables
+    self.metadata.reflect(bind=self.db.engine)
+AttributeError: module 'database.db' has no attribute 'engine'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1821, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 2313, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 51, in before_request
+    setup_reflected_models()  # or setup_specific_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Utils/table_reflector.py", line 18, in setup_reflected_models
+    reflected = registry.reflect_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 109, in reflect_all
+    tables = self.reflector.get_tables()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 52, in get_tables
+    self.metadata.reflect(bind=self.db.engine)
+AttributeError: module 'database.db' has no attribute 'engine'
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/views.py", line 104, in view
+    self = view.view_class(  # type: ignore[attr-defined]
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Journals/views/BaseResourceAPI.py", line 35, in __init__
+    self.registry = ModelRegistry(db)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 50, in __init__
+    self.reflector = TableReflector(db_instance)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 44, in __init__
+    raise RuntimeError(
+RuntimeError: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+An internal server error occurred
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 295, in error_router
+    return self.handle_error(e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 310, in handle_error
+    _handle_flask_propagate_exceptions_config(current_app, e)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/awotoroebenezer/.pyenv/versions/3.10.13/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/awotoroebenezer/.pyenv/versions/3.10.13/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/awotoroebenezer/.pyenv/versions/3.10.13/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/awotoroebenezer/.pyenv/versions/3.10.13/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Response is not JSON serializable
+❌ Service initialization error: No module named 'src.Services.DBservices.ModelRegistry'
+❌ Service initialization error: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+❌ Service initialization error: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+❌ Service initialization error: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/SafeRegistryInit.py", line 51, in initialize_registry_safely
+    registry = ModelRegistry(db)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 50, in __init__
+    self.reflector = TableReflector(db_instance)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 44, in __init__
+    raise RuntimeError(
+RuntimeError: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 105, in create_app
+    result = initialize_registry_safely(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/SafeRegistryInit.py", line 111, in initialize_registry_safely
+    empty_registry = ModelRegistry(db)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 50, in __init__
+    self.reflector = TableReflector(db_instance)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 44, in __init__
+    raise RuntimeError(
+RuntimeError: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+❌ Service initialization error: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/SafeRegistryInit.py", line 51, in initialize_registry_safely
+    registry = ModelRegistry(db)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 50, in __init__
+    self.reflector = TableReflector(db_instance)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 44, in __init__
+    raise RuntimeError(
+RuntimeError: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 105, in create_app
+    result = initialize_registry_safely(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/SafeRegistryInit.py", line 111, in initialize_registry_safely
+    empty_registry = ModelRegistry(db)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/models/ModelRegistry.py", line 50, in __init__
+    self.reflector = TableReflector(db_instance)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/src/Services/DBservices/TableReflector.py", line 44, in __init__
+    raise RuntimeError(
+RuntimeError: Database not properly initialized. Make sure you've called init_db(app) or db.init_app(app) within Flask application context.
+❌ Database creation error: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 82, in create_app
+    db.create_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4930, in create_all
+    bind._run_ddl_visitor(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3237, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3153, in begin
+    conn = self.connect(close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+❌ Database creation error: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 82, in create_app
+    db.create_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4930, in create_all
+    bind._run_ddl_visitor(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3237, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3153, in begin
+    conn = self.connect(close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+❌ Database creation error: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 98, in create_app
+    db.create_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4930, in create_all
+    bind._run_ddl_visitor(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3237, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3153, in begin
+    conn = self.connect(close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+❌ Database creation error: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/app.py", line 98, in create_app
+    db.create_all()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1094, in create_all
+    self._execute_for_all_tables(app, bind, 'create_all')
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/flask_sqlalchemy/__init__.py", line 1086, in _execute_for_all_tables
+    op(bind=self.get_engine(app, bind), **extra)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4930, in create_all
+    bind._run_ddl_visitor(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3237, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3153, in begin
+    conn = self.connect(close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/awotoroebenezer/Desktop/SenseBackend/.venv/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)

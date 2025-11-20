@@ -27,7 +27,7 @@ class NCBIExtractor(BaseArticleExtractor):
         self.is_open_access()
         self._extract_image_content()
         self._extract_tables()
-        self._extract_references()
+        # self._extract_references()
         self.__extract_sections()
 
     def _extract_image_content(self):

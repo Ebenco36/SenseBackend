@@ -548,8 +548,10 @@ class amstar2(TaggerInterface):
                 output[column] = value.strip() if isinstance(value, str) else value
 
         # Unpack label + flaws
-        label, met = summary
+        print(summary)
+        label, flaws, met = summary
         output["amstar_label"] = label
+        output["amstar_flaws"] = flaws
         output["amstar_met"] = met
 
         return output

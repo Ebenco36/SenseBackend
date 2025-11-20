@@ -287,7 +287,7 @@ class GeneralPDFWebScraper:
             if (hasattr(self, "fetch_pdf_urls") and "cochrane" not in self.url)
             else self.fetch_pdf_urls_2()
         )
-        print(pdf_urls)
+        # print(pdf_urls)
 
         if pdf_urls and len(pdf_urls) > 0 and "valueinhealthjournal" in pdf_urls[0]:
             downloader = PDFDownloader()

@@ -8,7 +8,7 @@ class UniversalExtractor(BaseArticleExtractor):
     def _extract_sections(self):
         self._extract_title()
         self.is_open_access()
-        self._extract_references()
+        # self._extract_references()
         self._extract_image_content()
         self.__extract_sections()
 

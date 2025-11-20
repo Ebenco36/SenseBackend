@@ -145,146 +145,6 @@ class JSONService:
 
         return builder
 
-    # def _build_from_payload(self, payload):
-    #     """
-    #     Builds a query from a standard JSON payload with full optimization and
-    #     robust, case-insensitive column validation.
-    #     """
-    #     table_name = payload.get("table")
-    #     if not table_name:
-    #         raise ValueError("Table name is required")
-
-    #     # Initialize the builder and cache the table's schema for validation
-    #     builder = self.db_service.table(table_name)
-    #     valid_columns_lower = builder._table_columns_lower
-
-    #     # 1. Handle Columns (Silently skips non-existent ones)
-    #     if cols_to_select := payload.get("columns"):
-    #         final_cols = [
-    #             col for col in cols_to_select
-    #             if col == '*' or col.lower() in valid_columns_lower
-    #         ]
-    #         if final_cols:
-    #             builder.select(*final_cols)
-
-    #     # 2. Handle Filters (Groups conditions and skips non-existent columns)
-    #     filters = payload.get("filters", [])
-    #     if filters:
-
-    #         # MODIFICATION START: Read the operator and prepare to manage conjunctions
-    #         operator = payload.get('filter_operator', 'AND').upper()
-    #         is_first_condition = True
-
-    #         def get_conjunction():
-    #             nonlocal is_first_condition
-    #             if is_first_condition:
-    #                 is_first_condition = False
-    #                 # The very first WHERE clause always starts with AND (or nothing)
-    #                 return "AND"
-    #             return operator
-    #         # MODIFICATION END
-
-    #         grouped_wheres = defaultdict(list)
-    #         grouped_likes = defaultdict(list)
-    #         other_conditions = []
-
-    #         # First, categorize all filters, skipping any with invalid columns
-    #         for f in filters:
-    #             column = f.get("column")
-    #             # For multi-column filters, all columns must be valid
-    #             if columns := f.get("columns"):
-    #                 if not all(c.lower() in valid_columns_lower for c in columns):
-    #                     logging.warning(
-    #                         f"Filter skipped: One or more columns in {columns} do not exist.")
-    #                     continue
-    #             elif not column or column.lower() not in valid_columns_lower:
-    #                 logging.warning(
-    #                     f"Filter skipped: Column '{column}' does not exist.")
-    #                 continue
-
-    #             filter_type = f.get("type", "where").lower()
-    #             if filter_type in ["where", "inwhere"]:
-    #                 grouped_wheres[column].append(f.get("value"))
-    #             elif filter_type == "likewhere":
-    #                 grouped_likes[column].append(f.get("value"))
-    #             else:
-    #                 other_conditions.append(f)
-
-    #         # Apply grouped 'where'/'inwhere' conditions as efficient IN clauses
-    #         for column, values in grouped_wheres.items():
-    #             flat_values = [v for v_list in values for v in (
-    #                 v_list if isinstance(v_list, list) else [v_list])]
-    #             unique_values = list(set(flat_values))
-    #             conjunction = get_conjunction()
-    #             if len(unique_values) > 1:
-    #                 builder.in_where(column, unique_values,
-    #                                  conjunction=conjunction)
-    #             elif unique_values:
-    #                 builder.where(
-    #                     column, unique_values[0], conjunction=conjunction)
-
-    #         # Apply grouped 'likewhere' conditions as efficient OR LIKE (...) clauses
-    #         for column, values in grouped_likes.items():
-    #             unique_values = list(set(values))
-    #             conjunction = get_conjunction()
-    #             if len(unique_values) > 1:
-    #                 builder.or_like_group(
-    #                     column, unique_values, conjunction=conjunction)
-    #             elif unique_values:
-    #                 builder.like(
-    #                     column, unique_values[0], conjunction=conjunction)
-
-    #         # Apply all other, non-groupable conditions
-    #         for f in other_conditions:
-    #             op_map = {
-    #                 "orwhere": builder.or_where,
-    #                 "notwhere": lambda col, val: builder.where(col, val, operator="!="),
-    #                 "betweenwhere": builder.between,
-    #                 "orlikewhere": lambda col, val: builder.like(col, val, conjunction="OR"),
-    #                 "multi_column_like": builder.or_like_multi_column,
-    #             }
-    #             filter_type = f.get("type").lower()
-    #             if filter_type in op_map:
-    #                 conjunction = get_conjunction()
-
-    #                 if filter_type == "multi_column_like":
-    #                     op_map[filter_type](
-    #                         f["columns"], f["value"], conjunction=conjunction)
-    #                 elif filter_type == "betweenwhere":
-    #                     op_map[filter_type](
-    #                         f["column"], f["value"][0], f["value"][1], conjunction=conjunction)
-    #                 else:
-    #                     op_map[filter_type](
-    #                         f["column"], f["value"], conjunction=conjunction)
-
-    #     # 3. Handle Group By (Case-insensitive check)
-    #     if groups := payload.get("group_by"):
-    #         valid_groups = [col for col in groups if col.lower()
-    #                         in valid_columns_lower]
-    #         if valid_groups:
-    #             builder.group_by(*valid_groups)
-
-    #     # 4. Handle Aggregations
-    #     for agg in payload.get("aggregations", []):
-    #         col = agg.get("column")
-    #         if col != '*' and (not col or col.lower() not in valid_columns_lower):
-    #             logging.warning(
-    #                 f"Aggregation skipped: Column '{col}' does not exist.")
-    #             continue
-    #         builder.add_aggregation(agg["func"], col, agg.get("alias"))
-
-    #     # 5. Handle Order By (Case-insensitive check)
-    #     if order := payload.get("order_by"):
-    #         col = order.get("column")
-    #         if col and col.lower() in valid_columns_lower:
-    #             builder.order_by(col, order.get("direction", "ASC"))
-
-    #     # 6. Handle Pagination
-    #     if page_info := payload.get("pagination"):
-    #         builder.paginate(page_info["page"], page_info["page_size"])
-
-    #     return builder
-
     def get_all_filter_options(self, include=None):
         """
         Generates and returns the complete, structured set of all available
@@ -508,8 +368,15 @@ class JSONService:
             table_name, record_id = payload.get("table"), payload.get("id")
             if not table_name or not record_id:
                 return {"error": "Table and ID are required"}
+            if isinstance(record_id, str):
+                record_id = record_id.strip()
+
+            # If primary_id is TEXT in DB:
+            record_id = str(record_id)
+            # print(record_id)
             record = self.db_service.table(table_name).where(
                 "primary_id", record_id).first()
+            # print(record)
             if record:
                 record = self._post_process_records([record])[0]
             else:
@@ -808,12 +675,24 @@ class JSONService:
                     break
         return {"success": True, "data": result}
 
+    # def get_summary_statistics(self):
+    #     # Assumes get_summary_statistics is part of your PostgresService
+    #     # If not, you would build the queries here using the builder.
+    #     if hasattr(self.chart_service, 'get_summary_statistics'):
+    #         return self.chart_service.get_summary_statistics()
+    #     return {"error": "get_summary_statistics not implemented in service"}
+    
     def get_summary_statistics(self):
-        # Assumes get_summary_statistics is part of your PostgresService
-        # If not, you would build the queries here using the builder.
+        """Get summary statistics from chart service"""
         if hasattr(self.chart_service, 'get_summary_statistics'):
             return self.chart_service.get_summary_statistics()
-        return {"error": "get_summary_statistics not implemented in service"}
+        return {
+            "status": "error",
+            "message": "get_summary_statistics not implemented in service",
+            "data": {},
+            "charts": []
+        }
+
 
     def get_other_filters(self):
         """

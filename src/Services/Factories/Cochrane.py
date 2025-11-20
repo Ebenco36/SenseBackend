@@ -267,7 +267,7 @@ class Cochrane(Service):
             pdf_url = doi_link.replace("/full", "/pdf/full")
 
             # Fetch additional PICO data
-            pico_data = self.fetch_pico_data(doi_link) if doi_link else {}
+            # pico_data = self.fetch_pico_data(doi_link) if doi_link else {}
 
             records.append(
                 {
@@ -288,7 +288,7 @@ class Cochrane(Service):
                         if get_other_fields.get("is_oa", False) == True
                         else "Not Open Access"
                     ),
-                    **pico_data,  # Merge PICO data fields
+                    # **pico_data,  # Merge PICO data fields
                 }
             )
 

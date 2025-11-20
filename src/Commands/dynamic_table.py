@@ -93,6 +93,32 @@ def update_table_schema(engine, table_name, columns, sample_rows):
                     connection.execute(alter_command)
                     logging.info(f"Added column '{column}' to '{table_name}'")
 
+
+YEAR_COLUMN = "year"  # change this if your column is named differently
+
+def is_row_from_2011_up(row):
+    """Return True only if the row's year is >= 2011."""
+    raw = (row.get(YEAR_COLUMN) or "").strip()
+    if not raw:
+        return False  # no year → reject
+
+    try:
+        # handle things like "2012.0"
+        year = int(float(raw))
+        return year >= 2011
+    except ValueError:
+        # invalid year → reject
+        return False
+
+DOI_COLUMNS = ["doi", "cleaned_doi"]  # which fields count as "having a DOI"
+def has_valid_doi(row):
+    """Return True if row contains at least one non-empty DOI field."""
+    for col in DOI_COLUMNS:
+        val = (row.get(col) or "").strip()
+        if val != "":
+            return True
+    return False
+
 def create_dynamic_model(columns, table_name, sample_rows):
     """Dynamically create a SQLAlchemy model based on CSV columns."""
     attrs = {
@@ -152,6 +178,12 @@ def seed_data(file_path, model):
         with open(file_path, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             for i, row in enumerate(reader, 1):
+                # 🚫 Skip rows not from 2011 onwards
+                if not is_row_from_2011_up(row):
+                    continue
+                # Skip if DOI is missing
+                if not has_valid_doi(row):
+                    continue
                 try:
                     cleaned_row = clean_data_for_insertion(row, model)
 

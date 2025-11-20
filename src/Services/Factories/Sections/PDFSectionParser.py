@@ -48,7 +48,8 @@ class PDFSectionParser:
             "Abstract": ["abstract"], "Introduction": ["introduction", "background"],
             "Methods": ["methods", "method", "methodology", "materials and methods"],
             "Results": ["results", "findings"], "Discussion": ["discussion"],
-            "Conclusion": ["conclusions", "conclusion"], "References": ["references", "bibliography"],
+            "Conclusion": ["conclusions", "conclusion"], 
+            # "References": ["references", "bibliography"],
         }
         reverse_map = {kw: key for key, kws in section_map.items() for kw in kws}
         pattern = re.compile(r"^(?:[A-Z0-9]+\.?\s*)?(" + "|".join(reverse_map.keys()) + r")\s*$", re.IGNORECASE)

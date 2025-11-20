@@ -1882,29 +1882,30 @@ def clean_references(
     # === Plain text cleanup ===
     if isinstance(input_data, str):
         lines = input_data.splitlines()
-        cleaned_lines = []
+        return '\n'.join(lines)
+        # cleaned_lines = []
 
-        for line in lines:
-            original_line = line.strip()
-            if not original_line:
-                continue
+        # for line in lines:
+        #     original_line = line.strip()
+        #     if not original_line:
+        #         continue
 
-            if remove_boilerplate and boilerplate_pattern.search(original_line):
-                continue
+        #     if remove_boilerplate and boilerplate_pattern.search(original_line):
+        #         continue
 
-            if remove_section_numbering:
-                line = section_numbering_pattern.sub('', original_line)
-            else:
-                line = original_line
+        #     if remove_section_numbering:
+        #         line = section_numbering_pattern.sub('', original_line)
+        #     else:
+        #         line = original_line
 
-            if patterns:
-                line = combined_pattern.sub('', line)
+        #     if patterns:
+        #         line = combined_pattern.sub('', line)
 
-            line = re.sub(r'\s{2,}', ' ', line).strip()
-            if line:
-                cleaned_lines.append(line)
+        #     line = re.sub(r'\s{2,}', ' ', line).strip()
+        #     if line:
+        #         cleaned_lines.append(line)
 
-        return '\n'.join(cleaned_lines)
+        # return '\n'.join(cleaned_lines)
 
     # === BeautifulSoup cleanup ===
     elif isinstance(input_data, BeautifulSoup):
