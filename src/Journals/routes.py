@@ -18,7 +18,7 @@ from src.Journals.views.data_filters import (
 from src.Journals.views.paper_processor_api import PaperProcessorAPI
 from src.Journals.views.visualization_resource import VisualizationDataAPI, VisualizationFiltersAPI
 from src.Utils.filter_structure import FILTER_STRUCTURE
-from src.models.ModelRegistry import ModelRegistry
+from src.models_.ModelRegistry import ModelRegistry
 
 def journal_routes(api):
     api.add_resource(RecordsAPI, '/api/records', '/api/records/<int:record_id>')

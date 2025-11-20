@@ -11,7 +11,7 @@ from typing import List, Optional, Dict, Any
 from sqlalchemy import inspect
 import logging
 
-from src.models.ModelRegistry import ModelRegistry
+from src.models_.ModelRegistry import ModelRegistry
 
 logger = logging.getLogger(__name__)
 

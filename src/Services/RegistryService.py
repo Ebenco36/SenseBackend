@@ -4,7 +4,7 @@ from typing import List, Optional, Dict, Any
 from src.Services.BaseService import BaseService
 from sqlalchemy import inspect
 
-from src.models.ModelRegistry import ModelRegistry
+from src.models_.ModelRegistry import ModelRegistry
 
 
 class RegistryService(BaseService):
