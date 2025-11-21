@@ -310,10 +310,165 @@ class FilterSearchResource(Resource):
     #         return None
     
     
+    # def _build_single_clause(self, model_class, condition: Dict):
+    #     """
+    #     Build a single SQLAlchemy filter clause.
+    #     Handles JSON-as-string columns for region/country using LIKE.
+    #     """
+    #     try:
+    #         field = condition.get('field')
+    #         operator = condition.get('operator', 'contains')
+    #         value = condition.get('value')
+    #         values = condition.get('values', [])
+            
+    #         if not field or not hasattr(model_class, field):
+    #             self.logger.warning(f"Field '{field}' not found in model")
+    #             return None
+            
+    #         column = getattr(model_class, field)
+            
+    #         # If region/country stored as JSON-string, use LIKE matching for 'region' and 'country' keys
+    #         is_json_str_col = (
+    #             '__hash__' in field
+    #             or field.lower().endswith('region')
+    #             or field.lower().endswith('country')
+    #         )
+
+    #         if is_json_str_col and operator in ['equals', 'in']:
+    #             if operator == 'equals' and value:
+    #                 # Match both single- and double-quotes for cross-language safety:
+    #                 return or_(
+    #                     column.ilike(f"%'{value}': True%"),
+    #                     column.ilike(f'%"{value}": True%')
+    #                 )
+    #             elif operator == 'in' and values:
+    #                 conds = [
+    #                     or_(
+    #                         column.ilike(f"%'{val}': True%"),
+    #                         column.ilike(f'%"{val}": True%')
+    #                     ) for val in values
+    #                 ]
+    #                 return or_(*conds)
+
+    #         # Standard operators (for normal columns)
+    #         if operator == 'contains':
+    #             return column.ilike(f'%{value}%')
+    #         elif operator in ['equals', '=']:
+    #             return column == value
+    #         elif operator == 'in':
+    #             if values:
+    #                 return column.in_(values)
+    #         elif operator == 'between':
+    #             if isinstance(value, list) and len(value) == 2:
+    #                 return between(column, value[0], value[1])
+    #         elif operator == 'starts_with':
+    #             return column.ilike(f'{value}%')
+    #         elif operator == 'ends_with':
+    #             return column.ilike(f'%{value}')
+    #         elif operator == 'gt':
+    #             return column > value
+    #         elif operator == 'gte':
+    #             return column >= value
+    #         elif operator == 'lt':
+    #             return column < value
+    #         elif operator == 'lte':
+    #             return column <= value
+            
+    #         return None
+    #     except Exception as e:
+    #         self.logger.error(f"Error building clause: {e}")
+    #         return None
+
+    
+    # def _build_single_clause(self, model_class, condition: Dict):
+    #     """
+    #     Build a single SQLAlchemy filter clause.
+    #     Handles JSON-as-string columns for region/country using LIKE.
+    #     """
+    #     try:
+    #         field = condition.get('field')
+    #         operator = condition.get('operator', 'contains')
+    #         value = condition.get('value')
+    #         values = condition.get('values', [])
+            
+    #         if not field or not hasattr(model_class, field):
+    #             self.logger.warning(f"Field '{field}' not found in model")
+    #             return None
+            
+    #         column = getattr(model_class, field)
+            
+    #         # ✅ ADD THIS: contains_any operator for hash fields
+    #         if operator == 'contains_any' and values:
+    #             self.logger.info(f"🔍 Using contains_any for field={field}, values={values}")
+    #             clauses = []
+    #             for tag_code in values:
+    #                 # Match pattern: ":tag_code" (tag code after colon)
+    #                 pattern = f'%:{tag_code}%'
+    #                 self.logger.debug(f"   Searching for pattern: {pattern}")
+    #                 clauses.append(column.ilike(pattern))
+    #             return or_(*clauses)
+            
+    #         # If region/country stored as JSON-string, use LIKE matching for 'region' and 'country' keys
+    #         is_json_str_col = (
+    #             '__hash__' in field
+    #             or field.lower().endswith('region')
+    #             or field.lower().endswith('country')
+    #         )
+
+    #         if is_json_str_col and operator in ['equals', 'in']:
+    #             if operator == 'equals' and value:
+    #                 # Match both single- and double-quotes for cross-language safety:
+    #                 return or_(
+    #                     column.ilike(f"%'{value}': True%"),
+    #                     column.ilike(f'%"{value}": True%')
+    #                 )
+    #             elif operator == 'in' and values:
+    #                 conds = [
+    #                     or_(
+    #                         column.ilike(f"%'{val}': True%"),
+    #                         column.ilike(f'%"{val}": True%')
+    #                     ) for val in values
+    #                 ]
+    #                 return or_(*conds)
+
+    #         # Standard operators (for normal columns)
+    #         if operator == 'contains':
+    #             return column.ilike(f'%{value}%')
+    #         elif operator in ['equals', '=']:
+    #             return column == value
+    #         elif operator == 'in':
+    #             if values:
+    #                 return column.in_(values)
+    #         elif operator == 'between':
+    #             if isinstance(value, list) and len(value) == 2:
+    #                 return between(column, value[0], value[1])
+    #         elif operator == 'starts_with':
+    #             return column.ilike(f'{value}%')
+    #         elif operator == 'ends_with':
+    #             return column.ilike(f'%{value}')
+    #         elif operator == 'gt':
+    #             return column > value
+    #         elif operator == 'gte':
+    #             return column >= value
+    #         elif operator == 'lt':
+    #             return column < value
+    #         elif operator == 'lte':
+    #             return column <= value
+            
+    #         return None
+    #     except Exception as e:
+    #         self.logger.error(f"Error building clause: {e}")
+    #         return None
+
+
     def _build_single_clause(self, model_class, condition: Dict):
         """
         Build a single SQLAlchemy filter clause.
-        Handles JSON-as-string columns for region/country using LIKE.
+        
+        Handles:
+        - Hash fields (topic__hash__*, outcome__hash__*, etc.) → contains_any or JSON matching
+        - Standard columns (country, year, etc.) → SQL operators
+        - Special operators (between, gt, gte, lt, lte, etc.)
         """
         try:
             field = condition.get('field')
@@ -321,63 +476,134 @@ class FilterSearchResource(Resource):
             value = condition.get('value')
             values = condition.get('values', [])
             
+            # ✅ Validate field exists
             if not field or not hasattr(model_class, field):
-                self.logger.warning(f"Field '{field}' not found in model")
+                self.logger.warning(f"⚠️  Field '{field}' not found in model")
                 return None
             
             column = getattr(model_class, field)
             
-            # If region/country stored as JSON-string, use LIKE matching for 'region' and 'country' keys
-            is_json_str_col = (
-                '__hash__' in field
-                or field.lower().endswith('region')
-                or field.lower().endswith('country')
-            )
-
-            if is_json_str_col and operator in ['equals', 'in']:
+            # ✅ Determine if this is a hash field
+            is_hash_field = '__hash__' in field
+            
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            # HASH FIELDS: contains_any operator (for tag codes)
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            if is_hash_field and operator == 'contains_any' and values:
+                self.logger.info(f"🔍 contains_any: {field} in {values}")
+                clauses = []
+                for tag_code in values:
+                    # Match pattern ":tag_code" (e.g., ":eff", ":saf", ":nb")
+                    clauses.append(column.ilike(f'%:{tag_code}%'))
+                return or_(*clauses)
+            
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            # HASH FIELDS: equals/in operators (for JSON string matching)
+            # Only if you still have old-style JSON stored as strings
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            if is_hash_field and operator in ['equals', 'in']:
                 if operator == 'equals' and value:
-                    # Match both single- and double-quotes for cross-language safety:
+                    # Match both single and double quotes for safety
                     return or_(
                         column.ilike(f"%'{value}': True%"),
                         column.ilike(f'%"{value}": True%')
                     )
                 elif operator == 'in' and values:
-                    conds = [
-                        or_(
-                            column.ilike(f"%'{val}': True%"),
-                            column.ilike(f'%"{val}": True%')
-                        ) for val in values
-                    ]
+                    conds = []
+                    for val in values:
+                        conds.append(
+                            or_(
+                                column.ilike(f"%'{val}': True%"),
+                                column.ilike(f'%"{val}": True%')
+                            )
+                        )
                     return or_(*conds)
-
-            # Standard operators (for normal columns)
+            
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            # STANDARD SQL OPERATORS (for normal columns)
+            # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            
+            # Contains (case-insensitive)
             if operator == 'contains':
                 return column.ilike(f'%{value}%')
-            elif operator in ['equals', '=']:
+            
+            # Equals
+            elif operator in ['equals', '=', '==']:
                 return column == value
+            
+            # In (list of values)
             elif operator == 'in':
-                if values:
-                    return column.in_(values)
+                if not values:
+                    self.logger.warning(f"⚠️  'in' operator requires values, got: {values}")
+                    return None
+                return column.in_(values)
+            
+            # Not in (exclusion)
+            elif operator == 'not_in':
+                if not values:
+                    return None
+                return column.notin_(values)
+            
+            # Between (range)
             elif operator == 'between':
-                if isinstance(value, list) and len(value) == 2:
-                    return between(column, value[0], value[1])
+                if not isinstance(value, list) or len(value) != 2:
+                    self.logger.warning(f"⚠️  'between' requires list of 2 values, got: {value}")
+                    return None
+                return between(column, value[0], value[1])
+            
+            # Starts with
             elif operator == 'starts_with':
                 return column.ilike(f'{value}%')
+            
+            # Ends with
             elif operator == 'ends_with':
                 return column.ilike(f'%{value}')
+            
+            # Greater than
             elif operator == 'gt':
                 return column > value
+            
+            # Greater than or equal
             elif operator == 'gte':
                 return column >= value
+            
+            # Less than
             elif operator == 'lt':
                 return column < value
+            
+            # Less than or equal
             elif operator == 'lte':
                 return column <= value
             
-            return None
+            # Not equals
+            elif operator in ['not_equals', '!=', '<>']:
+                return column != value
+            
+            # Is null
+            elif operator == 'is_null':
+                return column.is_(None)
+            
+            # Is not null
+            elif operator == 'is_not_null':
+                return column.isnot(None)
+            
+            # Regex match (PostgreSQL)
+            elif operator == 'regex':
+                return column.op('~')(value)
+            
+            # Case-sensitive contains
+            elif operator == 'contains_exact':
+                return column.like(f'%{value}%')
+            
+            # ✅ Unknown operator
+            else:
+                self.logger.warning(f"⚠️  Unknown operator: {operator}")
+                return None
+        
         except Exception as e:
-            self.logger.error(f"Error building clause: {e}")
+            self.logger.error(f"❌ Error building clause for field '{field}': {e}", exc_info=True)
             return None
+
 
     
     def _apply_sorting(self, query, model_class, sort_by: str, direction: str = 'asc'):
@@ -411,11 +637,71 @@ class FilterSearchResource(Resource):
         except Exception:
             return {}
     
+    # def _get_filter_counts(self, model_class, search: Dict) -> Dict:
+    #     """Get filter counts for UI updates."""
+    #     try:
+    #         counts = {}
+    #         base_query = db.session.query(model_class)
+    #         if search and 'conditions' in search:
+    #             base_query = self._apply_filters_recursive(
+    #                 base_query, 
+    #                 model_class, 
+    #                 search['conditions'], 
+    #                 search.get('logic', 'AND')
+    #             )
+            
+    #         for filter_col in [
+    #             'country', 'language', 'year', 'amstar_label', 
+    #             'intervention__hash__vaccine__options__hash__adjuvants',
+    #             'topic__hash__safety__hash__saf', 'topic__hash__acceptance__hash__kaa',
+    #             'topic__hash__adm__hash__adm', 'topic__hash__eff__hash__eff',
+    #             'topic__hash__risk__factor__hash__rf', 'topic__hash__coverage__hash__cov',
+    #             'topic__hash__ethical__issues__hash__eth', 'topic__hash__eco__hash__eco',
+    #             'intervention__hash__vpd__hash__hb', 'intervention__hash__vaccine__options__hash__live',
+    #             'intervention__hash__vpd__hash__hpv', 'intervention__hash__vpd__hash__infl',
+    #             'intervention__hash__vaccine__options__hash__biva', 'intervention__hash__vpd__hash__hiv',
+    #             'intervention__hash__vaccine__options__hash__quad', 'outcome__hash__icu__hash__icu',
+    #             'outcome__hash__death__hash__dea', 'outcome__hash__hospital__hash__hos', 
+    #             'outcome__hash__infection__hash__inf', 'popu__hash__age__group__hash__chi_2__9',
+    #             'popu__hash__immune__status__hash__hty', 'popu__hash__age__group__hash__nb_0__1',
+    #             'popu__hash__immune__status__hash__imu', 'popu__hash__specific__group__hash__pcg', 
+    #             'popu__hash__age__group__hash__adu_18__64', 'popu__hash__specific__group__hash__hcw', 
+    #             'popu__hash__age__group__hash__ado_10__17', 'popu__hash__specific__group__hash__pw', 
+    #             'popu__hash__age__group__hash__eld_65__10000'
+                
+    #         ]:
+    #             if hasattr(model_class, filter_col):
+    #                 column = getattr(model_class, filter_col)
+    #                 count_query = db.session.query(
+    #                     column,
+    #                     func.count(column).label('count')
+    #                 ).filter(column.isnot(None)).group_by(column)
+                    
+    #                 if search and 'conditions' in search:
+    #                     count_query = self._apply_filters_recursive(
+    #                         count_query, 
+    #                         model_class, 
+    #                         search['conditions'], 
+    #                         search.get('logic', 'AND')
+    #                     )
+                    
+    #                 results = count_query.all()
+    #                 counts[filter_col.title()] = [
+    #                     {'value': str(r[0]), 'count': r[1]} 
+    #                     for r in results if r[0]
+    #                 ]
+            
+    #         return counts
+    #     except Exception:
+    #         return {}
+    
+    
     def _get_filter_counts(self, model_class, search: Dict) -> Dict:
-        """Get filter counts for UI updates."""
+        """Get filter counts with dynamic field discovery."""
         try:
             counts = {}
             base_query = db.session.query(model_class)
+            
             if search and 'conditions' in search:
                 base_query = self._apply_filters_recursive(
                     base_query, 
@@ -424,8 +710,50 @@ class FilterSearchResource(Resource):
                     search.get('logic', 'AND')
                 )
             
-            for filter_col in ['country', 'language', 'year', 'amstar_label', 'intervention__hash__vaccine__options__hash__adjuvants']:
-                if hasattr(model_class, filter_col):
+            # ✅ Get all column names from the model
+            all_columns = [col.name for col in model_class.__table__.columns]
+            
+            # ✅ Define category patterns (prefix-based)
+            category_patterns = {
+                'Country': {'columns': ['country'], 'type': 'standard'},
+                'Year': {'columns': ['year'], 'type': 'standard'},
+                'Amstar_Label': {'columns': ['amstar_label'], 'type': 'standard'},
+                'Topics': {'prefix': 'topic__hash__', 'type': 'hash'},
+                'Interventions': {'prefix': 'intervention__hash__vpd__hash', 'type': 'hash'},
+                'Vaccine Options': {'prefix': 'intervention__hash__vaccine__options__hash', 'type': 'hash'},
+                'Outcomes': {'prefix': 'outcome__hash__', 'type': 'hash'},
+                'Population': {'prefix': 'popu__hash__', 'type': 'hash'}
+            }
+            
+            # ✅ Build field groups dynamically
+            field_groups = {}
+            
+            for category, config in category_patterns.items():
+                if 'columns' in config:
+                    # Standard fields (explicitly listed)
+                    field_groups[category] = config['columns']
+                elif 'prefix' in config:
+                    # ✅ Dynamic discovery: Find all columns starting with prefix
+                    matching_columns = [
+                        col for col in all_columns 
+                        if col.startswith(config['prefix'])
+                    ]
+                    if matching_columns:
+                        field_groups[category] = matching_columns
+            
+            self.logger.info(f"📊 Discovered field groups: {list(field_groups.keys())}")
+            for category, fields in field_groups.items():
+                self.logger.info(f"  {category}: {len(fields)} fields")
+            
+            # Process each group
+            for category, field_list in field_groups.items():
+                category_results = []
+                category_type = category_patterns.get(category, {}).get('type', 'hash')
+                
+                for filter_col in field_list:
+                    if not hasattr(model_class, filter_col):
+                        continue
+                    
                     column = getattr(model_class, filter_col)
                     count_query = db.session.query(
                         column,
@@ -441,15 +769,82 @@ class FilterSearchResource(Resource):
                         )
                     
                     results = count_query.all()
-                    counts[filter_col.title()] = [
-                        {'value': str(r[0]), 'count': r[1]} 
-                        for r in results if r[0]
-                    ]
+                    
+                    # Process results based on category type
+                    for value, count in results:
+                        if not value:
+                            continue
+                        
+                        # Standard fields (Country, Year, AMSTAR)
+                        if category_type == 'standard':
+                            category_results.append({
+                                'value': str(value),
+                                'count': count,
+                                'field': filter_col
+                            })
+                        else:
+                            # Hash fields - parse and extract tag codes
+                            parsed_tags = self._parse_hash_value(str(value))
+                            
+                            for tag_code in parsed_tags:
+                                category_results.append({
+                                    'value': tag_code,
+                                    'count': count,
+                                    'field': filter_col,
+                                    'raw_value': str(value)
+                                })
+                
+                # Aggregate: Sum counts for duplicate tag codes
+                if category_results:
+                    aggregated = {}
+                    for item in category_results:
+                        key = item['value']
+                        if key in aggregated:
+                            aggregated[key]['count'] += item['count']
+                        else:
+                            aggregated[key] = item
+                    
+                    counts[category] = list(aggregated.values())
             
             return counts
-        except Exception:
+        
+        except Exception as e:
+            self.logger.error(f"Error getting filter counts: {e}", exc_info=True)
             return {}
-    
+
+
+    def _parse_hash_value(self, value: str) -> List[str]:
+        """
+        Parse hash field values to extract tag codes.
+        
+        Examples:
+        - "influenza:infl" → ["infl"]
+        - "HPV:hpv; Human papillomavirus:hpv" → ["hpv"]
+        - "death:dea; mortality:dea" → ["dea"]
+        """
+        if not value or not isinstance(value, str):
+            return []
+        
+        tag_codes = set()
+        
+        # Split by semicolon first (handles multiple entries)
+        parts = value.split(';')
+        
+        for part in parts:
+            part = part.strip()
+            if not part:
+                continue
+            
+            # Look for "text:code" pattern
+            if ':' in part:
+                tag_code = part.split(':')[-1].strip()
+                
+                # Only add valid tag codes (short, not just numbers)
+                if tag_code and len(tag_code) <= 10 and not tag_code.replace('_', '').isdigit():
+                    tag_codes.add(tag_code)
+        
+        return list(tag_codes)
+
     def _handle_export(self, query, format: str, model_class):
         """Handle export."""
         records = query.all()
