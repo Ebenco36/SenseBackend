@@ -68,7 +68,7 @@ output/
 
 
 enriched_output.csv
-*.txt
+# *.txt
 !history.txt
 *.html
 testing_data.csv
@@ -124,3 +124,4 @@ sr_retrieval.jsonl
 .python-version
 dataset_scaffold/
 error.log
+requirements3eee.txt
