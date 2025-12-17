@@ -68,6 +68,9 @@ import io
 import csv
 import json
 from datetime import datetime
+from sqlalchemy.engine import Row
+from collections.abc import Mapping
+
 from collections import defaultdict
 
 from database.db import db
@@ -624,77 +627,39 @@ class FilterSearchResource(Resource):
             return query
     
     def _serialize_record(self, record) -> Dict:
-        """Serialize model to dict."""
+        """Serialize ORM instance OR SQLAlchemy Row/RowMapping to dict."""
         try:
-            result = {}
-            for column in record.__table__.columns:
-                value = getattr(record, column.name)
-                if isinstance(value, datetime):
-                    result[column.name] = value.isoformat()
-                else:
-                    result[column.name] = value
-            return result
+            # Case 1: SQLAlchemy Row / RowMapping (SQLAlchemy 1.4/2.0)
+            # - Row has ._mapping
+            # - RowMapping is Mapping
+            if hasattr(record, "_mapping"):
+                data = dict(record._mapping)
+                for k, v in list(data.items()):
+                    if isinstance(v, datetime):
+                        data[k] = v.isoformat()
+                return data
+
+            if isinstance(record, Mapping):
+                data = dict(record)
+                for k, v in list(data.items()):
+                    if isinstance(v, datetime):
+                        data[k] = v.isoformat()
+                return data
+
+            # Case 2: ORM model instance
+            if hasattr(record, "__table__"):
+                result = {}
+                for column in record.__table__.columns:
+                    value = getattr(record, column.name)
+                    result[column.name] = value.isoformat() if isinstance(value, datetime) else value
+                return result
+
+            # Unknown type
+            return {}
+
         except Exception:
             return {}
-    
-    # def _get_filter_counts(self, model_class, search: Dict) -> Dict:
-    #     """Get filter counts for UI updates."""
-    #     try:
-    #         counts = {}
-    #         base_query = db.session.query(model_class)
-    #         if search and 'conditions' in search:
-    #             base_query = self._apply_filters_recursive(
-    #                 base_query, 
-    #                 model_class, 
-    #                 search['conditions'], 
-    #                 search.get('logic', 'AND')
-    #             )
-            
-    #         for filter_col in [
-    #             'country', 'language', 'year', 'amstar_label', 
-    #             'intervention__hash__vaccine__options__hash__adjuvants',
-    #             'topic__hash__safety__hash__saf', 'topic__hash__acceptance__hash__kaa',
-    #             'topic__hash__adm__hash__adm', 'topic__hash__eff__hash__eff',
-    #             'topic__hash__risk__factor__hash__rf', 'topic__hash__coverage__hash__cov',
-    #             'topic__hash__ethical__issues__hash__eth', 'topic__hash__eco__hash__eco',
-    #             'intervention__hash__vpd__hash__hb', 'intervention__hash__vaccine__options__hash__live',
-    #             'intervention__hash__vpd__hash__hpv', 'intervention__hash__vpd__hash__infl',
-    #             'intervention__hash__vaccine__options__hash__biva', 'intervention__hash__vpd__hash__hiv',
-    #             'intervention__hash__vaccine__options__hash__quad', 'outcome__hash__icu__hash__icu',
-    #             'outcome__hash__death__hash__dea', 'outcome__hash__hospital__hash__hos', 
-    #             'outcome__hash__infection__hash__inf', 'popu__hash__age__group__hash__chi_2__9',
-    #             'popu__hash__immune__status__hash__hty', 'popu__hash__age__group__hash__nb_0__1',
-    #             'popu__hash__immune__status__hash__imu', 'popu__hash__specific__group__hash__pcg', 
-    #             'popu__hash__age__group__hash__adu_18__64', 'popu__hash__specific__group__hash__hcw', 
-    #             'popu__hash__age__group__hash__ado_10__17', 'popu__hash__specific__group__hash__pw', 
-    #             'popu__hash__age__group__hash__eld_65__10000'
-                
-    #         ]:
-    #             if hasattr(model_class, filter_col):
-    #                 column = getattr(model_class, filter_col)
-    #                 count_query = db.session.query(
-    #                     column,
-    #                     func.count(column).label('count')
-    #                 ).filter(column.isnot(None)).group_by(column)
-                    
-    #                 if search and 'conditions' in search:
-    #                     count_query = self._apply_filters_recursive(
-    #                         count_query, 
-    #                         model_class, 
-    #                         search['conditions'], 
-    #                         search.get('logic', 'AND')
-    #                     )
-                    
-    #                 results = count_query.all()
-    #                 counts[filter_col.title()] = [
-    #                     {'value': str(r[0]), 'count': r[1]} 
-    #                     for r in results if r[0]
-    #                 ]
-            
-    #         return counts
-    #     except Exception:
-    #         return {}
-    
+        
     
     def _get_filter_counts(self, model_class, search: Dict) -> Dict:
         """Get filter counts with dynamic field discovery."""

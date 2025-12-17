@@ -1,6 +1,6 @@
 import os, sys
 sys.path.append(os.getcwd())
-import psycopg2
+import psycopg
 from urllib.parse import urlparse
 from dotenv import load_dotenv
 
@@ -12,7 +12,7 @@ class DatabaseGeneralSettingManager:
         :param database_url: The database connection URL (e.g., postgresql://user:password@host:port/dbname).
         """
         self.db_params = self.parse_database_url(database_url)
-        self.connection = psycopg2.connect(**self.db_params)
+        self.connection = psycopg.connect(**self.db_params)
         self.cursor = self.connection.cursor()
 
     def parse_database_url(self, database_url):

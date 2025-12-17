@@ -15,6 +15,7 @@ class CountryRegionManager:
         Initialize the CountryRegionManager with a database URL.
         """
         db_url = os.getenv("DATABASE_URL")
+        db_url = db_url.replace("postgresql://", "postgresql+psycopg://")
         self.engine = create_engine(db_url, pool_size=10, max_overflow=20)
         self.metadata = MetaData()
         self.table_name = "region_country"

@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg
 import pandas as pd
 
 class PostgreSQLUpdater:
@@ -16,7 +16,7 @@ class PostgreSQLUpdater:
     def connect(self):
         """Establish connection to the PostgreSQL database."""
         try:
-            self.connection = psycopg2.connect(**self.db_params)
+            self.connection = psycopg.connect(**self.db_params)
             self.cursor = self.connection.cursor()
             print("Connected to the database.")
         except Exception as e:

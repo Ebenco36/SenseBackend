@@ -120,3 +120,7 @@ sr_auto_train_allenai.jsonl
 sr_eval.json
 sr_models/
 sr_retrieval.jsonl
+.venv_/
+.python-version
+dataset_scaffold/
+error.log

@@ -46,6 +46,8 @@ gunicorn -w 4 server:app -p 5400
 gunicorn -w 4 -b 0.0.0.0:5400 server:app
 
  gunicorn -w 4 -b 0.0.0.0:5400 --reload server:app
+ gunicorn -w 4 -k sync --preload -b 0.0.0.0:5400 --reload server:app
+
 
 RUN TEST
 pytest -s
@@ -126,7 +128,6 @@ Testing
 python ./src/Commands/dynamic_table.py ./enriched_output.csv  all_db --primary 'unique_id'
 docker compose --env-file .env -f docker-compose.yml up -d
 
-<<<<<<< HEAD
 export FLASK_APP=app:create_app
 export CELERY_APP=celery:make_celery
 
@@ -147,7 +148,6 @@ prod
 celery -A app:create_app beat --loglevel=info
 celery -A app:create_app worker --loglevel=info
 
-=======
 
 
 conda init --reverse $SHELL`
@@ -155,4 +155,10 @@ conda init --reverse $SHELL`
 conda config --set auto_activate_base false
 
 !python -m src.Services.Factories.NITAGSystem
->>>>>>> latest-branch
+
+
+ulimit -c unlimited
+python -X faulthandler -m gunicorn server:app -w 1 --log-level debug
+
+Working well
+waitress-serve --listen=127.0.0.1:5400 server:app

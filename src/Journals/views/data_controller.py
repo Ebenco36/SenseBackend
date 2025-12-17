@@ -1,6 +1,5 @@
 import os
 import json
-import pandas as pd
 from flask import request, jsonify
 from flask_restful import Resource
 from src.Utils.Helpers import clean_json
@@ -12,6 +11,7 @@ project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os
 
 class DataProcessorResource(Resource):
     def post(self):
+        import pandas as pd
         dataset = pd.read_csv(project_dir+"/results/ProcessedData.csv")
         # header = tableHeader(dataset.columns.tolist())
         # Assuming df is your DataFrame
@@ -104,6 +104,7 @@ class DataProcessorResource(Resource):
 class DataFilterResource(Resource):
 
     def get(self):
+        import pandas as pd
         dataset = pd.read_csv(project_dir+"/results/ProcessedData.csv")
         
         result = getDataFilters(dataset)
@@ -113,6 +114,7 @@ class DataFilterResource(Resource):
 
 class DataProcessorFilterResource(Resource):
     def get(self, row_id):
+        import pandas as pd
         dataset = pd.read_csv(project_dir+"/results/ProcessedData.csv")
         dataset.rename(columns={'Unnamed: 0': 'id'}, inplace=True)
         row = clean_json(dataset[dataset['id'] == row_id])

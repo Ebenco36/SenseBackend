@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg
 import sys
 import os
 
@@ -38,7 +38,7 @@ def main():
 
     try:
         # Connect to PostgreSQL
-        conn = psycopg2.connect(DATABASE_URL)
+        conn = psycopg.connect(DATABASE_URL)
         cursor = conn.cursor()
 
         for table in tables:

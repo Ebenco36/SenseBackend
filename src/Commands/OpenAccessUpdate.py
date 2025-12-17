@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg
 import requests
 import re
 import random
@@ -34,9 +34,9 @@ class OpenAccessSearch:
             print("Database parameters not configured.")
             return None
         try:
-            conn = psycopg2.connect(**self.db_params)
+            conn = psycopg.connect(**self.db_params)
             return conn
-        except psycopg2.OperationalError as e:
+        except psycopg.OperationalError as e:
             print(f"Error connecting to the database: {e}")
             return None
 
@@ -65,7 +65,7 @@ class OpenAccessSearch:
                 rows = cur.fetchall()
                 # returns a list of tuples (primary_key, doi)
                 records = [(row[0], row[1]) for row in rows if row[1]]
-        except psycopg2.Error as e:
+        except psycopg.Error as e:
             print(f"Database query error: {e}")
         finally:
             if conn:
@@ -308,7 +308,7 @@ class OpenAccessSearch:
                 conn.commit()
                 print(f"Successfully updated database for record ID: {primary_id}")
 
-        except psycopg2.Error as e:
+        except psycopg.Error as e:
             print(f"Database update error for record ID {primary_id}: {e}")
             conn.rollback() # Rollback the transaction on error
         finally:

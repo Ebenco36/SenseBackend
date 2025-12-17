@@ -19,6 +19,7 @@ class PostgresService:
         if not db_url:
             raise ValueError(
                 "Database URL must be provided or set in DATABASE_URL environment variable.")
+        db_url = db_url.replace("postgresql://", "postgresql+psycopg://")
         self.engine = create_engine(db_url, pool_size=10, max_overflow=20)
         self.reset_query()
 
